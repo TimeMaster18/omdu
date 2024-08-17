@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row>
-			<v-col v-for="hero in heros" :key="hero.id" align="center">
+			<v-col v-for="hero in heroes" :key="hero.id" align="center">
 				<hero-card class="text-left" :hero="hero" />
 			</v-col>
 		</v-row>
@@ -9,15 +9,15 @@
 </template>
 <script>
 import HeroCard from "../components/HeroCard.vue";
-import Heros from "../enums/heros";
+import Heroes from "../enums/heroes";
 
 export default {
 	components: {
 		HeroCard,
 	},
 	computed: {
-		heros() {
-			return Heros;
+		heroes() {
+			return Heroes;
 		}
 	}
 }

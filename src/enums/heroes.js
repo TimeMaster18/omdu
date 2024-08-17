@@ -1,11 +1,11 @@
 import Range from './range.js';
 import DamageType from './damageType.js';
 
-const Heros = Object.freeze([
+const Heroes = Object.freeze([
 	{
 		id: 1,
 		name: "Bionka",
-		portrait: "/images/heros/Bionka.webp",
+		portrait: "images/heroes/Bionka.webp",
 		hp: 625,
 		mana: 130,
 		range: Range.Melee,
@@ -123,7 +123,7 @@ const Heros = Object.freeze([
 	{
 		id: 2,
 		name: "Blackpaw",
-		portrait: "/images/heros/Blackpaw.webp",
+		portrait: "images/heroes/Blackpaw.webp",
 		hp: 341,
 		mana: 175,
 		range: Range.Melee,
@@ -241,7 +241,7 @@ const Heros = Object.freeze([
 	{
 		id: 3,
 		name: "Bloodspike",
-		portrait: "/images/heros/Bloodspike.webp",
+		portrait: "images/heroes/Bloodspike.webp",
 		hp: 600,
 		mana: 185,
 		range: Range.Melee,
@@ -366,7 +366,7 @@ const Heros = Object.freeze([
 	{
 		id: 4,
 		name: "Brass",
-		portrait: "/images/heros/Brass.webp",
+		portrait: "images/heroes/Brass.webp",
 		hp: 350,
 		mana: 100,
 		range: Range.Ranged,
@@ -491,7 +491,7 @@ const Heros = Object.freeze([
 	{
 		id: 5,
 		name: "Cygnus",
-		portrait: "/images/heros/Cygnus.webp",
+		portrait: "images/heroes/Cygnus.webp",
 		hp: 215,
 		mana: 320,
 		range: Range.Ranged,
@@ -609,7 +609,7 @@ const Heros = Object.freeze([
 	{
 		id: 6,
 		name: "Deadeye",
-		portrait: "/images/heros/Deadeye.webp",
+		portrait: "images/heroes/Deadeye.webp",
 		hp: 219,
 		mana: 200,
 		range: Range.Ranged,
@@ -734,7 +734,7 @@ const Heros = Object.freeze([
 	{
 		id: 7,
 		name: "Dobbin",
-		portrait: "/images/heros/Dobbin.webp",
+		portrait: "images/heroes/Dobbin.webp",
 		hp: 500,
 		mana: 200,
 		range: Range.Melee,
@@ -852,7 +852,7 @@ const Heros = Object.freeze([
 	{
 		id: 8,
 		name: "Gabriella",
-		portrait: "/images/heros/Gabriella.webp",
+		portrait: "images/heroes/Gabriella.webp",
 		hp: 200,
 		mana: 215,
 		range: Range.Ranged,
@@ -970,7 +970,7 @@ const Heros = Object.freeze([
 	{
 		id: 9,
 		name: "Hogarth",
-		portrait: "/images/heros/Hogarth.webp",
+		portrait: "images/heroes/Hogarth.webp",
 		hp: 950,
 		mana: 125,
 		range: Range.Melee,
@@ -1088,7 +1088,7 @@ const Heros = Object.freeze([
 	{
 		id: 10,
 		name: "Ivy",
-		portrait: "/images/heros/Ivy.webp",
+		portrait: "images/heroes/Ivy.webp",
 		hp: 162,
 		mana: 200,
 		range: Range.Ranged,
@@ -1206,7 +1206,7 @@ const Heros = Object.freeze([
 	{
 		id: 11,
 		name: "Maximilian",
-		portrait: "/images/heros/Maximilian.webp",
+		portrait: "images/heroes/Maximilian.webp",
 		hp: 206,
 		mana: 280,
 		range: Range.Ranged,
@@ -1324,7 +1324,7 @@ const Heros = Object.freeze([
 	{
 		id: 12,
 		name: "Midnight",
-		portrait: "/images/heros/Midnight.webp",
+		portrait: "images/heroes/Midnight.webp",
 		hp: 220,
 		mana: 190,
 		range: Range.Melee,
@@ -1445,7 +1445,7 @@ const Heros = Object.freeze([
 	{
 		id: 13,
 		name: "Oziel",
-		portrait: "/images/heros/Oziel.webp",
+		portrait: "images/heroes/Oziel.webp",
 		hp: 200,
 		mana: 160,
 		range: Range.Ranged,
@@ -1570,7 +1570,7 @@ const Heros = Object.freeze([
 	{
 		id: 14,
 		name: "Smolder",
-		portrait: "/images/heros/Smolder.webp",
+		portrait: "images/heroes/Smolder.webp",
 		hp: 313,
 		mana: 290,
 		range: Range.Ranged,
@@ -1692,7 +1692,7 @@ const Heros = Object.freeze([
 	{
 		id: 15,
 		name: "Stinkeye",
-		portrait: "/images/heros/Stinkeye.webp",
+		portrait: "images/heroes/Stinkeye.webp",
 		hp: 356,
 		mana: 200,
 		range: Range.Ranged,
@@ -1810,7 +1810,7 @@ const Heros = Object.freeze([
 	{
 		id: 16,
 		name: "Temper",
-		portrait: "/images/heros/Temper.webp",
+		portrait: "images/heroes/Temper.webp",
 		hp: 500,
 		mana: 0,
 		range: Range.Melee,
@@ -1937,7 +1937,7 @@ const Heros = Object.freeze([
 	{
 		id: 17,
 		name: "Tundra",
-		portrait: "/images/heros/Tundra.webp",
+		portrait: "images/heroes/Tundra.webp",
 		hp: 625,
 		mana: 225,
 		range: Range.Melee,
@@ -2064,7 +2064,7 @@ const Heros = Object.freeze([
 	{
 		id: 18,
 		name: "Yi-Lin",
-		portrait: "/images/heros/Yi-Lin.webp",
+		portrait: "images/heroes/Yi-Lin.webp",
 		hp: 250,
 		mana: 40,
 		range: Range.Melee,
@@ -2189,7 +2189,7 @@ const Heros = Object.freeze([
 	{
 		id: 19,
 		name: "Zoey",
-		portrait: "/images/heros/Zoey.webp",
+		portrait: "images/heroes/Zoey.webp",
 		hp: 275,
 		mana: 225,
 		range: Range.Ranged,
@@ -2312,4 +2312,4 @@ const Heros = Object.freeze([
 		skins: ["ZoeyDefault", "SchoolDaze", "PrettyLittleStitches", "JurassicJourney"]
 	}
 ]);
-export default Heros;
+export default Heroes;
