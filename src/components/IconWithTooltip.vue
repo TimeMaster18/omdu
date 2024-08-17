@@ -1,0 +1,40 @@
+<template>
+	<v-tooltip location="top" content-class="tooltip elevation-2" width="400">
+		<template v-slot:activator="{ props }">
+			<img class="icon" :src="icon" v-bind="props" />
+		</template>
+
+		<template v-slot:default>
+			<slot></slot>
+		</template>
+	</v-tooltip>
+</template>
+
+<script>
+export default {
+	props: {
+		icon: {
+			type: String,
+			required: true,
+		},
+	},
+};
+</script>
+
+<style scoped>
+.tooltip {
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(var(--v-theme-on-surface));
+	background: rgb(var(--v-theme-surface)) !important;
+	color: rgb(var(--v-theme-on-surface)) !important;
+}
+
+.icon {
+	width: 64px;
+	height: 64px;
+	aspect-ratio: 1/1;
+	border-radius: 4px;
+	overflow: hidden;
+}
+</style>
