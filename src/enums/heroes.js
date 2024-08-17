@@ -1347,14 +1347,14 @@ const Heroes = Object.freeze([
 			},
 			secondary: {
 				name: "Vital Strike",
-				icon: "images/abilities/Dash_and_Slash_icon.webp",
+				icon: "images/abilities/Vital_Strike_icon.webp",
 				description: "Midnight executes an acrobatic melee attack that deals heavy damage to its target and deals damage over time.",
 				cooldown: 4,
 				cost: null
 			},
 			third: {
 				name: "Dash and Slash",
-				icon: "images/abilities/Vital_Strike_icon.webp",
+				icon: "images/abilities/Dash_and_Slash_icon.webp",
 				description: "Midnight dashes forward, slashing every enemy she passes through.",
 				cooldown: 10,
 				cost: null
