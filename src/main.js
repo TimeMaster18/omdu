@@ -49,10 +49,10 @@ import LoadoutPage from './pages/LoadoutPage.vue';
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
-		{ path: '/heroes', component: HeroesPage },
-		{ path: '/traps', component: TrapsPage },
-		{ path: '/maps', component: MapsPage },
-		{ path: '/loadout', component: LoadoutPage },
+		{ path: '/omdu/heroes', component: HeroesPage },
+		{ path: '/omdu//traps', component: TrapsPage },
+		{ path: '/omdu//maps', component: MapsPage },
+		{ path: '/omdu//loadout', component: LoadoutPage },
 	],
 })
 
