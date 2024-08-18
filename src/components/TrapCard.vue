@@ -49,11 +49,10 @@
 			</div>
 
 			<!-- Trap part slots -->
-			<v-row no-gutters class="mt-4 text-center">
-				<v-col v-for="trapPartSlot in trap.trapPartSlots">
-					<trap-part-slot-icon :trap-part-slot="trapPartSlot" />
-				</v-col>
-			</v-row>
+			<h3 class="mt-4">Slots</h3>
+			<div v-for="trapPartSlot in trap.trapPartSlots" class="mt-2">
+				<trap-part-slot-icon :trap-part-slot="trapPartSlot" show-label :size="32" />
+			</div>
 		</v-card-text>
 	</v-card>
 </template>

@@ -6,12 +6,7 @@
 		<v-card-title>{{ trapPart.name }}</v-card-title>
 		<v-card-text>
 			<!-- Slot -->
-			 <div class="mt-2 d-flex align-center">
-				<trap-part-slot-icon :trap-part-slot="trapPart.partSlot" />
-				<span class="capitalize ml-2">
-					{{ trapPart.partSlot }}
-				</span>
-			 </div>
+			<trap-part-slot-icon :trap-part-slot="trapPart.partSlot" :size="32" show-label />
 
 			<!-- Description -->
 			<div class="mt-2">
@@ -63,9 +58,5 @@ export default {
 
 .flavor-text {
 	opacity: 0.3;
-}
-
-.capitalize {
-	text-transform: capitalize;
 }
 </style>

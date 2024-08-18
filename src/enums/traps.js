@@ -192,7 +192,7 @@ const Traps = Object.freeze([
 		id: 116,
 		name: "Decoy",
 		description: "Attracts Enemies to attack it until it is destroyed. The decoy does not respawn and must be replaced. Trap expires after being attacked 10 times. Enemies that attack the decoy are debuffed to take 15% more damage from all sources.",
-		trapPartSlots: [TrapPartSlot.Resonator, TrapPartSlot.Components, TrapPartSlot.Components],
+		trapPartSlots: [TrapPartSlot.Resonator, TrapPartSlot.Components, TrapPartSlot.Frame],
 		image: "images/traps/Decoy_wood_image.webp",
 		placement: Placement.Floor,
 		cost: 300,
