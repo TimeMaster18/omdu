@@ -7,21 +7,15 @@
 		<v-card-text>
 			<!-- Stats -->
 			<div>
-				<v-icon>mdi-select</v-icon>
+				<v-icon :icon="placementIcon"></v-icon>
 				<span class="capitalize value ml-2">
 					{{ trap.placement }}
 				</span>
 			</div>
 			<div>
-				<v-icon>mdi-hand-coin</v-icon>
+				<v-icon>mdi-currency-usd</v-icon>
 				<span class="value ml-2">
 					{{ trapCost }}
-				</span>
-			</div>
-			<div v-if="trap.max">
-				<v-icon>mdi-pound</v-icon>
-				<span class="value ml-2">
-					Max. {{ trap.max }}
 				</span>
 			</div>
 			<div v-if="trap.damageType">
@@ -42,6 +36,12 @@
 					{{ trapSize }}
 				</span>
 			</div>
+			<div v-if="trap.max">
+				<v-icon>mdi-alert</v-icon>
+				<span class="value ml-2">
+					Max. {{ trap.max }}
+				</span>
+			</div>
 
 			<!-- Description -->
 			<div class="mt-4">{{ trap.description }}</div>
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import Placement from '../enums/placement';
+
 export default {
 	props: {
 		trap: {
@@ -68,6 +70,11 @@ export default {
 			} else {
 				return this.trap.cost;
 			}
+		},
+		placementIcon(){
+			if(this.trap.placement === Placement.Walls) return "mdi-arrow-expand-horizontal";
+			else if(this.trap.placement === Placement.Ceiling) return "mdi-arrow-collapse-up";
+			else if(this.trap.placement === Placement.Floor) return "mdi-arrow-collapse-down";
 		}
 	}
 }

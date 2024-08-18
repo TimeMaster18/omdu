@@ -17,7 +17,7 @@ export default {
 	},
 	computed: {
 		traps() {
-			return Traps;
+			return JSON.parse(JSON.stringify(Traps)).sort((a, b) => a.name > b.name);
 		}
 	}
 }

@@ -17,7 +17,7 @@ export default {
 	},
 	computed: {
 		heroes() {
-			return Heroes;
+			return JSON.parse(JSON.stringify(Heroes)).sort((a, b) => a.name > b.name);
 		}
 	}
 }
