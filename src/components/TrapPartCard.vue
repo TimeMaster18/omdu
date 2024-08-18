@@ -6,7 +6,7 @@
 		<v-card-title>{{ trapPart.name }}</v-card-title>
 		<v-card-text>
 			<!-- Slot -->
-			 <div class="mt-2 d-flex align-center justify-center">
+			 <div class="mt-2 d-flex align-center">
 				<trap-part-slot-icon :trap-part-slot="trapPart.partSlot" />
 				<span class="capitalize ml-2">
 					{{ trapPart.partSlot }}
