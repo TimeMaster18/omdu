@@ -14,6 +14,10 @@
 				<v-icon>mdi-cog</v-icon>
 				<span>Traps</span>
 			</v-btn>
+			<v-btn to="trap-parts">
+				<v-icon>mdi-wrench</v-icon>
+				<span>Trap Parts</span>
+			</v-btn>
 			<v-btn to="guardians">
 				<v-icon>mdi-shield</v-icon>
 				<span>Guardians</span>

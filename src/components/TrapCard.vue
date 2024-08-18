@@ -44,15 +44,28 @@
 			</div>
 
 			<!-- Description -->
-			<div class="mt-4">{{ trap.description }}</div>
+			<div class="mt-4">
+				{{ trap.description }}
+			</div>
+
+			<!-- Trap part slots -->
+			<v-row no-gutters class="mt-4 text-center">
+				<v-col v-for="trapPartSlot in trap.trapPartSlots">
+					<trap-part-slot-icon :trap-part-slot="trapPartSlot" />
+				</v-col>
+			</v-row>
 		</v-card-text>
 	</v-card>
 </template>
 
 <script>
 import Placement from '../enums/placement';
+import TrapPartSlotIcon from './TrapPartSlotIcon.vue';
 
 export default {
+	components: {
+		TrapPartSlotIcon
+	},
 	props: {
 		trap: {
 			type: Object,
@@ -71,11 +84,11 @@ export default {
 				return this.trap.cost;
 			}
 		},
-		placementIcon(){
-			if(this.trap.placement === Placement.Walls) return "mdi-arrow-expand-horizontal";
-			else if(this.trap.placement === Placement.Ceiling) return "mdi-arrow-collapse-up";
-			else if(this.trap.placement === Placement.Floor) return "mdi-arrow-collapse-down";
-		}
+		placementIcon() {
+			if (this.trap.placement === Placement.Walls) return "mdi-arrow-expand-horizontal";
+			else if (this.trap.placement === Placement.Ceiling) return "mdi-arrow-collapse-up";
+			else if (this.trap.placement === Placement.Floor) return "mdi-arrow-collapse-down";
+		},
 	}
 }
 </script>
