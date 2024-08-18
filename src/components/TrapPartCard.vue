@@ -53,7 +53,7 @@ export default {
 
 .image img {
 	image-rendering: optimizeQuality;
-	height: 200px;
+	height: 180px;
 }
 
 .flavor-text {
