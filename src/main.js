@@ -44,6 +44,7 @@ const vuetify = createVuetify({
 import { createWebHistory, createRouter } from 'vue-router';
 import HeroesPage from './pages/HeroesPage.vue';
 import TrapsPage from './pages/TrapsPage.vue';
+import GuardiansPage from './pages/GuardiansPage.vue';
 import MapsPage from './pages/MapsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
 const router = createRouter({
@@ -51,6 +52,7 @@ const router = createRouter({
 	routes: [
 		{ path: '/omdu/heroes', component: HeroesPage },
 		{ path: '/omdu//traps', component: TrapsPage },
+		{ path: '/omdu//guardians', component: GuardiansPage },
 		{ path: '/omdu//maps', component: MapsPage },
 		{ path: '/omdu//loadout', component: LoadoutPage },
 	],

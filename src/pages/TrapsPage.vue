@@ -1,9 +1,25 @@
 <template>
-	Coming Soon!
+	<div>
+		<v-row>
+			<v-col v-for="trap in traps" :key="trap.id" align="center">
+				<trap-card class="text-left" :trap="trap" />
+			</v-col>
+		</v-row>
+	</div>
 </template>
 <script>
-export default {
+import TrapCard from '../components/TrapCard.vue';
+import Traps from '../enums/traps';
 
+export default {
+	components: {
+		TrapCard
+	},
+	computed: {
+		traps() {
+			return Traps;
+		}
+	}
 }
 </script>
 <style scoped></style>

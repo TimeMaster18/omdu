@@ -14,6 +14,10 @@
 				<v-icon>mdi-cog</v-icon>
 				<span>Traps</span>
 			</v-btn>
+			<v-btn to="guardians">
+				<v-icon>mdi-shield</v-icon>
+				<span>Guardians</span>
+			</v-btn>
 			<v-btn to="maps">
 				<v-icon>mdi-map</v-icon>
 				<span>Maps</span>
