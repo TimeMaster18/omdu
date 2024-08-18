@@ -49,7 +49,7 @@
 			</div>
 
 			<!-- Trap part slots -->
-			<h3 class="mt-4">Slots</h3>
+			<h3 class="mt-4">Parts</h3>
 			<div v-for="trapPartSlot in trap.trapPartSlots" class="mt-2">
 				<trap-part-slot-icon :trap-part-slot="trapPartSlot" show-label :size="32" />
 			</div>
