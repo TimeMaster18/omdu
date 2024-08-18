@@ -82,7 +82,7 @@ export default {
 
 .image {
 	height: 180px;
-	background-image: url('images/trap_background.webp');
+	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
 }
