@@ -2104,7 +2104,8 @@ const Heroes = Object.freeze([
 				icon: "images/abilities/Tempest_Strike_icon.webp",
 				description: "A vortex pulls enemies towards Yi-Lin's whirling blades, causing her to inflict massive damage on her enemies. Lasts 2.2s.",
 				cooldown: null,
-				cost: 20
+				cost: 20,
+				cooldown: 35
 			},
 			fifth: {
 				name: "Jade Sentinel",

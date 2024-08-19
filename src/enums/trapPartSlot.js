@@ -1,13 +1,13 @@
 const TrapPartSlot = Object.freeze({
-	Accumulator: "Accumulator",
-	Attuner: "Attuner",
-	Cladding: "Cladding",
-	Coil: "Coil",
-	Components: "Components",
-	Field: "Field",
-	Frame: "Frame",
-	Resonator: "Resonator",
-	Spring: "Spring",
-	Trigger: "Trigger"
+	Accumulator: "accumulator",
+	Attuner: "attuner",
+	Cladding: "cladding",
+	Coil: "coil",
+	Components: "components",
+	Field: "field",
+	Frame: "frame",
+	Resonator: "resonator",
+	Spring: "spring",
+	Trigger: "trigger"
 });
 export default TrapPartSlot;

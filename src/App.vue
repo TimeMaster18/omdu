@@ -10,6 +10,10 @@
 				<v-icon>mdi-account</v-icon>
 				<span>Heroes</span>
 			</v-btn>
+			<v-btn to="traits">
+				<v-icon>mdi-lightning-bolt</v-icon>
+				<span>Traits</span>
+			</v-btn>
 			<v-btn to="traps">
 				<v-icon>mdi-cog</v-icon>
 				<span>Traps</span>
