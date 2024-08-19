@@ -247,13 +247,13 @@ const Traps = Object.freeze([
 	{
 		id: 121,
 		name: "Temple Alarm Gong",
-		description: "This ancient gong sounds an alarm when Enemies approach and slows them by 70%. -20% cooldown when used by Yi-Lin.",
+		description: "This ancient gong sounds an alarm when Enemies approach and slows them by 70% for 2.5s. -20% cooldown when used by Yi-Lin.",
 		trapPartSlots: [TrapPartSlot.Field, TrapPartSlot.Spring, TrapPartSlot.Trigger],
 		image: "images/traps/Temple_Alarm_Gong_wood_image.webp",
 		placement: Placement.Ceiling,
 		cost: 1000,
 		size: [3, 1],
-		count: 2
+		max: 2
 	},
 	{
 		id: 122,

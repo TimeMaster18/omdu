@@ -50,21 +50,7 @@ export default {
 };
 </script>
 
-<style>
-.tooltip {
-	border-style: solid;
-	border-width: 1px;
-	border-color: rgb(var(--v-theme-on-surface));
-	background: rgb(var(--v-theme-surface)) !important;
-	color: rgb(var(--v-theme-on-surface)) !important;
-}
-
-.icon {
-	width: 64px;
-	height: 64px;
-	aspect-ratio: 1/1;
-}
-
+<style scoped>
 .name {
 	font-size: 1.2em;
 }

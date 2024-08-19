@@ -1,5 +1,5 @@
 <template>
-	<v-tooltip location="top" content-class="tooltip elevation-2" width="400">
+	<v-tooltip location="top" class="tooltip" content-class="tooltip-content elevation-2" width="400">
 		<template v-slot:activator="{ props }">
 			<img class="icon" :src="icon" v-bind="props" />
 		</template>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.tooltip {
+.tooltip >>> .tooltip-content {
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(var(--v-theme-on-surface));

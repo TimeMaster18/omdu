@@ -35,7 +35,11 @@ export default {
 		sizeStyle() {
 			return {
 				height: `${this.size}px`,
+				minHeight: `${this.size}px`,
+				maxHeight: `${this.size}px`,
 				width: `${this.size}px`,
+				minWidth: `${this.size}px`,
+				maxWidth: `${this.size}px`,
 			}
 		}
 	}
