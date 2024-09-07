@@ -6,36 +6,76 @@
 import { encode, decode } from '../utils/base62Util.js';
 
 export default {
-	mounted() {
-		// Encoding build
-		let loadout = "Dan-";
-		loadout += encode(1) // Hero id
-		loadout += encode(0, true) // Skin id
-		loadout += encode(3) // Dye id (1, 2, 3)
-		loadout += "-"
-		for (let index = 0; index < 9; index++) {
-			loadout += encode(100, true) // Trap/Item id
+	data() {
+		return {
+			loadout: {
+				heroId: null,
+				skinId: null,
+				dyeId: null,
+				traits: {
+					pentagonTraitId: null,
+					diamondTraitId: null,
+					triangleTraitId: null,
+					noBonusTraitId: null,
+				},
+				guardianIds: [
+					null,
+					null
+				],
+				slotItemIds: [
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+					null,
+				],
+				trapPartIds: [
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+					[null, null, null],
+				]
+			}
 		}
-		loadout += "-"
-		loadout += encode(1) // Guardian id
-		loadout += encode(2) // Guardian id
-		loadout += "-"
-		loadout += encode(0) // Consumable id
-		loadout += encode(0) // Consumable id
-		loadout += "-"
-		loadout += encode(40) // Trait id (pentagon slot)
-		loadout += encode(41) // Trait id (diamond slot)
-		loadout += encode(42) // Trait id (triangle slot)
-		loadout += encode(43) // Trait id (no bonus slot)
-		loadout += "-"
-		for (let index = 0; index < 9; index++) {
-			loadout += encode(22) // Trap part id
-			loadout += encode(30) // Trap part id
-			loadout += encode(12) // Trap part id
+	},
+	computed: {
+		loadoutCode() {
+			let loadoutCode = "PlayerName-";
+			loadoutCode += encode(this.loadout.heroId)
+			loadoutCode += encode(this.loadout.skinId, true)
+			loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
+			loadoutCode += "-"
+			for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
+				loadoutCode += encode(this.loadout.slotItemIds[index], true)
+			}
+			loadoutCode += "-"
+			loadoutCode += encode(this.loadout.guardianIds[0])
+			loadoutCode += encode(this.loadout.guardianIds[1])
+			loadoutCode += "-"
+			loadoutCode += encode(null) // Consumable id
+			loadoutCode += encode(null) // Consumable id
+			loadoutCode += "-"
+			loadoutCode += encode(this.loadout.traits.pentagonTraitId)
+			loadoutCode += encode(this.loadout.traits.diamondTraitId)
+			loadoutCode += encode(this.loadout.traits.triangleTraitId)
+			loadoutCode += encode(this.loadout.traits.noBonusTraitId)
+			loadoutCode += "-"
+			for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
+				loadoutCode += encode(this.loadout.trapPartIds[index][0])
+				loadoutCode += encode(this.loadout.trapPartIds[index][1])
+				loadoutCode += encode(this.loadout.trapPartIds[index][2])
+			}
+			return loadoutCode;
 		}
-		console.log(loadout);
-
-		// Decoding build
 	}
 };
 </script>

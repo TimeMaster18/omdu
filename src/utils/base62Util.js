@@ -1,6 +1,7 @@
 const base62Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 export const encode = function (value, forceLengthTwo = false) {
+	if (value === undefined || value === null) value = 0;
 	if (value < 0 || value >= 3844) { // 62 * 62 = 3844
 		throw new Error("Value must be in the range 0-3843.");
 	}
