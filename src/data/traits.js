@@ -1,4 +1,4 @@
-import TraitSlot from './traitSlot';
+import TraitSlot from '../enums/traitSlot';
 const Traits = Object.freeze([
 	{
 		id: 1,

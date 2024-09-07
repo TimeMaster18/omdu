@@ -1,4 +1,4 @@
-import guardianHome from './guardianHome';
+import guardianHome from '../enums/guardianHome';
 const guardians = Object.freeze([
 	{
 		id: 1,

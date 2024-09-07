@@ -1,6 +1,6 @@
-import DamageType from './damageType';
-import TrapPartSlot from './trapPartSlot';
-import Placement from './placement';
+import DamageType from '../enums/damageType';
+import TrapPartSlot from '../enums/trapPartSlot';
+import Placement from '../enums/placement';
 
 const Traps = Object.freeze([
 	{

@@ -1,11 +1,10 @@
-import Range from './range.js';
-import DamageType from './damageType.js';
+import Range from '../enums/range.js';
+import DamageType from '../enums/damageType.js';
 
 const Heroes = Object.freeze([
 	{
 		id: 1,
 		name: "Bionka",
-		portrait: "images/heroes/Bionka.webp",
 		hp: 625,
 		mana: 130,
 		range: Range.Melee,
@@ -118,12 +117,32 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["BionkaDefault", "LizardQueen", "Fluffalump", "BionkaBunny"]
+		skins: [
+			{
+				id: 9,
+				name: "Default",
+				image: "images/heroes/Bionka.webp"
+			},
+			{
+				id: 10,
+				name: "Lizard Queen",
+				image: "images/skins/Bionka_Lizard_Queen_background.webp"
+			},
+			{
+				id: 11,
+				name: "Fluffalump",
+				image: "images/skins/Bionka_Fluffalump_background.webp"
+			},
+			{
+				id: 12,
+				name: "Bunny",
+				image: "images/skins/Bionka_Bionka_Bunny_background.webp"
+			}
+		]
 	},
 	{
 		id: 2,
 		name: "Blackpaw",
-		portrait: "images/heroes/Blackpaw.webp",
 		hp: 341,
 		mana: 175,
 		range: Range.Melee,
@@ -236,12 +255,52 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["BlackpawDefault", "BlackpawEnchantedArmor", "PawOfTheDead", "TutuDloo", "PrideOfThePack", "Runeclaw", "Blackscale", "DragonThrall"]
+		skins: [
+			{
+				id: 15,
+				name: "Default",
+				image: "images/heroes/Blackpaw.webp"
+			},
+			{
+				id: 13,
+				name: "Enchanted Armor",
+				image: "images/skins/Blackpaw_Enchanted_Armor_background.webp"
+			},
+			{
+				id: 14,
+				name: "Paw of the Dead",
+				image: "images/skins/Blackpaw_Paw_of_the_Dead_background.webp"
+			},
+			{
+				id: 16,
+				name: "Tutu D'Loo",
+				image: "images/skins/Blackpaw_Tutu_D'Loo_background.webp"
+			},
+			{
+				id: 17,
+				name: "Pride of the Pack",
+				image: "images/skins/Blackpaw_Pride_of_the_Pack_background.webp"
+			},
+			{
+				id: 18,
+				name: "Runeclaw",
+				image: "images/skins/Blackpaw_Runeclaw_background.webp"
+			},
+			{
+				id: 19,
+				name: "Blackscale",
+				image: "images/skins/Blackpaw_Blackscale_background.webp"
+			},
+			{
+				id: 20,
+				name: "Dragon Thrall",
+				image: "images/skins/Blackpaw_Dragon_Thrall_background.webp"
+			},
+		]
 	},
 	{
 		id: 3,
 		name: "Bloodspike",
-		portrait: "images/heroes/Bloodspike.webp",
 		hp: 600,
 		mana: 185,
 		range: Range.Melee,
@@ -361,12 +420,42 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["BloodpsikeDefault", "GrizzlyKill", "BreakerOfMolds", "BloodAppetit", "GreenGuillotine", "LaughingToDeath"]
+		skins: [
+			{
+				id: 21,
+				name: "Default",
+				image: "images/heroes/Bloodspike.webp"
+			},
+			{
+				id: 22,
+				name: "Grizzly Kill",
+				image: "images/skins/Bloodspike_Grizzly_Kill_background.webp"
+			},
+			{
+				id: 23,
+				name: "Breaker of Molds",
+				image: "images/skins/Bloodspike_Breaker_of_Molds_background.webp"
+			},
+			{
+				id: 24,
+				name: "Blood Appetit",
+				image: "images/skins/Bloodspike_Blood_Appetit_background.webp"
+			},
+			{
+				id: 25,
+				name: "Green Guillotine",
+				image: "images/skins/Bloodspike_Green_Guillotine_background.webp"
+			},
+			{
+				id: 26,
+				name: "Laughing to Death",
+				image: "images/skins/Bloodspike_Laughing_to_Death_background.webp"
+			},
+		]
 	},
 	{
 		id: 4,
 		name: "Brass",
-		portrait: "images/heroes/Brass.webp",
 		hp: 350,
 		mana: 100,
 		range: Range.Ranged,
@@ -486,12 +575,27 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["BrassDefault", "GunsGearsNLace", "BombshellBattalion"]
+		skins: [
+			{
+				id: 27,
+				name: "Default",
+				image: "images/heroes/Brass.webp"
+			},
+			{
+				id: 28,
+				name: "Guns, Gears, 'n Lace",
+				image: "images/skins/Brass_Guns,_Gears,_'n_Lace_background.webp"
+			},
+			{
+				id: 29,
+				name: "Bombshell Battalion",
+				image: "images/skins/Brass_Bombshell_Battalion_background.webp"
+			},
+		]
 	},
 	{
 		id: 5,
 		name: "Cygnus",
-		portrait: "images/heroes/Cygnus.webp",
 		hp: 215,
 		mana: 320,
 		range: Range.Ranged,
@@ -604,12 +708,32 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["CygnusDefault", "Adventurer", "CygnusDefaultRed", "OldCodger", "RoadMaster"]
+		skins: [
+			{
+				id: 97,
+				name: "Default",
+				image: "images/heroes/Cygnus.webp"
+			},
+			{
+				id: 98,
+				name: "Adventurer",
+				image: "images/skins/Cygnus_Adventurer_background.webp"
+			},
+			{
+				id: 101,
+				name: "Old Codger",
+				image: "images/skins/Cygnus_Old_Codger_background.webp"
+			},
+			{
+				id: 102,
+				name: "Road Master",
+				image: "images/skins/Cygnus_Road_Master_background.webp"
+			},
+		]
 	},
 	{
 		id: 6,
 		name: "Deadeye",
-		portrait: "images/heroes/Deadeye.webp",
 		hp: 219,
 		mana: 200,
 		range: Range.Ranged,
@@ -729,12 +853,27 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["DeadeyeDefault", "PrettyPunk", "TheGoodTheBadAndTheDeadeye"]
+		skins: [
+			{
+				id: 41,
+				name: "Default",
+				image: "images/heroes/Deadeye.webp"
+			},
+			{
+				id: 42,
+				name: "Pretty Punk",
+				image: "images/skins/Deadeye_Pretty_Punk_background.webp"
+			},
+			{
+				id: 43,
+				name: "The Good, the Bad, and the Deadeye",
+				image: "images/skins/Deadeye_The_Good,_the_Bad,_and_the_Deadeye_background.webp"
+			},
+		]
 	},
 	{
 		id: 7,
 		name: "Dobbin",
-		portrait: "images/heroes/Dobbin.webp",
 		hp: 500,
 		mana: 200,
 		range: Range.Melee,
@@ -847,12 +986,32 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["DobbinDefault", "GoldRush", "DobbinDefaultGold", "ElCavador", "SantasLittleHelper"]
+		skins: [
+			{
+				id: 50,
+				name: "Default",
+				image: "images/heroes/Dobbin.webp"
+			},
+			{
+				id: 51,
+				name: "Gold Rush",
+				image: "images/skins/Dobbin_Gold_Rush_background.webp"
+			},
+			{
+				id: 53,
+				name: "El Cavador",
+				image: "images/skins/Dobbin_El_Cavador_background.webp"
+			},
+			{
+				id: 54,
+				name: "Santa's Little Helper",
+				image: "images/skins/Dobbin_Santa's_Little_Helper_background.webp"
+			},
+		]
 	},
 	{
 		id: 8,
 		name: "Gabriella",
-		portrait: "images/heroes/Gabriella.webp",
 		hp: 200,
 		mana: 215,
 		range: Range.Ranged,
@@ -965,12 +1124,87 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["GabriellaDefault", "ViolentVintage", "GabriellaEnchantedArmor", "BloodQueen", "FrightfullyDelightful", "GabriellaDefaultRed", "LifeInPlastic", "ArchmageOfTheOrder", "MistressOfIllusion", "PromisingProdigy", "IDreamOfGabby", "MiracleWorker", "WinterWitch", "SkullNinja", "EvilWays", "DragonCharmer"]
+		skins: [
+			{
+				id: 76,
+				name: "Default",
+				image: "images/heroes/Gabriella.webp"
+			},
+			{
+				id: 73,
+				name: "Violent Vintage",
+				image: "images/skins/Gabriella_Violet_Vintage_background.webp"
+			},
+			{
+				id: 74,
+				name: "Enchanted Armor",
+				image: "images/skins/Gabriella_Enchanted_Armor_background.webp"
+			},
+			{
+				id: 75,
+				name: "Blood Queen",
+				image: "images/skins/Gabriella_Blood_Queen_background.webp"
+			},
+			{
+				id: 77,
+				name: "Frightfully Delightful",
+				image: "images/skins/Gabriella_Frightfully_Delightful_background.webp"
+			},
+			{
+				id: 79,
+				name: "Life in Plastic",
+				image: "images/skins/Gabriella_Life_in_Plastic_background.webp"
+			},
+			{
+				id: 80,
+				name: "Archmage of the Order",
+				image: "images/skins/Gabriella_Archmage_of_the_Order_background.webp"
+			},
+			{
+				id: 81,
+				name: "Mistress of Illusion",
+				image: "images/skins/Gabriella_Mistress_of_Illusion_background.webp"
+			},
+			{
+				id: 82,
+				name: "Promising Prodigy",
+				image: "images/skins/Gabriella_Promising_Prodigy_background.webp"
+			},
+			{
+				id: 83,
+				name: "I Dream of Gabby",
+				image: "images/skins/Gabriella_I_Dream_of_Gabby_background.webp"
+			},
+			{
+				id: 84,
+				name: "Miracle Worker",
+				image: "images/skins/Gabriella_Miracle_Worker_background.webp"
+			},
+			{
+				id: 85,
+				name: "Winter Witch",
+				image: "images/skins/Gabriella_Winter_Witch_background.webp"
+			},
+			{
+				id: 86,
+				name: "Skull Ninja",
+				image: "images/skins/Gabriella_Skull_Ninja_background.webp"
+			},
+			{
+				id: 87,
+				name: "Evil Ways",
+				image: "images/skins/Gabriella_Evil_Ways_background.webp"
+			},
+			{
+				id: 88,
+				name: "Dragon Charmer",
+				image: "images/skins/Gabriella_Dragon_Charmer_background.webp"
+			},
+		]
 	},
 	{
 		id: 9,
 		name: "Hogarth",
-		portrait: "images/heroes/Hogarth.webp",
 		hp: 950,
 		mana: 125,
 		range: Range.Melee,
@@ -1083,12 +1317,62 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["HogarthDefault", "HogarthEnchantedArmor", "GodOfPlunder", "LumberingJack", "HogarthDefaultGold", "IceArmor", "ImperialGoldenWarrior", "BeachedBod", "BlackThane", "TheSchling", "DragonWard"]
+		skins: [
+			{
+				id: 32,
+				name: "Default",
+				image: "images/heroes/Hogarth.webp"
+			},
+			{
+				id: 30,
+				name: "Enchanted Armor",
+				image: "images/skins/Hogarth_Enchanted_Armor_background.webp"
+			},
+			{
+				id: 31,
+				name: "God of Plunder",
+				image: "images/skins/Hogarth_God_of_Plunder_background.webp"
+			},
+			{
+				id: 33,
+				name: "Lumbering Jack",
+				image: "images/skins/Hogarth_Lumbering_Jack_background.webp"
+			},
+			{
+				id: 35,
+				name: "Ice Armor",
+				image: "images/skins/Hogarth_Ice_Armor_background.webp"
+			},
+			{
+				id: 36,
+				name: "Imperial Golden Warrior",
+				image: "images/skins/Hogarth_Imperial_Golden_Warrior_background.webp"
+			},
+			{
+				id: 37,
+				name: "Beached Bod",
+				image: "images/skins/Hogarth_Beached_Bod_background.webp"
+			},
+			{
+				id: 38,
+				name: "Black Thane",
+				image: "images/skins/Hogarth_Black_Thane_background.webp"
+			},
+			{
+				id: 39,
+				name: "The Schling",
+				image: "images/skins/Hogarth_The_Schling_background.webp"
+			},
+			{
+				id: 40,
+				name: "Dragon Ward",
+				image: "images/skins/Hogarth_Dragon_Ward_background.webp"
+			},
+		]
 	},
 	{
 		id: 10,
 		name: "Ivy",
-		portrait: "images/heroes/Ivy.webp",
 		hp: 162,
 		mana: 200,
 		range: Range.Ranged,
@@ -1201,12 +1485,52 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["IvyEnchantedArmor", "IvyDefault", "Valkyrie", "FlowerFriend", "IvyDefaultGold", "ImperialRubyArcher", "WickedWarden", "Grovewatch", "DragonTamer"]
+		skins: [
+			{
+				id: 58,
+				name: "Default",
+				image: "images/heroes/Ivy.webp"
+			},
+			{
+				id: 56,
+				name: "Enchanted Armor",
+				image: "images/skins/Ivy_Enchanted_Armor_background.webp"
+			},
+			{
+				id: 57,
+				name: "Valkyrie",
+				image: "images/skins/Ivy_Valkyrie_background.webp"
+			},
+			{
+				id: 59,
+				name: "Flower Friend",
+				image: "images/skins/Ivy_Flower_Friend_background.webp"
+			},
+			{
+				id: 61,
+				name: "Imperial Ruby Archer",
+				image: "images/skins/Ivy_Imperial_Ruby_Archer_background.webp"
+			},
+			{
+				id: 62,
+				name: "Wicked Warden",
+				image: "images/skins/Ivy_Wicked_Warden_background.webp"
+			},
+			{
+				id: 63,
+				name: "Grovewatch",
+				image: "images/skins/Ivy_Grovewatch_background.webp"
+			},
+			{
+				id: 64,
+				name: "Dragon Tamer",
+				image: "images/skins/Ivy_Dragon_Tamer_background.webp"
+			},
+		]
 	},
 	{
 		id: 11,
 		name: "Maximilian",
-		portrait: "images/heroes/Maximilian.webp",
 		hp: 206,
 		mana: 280,
 		range: Range.Ranged,
@@ -1319,12 +1643,97 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["MaximillianDefault", "LuckyTunic", "MaximillianEnchantedArmor", "KnightsWatch", "OrcSlayer", "CardboardSamurai", "ScaredCrow", "LionHeart", "RobinHood", "Paximillian", "MaximillianLegendaryDefault", "ChampionOfTheOrder", "JamezRipher", "WinterWarrior", "Boomstick", "Backdraft", "DragonSlayer", "SummerOfStunning", "RedScarf", "YellowScarf", "BlueScarf"]
+		skins: [
+			{
+				id: 111,
+				name: "Default",
+				image: "images/heroes/Maximilian.webp"
+			},
+			{
+				id: 108,
+				name: "Lucky Tunic",
+				image: "images/skins/Maximilian_Lucky_Tunic_background.webp"
+			},
+			{
+				id: 109,
+				name: "Enchanted Armor",
+				image: "images/skins/Maximilian_Enchanted_Armor_background.webp"
+			},
+			{
+				id: 110,
+				name: "Knights Watch",
+				image: "images/skins/Maximilian_Knight's_Watch_background.webp"
+			},
+			{
+				id: 112,
+				name: "Orc Slayer",
+				image: "images/skins/Maximilian_Orc_Slayer_background.webp"
+			},
+			{
+				id: 113,
+				name: "Cardboard Samurai",
+				image: "images/skins/Maximilian_Cardboard_Samurai_background.webp"
+			},
+			{
+				id: 114,
+				name: "Scared-Crow",
+				image: "images/skins/Maximilian_Scared-Crow_background.webp"
+			},
+			{
+				id: 115,
+				name: "Lion Heart",
+				image: "images/skins/Maximilian_Lion_Heart_background.webp"
+			},
+			{
+				id: 116,
+				name: "Robin Hood",
+				image: "images/skins/Maximilian_Robin_Hood_background.webp"
+			},
+			{
+				id: 117,
+				name: "Paximillian",
+				image: "images/skins/Maximilian_PAXimilian_background.webp"
+			},
+			{
+				id: 119,
+				name: "Champion of the Order",
+				image: "images/skins/Maximilian_Champion_of_the_Order_background.webp"
+			},
+			{
+				id: 120,
+				name: "Jamez Ripher",
+				image: "images/skins/Maximilian_Jamez_Ripher_background.webp"
+			},
+			{
+				id: 121,
+				name: "Winter Warrior",
+				image: "images/skins/Maximilian_Winter_Warrior_background.webp"
+			},
+			{
+				id: 122,
+				name: "Boomstick",
+				image: "images/skins/Maximilian_Boomstick_background.webp"
+			},
+			{
+				id: 123,
+				name: "Backdraft",
+				image: "images/skins/Maximilian_Backdraft_background.webp"
+			},
+			{
+				id: 124,
+				name: "Dragon Slayer",
+				image: "images/skins/Maximilian_Dragon_Slayer_background.webp"
+			},
+			{
+				id: 125,
+				name: "Summer of Stunning",
+				image: "images/skins/Maximilian_Summer_of_Stunning_background.webp"
+			},
+		]
 	},
 	{
 		id: 12,
 		name: "Midnight",
-		portrait: "images/heroes/Midnight.webp",
 		hp: 220,
 		mana: 190,
 		range: Range.Melee,
@@ -1440,12 +1849,37 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["MidnightDefault", "HiddenTiger", "MidnightDefaultGold", "CatBurglar", "ShiverMeWhiskers", "WuXingAzureAssassin"]
+		skins: [
+			{
+				id: 44,
+				name: "Default",
+				image: "images/heroes/Midnight.webp"
+			},
+			{
+				id: 45,
+				name: "Hidden Tiger",
+				image: "images/skins/Midnight_Hidden_Tiger_background.webp"
+			},
+			{
+				id: 47,
+				name: "Cat Burglar",
+				image: "images/skins/Midnight_Cat_Burglar_background.webp"
+			},
+			{
+				id: 48,
+				name: "Shiver Me Whiskers",
+				image: "images/skins/Midnight_Shiver_Me_Whiskers_background.webp"
+			},
+			{
+				id: 49,
+				name: "Wu Xing Azure Assassin",
+				image: "images/skins/Midnight_Wu_Xing_Azure_Assassin_background.webp"
+			},
+		]
 	},
 	{
 		id: 13,
 		name: "Oziel",
-		portrait: "images/heroes/Oziel.webp",
 		hp: 200,
 		mana: 160,
 		range: Range.Ranged,
@@ -1565,12 +1999,32 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["OzielDefault", "BloodRune", "StringTheory", "KnightWalker"]
+		skins: [
+			{
+				id: 1,
+				name: "Default",
+				image: "images/heroes/Oziel.webp"
+			},
+			{
+				id: 2,
+				name: "Blood Rune",
+				image: "images/skins/Oziel_Blood_Rune_background.webp"
+			},
+			{
+				id: 3,
+				name: "String Theory",
+				image: "images/skins/Oziel_String_Theory_background.webp"
+			},
+			{
+				id: 4,
+				name: "Knight Walker",
+				image: "images/skins/Oziel_Knight_Walker_background.webp"
+			},
+		]
 	},
 	{
 		id: 14,
 		name: "Smolder",
-		portrait: "images/heroes/Smolder.webp",
 		hp: 313,
 		mana: 290,
 		range: Range.Ranged,
@@ -1687,12 +2141,42 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["SmolderDefault", "HelterSwelter", "SmolderDefaultWhiteHair", "Elite", "KillAuea", "FireAlarmFemme", "Firestarter", "WuXingDragonMage"]
+		skins: [
+			{
+				id: 65,
+				name: "Default",
+				image: "images/heroes/Smolder.webp"
+			},
+			{
+				id: 66,
+				name: "Helter Swelter",
+				image: "images/skins/Smolder_Helter_Swelter_background.webp"
+			},
+			{
+				id: 69,
+				name: "Kill-auea",
+				image: "images/skins/Smolder_Kill-auea_background.webp"
+			},
+			{
+				id: 70,
+				name: "Five-Alarm Femme",
+				image: "images/skins/Smolder_Five-Alarm_Femme_background.webp"
+			},
+			{
+				id: 71,
+				name: "Firestarter",
+				image: "images/skins/Smolder_Firestarter_background.webp"
+			},
+			{
+				id: 72,
+				name: "Wu Xing Dragon Mage",
+				image: "images/skins/Smolder_Wu_Xing_Dragon_Mage_background.webp"
+			},
+		]
 	},
 	{
 		id: 15,
 		name: "Stinkeye",
-		portrait: "images/heroes/Stinkeye.webp",
 		hp: 356,
 		mana: 200,
 		range: Range.Ranged,
@@ -1805,12 +2289,32 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["StinkeyeDefault", "FirstEyeBlind", "StinkeyeDefaultAlt", "EnfantTerrible", "FloatyFun"]
+		skins: [
+			{
+				id: 90,
+				name: "Default",
+				image: "images/heroes/Stinkeye.webp"
+			},
+			{
+				id: 89,
+				name: "First Eye Blind",
+				image: "images/skins/Stinkeye_First_Eye_Blind_background.webp"
+			},
+			{
+				id: 92,
+				name: "Enfant Terrible",
+				image: "images/skins/Stinkeye_Enfant_Terrible_background.webp"
+			},
+			{
+				id: 93,
+				name: "Floaty Fun",
+				image: "images/skins/Stinkeye_Floaty_Fun_background.webp"
+			},
+		]
 	},
 	{
 		id: 16,
 		name: "Temper",
-		portrait: "images/heroes/Temper.webp",
 		hp: 500,
 		mana: 0,
 		range: Range.Melee,
@@ -1932,12 +2436,27 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["TemperDefault", "ForgedFury", "PrizedCow"]
+		skins: [
+			{
+				id: 93,
+				name: "Default",
+				image: "images/heroes/Temper.webp"
+			},
+			{
+				id: 94,
+				name: "Forged Fury",
+				image: "images/skins/Temper_Forged_Fury_background.webp"
+			},
+			{
+				id: 95,
+				name: "Prized Cow",
+				image: "images/skins/Temper_Prized_Cow_background.webp"
+			},
+		]
 	},
 	{
 		id: 17,
 		name: "Tundra",
-		portrait: "images/heroes/Tundra.webp",
 		hp: 625,
 		mana: 225,
 		range: Range.Melee,
@@ -2059,12 +2578,37 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["TundraDefault", "WarChief", "BigLebearski", "KingOfArctos", "ImperialGoldenMage"]
+		skins: [
+			{
+				id: 103,
+				name: "Default",
+				image: "images/heroes/Tundra.webp"
+			},
+			{
+				id: 104,
+				name: "War Chief",
+				image: "images/skins/Tundra_War_Chief_background.webp"
+			},
+			{
+				id: 105,
+				name: "Big Lebearski",
+				image: "images/skins/Tundra_Big_Lebearski_background.webp"
+			},
+			{
+				id: 106,
+				name: "King of Arctos",
+				image: "images/skins/Tundra_King_of_Arctos_background.webp"
+			},
+			{
+				id: 107,
+				name: "Imperial Golden Mage",
+				image: "images/skins/Tundra_Imperial_Golden_Mage_background.webp"
+			},
+		]
 	},
 	{
 		id: 18,
 		name: "Yi-Lin",
-		portrait: "images/heroes/Yi-Lin.webp",
 		hp: 250,
 		mana: 40,
 		range: Range.Melee,
@@ -2185,12 +2729,33 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["YiLinDefault", "SentinelOfTheOrder", "SlayingInTheRain", "YuleLin"]
+		skins: [
+			{
+				id: 129,
+				name: "Default",
+				image: "images/heroes/Yi-Lin.webp"
+			},
+			{
+				id: 130,
+				name: "Sentinel of the Order",
+				image: "images/skins/Yi-Lin_Sentinel_of_the_Order_background.webp"
+			},
+			{
+				id: 131,
+				name: "Slaying in the Rain",
+				image: "images/skins/Yi-Lin_Slaying_in_the_Rain_background.webp"
+			},
+			{
+				id: 132,
+				name: "Yule-Lin",
+				image: "images/skins/Yi-Lin_Yule-Lin_background.webp"
+			},
+			
+		]
 	},
 	{
 		id: 19,
 		name: "Zoey",
-		portrait: "images/heroes/Zoey.webp",
 		hp: 275,
 		mana: 225,
 		range: Range.Ranged,
@@ -2310,7 +2875,28 @@ const Heroes = Object.freeze([
 				}
 			],
 		},
-		skins: ["ZoeyDefault", "SchoolDaze", "PrettyLittleStitches", "JurassicJourney"]
+		skins: [
+			{
+				id: 5,
+				name: "Default",
+				image: "images/heroes/Zoey.webp"
+			},
+			{
+				id: 6,
+				name: "School Daze",
+				image: "images/skins/Zoey_School_Daze_background.webp"
+			},
+			{
+				id: 7,
+				name: "Pretty Little Stitches",
+				image: "images/skins/Zoey_Pretty_Little_Stitches_background.webp"
+			},
+			{
+				id: 8,
+				name: "Jurassic Journey",
+				image: "images/skins/Zoey_Jurassic_Journey_background.webp"
+			},
+		]
 	}
 ]);
 export default Heroes;

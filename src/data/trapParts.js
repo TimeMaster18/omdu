@@ -1,4 +1,4 @@
-import TrapPartSlot from './trapPartSlot';
+import TrapPartSlot from '../enums/trapPartSlot';
 const TrapParts = Object.freeze([
 	{
 		id: 1,

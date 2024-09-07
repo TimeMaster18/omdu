@@ -1,6 +1,6 @@
 <template>
 	<v-card class="card">
-		<img :src="hero.portrait" class="portrait" />
+		<img :src="hero.skins[0].image" class="portrait" />
 		<v-card-title>{{ hero.name }}</v-card-title>
 		<v-card-text>
 			<!-- Stats -->

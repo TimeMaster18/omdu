@@ -9,7 +9,7 @@
 </template>
 <script>
 import TrapCard from '../components/TrapCard.vue';
-import Traps from '../enums/traps';
+import Traps from '../data/traps';
 
 export default {
 	components: {

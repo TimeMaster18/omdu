@@ -9,7 +9,7 @@
 </template>
 <script>
 import TraitCard from '../components/TraitCard.vue';
-import Traits from '../enums/traits';
+import Traits from '../data/traits';
 
 export default {
 	components: {

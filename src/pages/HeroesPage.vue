@@ -9,7 +9,7 @@
 </template>
 <script>
 import HeroCard from "../components/HeroCard.vue";
-import Heroes from "../enums/heroes";
+import Heroes from "../data/heroes";
 
 export default {
 	components: {

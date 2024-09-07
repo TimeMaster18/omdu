@@ -9,7 +9,7 @@
 </template>
 <script>
 import GuardianCard from '../components/GuardianCard.vue';
-import Guardians from '../enums/guardians';
+import Guardians from '../data/guardians';
 
 export default {
 	components: {
