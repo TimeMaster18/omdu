@@ -1,10 +1,14 @@
+// Actual app creation
+import '@/assets/main.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+const vueApp = createApp(App);
+
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
-// Vuetify
 const customTheme = {
 	dark: true,
 	colors: {
@@ -23,7 +27,7 @@ const customTheme = {
 		'success': '#4CB944',
 		'warning': '#E59500',
 	},
-}
+};
 const vuetify = createVuetify({
 	icons: {
 		defaultSet: 'mdi',
@@ -38,7 +42,8 @@ const vuetify = createVuetify({
 			customTheme,
 		},
 	}
-})
+});
+vueApp.use(vuetify);
 
 // Router
 import { createWebHistory, createRouter } from 'vue-router';
@@ -50,6 +55,7 @@ import TrapPartsPage from './pages/TrapPartsPage.vue';
 import GuardiansPage from './pages/GuardiansPage.vue';
 import MapsPage from './pages/MapsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
+import LobbyPage from './pages/LobbyPage.vue';
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
@@ -61,15 +67,26 @@ const router = createRouter({
 		{ path: '/omdu/guardians', component: GuardiansPage },
 		{ path: '/omdu/maps', component: MapsPage },
 		{ path: '/omdu/loadout', component: LoadoutPage },
+		{ path: '/omdu/lobby', component: LobbyPage },
 	],
-})
+});
+vueApp.use(router);
 
-// Actual app creation
-import '@/assets/main.css'
-import { createApp } from 'vue'
-import App from './App.vue'
+// Firebase
+import { VueFire, VueFireAuth, VueFireDatabaseOptionsAPI } from 'vuefire';
+import { firebaseApp } from './firebase';
+import Cookies from 'js-cookie'
+import cookieNames from './enums/cookieNames';
+if (Cookies.get(cookieNames.FirebaseSecret) !== undefined) {
+	// Without a firebase secret we can't access the database so we don't instantiate it
+	vueApp.use(VueFire, {
+		firebaseApp,
+		modules: [
+			VueFireAuth(),
+			VueFireDatabaseOptionsAPI()
+		],
+	});
+}
 
-createApp(App)
-	.use(vuetify)
-	.use(router)
-	.mount('#app')
+// Mount the Vue app
+vueApp.mount('#app')
