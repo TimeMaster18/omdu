@@ -14,6 +14,10 @@
 				<v-icon>mdi-lightning-bolt</v-icon>
 				<span>Traits</span>
 			</v-btn>
+			<v-btn to="gear">
+				<v-icon>mdi-ring</v-icon>
+				<span>Gear</span>
+			</v-btn>
 			<v-btn to="traps">
 				<v-icon>mdi-cog</v-icon>
 				<span>Traps</span>
