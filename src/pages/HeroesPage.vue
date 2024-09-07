@@ -7,18 +7,25 @@
 		</v-row>
 	</div>
 </template>
+
 <script>
+import { useDataStore } from '../stores/data';
 import HeroCard from "../components/HeroCard.vue";
-import Heroes from "../data/heroes";
 
 export default {
+	setup() {
+		const dataStore = useDataStore();
+		return {
+			dataStore
+		};
+	},
 	components: {
 		HeroCard,
 	},
 	computed: {
 		heroes() {
-			return JSON.parse(JSON.stringify(Heroes)).sort((a, b) => a.name > b.name);
-		}
+			return JSON.parse(JSON.stringify(this.dataStore.heroes)).sort((a, b) => a.name > b.name);
+		},
 	}
 }
 </script>

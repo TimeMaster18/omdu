@@ -1,7 +1,7 @@
 import Range from '../enums/range.js';
 import DamageType from '../enums/damageType.js';
 
-const Heroes = Object.freeze([
+const heroes = Object.freeze([
 	{
 		id: 1,
 		name: "Bionka",
@@ -2899,4 +2899,4 @@ const Heroes = Object.freeze([
 		]
 	}
 ]);
-export default Heroes;
+export default heroes;

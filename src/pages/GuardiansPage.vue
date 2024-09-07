@@ -7,19 +7,27 @@
 		</v-row>
 	</div>
 </template>
+
 <script>
+import { useDataStore } from '../stores/data';
 import GuardianCard from '../components/GuardianCard.vue';
-import Guardians from '../data/guardians';
 
 export default {
+	setup() {
+		const dataStore = useDataStore();
+		return {
+			dataStore
+		};
+	},
 	components: {
 		GuardianCard
 	},
 	computed: {
 		guardians() {
-			return JSON.parse(JSON.stringify(Guardians)).sort((a, b) => a.home.name > b.home.name);
+			return JSON.parse(JSON.stringify(this.dataStore.guardians)).sort((a, b) => a.home.name > b.home.name);
 		}
 	}
 }
 </script>
+
 <style scoped></style>

@@ -7,17 +7,24 @@
 		</v-row>
 	</div>
 </template>
+
 <script>
+import { useDataStore } from '../stores/data';
 import TraitCard from '../components/TraitCard.vue';
-import Traits from '../data/traits';
 
 export default {
+	setup() {
+		const dataStore = useDataStore();
+		return {
+			dataStore
+		};
+	},
 	components: {
 		TraitCard
 	},
 	computed: {
 		traits() {
-			return JSON.parse(JSON.stringify(Traits)).sort((a, b) => {
+			return JSON.parse(JSON.stringify(this.dataStore.traits)).sort((a, b) => {
 				if (a.slot !== b.slot) return a.slot > b.slot;
 				else return a.name > b.name;
 			});
@@ -25,4 +32,5 @@ export default {
 	}
 }
 </script>
+
 <style scoped></style>

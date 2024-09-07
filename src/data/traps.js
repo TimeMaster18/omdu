@@ -2,7 +2,7 @@ import DamageType from '../enums/damageType';
 import TrapPartSlot from '../enums/trapPartSlot';
 import Placement from '../enums/placement';
 
-const Traps = Object.freeze([
+const traps = Object.freeze([
 	{
 		id: 100,
 		name: "Arcane Bowling Ball",
@@ -598,4 +598,4 @@ const Traps = Object.freeze([
 		size: [1, 1]
 	}
 ]);
-export default Traps;
+export default traps;

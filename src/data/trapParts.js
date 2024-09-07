@@ -1,5 +1,5 @@
 import TrapPartSlot from '../enums/trapPartSlot';
-const TrapParts = Object.freeze([
+const trapParts = Object.freeze([
 	{
 		id: 1,
 		name: "Double Tank Accumulator",
@@ -297,4 +297,4 @@ const TrapParts = Object.freeze([
 		image: "images/trap-parts/Light_Pressure_Plate_image.webp"
 	}
 ]);
-export default TrapParts;
+export default trapParts;

@@ -7,19 +7,27 @@
 		</v-row>
 	</div>
 </template>
+
 <script>
+import { useDataStore } from '../stores/data';
 import TrapCard from '../components/TrapCard.vue';
-import Traps from '../data/traps';
 
 export default {
+	setup() {
+		const dataStore = useDataStore();
+		return {
+			dataStore
+		};
+	},
 	components: {
 		TrapCard
 	},
 	computed: {
 		traps() {
-			return JSON.parse(JSON.stringify(Traps)).sort((a, b) => a.name > b.name);
+			return JSON.parse(JSON.stringify(this.dataStore.traps)).sort((a, b) => a.name > b.name);
 		}
 	}
 }
 </script>
+
 <style scoped></style>

@@ -1,5 +1,5 @@
 import TraitSlot from '../enums/traitSlot';
-const Traits = Object.freeze([
+const traits = Object.freeze([
 	{
 		id: 1,
 		name: "Easily Excited",
@@ -385,4 +385,4 @@ const Traits = Object.freeze([
 		image: "images/traits/Respect_My_Authority_image.webp"
 	}
 ]);
-export default Traits;
+export default traits;

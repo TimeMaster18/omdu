@@ -72,6 +72,12 @@ const router = createRouter({
 });
 vueApp.use(router);
 
+// Pinia
+import { createPinia, setActivePinia } from 'pinia';
+const pinia = createPinia();
+setActivePinia(pinia);
+vueApp.use(pinia);
+
 // Firebase
 import { VueFire, VueFireAuth, VueFireDatabaseOptionsAPI } from 'vuefire';
 import { firebaseApp } from './firebase';
