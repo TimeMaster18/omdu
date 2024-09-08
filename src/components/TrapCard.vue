@@ -108,6 +108,7 @@ export default {
 	user-select: none;
 	min-width: 250px;
 	max-width: 300px;
+    line-height: 0;
 }
 
 .image {

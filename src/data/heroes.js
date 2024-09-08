@@ -120,7 +120,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 9,
-                name: "Default",
+                name: "Queen Momma",
                 image: "images/heroes/Bionka.webp"
             },
             {
@@ -258,7 +258,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 15,
-                name: "Default",
+                name: "Vindicator of the Dead",
                 image: "images/heroes/Blackpaw.webp"
             },
             {
@@ -423,7 +423,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 21,
-                name: "Default",
+                name: "The Brutal",
                 image: "images/heroes/Bloodspike.webp"
             },
             {
@@ -578,7 +578,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 27,
-                name: "Default",
+                name: "The Master Engineer",
                 image: "images/heroes/Brass.webp"
             },
             {
@@ -711,7 +711,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 97,
-                name: "Default",
+                name: "The Master of the Order",
                 image: "images/heroes/Cygnus.webp"
             },
             {
@@ -856,7 +856,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 41,
-                name: "Default",
+                name: "The Eight Groves Most Wanted",
                 image: "images/heroes/Deadeye.webp"
             },
             {
@@ -989,7 +989,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 50,
-                name: "Default",
+                name: "Claim Jumper",
                 image: "images/heroes/Dobbin.webp"
             },
             {
@@ -1127,7 +1127,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 76,
-                name: "Default",
+                name: "The Redeemed Sorceress",
                 image: "images/heroes/Gabriella.webp"
             },
             {
@@ -1320,7 +1320,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 32,
-                name: "Default",
+                name: "Frozen Shield of Deg Itan",
                 image: "images/heroes/Hogarth.webp"
             },
             {
@@ -1488,7 +1488,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 58,
-                name: "Default",
+                name: "Warden of the First Grove",
                 image: "images/heroes/Ivy.webp"
             },
             {
@@ -1646,7 +1646,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 111,
-                name: "Default",
+                name: "The War Mage",
                 image: "images/heroes/Maximilian.webp"
             },
             {
@@ -1852,7 +1852,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 44,
-                name: "Default",
+                name: "Twilight's Razor",
                 image: "images/heroes/Midnight.webp"
             },
             {
@@ -2002,7 +2002,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 1,
-                name: "Default",
+                name: "The Soul Thief",
                 image: "images/heroes/Oziel.webp"
             },
             {
@@ -2144,7 +2144,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 65,
-                name: "Default",
+                name: "The Fireborn",
                 image: "images/heroes/Smolder.webp"
             },
             {
@@ -2292,7 +2292,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 90,
-                name: "Default",
+                name: "Shaman of Oasis",
                 image: "images/heroes/Stinkeye.webp"
             },
             {
@@ -2439,7 +2439,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 93,
-                name: "Default",
+                name: "Rage of the Forge",
                 image: "images/heroes/Temper.webp"
             },
             {
@@ -2581,7 +2581,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 103,
-                name: "Default",
+                name: "Oathkeeper of Arctos",
                 image: "images/heroes/Tundra.webp"
             },
             {
@@ -2731,7 +2731,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 129,
-                name: "Default",
+                name: "Jade Sentinel",
                 image: "images/heroes/Yi-Lin.webp"
             },
             {
@@ -2877,7 +2877,7 @@ const heroes = Object.freeze([
         skins: [
             {
                 id: 5,
-                name: "Default",
+                name: "The Chaotic Apprentice",
                 image: "images/heroes/Zoey.webp"
             },
             {

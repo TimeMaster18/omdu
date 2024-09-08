@@ -2,7 +2,10 @@
     <div>
         <v-row>
             <v-col cols="4">
-                <hero-selector />
+                <hero-selector
+                    v-model:hero-id="loadout.heroId"
+                    v-model:skin-id="loadout.skinId"
+                />
             </v-col>
             <v-col cols="5">
                 Coming Soon!

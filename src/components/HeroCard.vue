@@ -144,6 +144,7 @@ export default {
 	user-select: none;
     min-width: 420px;
     max-width: 500px;
+    line-height: 0;
 }
 
 .portrait {

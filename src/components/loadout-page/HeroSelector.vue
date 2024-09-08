@@ -86,7 +86,7 @@
 
 <script>
 import HeroCard from '../HeroCard.vue';
-import SelectionCard from './SelectionCard.vue';
+import SelectionCard from './HeroSelectionCard.vue';
 import { useDataStore } from '../../stores/data';
 
 export default {
@@ -98,7 +98,14 @@ export default {
         };
     },
     props:{
-
+        heroId: {
+            type: Number,
+            required: true
+        },
+        skinId: {
+            type: Number,
+            required: true
+        }
     },
     components:{
         SelectionCard,
@@ -136,6 +143,24 @@ export default {
         selectSkin(index){
             this.selectedSkinIndex = index;
             this.isOpen = false;
+        }
+    },
+    watch:{
+        // All this is to keep the hero-id and skin-id properties synced
+        heroId(heroId){
+            this.selectedHeroIndex = this.dataStore.heroes.findIndex(hero=>hero.id === heroId);
+            if(this.selectedHeroIndex === -1) this.selectedSkinIndex = 0;
+        },
+        skinId(skinId){
+            this.selectedSkinIndex = this.hero.skins.findIndex(skin=>skin.id === skinId);
+            console.log(this.selectedSkinIndex);
+            if(this.selectedSkinIndex === -1) this.selectedSkinIndex = 0;
+        },
+        hero(hero){
+            this.$emit("update:hero-id", hero?.id);
+        },
+        skin(skin){
+            this.$emit("update:skin-id", skin?.id);
         }
     }
 }
