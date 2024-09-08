@@ -1,5 +1,5 @@
 const Range = Object.freeze({
-	Melee: "melee",
-	Ranged: "range"
+    Melee: "melee",
+    Ranged: "range"
 });
 export default Range;

@@ -1,32 +1,35 @@
 <template>
-	<v-card class="card">
-		<div class="image text-center">
-			<img :src="guardian.image" />
-		</div>
-		<img :src="guardian.home.icon" class="home-icon" />
-		<v-card-title>{{ guardian.name }}</v-card-title>
-		<v-card-text>
-			<!-- Description -->
-			<div class="mt-2">
-				Aura: {{ guardian.aura.description }}
-			</div>
+    <v-card class="card">
+        <div class="image text-center">
+            <img :src="guardian.image">
+        </div>
+        <img
+            :src="guardian.home.icon"
+            class="home-icon"
+        >
+        <v-card-title>{{ guardian.name }}</v-card-title>
+        <v-card-text>
+            <!-- Description -->
+            <div class="mt-2">
+                Aura: {{ guardian.aura.description }}
+            </div>
 
-			<!-- Description -->
-			<div class="mt-4 flavor-text">
-				{{ guardian.description }}
-			</div>
-		</v-card-text>
-	</v-card>
+            <!-- Description -->
+            <div class="mt-4 flavor-text">
+                {{ guardian.description }}
+            </div>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
 export default {
-	props: {
-		guardian: {
-			type: Object,
-			required: true
-		}
-	},
+    props: {
+        guardian: {
+            type: Object,
+            required: true
+        }
+    },
 }
 </script>
 

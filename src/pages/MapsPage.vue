@@ -1,5 +1,5 @@
 <template>
-	Coming Soon!
+    Coming Soon!
 </template>
 <script>
 export default {

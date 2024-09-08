@@ -10,38 +10,38 @@ import { createVuetify } from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 const customTheme = {
-	dark: true,
-	colors: {
-		'background-darken-1': '#1a1a1a',
-		'background': '#343434',
-		'background-lighten-1': '#9a9a9a',
-		'background-lighten-2': '#ebebeb',
+    dark: true,
+    colors: {
+        'background-darken-1': '#1a1a1a',
+        'background': '#343434',
+        'background-lighten-1': '#9a9a9a',
+        'background-lighten-2': '#ebebeb',
 
-		'surface': '#1a1a1a',
+        'surface': '#1a1a1a',
 
-		'primary': '#efaac4',
-		'primary-lighten-1': '#f4c4d6',
+        'primary': '#efaac4',
+        'primary-lighten-1': '#f4c4d6',
 
-		'error': '#D7263D',
-		'info': '#37B5E6',
-		'success': '#4CB944',
-		'warning': '#E59500',
-	},
+        'error': '#D7263D',
+        'info': '#37B5E6',
+        'success': '#4CB944',
+        'warning': '#E59500',
+    },
 };
 const vuetify = createVuetify({
-	icons: {
-		defaultSet: 'mdi',
-		aliases,
-		sets: {
-			mdi,
-		}
-	},
-	theme: {
-		defaultTheme: 'customTheme',
-		themes: {
-			customTheme,
-		},
-	}
+    icons: {
+        defaultSet: 'mdi',
+        aliases,
+        sets: {
+            mdi,
+        }
+    },
+    theme: {
+        defaultTheme: 'customTheme',
+        themes: {
+            customTheme,
+        },
+    }
 });
 vueApp.use(vuetify);
 
@@ -57,18 +57,18 @@ import MapsPage from './pages/MapsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
 import LobbyPage from './pages/LobbyPage.vue';
 const router = createRouter({
-	history: createWebHistory(),
-	routes: [
-		{ path: '/omdu/heroes', component: HeroesPage },
-		{ path: '/omdu/traits', component: TraitsPage },
-		{ path: '/omdu/gear', component: GearPage },
-		{ path: '/omdu/traps', component: TrapsPage },
-		{ path: '/omdu/trap-parts', component: TrapPartsPage },
-		{ path: '/omdu/guardians', component: GuardiansPage },
-		{ path: '/omdu/maps', component: MapsPage },
-		{ path: '/omdu/loadout', component: LoadoutPage },
-		{ path: '/omdu/lobby', component: LobbyPage },
-	],
+    history: createWebHistory(),
+    routes: [
+        { path: '/omdu/heroes', component: HeroesPage },
+        { path: '/omdu/traits', component: TraitsPage },
+        { path: '/omdu/gear', component: GearPage },
+        { path: '/omdu/traps', component: TrapsPage },
+        { path: '/omdu/trap-parts', component: TrapPartsPage },
+        { path: '/omdu/guardians', component: GuardiansPage },
+        { path: '/omdu/maps', component: MapsPage },
+        { path: '/omdu/loadout', component: LoadoutPage },
+        { path: '/omdu/lobby', component: LobbyPage },
+    ],
 });
 vueApp.use(router);
 
@@ -84,14 +84,14 @@ import { firebaseApp } from './firebase';
 import Cookies from 'js-cookie'
 import cookieNames from './enums/cookieNames';
 if (Cookies.get(cookieNames.FirebaseSecret) !== undefined) {
-	// Without a firebase secret we can't access the database so we don't instantiate it
-	vueApp.use(VueFire, {
-		firebaseApp,
-		modules: [
-			VueFireAuth(),
-			VueFireDatabaseOptionsAPI()
-		],
-	});
+    // Without a firebase secret we can't access the database so we don't instantiate it
+    vueApp.use(VueFire, {
+        firebaseApp,
+        modules: [
+            VueFireAuth(),
+            VueFireDatabaseOptionsAPI()
+        ],
+    });
 }
 
 // Mount the Vue app

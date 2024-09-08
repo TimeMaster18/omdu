@@ -7,17 +7,19 @@ import trapParts from '../data/trapParts';
 import guardians from '../data/guardians';
 
 export const useDataStore = defineStore('data', {
-	state() {
-		return {
-			heroes: heroes,
-			traits: traits,
-			gear: gear,
-			traps: traps,
-			trapParts: trapParts,
-			guardians: guardians
-		};
-	},
-	getters: {
-
-	},
+    state() {
+        return {
+            heroes: heroes,
+            traits: traits,
+            gear: gear,
+            traps: traps,
+            trapParts: trapParts,
+            guardians: guardians
+        };
+    },
+    getters: {
+        getHeroById: (state) => (id) => {
+            return state.heroes.find(hero => hero.id === id) ?? null;
+        }
+    },
 });

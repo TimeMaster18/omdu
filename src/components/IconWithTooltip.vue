@@ -1,28 +1,37 @@
 <template>
-	<v-tooltip location="top" class="tooltip" content-class="tooltip-content elevation-2" width="400">
-		<template v-slot:activator="{ props }">
-			<img class="icon" :src="icon" v-bind="props" />
-		</template>
+    <v-tooltip
+        location="top"
+        class="tooltip"
+        content-class="tooltip-content elevation-2"
+        width="400"
+    >
+        <template #activator="{ props }">
+            <img
+                class="icon"
+                :src="icon"
+                v-bind="props"
+            >
+        </template>
 
-		<template v-slot:default>
-			<slot></slot>
-		</template>
-	</v-tooltip>
+        <template #default>
+            <slot />
+        </template>
+    </v-tooltip>
 </template>
 
 <script>
 export default {
-	props: {
-		icon: {
-			type: String,
-			required: true,
-		},
-	},
+    props: {
+        icon: {
+            type: String,
+            required: true,
+        },
+    },
 };
 </script>
 
 <style scoped>
-.tooltip >>> .tooltip-content {
+.tooltip:deep(.tooltip-content) {
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(var(--v-theme-on-surface));

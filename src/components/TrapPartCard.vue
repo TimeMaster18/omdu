@@ -1,39 +1,43 @@
 <template>
-	<v-card class="card">
-		<div class="image text-center">
-			<img :src="trapPart.image" />
-		</div>
-		<v-card-title>{{ trapPart.name }}</v-card-title>
-		<v-card-text>
-			<!-- Slot -->
-			<trap-part-slot-icon :trap-part-slot="trapPart.partSlot" :size="32" show-label />
+    <v-card class="card">
+        <div class="image text-center">
+            <img :src="trapPart.image">
+        </div>
+        <v-card-title>{{ trapPart.name }}</v-card-title>
+        <v-card-text>
+            <!-- Slot -->
+            <trap-part-slot-icon
+                :trap-part-slot="trapPart.partSlot"
+                :size="32"
+                show-label
+            />
 
-			<!-- Description -->
-			<div class="mt-2">
-				{{ trapPart.description }}
-			</div>
+            <!-- Description -->
+            <div class="mt-2">
+                {{ trapPart.description }}
+            </div>
 
-			<!-- Flavor text -->
-			<div class="mt-4 font-italic flavor-text">
-				{{ trapPart.flavourText }}
-			</div>
-		</v-card-text>
-	</v-card>
+            <!-- Flavor text -->
+            <div class="mt-4 font-italic flavor-text">
+                {{ trapPart.flavourText }}
+            </div>
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
 import TrapPartSlotIcon from './TrapPartSlotIcon.vue';
 
 export default {
-	components: {
-		TrapPartSlotIcon
-	},
-	props: {
-		trapPart: {
-			type: Object,
-			required: true
-		}
-	},
+    components: {
+        TrapPartSlotIcon
+    },
+    props: {
+        trapPart: {
+            type: Object,
+            required: true
+        }
+    },
 }
 </script>
 
