@@ -39,7 +39,7 @@
                 <v-card-text class="pt-2">
                     <v-tabs-window
                         v-model="currentTab"
-                        class="py-2"
+                        class="pa-1"
                     >
                         <!-- Select Hero -->
                         <v-tabs-window-item value="hero">
