@@ -12,6 +12,7 @@
                 v-bind="activatorProps"
             >
                 <hero-card
+                    class="cursor-pointer"
                     :hero="hero"
                     :skin="skin"
                     show-stats
@@ -144,7 +145,6 @@ export default {
 .hero-selector {
 	border-radius: 4px;
 	overflow: hidden;
-    cursor: pointer;
 }
 
 .hero-image {
