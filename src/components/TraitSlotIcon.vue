@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex align-center">
         <img
-            :src="image"
+            :src="traitSlot.image"
             class="icon"
             :style="sizeStyle"
         >
@@ -9,17 +9,16 @@
             v-if="showLabel"
             class="capitalize ml-2"
         >
-            {{ traitSlot }}
+            {{ traitSlot.name }}
         </span>
         <slot />
     </div>
 </template>
 
 <script>
-import TraitSlot from '../enums/traitSlot';
-
 export default {
     props: {
+        // Check TraitSlot enum for possible values
         traitSlot: {
             type: String,
             required: true
@@ -34,12 +33,6 @@ export default {
         }
     },
     computed: {
-        image() {
-            if (this.traitSlot === TraitSlot.Diamond) return "images/trait-slots/Diamond_icon.webp";
-            else if (this.traitSlot === TraitSlot.Pentagon) return "images/trait-slots/Pentagon_icon.webp";
-            else if (this.traitSlot === TraitSlot.Triangle) return "images/trait-slots/Triangle_icon.webp";
-            else return null;
-        },
         sizeStyle() {
             return {
                 height: `${this.size}px`,
