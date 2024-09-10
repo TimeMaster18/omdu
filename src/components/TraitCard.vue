@@ -20,7 +20,7 @@
                 <trait-slot-icon
                     :trait-slot="trait.slot"
                     :size="2"
-                    :class="{ 'inactive-trait-bonus': !activeBonus }"
+                    :inactive="!activeBonus"
                 >
                     <div class="ml-2">
                         {{ trait.matchingSlotTrait }}

@@ -1,15 +1,38 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="4">
-                <hero-selector
+            <v-col cols="1" />
+            <v-col />
+            <v-col
+                cols="auto"
+                align="center"
+            >
+                <hero-selector-dialog
                     v-model:hero-id="loadout.heroId"
                     v-model:skin-id="loadout.skinId"
                 />
             </v-col>
-            <v-col cols="5">
-                Coming Soon!
+            <v-col>
+                <trait-selector-dialog
+                    v-model="loadout.traits.pentagonTraitId"
+                    :bonus-slot="TraitSlot.Pentagon"
+                    activator-class="mb-2"
+                />
+                <trait-selector-dialog
+                    v-model="loadout.traits.diamondTraitId"
+                    :bonus-slot="TraitSlot.Diamond"
+                    activator-class="mb-2"
+                />
+                <trait-selector-dialog
+                    v-model="loadout.traits.triangleTraitId"
+                    :bonus-slot="TraitSlot.Triangle"
+                    activator-class="mb-2"
+                />
+                <trait-selector-dialog
+                    v-model="loadout.traits.noBonusTraitId"
+                />
             </v-col>
+            <v-col cols="1" />
         </v-row>
     </div>
 </template>
@@ -17,14 +40,19 @@
 <script>
 import { encode } from '../utils/base62Util.js';
 import Dye from '../enums/dye.js';
-import HeroSelector from '../components/loadout-page/HeroSelector.vue';
+import HeroSelectorDialog from '../components/loadout-page/HeroSelectorDialog.vue';
+import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.vue';
+import TraitSlot from '../enums/traitSlot.js';
 
 export default {
     components: {
-        HeroSelector
+        HeroSelectorDialog,
+        TraitSelectorDialog
     },
     data() {
         return {
+            TraitSlot,
+            
             loadout: {
                 heroId: 1,
                 skinId: 9,

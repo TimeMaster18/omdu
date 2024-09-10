@@ -1,7 +1,10 @@
 <template>
-    <div class="d-flex align-center">
+    <div
+        class="d-flex align-center"
+        :class="{'inactive': inactive}"
+    >
         <img
-            :src="traitSlot.image"
+            :src="traitSlot?.image"
             class="icon"
             :style="sizeStyle"
         >
@@ -9,9 +12,11 @@
             v-if="showLabel"
             class="capitalize ml-2"
         >
-            {{ traitSlot.name }}
+            {{ traitSlot?.name }}
         </span>
-        <slot />
+        <span class="ml-2">
+            <slot />
+        </span>
     </div>
 </template>
 
@@ -20,7 +25,7 @@ export default {
     props: {
         // Check TraitSlot enum for possible values
         traitSlot: {
-            type: String,
+            type: Object,
             required: true
         },
         showLabel: {
@@ -30,6 +35,10 @@ export default {
         size: {
             type: Number,
             default: 4
+        },
+        inactive: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -56,5 +65,10 @@ export default {
 
 .capitalize {
 	text-transform: capitalize;
+}
+
+.inactive {
+    filter: grayscale();
+    opacity: 0.5;
 }
 </style>
