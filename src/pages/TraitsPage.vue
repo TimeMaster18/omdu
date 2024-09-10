@@ -9,6 +9,9 @@
                 <trait-card
                     class="text-left"
                     :trait="trait"
+                    active-bonus
+                    show-image
+                    show-name
                 />
             </v-col>
         </v-row>

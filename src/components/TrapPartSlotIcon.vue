@@ -29,7 +29,7 @@ export default {
         },
         size: {
             type: Number,
-            default: 64
+            default: 4
         }
     },
     computed: {
@@ -48,8 +48,8 @@ export default {
         },
         sizeStyle() {
             return {
-                height: `${this.size}px`,
-                width: `${this.size}px`,
+                height: `${this.size}rem`,
+                width: `${this.size}rem`,
             }
         }
     }
@@ -59,7 +59,7 @@ export default {
 <style scoped>
 .icon {
 	aspect-ratio: 1/1;
-	border-radius: 4px;
+	border-radius: 0.25rem;
 	overflow: hidden;
 	filter: grayscale();
 }

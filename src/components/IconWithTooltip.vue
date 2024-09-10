@@ -40,10 +40,10 @@ export default {
 }
 
 .icon {
-	width: 64px;
-	height: 64px;
+	width: 4rem;
+	height: 4rem;
 	aspect-ratio: 1/1;
-	border-radius: 4px;
+	border-radius: 0.25rem;
 	overflow: hidden;
 }
 </style>

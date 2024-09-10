@@ -36,12 +36,12 @@ export default {
 <style scoped>
 .card {
 	user-select: none;
-	min-width: 250px;
-	max-width: 300px;
+	min-width: 15.625rem;
+	max-width: 18.75rem;
 }
 
 .image {
-	height: 180px;
+	height: 11.25rem;
 	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
@@ -49,14 +49,14 @@ export default {
 
 .image img {
 	image-rendering: optimizeQuality;
-	height: 180px;
+	height: 11.25rem;
 }
 
 .home-icon {
-	height: 48px;
+	height: 3rem;
 	position: absolute;
-	right: 16px;
-	top: 16px;
+	right: 1rem;
+	top: 1rem;
 }
 
 .flavor-text {

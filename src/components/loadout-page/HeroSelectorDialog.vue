@@ -6,12 +6,12 @@
         max-width="1400"
         width="auto"
     >
-        <template #activator="{ props: activatorProps }">
+        <template #activator>
             <div
                 class="hero-selector"
-                v-bind="activatorProps"
             >
                 <hero-card
+                    @click="isOpen = true"
                     class="cursor-pointer"
                     :hero="hero"
                     :skin="skin"
@@ -27,7 +27,7 @@
                 <v-tabs
                     v-model="currentTab"
                     align-tabs="center"
-                    style="min-height: 48px"
+                    style="min-height: 3rem"
                 >
                     <v-tab value="hero">
                         Hero
@@ -44,7 +44,7 @@
                     >
                         <!-- Select Hero -->
                         <v-tabs-window-item value="hero">
-                            <v-row>
+                            <v-row dense>
                                 <v-col
                                     v-for="(sortedHero, index) in sortedHeroes"
                                     :key="sortedHero.id"
@@ -62,7 +62,7 @@
                     
                         <!-- Select Skin -->
                         <v-tabs-window-item value="skin">
-                            <v-row>
+                            <v-row dense>
                                 <v-col
                                     v-for="(sortedSkin, index) in skins"
                                     :key="sortedSkin.id"
@@ -168,7 +168,7 @@ export default {
 
 <style scoped>
 .hero-selector {
-	border-radius: 4px;
+	border-radius: 0.25rem;
 	overflow: hidden;
 }
 

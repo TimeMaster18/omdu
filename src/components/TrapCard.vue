@@ -60,7 +60,7 @@
                 <trap-part-slot-icon
                     :trap-part-slot="trapPartSlot"
                     show-label
-                    :size="32"
+                    :size="2"
                 />
             </div>
         </v-card-text>
@@ -106,13 +106,13 @@ export default {
 <style scoped>
 .card {
 	user-select: none;
-	min-width: 250px;
-	max-width: 300px;
+	min-width: 15.625rem;
+	max-width: 18.75rem;
     line-height: 0;
 }
 
 .image {
-	height: 180px;
+	height: 11.25rem;
 	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
@@ -120,7 +120,7 @@ export default {
 
 .image img {
 	image-rendering: optimizeQuality;
-	height: 200px;
+	height: 12.5rem;
 }
 
 .capitalize {

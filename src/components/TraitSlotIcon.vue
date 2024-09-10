@@ -29,18 +29,18 @@ export default {
         },
         size: {
             type: Number,
-            default: 64
+            default: 4
         }
     },
     computed: {
         sizeStyle() {
             return {
-                height: `${this.size}px`,
-                minHeight: `${this.size}px`,
-                maxHeight: `${this.size}px`,
-                width: `${this.size}px`,
-                minWidth: `${this.size}px`,
-                maxWidth: `${this.size}px`,
+                height: `${this.size}rem`,
+                minHeight: `${this.size}rem`,
+                maxHeight: `${this.size}rem`,
+                width: `${this.size}rem`,
+                minWidth: `${this.size}rem`,
+                maxWidth: `${this.size}rem`,
             }
         }
     }
@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .icon {
 	aspect-ratio: 1/1;
-	border-radius: 4px;
+	border-radius: 0.25rem;
 	overflow: hidden;
 }
 

@@ -35,7 +35,7 @@ export default {
 <style scoped>
 .card {
 	user-select: none;
-    width: 250px;
+    width: 18.75rem;
     line-height: 0;
 }
 
@@ -49,13 +49,13 @@ export default {
 	aspect-ratio: 1000/471;
 }
 
-.label{
+.label {
     position: absolute;
     left: 0;
     bottom: 0;
     line-height: 1;
-    padding: 4px;
-    background: rgba(var(--v-theme-surface), 0.7);
-    border-top-right-radius: 8px;
+    padding: 0.25rem;
+    background: rgba(var(--v-theme-surface), 1);
+    border-top-right-radius: 0.5rem;
 }
 </style>

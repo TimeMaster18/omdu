@@ -1,10 +1,14 @@
 <template>
     <v-card class="card text-start">
-        <img
-            :src="image"
-            class="portrait"
-        >
-        <v-card-title>{{ hero.name }}</v-card-title>
+        <div>
+            <img
+                :src="image"
+                class="portrait"
+            >
+            <span class="name">
+                {{ hero.name }}
+            </span>
+        </div>
         <v-card-text>
             <!-- Stats -->
             <div v-if="showStats">
@@ -142,8 +146,8 @@ export default {
 <style scoped>
 .card {
 	user-select: none;
-    min-width: 420px;
-    max-width: 500px;
+    min-width: 26.25rem;
+    max-width: 31.25rem;
     line-height: 0;
 }
 
@@ -160,5 +164,16 @@ export default {
 .value {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.name {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    line-height: 1;
+    font-size: 1.25rem;
+    padding: 0.25rem 1rem;
+    background: rgba(var(--v-theme-surface), 1);
+    border-top-right-radius: 0.5rem;
 }
 </style>
