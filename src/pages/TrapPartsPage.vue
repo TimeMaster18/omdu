@@ -9,6 +9,8 @@
                 <trap-part-card
                     class="text-left"
                     :trap-part="trapPart"
+                    show-slot-icon
+                    show-flavour
                 />
             </v-col>
         </v-row>

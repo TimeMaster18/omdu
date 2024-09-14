@@ -2,24 +2,36 @@
     <div>
         <v-row>
             <v-col
-                cols="6"
+                cols="12"
+                order="3"
+                xl="6"
+                order-xl="1"
                 align="right"
+                class="slot-items"
             >
                 <v-row
                     v-for="x in [0,1,2]"
                     :key="x"
+                    dense
                 >
                     <v-col
                         v-for="y in [0,1,2]"
                         :key="y"
                         align="center"
                     >
-                        <slot-item-card v-model:slot-item-id="loadout.slotItemIds[x * 3 + y]" />
+                        <slot-item-card
+                            v-model:slot-item-id="loadout.slotItemIds[x * 3 + y]"
+                            v-model:trap-part-ids="loadout.trapPartIds[x * 3 + y]"
+                        />
                     </v-col>
                 </v-row>
             </v-col>
             <v-col
-                cols="3"
+                cols="12"
+                order="1"
+                md="6"
+                xl="3"
+                order-xl="2"
                 align="center"
             >
                 <hero-selector-dialog
@@ -27,7 +39,13 @@
                     v-model:skin-id="loadout.skinId"
                 />
             </v-col>
-            <v-col cols="3">
+            <v-col
+                cols="12"
+                order="2"
+                md="6"
+                xl="3"
+                order-xl="3"
+            >
                 <trait-selector-dialog
                     v-model="loadout.traits.pentagonTraitId"
                     :bonus-slot="TraitSlot.Pentagon"
@@ -141,4 +159,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.slot-items{
+    overflow-y: auto;
+    /* 56px is the size of the bottom bar */
+    max-height: calc(100vh - 56px); 
+    scrollbar-width: none; /* Hide scroll for Firefox */
+}
+
+.slot-items::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* Hide scroll for Chrome/Safari/Webkit */
+}
+</style>

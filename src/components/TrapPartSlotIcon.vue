@@ -48,8 +48,10 @@ export default {
         },
         sizeStyle() {
             return {
-                height: `${this.size}rem`,
-                width: `${this.size}rem`,
+                "min-height": `${this.size}rem`,
+                "max-height": `${this.size}rem`,
+                "min-width": `${this.size}rem`,
+                "max-width": `${this.size}rem`,
             }
         }
     }

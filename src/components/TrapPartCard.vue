@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card">
+    <v-card class="card text-left">
         <div class="image text-center">
             <img :src="trapPart.image">
         </div>
@@ -7,18 +7,23 @@
         <v-card-text>
             <!-- Slot -->
             <trap-part-slot-icon
+                v-if="showSlotIcon"
                 :trap-part-slot="trapPart.partSlot"
                 :size="2"
                 show-label
+                class="mb-2"
             />
 
             <!-- Description -->
-            <div class="mt-2">
+            <div>
                 {{ trapPart.description }}
             </div>
 
             <!-- Flavor text -->
-            <div class="mt-4 font-italic flavor-text">
+            <div
+                v-if="showFlavour"
+                class="mt-4 font-italic flavor-text"
+            >
                 {{ trapPart.flavourText }}
             </div>
         </v-card-text>
@@ -36,6 +41,14 @@ export default {
         trapPart: {
             type: Object,
             required: true
+        },
+        showSlotIcon:{
+            type: Boolean,
+            default:false
+        },
+        showFlavour:{
+            type: Boolean,
+            default:false
         }
     },
 }

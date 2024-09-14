@@ -13,9 +13,16 @@
                 :class="activatorClass"
             >
                 <img
+                    v-if="selectedSlotItem !== null"
                     :src="selectedSlotItem?.image"
                     :class="slotItemType"
                 >
+                <v-card-text
+                    v-else
+                    class="font-italic no-slot-item-selected"
+                >
+                    No slot item selected
+                </v-card-text>
             </v-card>
         </template>
 
@@ -170,7 +177,12 @@ export default {
     height: 100%;
 }
 .slot-item-card img.trap {
-    margin-top:0.75em;
+    margin-top: 0.75em;
+}
+
+.no-slot-item-selected {
+    margin-top: calc((7.5rem - 51.95px) / 2);
+	opacity: 0.3;
 }
 
 .selected {
