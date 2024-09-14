@@ -9,6 +9,11 @@
                 <trap-card
                     class="text-left"
                     :trap="trap"
+                    show-image
+                    show-name
+                    show-stats
+                    show-description
+                    show-parts
                 />
             </v-col>
         </v-row>

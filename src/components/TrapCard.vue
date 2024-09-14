@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card">
+    <v-card class="card text-start">
         <div class="image text-center">
             <img :src="trap.image">
         </div>
@@ -49,19 +49,21 @@
             </div>
 
             <!-- Trap part slots -->
-            <h3 class="mt-4">
-                Parts
-            </h3>
-            <div
-                v-for="(trapPartSlot, index) in trap.trapPartSlots"
-                :key="index"
-                class="mt-2"
-            >
-                <trap-part-slot-icon
-                    :trap-part-slot="trapPartSlot"
-                    show-label
-                    :size="2"
-                />
+            <div v-if="showParts">
+                <h3 class="mt-4">
+                    Parts
+                </h3>
+                <div
+                    v-for="(trapPartSlot, index) in trap.trapPartSlots"
+                    :key="index"
+                    class="mt-2"
+                >
+                    <trap-part-slot-icon
+                        :trap-part-slot="trapPartSlot"
+                        show-label
+                        :size="2"
+                    />
+                </div>
             </div>
         </v-card-text>
     </v-card>
@@ -79,6 +81,10 @@ export default {
         trap: {
             type: Object,
             required: true
+        },
+        showParts:{
+            type: Boolean,
+            default: false
         }
     },
     computed: {

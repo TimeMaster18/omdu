@@ -1,5 +1,5 @@
 <template>
-    <v-card class="card">
+    <v-card class="card text-start">
         <div class="image text-center">
             <img :src="gear.image">
         </div>

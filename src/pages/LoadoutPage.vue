@@ -1,10 +1,25 @@
 <template>
     <div>
         <v-row>
-            <v-col cols="1" />
-            <v-col />
             <v-col
-                cols="auto"
+                cols="6"
+                align="right"
+            >
+                <v-row
+                    v-for="x in [0,1,2]"
+                    :key="x"
+                >
+                    <v-col
+                        v-for="y in [0,1,2]"
+                        :key="y"
+                        align="center"
+                    >
+                        <slot-item-card v-model:slot-item-id="loadout.slotItemIds[x * 3 + y]" />
+                    </v-col>
+                </v-row>
+            </v-col>
+            <v-col
+                cols="3"
                 align="center"
             >
                 <hero-selector-dialog
@@ -12,7 +27,7 @@
                     v-model:skin-id="loadout.skinId"
                 />
             </v-col>
-            <v-col>
+            <v-col cols="3">
                 <trait-selector-dialog
                     v-model="loadout.traits.pentagonTraitId"
                     :bonus-slot="TraitSlot.Pentagon"
@@ -32,7 +47,6 @@
                     v-model="loadout.traits.noBonusTraitId"
                 />
             </v-col>
-            <v-col cols="1" />
         </v-row>
     </div>
 </template>
@@ -42,12 +56,14 @@ import { encode } from '../utils/base62Util.js';
 import Dye from '../enums/dye.js';
 import HeroSelectorDialog from '../components/loadout-page/HeroSelectorDialog.vue';
 import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.vue';
+import SlotItemCard from '../components/loadout-page/SlotItemCard.vue';
 import TraitSlot from '../enums/traitSlot.js';
 
 export default {
     components: {
         HeroSelectorDialog,
-        TraitSelectorDialog
+        TraitSelectorDialog,
+        SlotItemCard
     },
     data() {
         return {
