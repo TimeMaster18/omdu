@@ -7,7 +7,6 @@
                 xl="6"
                 order-xl="1"
                 align="right"
-                class="slot-items"
             >
                 <v-row
                     v-for="x in [0,1,2]"
@@ -17,6 +16,7 @@
                     <v-col
                         v-for="y in [0,1,2]"
                         :key="y"
+                        cols="4"
                         align="center"
                     >
                         <slot-item-card
@@ -160,15 +160,4 @@ export default {
 </script>
 
 <style scoped>
-.slot-items{
-    overflow-y: auto;
-    /* 56px is the size of the bottom bar */
-    max-height: calc(100vh - 56px); 
-    scrollbar-width: none; /* Hide scroll for Firefox */
-}
-
-.slot-items::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* Hide scroll for Chrome/Safari/Webkit */
-}
 </style>

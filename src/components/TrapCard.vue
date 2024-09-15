@@ -1,50 +1,60 @@
 <template>
     <v-card class="card text-start">
-        <div class="image text-center">
+        <div
+            v-if="showImage"
+            class="image text-center"
+        >
             <img :src="trap.image">
         </div>
-        <v-card-title>{{ trap.name }}</v-card-title>
+        <v-card-title v-if="showName">
+            {{ trap.name }}
+        </v-card-title>
         <v-card-text>
             <!-- Stats -->
-            <div>
-                <v-icon :icon="placementIcon" />
-                <span class="capitalize value ml-2">
-                    {{ trap.placement }}
-                </span>
-            </div>
-            <div>
-                <v-icon>mdi-currency-usd</v-icon>
-                <span class="value ml-2">
-                    {{ trapCost }}
-                </span>
-            </div>
-            <div v-if="trap.damageType">
-                <v-icon>mdi-sword</v-icon>
-                <span class="capitalize value ml-2">
-                    {{ trap.damageType }}
-                </span>
-            </div>
-            <div v-if="trap.range">
-                <v-icon>mdi-bullseye</v-icon>
-                <span class="value ml-2">
-                    {{ trap.range }}
-                </span>
-            </div>
-            <div v-if="trapSize">
-                <v-icon>mdi-axis-arrow</v-icon>
-                <span class="value ml-2">
-                    {{ trapSize }}
-                </span>
-            </div>
-            <div v-if="trap.max">
-                <v-icon>mdi-alert</v-icon>
-                <span class="value ml-2">
-                    Max. {{ trap.max }}
-                </span>
+            <div v-if="showStats">
+                <div>
+                    <v-icon :icon="placementIcon" />
+                    <span class="capitalize value ml-2">
+                        {{ trap.placement }}
+                    </span>
+                </div>
+                <div>
+                    <v-icon>mdi-currency-usd</v-icon>
+                    <span class="value ml-2">
+                        {{ trapCost }}
+                    </span>
+                </div>
+                <div v-if="trap.damageType">
+                    <v-icon>mdi-sword</v-icon>
+                    <span class="capitalize value ml-2">
+                        {{ trap.damageType }}
+                    </span>
+                </div>
+                <div v-if="trap.range">
+                    <v-icon>mdi-bullseye</v-icon>
+                    <span class="value ml-2">
+                        {{ trap.range }}
+                    </span>
+                </div>
+                <div v-if="trapSize">
+                    <v-icon>mdi-axis-arrow</v-icon>
+                    <span class="value ml-2">
+                        {{ trapSize }}
+                    </span>
+                </div>
+                <div v-if="trap.max">
+                    <v-icon>mdi-alert</v-icon>
+                    <span class="value ml-2">
+                        Max. {{ trap.max }}
+                    </span>
+                </div>
             </div>
 
             <!-- Description -->
-            <div class="mt-4">
+            <div
+                v-if="showDescription"
+                class="mt-4"
+            >
                 {{ trap.description }}
             </div>
 
@@ -81,6 +91,22 @@ export default {
         trap: {
             type: Object,
             required: true
+        },
+        showImage:{
+            type: Boolean,
+            default: false
+        },
+        showName:{
+            type: Boolean,
+            default: false
+        },
+        showStats:{
+            type: Boolean,
+            default: false
+        },
+        showDescription:{
+            type: Boolean,
+            default: false
         },
         showParts:{
             type: Boolean,
@@ -126,7 +152,8 @@ export default {
 
 .image img {
 	image-rendering: optimizeQuality;
-	height: 12.5rem;
+	height: 11.25rem;
+	/* height: 12.5rem; */
 }
 
 .capitalize {

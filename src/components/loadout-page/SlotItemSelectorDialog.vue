@@ -15,7 +15,6 @@
                 <img
                     v-if="selectedSlotItem !== null"
                     :src="selectedSlotItem?.image"
-                    :class="slotItemType"
                 >
                 <v-card-text
                     v-else
@@ -59,6 +58,10 @@
                                         :trap="trap"
                                         :class="{'selected': trap.id === selectedSlotItemId}"
                                         @click="selectSlotItem(trap)"
+                                        show-image
+                                        show-name
+                                        show-stats
+                                        show-description
                                     />
                                 </v-col>
                             </v-row>
@@ -91,6 +94,10 @@ import GearCard from '../GearCard.vue';
 import TrapCard from '../TrapCard.vue';
 
 export default {
+    components:{
+        TrapCard,
+        GearCard
+    },
     emits: ['update:model-value'],
     setup() {
         const dataStore = useDataStore();
@@ -108,16 +115,15 @@ export default {
             default: null
         }
     },
-    components:{
-        TrapCard,
-        GearCard
-    },
     data() {
         return {
             isOpen: false,
             currentTab: "traps",
             selectedSlotItemId: null
         }
+    },
+    mounted(){
+        this.selectedSlotItemId = this.modelValue;
     },
     computed: {
         slotItemType(){
@@ -175,9 +181,6 @@ export default {
 
 .slot-item-card img {
     height: 100%;
-}
-.slot-item-card img.trap {
-    margin-top: 0.75em;
 }
 
 .no-slot-item-selected {

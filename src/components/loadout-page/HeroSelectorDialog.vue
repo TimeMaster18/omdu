@@ -11,6 +11,7 @@
                 class="hero-selector"
             >
                 <hero-card
+                    v-if="hero"
                     @click="isOpen = true"
                     class="cursor-pointer"
                     :hero="hero"
@@ -90,6 +91,10 @@ import SelectionCard from './HeroSelectionCard.vue';
 import { useDataStore } from '../../stores/data';
 
 export default {
+    components:{
+        SelectionCard,
+        HeroCard
+    },
     emits: ['update:hero-id', 'update:skin-id'],
     setup() {
         const dataStore = useDataStore();
@@ -107,18 +112,19 @@ export default {
             required: true
         }
     },
-    components:{
-        SelectionCard,
-        HeroCard
-    },
     data() {
         return {
             isOpen: false,
             currentTab: "hero",
 
-            selectedHeroIndex: 0,
-            selectedSkinIndex: 0
+            selectedHeroIndex: null,
+            selectedSkinIndex: null
         }
+    },
+    mounted(){
+        console.log(this.heroId);
+        this.syncSelectedHeroIndex(this.heroId);
+        this.syncSelectedSkinIndex(this.skinId);
     },
     computed: {
         sortedHeroes() {
@@ -143,18 +149,24 @@ export default {
         selectSkin(index){
             this.selectedSkinIndex = index;
             this.isOpen = false;
+        },
+
+        syncSelectedHeroIndex(heroId){
+            this.selectedHeroIndex = this.dataStore.heroes.findIndex(hero => hero.id === heroId);
+            if(this.selectedHeroIndex === -1) this.selectedSkinIndex = 0;
+        },
+        syncSelectedSkinIndex(skinId){
+            this.selectedSkinIndex = this.hero.skins.findIndex(skin => skin.id === skinId);
+            if(this.selectedSkinIndex === -1) this.selectedSkinIndex = 0;
         }
     },
     watch:{
-        // All this is to keep the hero-id and skin-id properties synced
+    // All this is to keep the hero-id and skin-id properties synced
         heroId(heroId){
-            this.selectedHeroIndex = this.dataStore.heroes.findIndex(hero=>hero.id === heroId);
-            if(this.selectedHeroIndex === -1) this.selectedSkinIndex = 0;
+            this.syncSelectedHeroIndex(heroId);
         },
         skinId(skinId){
-            this.selectedSkinIndex = this.hero.skins.findIndex(skin=>skin.id === skinId);
-            console.log(this.selectedSkinIndex);
-            if(this.selectedSkinIndex === -1) this.selectedSkinIndex = 0;
+            this.syncSelectedSkinIndex(skinId);
         },
         hero(hero){
             this.$emit("update:hero-id", hero?.id);

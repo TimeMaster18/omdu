@@ -138,6 +138,8 @@ export default {
     },
     mounted(){
         if(this.bonusSlot) this.currentTab = this.bonusSlot.name;
+
+        this.selectedTraitId = this.modelValue;
     },
     computed: {
         selectedTrait(){

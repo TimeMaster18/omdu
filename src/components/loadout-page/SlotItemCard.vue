@@ -4,26 +4,35 @@
             v-model="slotItemProxy"
             activator-class="elevation-0"
         />
-        <div v-if="isTrap">
-            <!-- Trap Parts -->
-            <trap-part-selector-dialog
-                v-model="trapPart1Proxy"
-                :trap-part-slot="trapParts[0]"
-                class="mb-2"
-                activator-class="elevation-0"
-            />
-            <trap-part-selector-dialog
-                v-model="trapPart2Proxy"
-                :trap-part-slot="trapParts[1]"
-                class="mb-2"
-                activator-class="elevation-0"
-            />
-            <trap-part-selector-dialog
-                v-model="trapPart3Proxy" 
-                :trap-part-slot="trapParts[2]"
-                activator-class="elevation-0"
-            />
-        </div>
+        <v-row
+            v-if="isTrap"
+            no-gutters
+            class="text-center"
+        >
+            <v-col>
+                <trap-part-selector-dialog
+                    v-model="trapPart1Proxy"
+                    :trap-part-slot="trapParts[0]"
+                    class="mb-2"
+                    activator-class="elevation-0"
+                />
+            </v-col>
+            <v-col>
+                <trap-part-selector-dialog
+                    v-model="trapPart2Proxy"
+                    :trap-part-slot="trapParts[1]"
+                    class="mb-2"
+                    activator-class="elevation-0"
+                />
+            </v-col>
+            <v-col>
+                <trap-part-selector-dialog
+                    v-model="trapPart3Proxy" 
+                    :trap-part-slot="trapParts[2]"
+                    activator-class="elevation-0"
+                />
+            </v-col>
+        </v-row>
     </v-card>
 </template>
 

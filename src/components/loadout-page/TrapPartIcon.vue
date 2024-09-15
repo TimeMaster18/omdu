@@ -1,20 +1,21 @@
 <template>
     <div class="d-flex align-center">
-        <img
-            :src="trapPart.image"
-            class="icon"
+        <icon-with-tooltip
+            :icon="trapPart.image"
             :style="sizeStyle"
         >
-        <span
-            class="capitalize ml-2"
-        >
             {{ trapPart.description }}
-        </span>
+        </icon-with-tooltip>
     </div>
 </template>
 
 <script>
+import IconWithTooltip from '../IconWithTooltip.vue';
+
 export default {
+    components:{
+        IconWithTooltip,
+    },
     props: {
         trapPart: {
             type: Object,
@@ -39,13 +40,4 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-	aspect-ratio: 1/1;
-	border-radius: 0.25rem;
-	overflow: hidden;
-}
-
-.capitalize {
-	text-transform: capitalize;
-}
 </style>

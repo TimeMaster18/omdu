@@ -16,13 +16,14 @@
                     <trap-part-icon
                         v-if="selectedTrapPart !== null"
                         :trap-part="selectedTrapPart"
-                        :size="3"
+                        :size="4"
+                        class="justify-center"
                     />
                     <trap-part-slot-icon
                         v-else
                         :trap-part-slot="trapPartSlot"
-                        :size="3"
-                        show-label
+                        :size="4"
+                        class="justify-center"
                     />
                 </v-card-text>
             </v-card>
@@ -88,6 +89,9 @@ export default {
             isOpen: false,
             selectedTrapPartId: null
         }
+    },
+    mounted(){
+        this.selectedTrapPartId = this.modelValue;
     },
     computed: {
         selectedTrapPart() {
