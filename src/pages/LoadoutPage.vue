@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-text-field v-model="loadoutCode" />
         <v-row>
             <v-col
                 cols="12"
@@ -70,7 +71,7 @@
 </template>
 
 <script>
-import { encode } from '../utils/base62Util.js';
+import { encode, decode } from '../utils/base62Util.js';
 import Dye from '../enums/dye.js';
 import HeroSelectorDialog from '../components/loadout-page/HeroSelectorDialog.vue';
 import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.vue';
@@ -127,33 +128,60 @@ export default {
         }
     },
     computed: {
-        loadoutCode() {
-            let loadoutCode = "PlayerName-";
-            loadoutCode += encode(this.loadout.heroId)
-            loadoutCode += encode(this.loadout.skinId, true)
-            loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
-            loadoutCode += "-"
-            for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
-                loadoutCode += encode(this.loadout.slotItemIds[index], true)
+        loadoutCode: {
+            get(){
+                let loadoutCode = "PlayerName-";
+                loadoutCode += encode(this.loadout.heroId)
+                loadoutCode += encode(this.loadout.skinId, true)
+                loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
+                loadoutCode += "-"
+                for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
+                    loadoutCode += encode(this.loadout.slotItemIds[index], true)
+                }
+                loadoutCode += "-"
+                loadoutCode += encode(this.loadout.guardianIds[0])
+                loadoutCode += encode(this.loadout.guardianIds[1])
+                loadoutCode += "-"
+                loadoutCode += encode(null) // Consumable id
+                loadoutCode += encode(null) // Consumable id
+                loadoutCode += "-"
+                loadoutCode += encode(this.loadout.traits.pentagonTraitId)
+                loadoutCode += encode(this.loadout.traits.diamondTraitId)
+                loadoutCode += encode(this.loadout.traits.triangleTraitId)
+                loadoutCode += encode(this.loadout.traits.noBonusTraitId)
+                loadoutCode += "-"
+                for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
+                    loadoutCode += encode(this.loadout.trapPartIds[index][0])
+                    loadoutCode += encode(this.loadout.trapPartIds[index][1])
+                    loadoutCode += encode(this.loadout.trapPartIds[index][2])
+                }
+                return loadoutCode;
+            },
+            set(value){
+                const parts = value.split("-");
+                this.loadout.heroId = decode(parts[1].substring(0, 1));
+                this.loadout.skinId = decode(parts[1].substring(1, 3));
+                this.loadout.dyeId = decode(parts[1].substring(3, 4));
+
+                for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
+                    this.loadout.slotItemIds[index] = decode(parts[2].substring(index * 2, (index + 1) * 2));
+                }
+                
+                this.loadout.guardianIds[0] = decode(parts[3].substring(0, 1));
+                this.loadout.guardianIds[1] = decode(parts[3].substring(1, 2));
+                
+                
+                this.loadout.traits.pentagonTraitId = decode(parts[5].substring(0, 1));
+                this.loadout.traits.diamondTraitId = decode(parts[5].substring(1, 2));
+                this.loadout.traits.triangleTraitId = decode(parts[5].substring(2, 3));
+                this.loadout.traits.noBonusTraitId = decode(parts[5].substring(3, 4));
+
+                for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
+                    this.loadout.trapPartIds[index][0] = decode(parts[6].substring(index * 3 + 0, index * 3 + 1));
+                    this.loadout.trapPartIds[index][1] = decode(parts[6].substring(index * 3 + 1, index * 3 + 2));
+                    this.loadout.trapPartIds[index][2] = decode(parts[6].substring(index * 3 + 2, index * 3 + 3));
+                }
             }
-            loadoutCode += "-"
-            loadoutCode += encode(this.loadout.guardianIds[0])
-            loadoutCode += encode(this.loadout.guardianIds[1])
-            loadoutCode += "-"
-            loadoutCode += encode(null) // Consumable id
-            loadoutCode += encode(null) // Consumable id
-            loadoutCode += "-"
-            loadoutCode += encode(this.loadout.traits.pentagonTraitId)
-            loadoutCode += encode(this.loadout.traits.diamondTraitId)
-            loadoutCode += encode(this.loadout.traits.triangleTraitId)
-            loadoutCode += encode(this.loadout.traits.noBonusTraitId)
-            loadoutCode += "-"
-            for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
-                loadoutCode += encode(this.loadout.trapPartIds[index][0])
-                loadoutCode += encode(this.loadout.trapPartIds[index][1])
-                loadoutCode += encode(this.loadout.trapPartIds[index][2])
-            }
-            return loadoutCode;
         },
     }
 };

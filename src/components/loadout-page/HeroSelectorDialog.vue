@@ -122,7 +122,6 @@ export default {
         }
     },
     mounted(){
-        console.log(this.heroId);
         this.syncSelectedHeroIndex(this.heroId);
         this.syncSelectedSkinIndex(this.skinId);
     },
@@ -156,7 +155,10 @@ export default {
             if(this.selectedHeroIndex === -1) this.selectedSkinIndex = 0;
         },
         syncSelectedSkinIndex(skinId){
-            this.selectedSkinIndex = this.hero.skins.findIndex(skin => skin.id === skinId);
+            // Can't make use of the hero computed as it only updated the tick after which breaks the skins when they are updated together
+            let hero = this.dataStore.heroes.find(hero => hero.id === this.heroId);
+            this.selectedSkinIndex = hero.skins.findIndex(skin => skin.id === skinId);
+            console.log(this.hero, this.selectedSkinIndex, skinId);
             if(this.selectedSkinIndex === -1) this.selectedSkinIndex = 0;
         }
     },

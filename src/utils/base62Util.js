@@ -17,11 +17,15 @@ export const encode = function (value, forceLengthTwo = false) {
 
 export const decode = function (str) {
     if (str.length === 1) {
-        return base62Chars.indexOf(str[0]);
+        let value = base62Chars.indexOf(str[0]);
+        if(value === 0) return null;
+        else return value;
     } else if (str.length === 2) {
         const high = base62Chars.indexOf(str[0]);
         const low = base62Chars.indexOf(str[1]);
-        return high * 62 + low;
+        let value = high * 62 + low;
+        if(value === 0) return null;
+        else return value;
     } else {
         throw new Error("Invalid Base62 encoded string length.");
     }
