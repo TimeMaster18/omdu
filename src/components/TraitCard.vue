@@ -71,6 +71,7 @@ export default {
 	margin-top: -1.25rem;
 	height: 15rem;
 	overflow: hidden;
+    background: rgb(var(--v-theme-on-surface-loading));
 }
 
 .image img {

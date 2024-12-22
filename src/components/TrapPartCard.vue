@@ -64,6 +64,7 @@ export default {
 
 .image {
 	height: 11.25rem;
+    background-color: rgb(var(--v-theme-on-surface-loading));
 	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;

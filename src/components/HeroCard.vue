@@ -35,10 +35,19 @@
                         {{ hero.damageType }}
                     </span>
                 </div>
-                <div v-if="hero.trapAffinity">
+                <div>
                     <v-icon>mdi-cog</v-icon>
-                    <span class="value ml-2">
+                    <span
+                        v-if="hero.trapAffinity"
+                        class="value ml-2"
+                    >
                         {{ hero.trapAffinity }}
+                    </span>
+                    <span
+                        v-else
+                        class="value ml-2 font-italic transparent"
+                    >
+                        None
                     </span>
                 </div>
             </div>
@@ -79,14 +88,17 @@
                 </h3>
                 <div>
                     <upgrade-tier
+                        class="mb-1"
                         label="Level 2"
                         :upgrade-tier="hero.upgrades.tier1"
                     />
                     <upgrade-tier
+                        class="mb-1"
                         label="Level 4"
                         :upgrade-tier="hero.upgrades.tier2"
                     />
                     <upgrade-tier
+                        class="mb-1"
                         label="Level 7"
                         :upgrade-tier="hero.upgrades.tier3"
                     />
@@ -165,6 +177,10 @@ export default {
 .value {
 	display: inline-block;
 	vertical-align: middle;
+}
+
+.transparent {
+    opacity: 0.3;
 }
 
 .name {
