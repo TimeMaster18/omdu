@@ -3,9 +3,22 @@ import { getDatabase } from 'firebase/database';
 import Cookies from 'js-cookie';
 import cookieNames from './enums/cookieNames';
 
-export const firebaseApp = initializeApp({
-    apiKey: Cookies.get(cookieNames.FirebaseSecret),
-    databaseURL: "https://orcs-must-read-unchained-default-rtdb.europe-west1.firebasedatabase.app/"
-});
+let firebaseApp = null;
+let database = null;
 
-export const database = getDatabase(firebaseApp);
+try {
+    // There's multiple ways this could go wrong (like a missing url, secret, connection, ...)
+    firebaseApp = initializeApp({
+        apiKey: Cookies.get(cookieNames.FirebaseSecret),
+        databaseURL: Cookies.get(cookieNames.FirebaseUrl)
+    });
+    database = getDatabase(firebaseApp);
+} catch(exception) {
+    console.error(exception);
+
+    // De-instantiate any setup as they either all succeed or all fail
+    firebaseApp = null;
+    database = null;
+}
+
+export { firebaseApp, database };

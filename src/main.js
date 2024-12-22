@@ -81,10 +81,7 @@ vueApp.use(pinia);
 // Firebase
 import { VueFire, VueFireAuth, VueFireDatabaseOptionsAPI } from 'vuefire';
 import { firebaseApp } from './firebase';
-import Cookies from 'js-cookie'
-import cookieNames from './enums/cookieNames';
-if (Cookies.get(cookieNames.FirebaseSecret) !== undefined) {
-    // Without a firebase secret we can't access the database so we don't instantiate it
+if (firebaseApp !== null) {
     vueApp.use(VueFire, {
         firebaseApp,
         modules: [

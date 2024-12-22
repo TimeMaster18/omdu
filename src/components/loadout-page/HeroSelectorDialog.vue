@@ -11,11 +11,11 @@
                 class="hero-selector"
             >
                 <hero-card
-                    v-if="hero"
+                    v-if="selectedHero"
                     @click="isOpen = true"
                     class="cursor-pointer"
-                    :hero="hero"
-                    :skin="skin"
+                    :hero="selectedHero"
+                    :skin="selectedSkin"
                     show-stats
                     show-abilities
                     show-upgrades
@@ -47,15 +47,15 @@
                         <v-tabs-window-item value="hero">
                             <v-row dense>
                                 <v-col
-                                    v-for="(sortedHero, index) in sortedHeroes"
+                                    v-for="sortedHero in sortedHeroes"
                                     :key="sortedHero.id"
                                     align="center"
                                 >
                                     <selection-card
                                         :image="sortedHero.skins[0].image"
                                         :label="sortedHero.name"
-                                        :selected="index === selectedHeroIndex"
-                                        @click="selectHero(index)"
+                                        :selected="sortedHero.id === selectedHero?.id"
+                                        @click="selectHero(sortedHero)"
                                     />
                                 </v-col>
                             </v-row>
@@ -65,15 +65,15 @@
                         <v-tabs-window-item value="skin">
                             <v-row dense>
                                 <v-col
-                                    v-for="(sortedSkin, index) in skins"
+                                    v-for="sortedSkin in selectedHero?.skins"
                                     :key="sortedSkin.id"
                                     align="center"
                                 >
                                     <selection-card
                                         :image="sortedSkin.image"
                                         :label="sortedSkin.name"
-                                        :selected="index === selectedSkinIndex"
-                                        @click="selectSkin(index)"
+                                        :selected="sortedSkin.id === selectedSkin?.id"
+                                        @click="selectSkin(sortedSkin)"
                                     />
                                 </v-col>
                             </v-row>
@@ -95,7 +95,7 @@ export default {
         SelectionCard,
         HeroCard
     },
-    emits: ['update:hero-id', 'update:skin-id'],
+    emits: ['update:model-value'],
     setup() {
         const dataStore = useDataStore();
         return {
@@ -103,79 +103,64 @@ export default {
         };
     },
     props:{
-        heroId: {
-            type: Number,
+        modelValue: {
+            type: Object, // { heroId: int, skinId: int }
             required: true
         },
-        skinId: {
-            type: Number,
-            required: true
-        }
     },
     data() {
         return {
             isOpen: false,
             currentTab: "hero",
 
-            selectedHeroIndex: null,
-            selectedSkinIndex: null
+            selectedHero: null,
+            selectedSkin: null
         }
     },
     mounted(){
-        this.syncSelectedHeroIndex(this.heroId);
-        this.syncSelectedSkinIndex(this.skinId);
+        this.syncSelectedHeroAndSkin(this.modelValue.heroId, this.modelValue.skinId);
     },
     computed: {
         sortedHeroes() {
             return JSON.parse(JSON.stringify(this.dataStore.heroes)).sort((a, b) => a.name > b.name);
         },
-        hero() {
-            return this.dataStore.heroes[this.selectedHeroIndex] ?? null;
-        },
-        skins(){
-            return this.hero?.skins;
-        },
-        skin() {
-            return this.hero?.skins[this.selectedSkinIndex];
-        },
     },
     methods:{
-        selectHero(index){
-            this.selectedHeroIndex = index;
-            this.selectedSkinIndex = 0;
-            this.currentTab = "skin";
-        },
-        selectSkin(index){
-            this.selectedSkinIndex = index;
-            this.isOpen = false;
+        syncSelectedHeroAndSkin(heroId, skinId) {
+            // Find the hero
+            this.selectedHero = this.dataStore.heroes.find(hero => hero.id === heroId) ?? null;
+
+            // Find the skin
+            if(this.selectHero === null) {
+                this.selectedSkin = null;
+            } else {
+                this.selectedSkin = this.selectedHero.skins.find(skin => skin.id === skinId);
+            }
         },
 
-        syncSelectedHeroIndex(heroId){
-            this.selectedHeroIndex = this.dataStore.heroes.findIndex(hero => hero.id === heroId);
-            if(this.selectedHeroIndex === -1) this.selectedSkinIndex = 0;
+        selectHero(hero) {
+            this.selectedHero = hero;
+            this.selectedSkin = this.selectedHero.skins[0];
+            this.currentTab = "skin";
+            this.emitHeroOrSkinChange();
         },
-        syncSelectedSkinIndex(skinId){
-            // Can't make use of the hero computed as it only updated the tick after which breaks the skins when they are updated together
-            let hero = this.dataStore.heroes.find(hero => hero.id === this.heroId);
-            this.selectedSkinIndex = hero.skins.findIndex(skin => skin.id === skinId);
-            console.log(this.hero, this.selectedSkinIndex, skinId);
-            if(this.selectedSkinIndex === -1) this.selectedSkinIndex = 0;
+        selectSkin(skin) {
+            this.selectedSkin = skin;
+            this.isOpen = false;
+            this.emitHeroOrSkinChange();
+        },
+
+        emitHeroOrSkinChange() {
+            this.$emit("update:model-value", {
+                skinId: this.selectedSkin?.id ?? null,
+                heroId: this.selectedHero?.id ?? null
+            });
         }
     },
     watch:{
-    // All this is to keep the hero-id and skin-id properties synced
-        heroId(heroId){
-            this.syncSelectedHeroIndex(heroId);
+        modelValue(modelValue) {
+            this.syncSelectedHeroAndSkin(modelValue.heroId, modelValue.skinId);
         },
-        skinId(skinId){
-            this.syncSelectedSkinIndex(skinId);
-        },
-        hero(hero){
-            this.$emit("update:hero-id", hero?.id);
-        },
-        skin(skin){
-            this.$emit("update:skin-id", skin?.id);
-        }
     }
 }
 </script>

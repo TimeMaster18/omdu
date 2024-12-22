@@ -2,7 +2,7 @@
     <v-layout>
         <v-main>
             <v-container fluid>
-                <RouterView />
+                <router-view />
             </v-container>
         </v-main>
         <v-bottom-navigation show-arrows>
@@ -37,6 +37,10 @@
             <v-btn to="loadout">
                 <v-icon>mdi-package</v-icon>
                 <span>Loadout</span>
+            </v-btn>
+            <v-btn to="lobby">
+                <v-icon>mdi-account-group</v-icon>
+                <span>Lobby</span>
             </v-btn>
         </v-bottom-navigation>
     </v-layout>

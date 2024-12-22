@@ -43,7 +43,7 @@ import TrapPartSelectorDialog from './TrapPartSelectorDialog.vue';
 
 export default {
     emits: ['update:slot-item-id', 'update:trap-part-ids'],
-    components:{
+    components: {
         SlotItemSelectorDialog,
         TrapPartSelectorDialog
     },
@@ -53,61 +53,64 @@ export default {
             dataStore
         };
     },
-    props:{
-        slotItemId:{
+    props: {
+        slotItemId: {
             type: Number,
             required: true
         },
-        trapPartIds:{
+        trapPartIds: {
             type:Number,
             required: true
         }
     },
-    computed:{
+    computed: {
         slotItemProxy:{
-            get(){
+            get() {
                 return this.slotItemId;
             },
-            set(value){
+            set(value) {
                 this.$emit("update:slot-item-id", value);
+                this.trapPart1Proxy = null;
+                this.trapPart2Proxy = null;
+                this.trapPart3Proxy = null;
             }
         },
-        trapPart1Proxy:{
-            get(){
+        trapPart1Proxy: {
+            get() {
                 return this.trapPartIds[0];
             },
-            set(value){
+            set(value) {
                 let temp = this.trapPartIds;
                 temp[0] = value;
                 this.$emit("update:trap-part-ids", temp);
             }
         },
-        trapPart2Proxy:{
-            get(){
+        trapPart2Proxy: {
+            get() {
                 return this.trapPartIds[1];
             },
-            set(value){
+            set(value) {
                 let temp = this.trapPartIds;
                 temp[1] = value;
                 this.$emit("update:trap-part-ids", temp);
             }
         },
-        trapPart3Proxy:{
-            get(){
+        trapPart3Proxy: {
+            get() {
                 return this.trapPartIds[2];
             },
-            set(value){
+            set(value) {
                 let temp = this.trapPartIds;
                 temp[2] = value;
                 this.$emit("update:trap-part-ids", temp);
             }
         },
 
-        isTrap(){
+        isTrap() {
             return this.slotItemId >= 100 && this.slotItemId <= 200;
             
         },
-        trapParts(){
+        trapParts() {
             if(!this.isTrap) return null;
 
             return this.dataStore.traps.find(trap => trap.id === this.slotItemId)?.trapPartSlots ?? null;
