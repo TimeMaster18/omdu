@@ -11,7 +11,7 @@
         </div>
         <div
             v-else
-            class="mb-4 text-error"
+            class="mb-4 text-error text-center"
         >
             <v-icon size="32">
                 mdi-close-circle-outline

@@ -18,6 +18,7 @@ const customTheme = {
         'background-lighten-2': '#ebebeb',
 
         'surface': '#1a1a1a',
+        'on-surface-loading': '#212121',
 
         'primary': '#efaac4',
         'primary-lighten-1': '#f4c4d6',

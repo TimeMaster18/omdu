@@ -155,6 +155,7 @@ export default {
 	width: 100%;
 	image-rendering: optimizeQuality;
 	aspect-ratio: 1000/471;
+    background: rgb(var(--v-theme-on-surface-loading));
 }
 
 .capitalize {
