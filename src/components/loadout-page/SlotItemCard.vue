@@ -1,7 +1,8 @@
 <template>
     <v-card class="text-left">
         <slot-item-selector-dialog
-            v-model="slotItemProxy"
+            :model-value="slotItemId"
+            @update:model-value="onSlotItemUpdate"
             activator-class="elevation-0"
         />
         <v-row
@@ -42,7 +43,7 @@ import SlotItemSelectorDialog from './SlotItemSelectorDialog.vue';
 import TrapPartSelectorDialog from './TrapPartSelectorDialog.vue';
 
 export default {
-    emits: ['update:slot-item-id', 'update:trap-part-ids'],
+    emits: ['update:model-value'],
     components: {
         SlotItemSelectorDialog,
         TrapPartSelectorDialog
@@ -54,35 +55,29 @@ export default {
         };
     },
     props: {
-        slotItemId: {
-            type: Number,
+        modelValue: {
+            type: Object, // {itemId: int, partIds: int[3]}
             required: true
         },
-        trapPartIds: {
-            type:Number,
-            required: true
+    },
+    data() {
+        return {
+            slotItemId: null,
+            trapPartIds: [null, null, null]
         }
     },
+    mounted() {
+        this.slotItemId = this.modelValue.itemId;
+        this.trapPartIds = this.modelValue.partIds;
+    },
     computed: {
-        slotItemProxy:{
-            get() {
-                return this.slotItemId;
-            },
-            set(value) {
-                this.$emit("update:slot-item-id", value);
-                this.trapPart1Proxy = null;
-                this.trapPart2Proxy = null;
-                this.trapPart3Proxy = null;
-            }
-        },
         trapPart1Proxy: {
             get() {
                 return this.trapPartIds[0];
             },
             set(value) {
-                let temp = this.trapPartIds;
-                temp[0] = value;
-                this.$emit("update:trap-part-ids", temp);
+                this.trapPartIds[0] = value;
+                this.emitModelValueUpdate();
             }
         },
         trapPart2Proxy: {
@@ -90,9 +85,8 @@ export default {
                 return this.trapPartIds[1];
             },
             set(value) {
-                let temp = this.trapPartIds;
-                temp[1] = value;
-                this.$emit("update:trap-part-ids", temp);
+                this.trapPartIds[1] = value;
+                this.emitModelValueUpdate();
             }
         },
         trapPart3Proxy: {
@@ -100,20 +94,42 @@ export default {
                 return this.trapPartIds[2];
             },
             set(value) {
-                let temp = this.trapPartIds;
-                temp[2] = value;
-                this.$emit("update:trap-part-ids", temp);
+                this.trapPartIds[2] = value;
+                this.emitModelValueUpdate();
             }
         },
 
         isTrap() {
-            return this.slotItemId >= 100 && this.slotItemId <= 200;
+            return this.modelValue.itemId >= 100 && this.modelValue.itemId <= 200;
             
         },
         trapParts() {
             if(!this.isTrap) return null;
 
-            return this.dataStore.traps.find(trap => trap.id === this.slotItemId)?.trapPartSlots ?? null;
+            return this.dataStore.traps.find(trap => trap.id === this.modelValue.itemId)?.trapPartSlots ?? null;
+        }
+    },
+    methods: {
+        onSlotItemUpdate(itemId) {
+            if(this.slotItemId === itemId) return;
+            this.slotItemId = itemId;
+            this.trapPartIds = [null, null, null];
+            this.emitModelValueUpdate();
+        },
+        emitModelValueUpdate() {
+            this.$emit("update:model-value", {
+                itemId: this.slotItemId,
+                partIds: this.trapPartIds
+            })
+        },
+    },
+    watch: {
+        modelValue: {
+            deep: true,
+            handler(value) {
+                this.slotItemId = value.itemId;
+                this.trapPartIds = value.partIds;
+            }
         }
     }
 }

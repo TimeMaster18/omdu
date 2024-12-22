@@ -19,10 +19,7 @@
                         cols="4"
                         align="center"
                     >
-                        <slot-item-card
-                            v-model:slot-item-id="loadout.slotItemIds[x * 3 + y]"
-                            v-model:trap-part-ids="loadout.trapPartIds[x * 3 + y]"
-                        />
+                        <slot-item-card v-model="loadout.slots[x * 3 + y]" />
                     </v-col>
                 </v-row>
             </v-col>
@@ -108,28 +105,44 @@ export default {
                     null,
                     null
                 ],
-                slotItemIds: [
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
+                slots: [
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    },
+                    {
+                        itemId: null,
+                        partIds: [null, null, null]
+                    }
                 ],
-                trapPartIds: [
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                    [null, null, null],
-                ]
             }
         }
     },
@@ -143,9 +156,9 @@ export default {
             loadoutCode += encode(this.loadout.skinId, true)
             loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
             loadoutCode += "-"
-            for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
-                loadoutCode += encode(this.loadout.slotItemIds[index], true)
-            }
+            this.loadout.slots.forEach(slot => {
+                loadoutCode += encode(slot.itemId, true);
+            });
             loadoutCode += "-"
             loadoutCode += encode(this.loadout.guardianIds[0])
             loadoutCode += encode(this.loadout.guardianIds[1])
@@ -158,11 +171,11 @@ export default {
             loadoutCode += encode(this.loadout.traits.triangleTraitId)
             loadoutCode += encode(this.loadout.traits.noBonusTraitId)
             loadoutCode += "-"
-            for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
-                loadoutCode += encode(this.loadout.trapPartIds[index][0])
-                loadoutCode += encode(this.loadout.trapPartIds[index][1])
-                loadoutCode += encode(this.loadout.trapPartIds[index][2])
-            }
+            this.loadout.slots.forEach(slot => {
+                loadoutCode += encode(slot.partIds[0]);
+                loadoutCode += encode(slot.partIds[1]);
+                loadoutCode += encode(slot.partIds[2]);
+            });
             return loadoutCode;
         },
         heroAndSkin: {
@@ -191,8 +204,8 @@ export default {
             this.loadout.skinId = decode(parts[1].substring(1, 3));
             this.loadout.dyeId = decode(parts[1].substring(3, 4));
 
-            for (let index = 0; index < this.loadout.slotItemIds.length; index++) {
-                this.loadout.slotItemIds[index] = decode(parts[2].substring(index * 2, (index + 1) * 2));
+            for (let index = 0; index < this.loadout.slots.length; index++) {
+                this.loadout.slots[index].itemId = decode(parts[2].substring(index * 2, (index + 1) * 2));
             }
                 
             this.loadout.guardianIds[0] = decode(parts[3].substring(0, 1));
@@ -204,10 +217,10 @@ export default {
             this.loadout.traits.triangleTraitId = decode(parts[5].substring(2, 3));
             this.loadout.traits.noBonusTraitId = decode(parts[5].substring(3, 4));
 
-            for (let index = 0; index < this.loadout.trapPartIds.length; index++) {
-                this.loadout.trapPartIds[index][0] = decode(parts[6].substring(index * 3 + 0, index * 3 + 1));
-                this.loadout.trapPartIds[index][1] = decode(parts[6].substring(index * 3 + 1, index * 3 + 2));
-                this.loadout.trapPartIds[index][2] = decode(parts[6].substring(index * 3 + 2, index * 3 + 3));
+            for (let index = 0; index < this.loadout.slots.length; index++) {
+                this.loadout.slots[index].partIds[0] = decode(parts[6].substring(index * 3 + 0, index * 3 + 1));
+                this.loadout.slots[index].partIds[1] = decode(parts[6].substring(index * 3 + 1, index * 3 + 2));
+                this.loadout.slots[index].partIds[2] = decode(parts[6].substring(index * 3 + 2, index * 3 + 3));
             }
         },
     },
