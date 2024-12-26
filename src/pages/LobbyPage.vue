@@ -54,13 +54,11 @@ export default {
     },
     data() {
         return {
-            firebaseCorrectlySetup: firebaseApp !== null
+            firebaseCorrectlySetup: firebaseApp !== null,
+            playerName: Cookies.get(CookieName.PlayerName) ?? null
         }
     },
     computed: {
-        playerName() {
-            return Cookies.get(CookieName.PlayerName) ?? null;
-        },
         loadoutCode: {
             get() {
                 return this.lobbyStore.playerLoadout;

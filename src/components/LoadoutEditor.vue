@@ -106,7 +106,7 @@ export default {
             TraitSlot,
             
             loadout: {
-                playerName: 'Player',
+                playerName: this.fixedPlayerName ?? 'Player',
                 heroId: 1,
                 skinId: 9,
                 dyeId: Dye.Normal,
