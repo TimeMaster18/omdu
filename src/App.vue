@@ -6,34 +6,51 @@
             </v-container>
         </v-main>
         <v-bottom-navigation>
-            <v-btn to="heroes">
-                <v-icon>mdi-account</v-icon>
-                <span>Heroes</span>
-            </v-btn>
-            <v-btn to="traits">
-                <v-icon>mdi-lightning-bolt</v-icon>
-                <span>Traits</span>
-            </v-btn>
-            <v-btn to="gear">
-                <v-icon>mdi-ring</v-icon>
-                <span>Gear</span>
-            </v-btn>
-            <v-btn to="traps">
-                <v-icon>mdi-cog</v-icon>
-                <span>Traps</span>
-            </v-btn>
-            <v-btn to="trap-parts">
-                <v-icon>mdi-wrench</v-icon>
-                <span>Trap Parts</span>
-            </v-btn>
-            <v-btn to="guardians">
-                <v-icon>mdi-shield</v-icon>
-                <span>Guardians</span>
-            </v-btn>
-            <v-btn to="maps">
-                <v-icon>mdi-map</v-icon>
-                <span>Maps</span>
-            </v-btn>
+            <v-menu open-on-hover>
+                <template #activator="{ props }">
+                    <v-btn v-bind="props">
+                        <v-icon>mdi-book-open-blank-variant</v-icon>
+                        <span>Encyclopedia</span>
+                    </v-btn>
+                </template>
+                <v-list class="menu-dropdown">
+                    <v-list-item
+                        to="heroes"
+                        prepend-icon="mdi-account"
+                        title="Heroes"
+                    />
+                    <v-list-item
+                        to="traits"
+                        prepend-icon="mdi-lightning-bolt"
+                        title="Traits"
+                    />
+                    <v-list-item
+                        to="gear"
+                        prepend-icon="mdi-ring"
+                        title="Gear"
+                    />
+                    <v-list-item
+                        to="traps"
+                        prepend-icon="mdi-cog"
+                        title="Traps"
+                    />
+                    <v-list-item
+                        to="trap-parts"
+                        prepend-icon="mdi-wrench"
+                        title="Trap Parts"
+                    />
+                    <v-list-item
+                        to="guardians"
+                        prepend-icon="mdi-shield"
+                        title="Guardians"
+                    />
+                    <v-list-item
+                        to="maps"
+                        prepend-icon="mdi-map"
+                        title="Maps"
+                    />
+                </v-list>
+            </v-menu>
             <v-btn to="loadout">
                 <v-icon>mdi-package</v-icon>
                 <span>Loadout</span>
@@ -64,4 +81,7 @@ html::-webkit-scrollbar {
 </style>
 
 <style scoped>
+.menu-dropdown:deep(.v-list-item__prepend) {
+    max-width: 36px;
+}
 </style>
