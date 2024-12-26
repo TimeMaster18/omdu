@@ -84,6 +84,10 @@ export default {
         modelValue: {
             type: String,
             default: null
+        },
+        fixedPlayerName: {
+            type: String,
+            default: null
         }
     },
     data() {
@@ -151,7 +155,8 @@ export default {
     },
     computed:{
         loadoutCode() {
-            let loadoutCode = this.loadout.playerName + "-";
+            let loadoutCode = this.loadout.playerName;
+            loadoutCode += "-";
             loadoutCode += encode(this.loadout.heroId)
             loadoutCode += encode(this.loadout.skinId, true)
             loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
@@ -196,9 +201,10 @@ export default {
             // TODO: Validation
             if(loadoutCode === null) return;
 
-            // Turn the loadoat code into loadout data
+            // Turn the loadout code into loadout data
             const parts = loadoutCode.split("-");
-            this.loadout.playerName = parts[0];
+            if(this.fixedPlayerName !== null) this.loadout.playerName = this.fixedPlayerName;
+            else this.loadout.playerName = parts[0];
 
             this.loadout.heroId = decode(parts[1].substring(0, 1));
             this.loadout.skinId = decode(parts[1].substring(1, 3));

@@ -10,7 +10,7 @@
             no-gutters
             class="text-center"
         >
-            <v-col>
+            <v-col cols="4">
                 <trap-part-selector-dialog
                     v-model="trapPart1Proxy"
                     :trap-part-slot="trapParts[0]"
@@ -18,7 +18,7 @@
                     activator-class="elevation-0"
                 />
             </v-col>
-            <v-col>
+            <v-col cols="4">
                 <trap-part-selector-dialog
                     v-model="trapPart2Proxy"
                     :trap-part-slot="trapParts[1]"
@@ -26,7 +26,7 @@
                     activator-class="elevation-0"
                 />
             </v-col>
-            <v-col>
+            <v-col cols="4">
                 <trap-part-selector-dialog
                     v-model="trapPart3Proxy" 
                     :trap-part-slot="trapParts[2]"
@@ -101,7 +101,6 @@ export default {
 
         isTrap() {
             return this.modelValue.itemId >= 100 && this.modelValue.itemId <= 200;
-            
         },
         trapParts() {
             if(!this.isTrap) return null;

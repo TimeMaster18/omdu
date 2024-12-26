@@ -3,7 +3,6 @@
         v-model="isOpen"
         transition="scale-transition"
         scrollable
-        max-width="1400"
         width="auto"
     >
         <template #activator>

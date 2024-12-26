@@ -5,7 +5,7 @@
                 <router-view />
             </v-container>
         </v-main>
-        <v-bottom-navigation show-arrows>
+        <v-bottom-navigation>
             <v-btn to="heroes">
                 <v-icon>mdi-account</v-icon>
                 <span>Heroes</span>
@@ -63,4 +63,5 @@ html::-webkit-scrollbar {
 }
 </style>
 
-<style scoped></style>
+<style scoped>
+</style>

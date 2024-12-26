@@ -30,7 +30,7 @@ export const useLobbyStore = defineStore('lobby', {
             return state.playerLoadouts[state.playerIndex].value?.$value;
         },
         getPlayerLoadoutByIndex: (state) => (playerIndex) => {
-            return state.playerLoadouts[playerIndex].value?.$value;
+            return state.playerLoadouts[playerIndex].value?.$value ?? null;
         },
     }
 });
