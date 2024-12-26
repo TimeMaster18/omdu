@@ -32,6 +32,9 @@
             <v-card>
                 <v-card-text>
                     <v-row dense>
+                        <v-col>
+                            <DeselectCard @click="deselectTrapPart()" />
+                        </v-col>
                         <v-col
                             v-for="trapPart in trapParts"
                             :key="trapPart.id"
@@ -55,12 +58,14 @@ import { useDataStore } from '../../stores/data';
 import TrapPartIcon from './TrapPartIcon.vue';
 import TrapPartCard from '../TrapPartCard.vue';
 import TrapPartSlotIcon from '../TrapPartSlotIcon.vue';
+import DeselectCard from './DeselectCard.vue';
 
 export default {
     components:{
         TrapPartIcon,
         TrapPartSlotIcon,
-        TrapPartCard
+        TrapPartCard,
+        DeselectCard
     },
     emits: ['update:model-value'],
     setup() {
@@ -106,6 +111,10 @@ export default {
     methods:{
         selectTrapPart(trapPart) {
             this.selectedTrapPartId = trapPart.id;
+            this.isOpen = false;
+        },
+        deselectTrapPart() {
+            this.selectedTrapPartId = null;
             this.isOpen = false;
         }
     },

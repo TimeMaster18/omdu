@@ -135,7 +135,4 @@ export default {
 </script>
 
 <style scoped>
-.no-slot-item-selected {
-	opacity: 0.3;
-}
 </style>

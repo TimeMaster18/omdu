@@ -3,7 +3,6 @@
         v-model="isOpen"
         transition="scale-transition"
         scrollable
-        width="auto"
     >
         <template #activator>
             <v-card
@@ -48,6 +47,9 @@
                     >
                         <v-tabs-window-item value="traps">
                             <v-row dense>
+                                <v-col>
+                                    <DeselectCard @click="deselectSlotItem" />
+                                </v-col>
                                 <v-col
                                     v-for="trap in traps"
                                     :key="trap.id"
@@ -67,6 +69,9 @@
                         </v-tabs-window-item>
                         <v-tabs-window-item value="gear">
                             <v-row dense>
+                                <v-col>
+                                    <DeselectCard @click="deselectSlotItem" />
+                                </v-col>
                                 <v-col
                                     v-for="gearItem in gear"
                                     :key="gearItem.id"
@@ -91,11 +96,13 @@
 import { useDataStore } from '../../stores/data';
 import GearCard from '../GearCard.vue';
 import TrapCard from '../TrapCard.vue';
+import DeselectCard from './DeselectCard.vue';
 
 export default {
     components:{
         TrapCard,
-        GearCard
+        GearCard,
+        DeselectCard
     },
     emits: ['update:model-value'],
     setup() {
@@ -157,7 +164,11 @@ export default {
         selectSlotItem(slotItem) {
             this.selectedSlotItemId = slotItem.id;
             this.isOpen = false;
-        }
+        },
+        deselectSlotItem() {
+            this.selectedSlotItemId = null;
+            this.isOpen = false;
+        },
     },
     watch: {
         // All this is to keep the v-model synced

@@ -3,7 +3,6 @@
         v-model="isOpen"
         transition="scale-transition"
         scrollable
-        width="auto"
     >
         <template #activator>
             <div :class="activatorClass">
@@ -65,6 +64,9 @@
                             :value="traitSlot.name"
                         >
                             <v-row dense>
+                                <v-col>
+                                    <DeselectCard @click="deselectTrait()" />
+                                </v-col>
                                 <v-col
                                     v-for="trait in traits(traitSlot)"
                                     :key="trait.id"
@@ -93,16 +95,22 @@ import { useDataStore } from '../../stores/data';
 import TraitSlotIcon from '../TraitSlotIcon.vue';
 import TraitSlot from '../../enums/traitSlot';
 import TraitCard from '../TraitCard.vue';
+import DeselectCard from './DeselectCard.vue';
 
 export default {
     emits: ['update:model-value'],
+    components: {
+        TraitCard,
+        TraitSlotIcon,
+        DeselectCard,
+    },
     setup() {
         const dataStore = useDataStore();
         return {
             dataStore
         };
     },
-    props:{
+    props: {
         modelValue:{
             type: Number,
             required: true
@@ -116,10 +124,6 @@ export default {
             type: Object,
             default: null
         }
-    },
-    components:{
-        TraitCard,
-        TraitSlotIcon,
     },
     data() {
         return {
@@ -135,17 +139,17 @@ export default {
             selectedTraitId: null
         }
     },
-    mounted(){
+    mounted() {
         if(this.bonusSlot) this.currentTab = this.bonusSlot.name;
 
         this.selectedTraitId = this.modelValue;
     },
     computed: {
-        selectedTrait(){
+        selectedTrait() {
             return this.dataStore.traits.find(trait => trait.id === this.selectedTraitId) ?? null;
         },
 
-        traits(){
+        traits() {
             return (traitSlot)=>{
                 return JSON.parse(JSON.stringify(this.dataStore.traits))
                     .filter((trait) => trait.slot.name === traitSlot.name)
@@ -153,18 +157,22 @@ export default {
             }
         },
     },
-    methods:{
+    methods: {
         selectTrait(trait) {
             this.selectedTraitId = trait.id;
+            this.isOpen = false;
+        },
+        deselectTrait() {
+            this.selectedTraitId = null;
             this.isOpen = false;
         }
     },
     watch: {
         // All this is to keep the v-model synced
-        selectedTrait(){
+        selectedTrait() {
             this.$emit("update:model-value", this.selectedTrait?.id);
         },
-        modelValue(traitId){
+        modelValue(traitId) {
             this.selectedTraitId = traitId;
         }
     }
