@@ -17,6 +17,11 @@ export default {
             loadoutCode: "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
         }
     },
+    mounted() {
+        if(this.$route.query.code !== undefined) {
+            this.loadoutCode = this.$route.query.code;
+        }
+    }
 };
 </script>
 

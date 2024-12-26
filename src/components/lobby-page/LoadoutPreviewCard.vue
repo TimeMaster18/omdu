@@ -17,13 +17,20 @@
                     :src="slotItem?.image"
                 >
             </div>
-            <v-icon
-                class="copy-code"
-                @click="copyLoadoutCodeToClipboard"
-                :disabled="copying"
-            >
-                mdi-content-copy
-            </v-icon>
+            <div class="actions">
+                <v-icon
+                    @click="openLoadoutLinkToClipboard"
+                    class="mr-2"
+                >
+                    mdi-link
+                </v-icon>
+                <v-icon
+                    @click="copyLoadoutCodeToClipboard"
+                    :disabled="copying"
+                >
+                    mdi-content-copy
+                </v-icon>
+            </div>
         </div>
     </v-card>
 </template>
@@ -110,6 +117,10 @@ export default {
             } else {
                 alert("Failed to copy loadout code to your clipboard 😢");
             }
+        },
+        openLoadoutLinkToClipboard() {
+            let url = `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
+            window.open(url, '_blank');
         }
     }
 }
@@ -158,9 +169,10 @@ export default {
     visibility: hidden;
 }
 
-.copy-code {
+.actions {
 	position: absolute;
-	top: 0.25rem;
-    right: 0.25rem;
+	top: 0;
+    right: 0;
+    padding: 0.25rem;
 }
 </style>
