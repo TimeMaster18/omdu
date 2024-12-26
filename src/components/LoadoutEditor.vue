@@ -59,6 +59,15 @@
                 />
                 <trait-selector-dialog
                     v-model="loadout.traits.noBonusTraitId"
+                    activator-class="mb-8"
+                />
+
+                <guardian-selector-dialog
+                    v-model="loadout.guardianIds[0]"
+                    activator-class="mb-2"
+                />
+                <guardian-selector-dialog
+                    v-model="loadout.guardianIds[1]"
                 />
             </v-col>
         </v-row>
@@ -72,13 +81,15 @@ import HeroSelectorDialog from '../components/loadout-page/HeroSelectorDialog.vu
 import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.vue';
 import SlotItemCard from '../components/loadout-page/SlotItemCard.vue';
 import TraitSlot from '../enums/traitSlot.js';
+import GuardianSelectorDialog from './loadout-page/GuardianSelectorDialog.vue';
 
 export default {
     emits: ['update:model-value'],
     components: {
         HeroSelectorDialog,
         TraitSelectorDialog,
-        SlotItemCard
+        SlotItemCard,
+        GuardianSelectorDialog
     },
     props: {
         modelValue: {

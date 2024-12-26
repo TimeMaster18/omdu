@@ -1,12 +1,13 @@
 <template>
-    <v-card class="card">
+    <v-card class="card text-start">
         <div class="image text-center">
             <img :src="guardian.image">
         </div>
-        <img
-            :src="guardian.home.icon"
+        <guardian-home-icon
             class="home-icon"
-        >
+            :guardian-home="guardian.home"
+            size="3"
+        />
         <v-card-title>{{ guardian.name }}</v-card-title>
         <v-card-text>
             <!-- Description -->
@@ -23,7 +24,12 @@
 </template>
 
 <script>
+import GuardianHomeIcon from './GuardianHomeIcon.vue';
+
 export default {
+    components: {
+        GuardianHomeIcon
+    },
     props: {
         guardian: {
             type: Object,
@@ -54,7 +60,6 @@ export default {
 }
 
 .home-icon {
-	height: 3rem;
 	position: absolute;
 	right: 1rem;
 	top: 1rem;
