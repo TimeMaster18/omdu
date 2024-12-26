@@ -80,17 +80,8 @@ setActivePinia(pinia);
 vueApp.use(pinia);
 
 // Firebase
-import { VueFire, VueFireAuth, VueFireDatabaseOptionsAPI } from 'vuefire';
-import { firebaseApp } from './firebase';
-if (firebaseApp !== null) {
-    vueApp.use(VueFire, {
-        firebaseApp,
-        modules: [
-            VueFireAuth(),
-            VueFireDatabaseOptionsAPI()
-        ],
-    });
-}
+import { initialize as initializeFirebase } from './firebase';
+initializeFirebase(vueApp);
 
 // Mount the Vue app
 vueApp.mount('#app')
