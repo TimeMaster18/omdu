@@ -5,6 +5,7 @@ import gear from '../data/gear';
 import traps from '../data/traps';
 import trapParts from '../data/trapParts';
 import guardians from '../data/guardians';
+import enemies from '../data/enemies';
 
 export const useDataStore = defineStore('data', {
     state() {
@@ -14,7 +15,8 @@ export const useDataStore = defineStore('data', {
             gear: gear,
             traps: traps,
             trapParts: trapParts,
-            guardians: guardians
+            guardians: guardians,
+            enemies: enemies,
         };
     },
     getters: {

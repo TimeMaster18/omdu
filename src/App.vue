@@ -45,6 +45,11 @@
                         title="Guardians"
                     />
                     <v-list-item
+                        to="enemies"
+                        prepend-icon="mdi-target-account"
+                        title="Enemies"
+                    />
+                    <v-list-item
                         to="maps"
                         prepend-icon="mdi-map"
                         title="Maps"

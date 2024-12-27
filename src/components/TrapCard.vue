@@ -63,17 +63,14 @@
                 <h3 class="mt-4">
                     Parts
                 </h3>
-                <div
+                <trap-part-slot-icon
                     v-for="(trapPartSlot, index) in trap.trapPartSlots"
                     :key="index"
                     class="mt-2"
-                >
-                    <trap-part-slot-icon
-                        :trap-part-slot="trapPartSlot"
-                        show-label
-                        :size="2"
-                    />
-                </div>
+                    :trap-part-slot="trapPartSlot"
+                    show-label
+                    :size="2"
+                />
             </div>
         </v-card-text>
     </v-card>

@@ -1,37 +1,40 @@
 <template>
     <v-card class="card text-start">
         <div class="image text-center">
-            <img :src="guardian.image">
+            <img :src="enemy.image">
         </div>
-        <guardian-home-icon
-            class="home-icon"
-            :guardian-home="guardian.home"
-            size="3"
-        />
-        <v-card-title>{{ guardian.name }}</v-card-title>
+        <v-card-title>{{ enemy.name }}</v-card-title>
         <v-card-text>
-            <!-- Aura description -->
-            <div class="mt-2">
-                Aura: {{ guardian.aura.description }}
-            </div>
-
             <!-- Description -->
-            <div class="mt-4 flavor-text">
-                {{ guardian.description }}
+            <div class="flavor-text">
+                {{ enemy.description }}
             </div>
+            
+            <!-- Abilities -->
+            <h3 class="mt-4">
+                Abilities
+            </h3>
+            <enemy-ability-icon
+                v-for="(ability, index) in enemy.abilities"
+                :key="index"
+                :ability="ability"
+                show-label
+                :size="2"
+                class="mt-2"
+            />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
-import GuardianHomeIcon from './GuardianHomeIcon.vue';
+import EnemyAbilityIcon from './EnemyAbilityIcon.vue';
 
 export default {
     components: {
-        GuardianHomeIcon
+        EnemyAbilityIcon
     },
     props: {
-        guardian: {
+        enemy: {
             type: Object,
             required: true
         }
@@ -57,14 +60,6 @@ export default {
 .image img {
 	image-rendering: optimizeQuality;
 	height: 11.25rem;
-}
-
-.home-icon {
-	position: absolute;
-	right: 0.5rem;
-	top: 0.5rem;
-    filter: grayscale();
-    opacity: 0.5;
 }
 
 .flavor-text {
