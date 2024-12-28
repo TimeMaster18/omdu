@@ -6,7 +6,7 @@ import traps from '../data/traps';
 import trapParts from '../data/trapParts';
 import guardians from '../data/guardians';
 import enemies from '../data/enemies';
-import battlegrounds from '../data/battleGrounds';
+import battlegrounds from '../data/battlegrounds';
 
 export const useDataStore = defineStore('data', {
     state() {
