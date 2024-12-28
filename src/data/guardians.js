@@ -1,9 +1,9 @@
-import guardianHome from '../enums/guardianHome';
+import GuardianHome from '../enums/guardianHome';
 const guardians = Object.freeze([
     {
         id: 1,
         name: "Bartender Guardian",
-        home: guardianHome.Kitchen,
+        home: GuardianHome.Kitchen,
         aura: {
             name: "Liquid Courage",
             description: "(In Combat) Reduces all cooldown durations by 20%. Buff granted to all heroes in Barmaid's aura."
@@ -14,7 +14,7 @@ const guardians = Object.freeze([
     {
         id: 2,
         name: "Blacksmith Guardian",
-        home: guardianHome.Forge,
+        home: GuardianHome.Forge,
         aura: {
             name: "Forged Armor",
             description: "(In Combat) Reduces damage taken by heroes 50%. Increases heroes' aggro max. Lasts only while in Blacksmith's aura."
@@ -25,7 +25,7 @@ const guardians = Object.freeze([
     {
         id: 3,
         name: "Cook Guardian",
-        home: guardianHome.Kitchen,
+        home: GuardianHome.Kitchen,
         aura: {
             name: "Serving Up Grub",
             description: "Quickly regenerates heroes' health and grants them the Full Stomach buff which increases their health for 45s when outside the aura. Heroes regain the buff upon re-entering the aura."
@@ -36,7 +36,7 @@ const guardians = Object.freeze([
     {
         id: 4,
         name: "Deckhand Guardian",
-        home: guardianHome.Docks,
+        home: GuardianHome.Docks,
         aura: {
             name: "Swashbuckling",
             description: "(In Combat) Kills increase Unchained meter by +3."
@@ -47,7 +47,7 @@ const guardians = Object.freeze([
     {
         id: 5,
         name: "Dragon Guardian",
-        home: guardianHome.Default,
+        home: GuardianHome.Default,
         aura: {
             name: "Guardian's Blessing",
             description: "(Permanent) +50 armor and magic armor due to a nearby allied guardian. (Out of Combat) Regenerating health due to an allied guardian's aura."
@@ -58,7 +58,7 @@ const guardians = Object.freeze([
     {
         id: 6,
         name: "Friar Guardian",
-        home: guardianHome.Temple,
+        home: GuardianHome.Temple,
         aura: {
             name: "Wiftmaker's Bwessing",
             description: "(In Combat) Primary attacks dealing arcane damage."
@@ -69,7 +69,7 @@ const guardians = Object.freeze([
     {
         id: 7,
         name: "Headhunter Guardian",
-        home: guardianHome.Barracks,
+        home: GuardianHome.Barracks,
         aura: {
             name: "Junior Headhunter",
             description: "(In Combat) Reflecting 30% of incoming damage."
@@ -80,7 +80,7 @@ const guardians = Object.freeze([
     {
         id: 8,
         name: "Jade Empire Guardian",
-        home: guardianHome.Jail,
+        home: GuardianHome.Jail,
         aura: {
             name: "Blessing of Wealth",
             description: "Generating 3 coin per second."
@@ -91,7 +91,7 @@ const guardians = Object.freeze([
     {
         id: 9,
         name: "Jailer Guardian",
-        home: guardianHome.Jail,
+        home: GuardianHome.Jail,
         aura: {
             name: "Soul Shackle",
             description: "(In Combat) Lifestealing with primary attacks."
@@ -102,7 +102,7 @@ const guardians = Object.freeze([
     {
         id: 10,
         name: "Lion Guardian",
-        home: guardianHome.Default,
+        home: GuardianHome.Default,
         aura: {
             name: "Guardian's Blessing",
             description: "(Permanent) +50 armor and magic armor due to a nearby allied guardian. (Out of Combat) Regenerating health due to an allied guardian's aura."
@@ -113,7 +113,7 @@ const guardians = Object.freeze([
     {
         id: 11,
         name: "Moon Guardian",
-        home: guardianHome.Default,
+        home: GuardianHome.Default,
         aura: {
             name: "Guardian's Blessing",
             description: "(Permanent) +50 armor and magic armor due to a nearby allied guardian. (Out of Combat) Regenerating health due to an allied guardian's aura."
@@ -124,7 +124,7 @@ const guardians = Object.freeze([
     {
         id: 12,
         name: "Priest Guardian",
-        home: guardianHome.Temple,
+        home: GuardianHome.Temple,
         aura: {
             name: "Stirring Benediction",
             description: "(Permanent) Mana regeneration increased."
@@ -135,7 +135,7 @@ const guardians = Object.freeze([
     {
         id: 13,
         name: "Quartermaster Guardian",
-        home: guardianHome.Barracks,
+        home: GuardianHome.Barracks,
         aura: {
             name: "Morale Boost",
             description: "Damage increased by 25%."
@@ -146,7 +146,7 @@ const guardians = Object.freeze([
     {
         id: 14,
         name: "Ranch Hand Guardian",
-        home: guardianHome.Stables,
+        home: GuardianHome.Stables,
         aura: {
             name: "Slowpoke",
             description: "(In Combat) Primary attacks slow enemies."
@@ -157,7 +157,7 @@ const guardians = Object.freeze([
     {
         id: 15,
         name: "Rumrudder Guardian",
-        home: guardianHome.Docks,
+        home: GuardianHome.Docks,
         aura: {
             name: "Plunder",
             description: "(Permanent) Kills yield health, mana, or Unchained pickups."
@@ -168,7 +168,7 @@ const guardians = Object.freeze([
     {
         id: 16,
         name: "Serpent Guardian",
-        home: guardianHome.Default,
+        home: GuardianHome.Default,
         aura: {
             name: "Guardian's Blessing",
             description: "(Permanent) +50 Physical Armor and Magic Armor due to a nearby allied guardian. (Out of Combat) Regenerating health due to an allied guardian's aura."
@@ -179,7 +179,7 @@ const guardians = Object.freeze([
     {
         id: 17,
         name: "Stablehand Guardian",
-        home: guardianHome.Stables,
+        home: GuardianHome.Stables,
         aura: {
             name: "Hoedown",
             description: "(Permanent) Movement speed increased."
@@ -190,7 +190,7 @@ const guardians = Object.freeze([
     {
         id: 18,
         name: "Sun Guardian",
-        home: guardianHome.Default,
+        home: GuardianHome.Default,
         aura: {
             name: "Guardian's Blessing",
             description: "(Permanent) +50 armor and magic armor due to a nearby allied guardian. (Out of Combat) Regenerating health due to an allied guardian's aura."
@@ -201,7 +201,7 @@ const guardians = Object.freeze([
     {
         id: 19,
         name: "Weaponwright Guardian",
-        home: guardianHome.Forge,
+        home: GuardianHome.Forge,
         aura: {
             name: "Forged Weapons",
             description: "(In Combat) Primary attacks dealing fire damage over time."

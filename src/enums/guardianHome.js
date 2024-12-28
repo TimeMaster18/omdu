@@ -1,4 +1,4 @@
-const guardianHome = Object.freeze({
+const GuardianHome = Object.freeze({
     Barracks:{
         name: "Barracks",
         icon: "images/guardian-homes/Barracks_icon.webp"
@@ -32,4 +32,4 @@ const guardianHome = Object.freeze({
         icon: "images/guardian-homes/Temple_icon.webp"
     },
 });
-export default guardianHome;
+export default GuardianHome;
