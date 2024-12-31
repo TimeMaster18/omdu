@@ -670,7 +670,7 @@ const enemies = Object.freeze({
     KamikazeKobold: {
         name: "Kamikaze Kobold",
         description: "These kobolds carry dynamite on their backs, detonating it and themselves to stop heroes and destroy barricades.",
-        image: "images/enemies/",
+        image: "images/enemies/Kamikaze_Kobold_image.webp",
         type: EnemyType.Minion,
         hp: 24,
         abilities: [
@@ -783,7 +783,7 @@ const enemies = Object.freeze({
     MountainTroll: {
         name: "Mountain Troll",
         description: "Once thought to be a myth, mountain trolls deal massive physical damage and regenerate health. They also ignore physics traps.",
-        image: "images/enemies/",
+        image: "images/enemies/Mountain_Troll_image.webp",
         type: EnemyType.Minion,
         hp: 1680,
         abilities: [
