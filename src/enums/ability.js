@@ -164,5 +164,20 @@ const Ability = Object.freeze({
         description: "Regains 25% health when a nearby ally dies.",
         icon: "images/enemy-abilities/Vindictive_icon.webp"
     },
+    Slowing: {
+        name: "Slowing",
+        description: "Slows players close to him.",
+        icon: ""
+    },
+    Swifty: {
+        name: "Swifty",
+        description: "Casts a speed buff on nearby allied minions.",
+        icon: ""
+    },
+    MagicArmor: {
+        name: "MagicArmor",
+        description: "Protected against magic damage.",
+        icon: ""
+    },
 });
 export default Ability;

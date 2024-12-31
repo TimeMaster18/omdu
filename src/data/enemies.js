@@ -1093,7 +1093,8 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 263,
         abilities: [
-            Ability.Ranged
+            Ability.Ranged,
+            Ability.MagicArmor
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 1
@@ -1118,6 +1119,7 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 650,
         abilities: [
+            Ability.MagicArmor
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 1
@@ -1142,6 +1144,7 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 107,
         abilities: [
+            Ability.MagicArmor
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 1
@@ -1167,6 +1170,7 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 263,
         abilities: [
+            Ability.MagicArmor
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 1
@@ -1178,6 +1182,7 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 128,
         abilities: [
+            Ability.Swifty,
             Ability.TrapResistant
         ],
         faction: Faction.WuXingDynasty,
@@ -1191,7 +1196,8 @@ const enemies = Object.freeze({
         hp: 1232,
         abilities: [
             Ability.Large,
-            Ability.Slow
+            Ability.Slow,
+            Ability.Slowing
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 3
