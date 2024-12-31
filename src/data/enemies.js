@@ -47,6 +47,20 @@ const enemies = Object.freeze({
         ],
         faction: Faction.Northmun,
         riftPoints: 4
+    },
+    ArmoredGiant: {
+        name: "Armored Giant",
+        description: "Giants may be slow but they are heavy-hitting, dealing massive physical damage. At low health, they move and attack more quickly.",
+        image: "images/enemies/Armored_Giant_image.webp",
+        type: EnemyType.Minion,
+        hp: 1500,
+        abilities: [
+            Ability.Enraged,
+            Ability.Large,
+            Ability.Slow
+        ],
+        faction: Faction.Order,
+        riftPoints: 4
     }
 });
 
