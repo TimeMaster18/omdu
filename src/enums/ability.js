@@ -1,7 +1,7 @@
 const Ability = Object.freeze({
     BarricadeBash: {
         name: "Barricade Bash",
-        description: "Destroys wall and Barricade traps.",
+        description: "Destroys wall and barricade traps.",
         icon: "images/enemy-abilities/Barricade_Bash_icon.webp"
     },
     BigGameHunting: {
@@ -31,12 +31,12 @@ const Ability = Object.freeze({
     },
     Freezing: {
         name: "Freezing",
-        description: "Immobilizes enemies with Frost magic.",
+        description: "Immobilizes enemies with frost magic.",
         icon: "images/enemy-abilities/Freezing_icon.webp"
     },
     FrostResistance: {
         name: "Frost Resistance",
-        description: "Protected against Frost damage (+100 Frost Armor).",
+        description: "Protected against frost damage (+100 frost armor).",
         icon: "images/enemy-abilities/Frost_Resistance_icon.webp"
     },
     Grenadier: {
@@ -46,7 +46,7 @@ const Ability = Object.freeze({
     },
     Healing: {
         name: "Healing",
-        description: "Heals nearby Minions.",
+        description: "Heals nearby minions.",
         icon: "images/enemy-abilities/Healing_icon.webp"
     },
     HighDamage: {
@@ -61,17 +61,17 @@ const Ability = Object.freeze({
     },
     Immolating: {
         name: "Immolating",
-        description: "Damages nearby Barricades.",
+        description: "Damages nearby barricades.",
         icon: "images/enemy-abilities/Immolating_icon.webp"
     },
     Large: {
         name: "Large",
-        description: "Unaffected by Physics Traps.",
+        description: "Unaffected by physics Traps.",
         icon: "images/enemy-abilities/Large_icon.webp"
     },
     Leaping: {
         name: "Leaping",
-        description: "Jumps over Barricade and wall traps.",
+        description: "Jumps over barricade and wall traps.",
         icon: "images/enemy-abilities/Leaping_icon.webp"
     },
     Lifesteal: {
@@ -81,7 +81,7 @@ const Ability = Object.freeze({
     },
     Maiming: {
         name: "Maiming",
-        description: "Attacks cast Slow on enemies.",
+        description: "Attacks cast slow on enemies.",
         icon: "images/enemy-abilities/Maiming_icon.webp"
     },
     Overstepping: {
@@ -101,7 +101,7 @@ const Ability = Object.freeze({
     },
     Protective: {
         name: "Protective",
-        description: "Casts a shield on nearby allied Minions.",
+        description: "Casts a shield on nearby allied minions.",
         icon: "images/enemy-abilities/Protective_icon.webp"
     },
     Ranged: {
@@ -175,8 +175,13 @@ const Ability = Object.freeze({
         icon: ""
     },
     MagicArmor: {
-        name: "MagicArmor",
-        description: "Protected against magic damage.",
+        name: "Magic Armor",
+        description: "Protected against magic damage (+100 frost/fire/arcane/lightning armor).",
+        icon: ""
+    },
+    PhysicalArmor: {
+        name: "Physical Armor",
+        description: "Protected against physical damage (+100 physical armor).",
         icon: ""
     },
 });

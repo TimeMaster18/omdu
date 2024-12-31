@@ -3,7 +3,7 @@
         class="d-flex align-center"
     >
         <img
-            :src="guardianHome?.icon"
+            :src="faction?.image"
             class="icon"
             :style="sizeStyle"
         >
@@ -16,8 +16,8 @@
 <script>
 export default {
     props: {
-        // Check GuardianHome enum for possible values
-        guardianHome: {
+        // Check Faction enum for possible values
+        faction: {
             type: Object,
             required: true
         },
@@ -46,7 +46,6 @@ export default {
 	aspect-ratio: 1/1;
 	border-radius: 0.25rem;
 	overflow: hidden;
-    filter: grayscale();
     opacity: 0.5;
 }
 

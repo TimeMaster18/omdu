@@ -74,7 +74,7 @@ const enemies = Object.freeze({
         ],
         faction: Faction.Order,
         riftPoints: 4
-    },    
+    },
     ArmoredOgre: {
         name: "Armored Ogre",
         description: "These stout ogre soldiers are protected by physical armor. Like other ogres, they charge and slow their foes and are not affected by physics traps. They have +100 Physical Armor which translates to 50% damage reduction of physical attacks received.",
@@ -82,6 +82,7 @@ const enemies = Object.freeze({
         type: EnemyType.Minion,
         hp: 1120,
         abilities: [
+            Ability.PhysicalArmor,
             Ability.Stunning,
             Ability.Large
         ],
@@ -107,7 +108,7 @@ const enemies = Object.freeze({
         description: "From the darkest corner of the Greenthorn Swamp, Crogon Hatchlings poison their enemies with their spit. Fast and Small but dangerous minions with ranged attacks.",
         image: "images/enemies/Crogon_Hatchling_image.webp",
         type: EnemyType.Minion,
-        hp: 0,
+        hp: null, // wiki doesn't have this info
         abilities: [
             Ability.Enraged,
             Ability.Large,

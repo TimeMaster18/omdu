@@ -63,8 +63,6 @@ export default {
 	position: absolute;
 	right: 0.5rem;
 	top: 0.5rem;
-    filter: grayscale();
-    opacity: 0.5;
 }
 
 .flavor-text {

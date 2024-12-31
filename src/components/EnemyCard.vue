@@ -31,7 +31,7 @@ import EnemyAbilityIcon from './EnemyAbilityIcon.vue';
 
 export default {
     components: {
-        EnemyAbilityIcon
+        EnemyAbilityIcon,
     },
     props: {
         enemy: {
@@ -50,16 +50,18 @@ export default {
 }
 
 .image {
-	height: 11.25rem;
+	/* height: 11.25rem; */
     background-color: rgb(var(--v-theme-on-surface-loading));
 	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
+    aspect-ratio: 88/89;
+    line-height: 0;
 }
 
 .image img {
 	image-rendering: optimizeQuality;
-	height: 11.25rem;
+    width: 100%;
 }
 
 .flavor-text {

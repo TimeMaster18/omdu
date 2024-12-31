@@ -31,7 +31,11 @@ export default {
     },
     computed: {
         enemies() {
-            return JSON.parse(JSON.stringify(this.dataStore.enemies)).sort((a, b) => a.faction.name > b.faction.name).sort((a, b) => a.name > b.name);
+            return JSON.parse(JSON.stringify(this.dataStore.enemies))
+                .sort((a, b) => {
+                    if(a.faction.name !== b.faction.name) return a.faction.name > b.faction.name;
+                    else return a.name > b.name
+                });
         }
     }
 }
