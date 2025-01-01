@@ -56,6 +56,7 @@ export default {
 
 .image {
 	width: 100%;
+    aspect-ratio: 599/90;
 }
 
 .image.inactive {
