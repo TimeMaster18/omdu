@@ -12,42 +12,43 @@
         <v-card-text>
             <!-- Stats -->
             <div v-if="showStats">
-                <div>
-                    <v-icon :icon="placementIcon" />
-                    <span class="capitalize value ml-2">
+                <stat-value
+                    v-if="trap.damageType"
+                    :icon="placementIcon"
+                >
+                    <span class="capitalize">
                         {{ trap.placement }}
                     </span>
-                </div>
-                <div>
-                    <v-icon>mdi-currency-usd</v-icon>
-                    <span class="value ml-2">
-                        {{ trapCost }}
-                    </span>
-                </div>
-                <div v-if="trap.damageType">
-                    <v-icon>mdi-sword</v-icon>
-                    <span class="capitalize value ml-2">
+                </stat-value>
+                <stat-value icon="mdi-currency-usd">
+                    {{ trapCost }}
+                </stat-value>
+                <stat-value
+                    v-if="trap.damageType"
+                    icon="mdi-sword"
+                >
+                    <span class="capitalize">
                         {{ trap.damageType }}
                     </span>
-                </div>
-                <div v-if="trap.range">
-                    <v-icon>mdi-bullseye</v-icon>
-                    <span class="value ml-2">
-                        {{ trap.range }}
-                    </span>
-                </div>
-                <div v-if="trapSize">
-                    <v-icon>mdi-axis-arrow</v-icon>
-                    <span class="value ml-2">
-                        {{ trapSize }}
-                    </span>
-                </div>
-                <div v-if="trap.max">
-                    <v-icon>mdi-alert</v-icon>
-                    <span class="value ml-2">
-                        Max. {{ trap.max }}
-                    </span>
-                </div>
+                </stat-value>
+                <stat-value
+                    v-if="trap.range"
+                    icon="mdi-bullseye"
+                >
+                    {{ trap.range }}
+                </stat-value>
+                <stat-value
+                    v-if="trapSize"
+                    icon="mdi-axis-arrow"
+                >
+                    {{ trapSize }}
+                </stat-value>
+                <stat-value
+                    v-if="trap.max"
+                    icon="mdi-alert"
+                >
+                    Max. {{ trap.max }}
+                </stat-value>
             </div>
 
             <!-- Description -->
@@ -78,11 +79,13 @@
 
 <script>
 import Placement from '../enums/placement';
+import StatValue from './StatValue.vue';
 import TrapPartSlotIcon from './TrapPartSlotIcon.vue';
 
 export default {
     components: {
-        TrapPartSlotIcon
+        TrapPartSlotIcon,
+        StatValue
     },
     props: {
         trap: {
@@ -151,15 +154,9 @@ export default {
 .image img {
 	image-rendering: optimizeQuality;
 	height: 11.25rem;
-	/* height: 12.5rem; */
 }
 
 .capitalize {
 	text-transform: capitalize;
-}
-
-.value {
-	display: inline-block;
-	vertical-align: middle;
 }
 </style>

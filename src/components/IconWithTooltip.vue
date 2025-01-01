@@ -9,7 +9,7 @@
             location="top"
             class="tooltip"
             content-class="tooltip-content elevation-2"
-            width="400"
+            max-width="400"
         >
             <template #activator="{ props }">
                 <img

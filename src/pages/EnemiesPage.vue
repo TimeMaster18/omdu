@@ -9,6 +9,7 @@
                 <enemy-card
                     class="text-left"
                     :enemy="enemy"
+                    show-description
                 />
             </v-col>
         </v-row>

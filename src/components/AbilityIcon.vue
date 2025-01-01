@@ -3,14 +3,18 @@
         <div class="name">
             {{ ability.name }}
         </div>
-        <div v-if="abilityCost">
-            <v-icon>mdi-water</v-icon>
-            <span class="value ml-2"> {{ abilityCost }}</span>
-        </div>
-        <div v-if="ability.cooldown">
-            <v-icon>mdi-clock</v-icon>
-            <span class="value ml-2"> {{ ability.cooldown }}s</span>
-        </div>
+        <stat-value
+            v-if="abilityCost"
+            icon="mdi-water"
+        >
+            {{ abilityCost }}
+        </stat-value>
+        <stat-value
+            v-if="ability.cooldown"
+            icon="mdi-clock"
+        >
+            {{ ability.cooldown }}s
+        </stat-value>
         <div class="mt-2">
             {{ ability.description }}
         </div>
@@ -19,8 +23,10 @@
 
 <script>
 import IconWithTooltip from "./IconWithTooltip.vue";
+import StatValue from './StatValue.vue';
+
 export default {
-    components: { IconWithTooltip },
+    components: { IconWithTooltip, StatValue },
     props: {
         ability: {
             type: Object,
@@ -53,10 +59,5 @@ export default {
 <style scoped>
 .name {
 	font-size: 1.2em;
-}
-
-.value {
-	display: inline-block;
-	vertical-align: middle;
 }
 </style>

@@ -6,18 +6,18 @@
         <v-card-title>{{ gear.name }}</v-card-title>
         <v-card-text>
             <!-- Stats -->
-            <div v-if="gear.cost">
-                <v-icon>mdi-water</v-icon>
-                <span class="value ml-2">
-                    {{ gear.cost }}
-                </span>
-            </div>
-            <div v-if="gear.cooldown">
-                <v-icon>mdi-clock</v-icon>
-                <span class="value ml-2">
-                    {{ gear.cooldown }}s
-                </span>
-            </div>
+            <stat-value
+                v-if="gear.cost"
+                icon="mdi-water"
+            >
+                {{ gear.cost }}
+            </stat-value>
+            <stat-value
+                v-if="gear.cooldown"
+                icon="mdi-clock"
+            >
+                {{ gear.cooldown }}s
+            </stat-value>
 
             <!-- Description -->
             <div class="mt-4">
@@ -28,8 +28,10 @@
 </template>
 
 <script>
+import StatValue from './StatValue.vue';
 
 export default {
+    components: { StatValue },
     props: {
         gear: {
             type: Object,
@@ -62,10 +64,5 @@ export default {
 
 .capitalize {
 	text-transform: capitalize;
-}
-
-.value {
-	display: inline-block;
-	vertical-align: middle;
 }
 </style>

@@ -55,7 +55,7 @@ import TrapsPage from './pages/TrapsPage.vue';
 import TrapPartsPage from './pages/TrapPartsPage.vue';
 import GuardiansPage from './pages/GuardiansPage.vue';
 import EnemiesPage from './pages/EnemiesPage.vue';
-import MapsPage from './pages/MapsPage.vue';
+import BattlegroundsPage from './pages/BattlegroundsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
 import LobbyPage from './pages/LobbyPage.vue';
 const router = createRouter({
@@ -68,7 +68,7 @@ const router = createRouter({
         { path: '/omdu/trap-parts', component: TrapPartsPage },
         { path: '/omdu/guardians', component: GuardiansPage },
         { path: '/omdu/enemies', component: EnemiesPage },
-        { path: '/omdu/maps', component: MapsPage },
+        { path: '/omdu/maps', component: BattlegroundsPage },
         { path: '/omdu/loadout', component: LoadoutPage },
         { path: '/omdu/lobby', component: LobbyPage },
     ],

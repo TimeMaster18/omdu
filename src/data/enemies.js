@@ -103,20 +103,6 @@ const enemies = Object.freeze({
         faction: Faction.Order,
         riftPoints: 1
     },
-    CrogonHatchling: {
-        name: "Crogon Hatchling",
-        description: "From the darkest corner of the Greenthorn Swamp, Crogon Hatchlings poison their enemies with their spit. Fast and Small but dangerous minions with ranged attacks.",
-        image: "images/enemies/Crogon_Hatchling_image.webp",
-        type: EnemyType.Minion,
-        hp: null, // wiki doesn't have this info
-        abilities: [
-            Ability.Enraged,
-            Ability.Large,
-            Ability.Slow
-        ],
-        faction: Faction.Unchained,
-        riftPoints: 4
-    },
     Crossbowman: {
         name: "Crossbowman",
         description: "Archers pepper their enemies with crossbow bolts, having low health and dealing damage at range. They are deadly in groups.",
@@ -614,60 +600,6 @@ const enemies = Object.freeze({
         faction: Faction.Elementals,
         riftPoints: 1
     },
-    InfiniteKoboldPup: {
-        name: "Infinite Kobold Pup",
-        description: "Kobold pups are young, very fast kobolds. Because of their small size, they are hard to catch and keep out of rifts but have low health.",
-        image: "images/enemies/Infinite_Kobold_Pup_image.webp",
-        type: EnemyType.Minion,
-        hp: 10,
-        abilities: [
-            Ability.Fast,
-            Ability.Swarming
-        ],
-        faction: Faction.Unchained,
-        riftPoints: 1
-    },
-    InfiniteMountainTroll: {
-        name: "Infinite Mountain Troll",
-        description: "Once thought to be a myth, mountain trolls deal massive physical damage and regenerate health. They also ignore physics traps.",
-        image: "images/enemies/Infinite_Mountain_Troll_image.webp",
-        type: EnemyType.Minion,
-        hp: 1680,
-        abilities: [
-            Ability.Regenerating,
-            Ability.Large
-        ],
-        faction: Faction.Unchained,
-        riftPoints: 4
-    },
-    InfinitePrideHunter: {
-        name: "Infinite Pride Hunter",
-        description: "Vengeful pride hunters pursue and take down heroes. They also regain health when nearby allies die. They are worth no rift points.",
-        image: "images/enemies/Infinite_Pride_Hunter_image.webp",
-        type: EnemyType.Minion,
-        hp: 400,
-        abilities: [
-            Ability.Vindictive,
-            Ability.BigGameHunting,
-            Ability.Leaping
-        ],
-        faction: Faction.Order,
-        riftPoints: 0
-    },
-    InfiniteSatyrRunner: {
-        name: "Infinite Satyr Runner",
-        description: "Known for their distinctive call, satyr runners are small and weak but fast. They ignore heroes, avoid damage, and run straight for rifts.",
-        image: "images/enemies/Infinite_Satyr_Runner_image.webp",
-        type: EnemyType.Minion,
-        hp: 80,
-        abilities: [
-            Ability.Phasing,
-            Ability.Fast,
-            Ability.Swarming
-        ],
-        faction: Faction.Order,
-        riftPoints: 1
-    },
     KamikazeKobold: {
         name: "Kamikaze Kobold",
         description: "These kobolds carry dynamite on their backs, detonating it and themselves to stop heroes and destroy barricades.",
@@ -901,20 +833,6 @@ const enemies = Object.freeze({
         ],
         faction: Faction.Order,
         riftPoints: 4
-    },
-    OrderTNTArcher: {
-        name: "Order TNT Archer",
-        description: "Skilled with both arrows and explosives, these archers shoot dynamite-laden arrows at their foes that explode after a few seconds. Arrows can be destroyed before detonation.",
-        image: "images/enemies/Order_TNT_Archer_image.webp",
-        type: EnemyType.Minion,
-        hp: 128,
-        abilities: [
-            Ability.Grenadier,
-            Ability.Steady,
-            Ability.Ranged
-        ],
-        faction: Faction.Order,
-        riftPoints: 1
     },
     PirateHeavyOrc: {
         name: "Pirate Heavy Orc",

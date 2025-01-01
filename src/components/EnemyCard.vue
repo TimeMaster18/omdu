@@ -5,15 +5,12 @@
         </div>
         <v-card-title>{{ enemy.name }}</v-card-title>
         <v-card-text>
-            <!-- Description -->
-            <div class="flavor-text">
-                {{ enemy.description }}
-            </div>
-            
+            <!-- Stats -->
+            <stat-value icon="mdi-heart">
+                {{ enemy.hp }}
+            </stat-value>
+
             <!-- Abilities -->
-            <h3 class="mt-4">
-                Abilities
-            </h3>
             <enemy-ability-icon
                 v-for="(ability, index) in enemy.abilities"
                 :key="index"
@@ -22,21 +19,35 @@
                 :size="2"
                 class="mt-2"
             />
+
+            <!-- Description -->
+            <div
+                v-if="showDescription"
+                class="mt-4 flavor-text"
+            >
+                {{ enemy.description }}
+            </div>
         </v-card-text>
     </v-card>
 </template>
 
 <script>
 import EnemyAbilityIcon from './EnemyAbilityIcon.vue';
+import StatValue from './StatValue.vue';
 
 export default {
     components: {
         EnemyAbilityIcon,
+        StatValue,
     },
     props: {
         enemy: {
             type: Object,
             required: true
+        },
+        showDescription: {
+            type: Boolean,
+            default: false
         }
     },
 }

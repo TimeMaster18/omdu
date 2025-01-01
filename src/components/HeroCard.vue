@@ -12,44 +12,31 @@
         <v-card-text>
             <!-- Stats -->
             <div v-if="showStats">
-                <div>
-                    <v-icon>mdi-heart</v-icon>
-                    <span class="value ml-2">
-                        {{ hero.hp }}
-                    </span>
-                </div>
-                <div>
-                    <v-icon>mdi-water</v-icon>
-                    <span class="value ml-2">
-                        {{ hero.mana }}
-                    </span>
-                </div>
-                <div>
-                    <v-icon v-if="hero.range === Range.Melee">
-                        mdi-sword
-                    </v-icon>
-                    <v-icon v-else>
-                        mdi-bow-arrow
-                    </v-icon>
-                    <span class="capitalize value ml-2">
+                <stat-value icon="mdi-heart">
+                    {{ hero.hp }}
+                </stat-value>
+                <stat-value icon="mdi-water">
+                    {{ hero.mana }}
+                </stat-value>
+                <stat-value :icon="hero.range === Range.Melee ? 'mdi-sword' : 'mdi-bow-arrow'">
+                    <span class="capitalize">
                         {{ hero.damageType }}
                     </span>
-                </div>
-                <div>
-                    <v-icon>mdi-cog</v-icon>
-                    <span
-                        v-if="hero.trapAffinity"
-                        class="value ml-2"
-                    >
-                        {{ hero.trapAffinity }}
-                    </span>
-                    <span
-                        v-else
-                        class="value ml-2 font-italic transparent"
-                    >
+                </stat-value>
+                <stat-value
+                    v-if="hero.trapAffinity"
+                    icon="mdi-cog"
+                >
+                    {{ hero.trapAffinity }}
+                </stat-value>
+                <stat-value
+                    v-else
+                    icon="mdi-cog"
+                >
+                    <span class="font-italic transparent">
                         None
                     </span>
-                </div>
+                </stat-value>
             </div>
 
             <!-- Abilities -->
@@ -115,10 +102,11 @@
 <script>
 import Range from "../enums/range.js";
 import AbilityIcon from "./AbilityIcon.vue";
+import StatValue from "./StatValue.vue";
 import UpgradeTier from "./UpgradeTier.vue";
 
 export default {
-    components: { AbilityIcon, UpgradeTier },
+    components: { AbilityIcon, UpgradeTier, StatValue },
     props: {
         hero: {
             type: Object,
@@ -172,11 +160,6 @@ export default {
 
 .capitalize {
 	text-transform: capitalize;
-}
-
-.value {
-	display: inline-block;
-	vertical-align: middle;
 }
 
 .transparent {
