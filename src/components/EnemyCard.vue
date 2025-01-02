@@ -7,7 +7,7 @@
         <v-card-text>
             <!-- Stats -->
             <stat-value icon="mdi-heart">
-                {{ enemy.hp }}
+                {{ enemy.hp ?? '?' }}
             </stat-value>
 
             <!-- Abilities -->

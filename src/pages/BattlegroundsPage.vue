@@ -61,10 +61,7 @@ export default {
         battlegrounds() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .filter(battleground => this.difficultyFilter === battleground.difficulty)
-                .sort((a, b) => {
-                    if(a.difficulty !== b.difficulty) return a.difficulty > b.difficulty;
-                    else return a.name > b.name;
-                });
+                .sort((a, b) => a.name > b.name);
         },
     },
 }

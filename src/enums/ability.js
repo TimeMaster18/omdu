@@ -184,5 +184,65 @@ const Ability = Object.freeze({
         description: "Protected against physical damage (+100 physical armor).",
         icon: ""
     },
+    Dread: {
+        name: "Dread",
+        description: "Buffs nearby minions with extra maximum health.",
+        icon: ""
+    },
+    Rich: {
+        name: "Rich",
+        description: "Leaves 5 coin bags with 1000 coins each when killed.",
+        icon: ""
+    },
+    Sarge: {
+        name: "Sarge",
+        description: "Buffs nearby minions with increased damage.",
+        icon: ""
+    },
+    Scurvy: {
+        name: "Scurvy",
+        description: "Deals increased damage to guardians.",
+        icon: ""
+    },
+    Charge: {
+        name: "Charge",
+        description: "Charges into nearby enemy heroes knocking them back on hit and dealing damage to barricades.",
+        icon: ""
+    },
+    Retreat: {
+        name: "Retreat",
+        description: "Retreats charging when no minions are left or reaches the rift.",
+        icon: ""
+    },
+    ChaosCrystals: {
+        name: "Chaos Crystals",
+        description: "Creates crystals that disable traps in an area of 2x2.",
+        icon: ""
+    },
+    ArcaneShield: {
+        name: "Arcane Shield",
+        description: "Creates a bubble shield around him that protects the inside from all damage coming from outside.",
+        icon: ""
+    },
+    ArcaneRegeneration: {
+        name: "Arcane Shield",
+        description: "Applies a very powerful regeneration buff to nearby damaged minions.",
+        icon: ""
+    },
+    OutOfGnollwhere: {
+        name: "Out of Gnoll-where",
+        description: "Throws a cage near enemy heroes that spawn 4 teacup gnolls.",
+        icon: ""
+    },
+    Clones: {
+        name: "Clones",
+        description: "Creates immortal clones of different elements with same stats as the real one.",
+        icon: ""
+    },
+    Cloak: {
+        name: "Cloak",
+        description: "Vanishes in the shadows healing up to half of his HP.",
+        icon: ""
+    },
 });
 export default Ability;

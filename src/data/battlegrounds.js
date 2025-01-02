@@ -14,7 +14,10 @@ const battlegrounds = Object.freeze([
             minutes: 13,
             seconds: 30
         },
+        mercenaries: 1,
         enemies: [
+            Enemy.Sarge,
+            Enemy.Swiftyhooves,
             Enemy.LightSoldier,
             Enemy.MediumSoldier,
             Enemy.HeavySoldier,
@@ -28,7 +31,7 @@ const battlegrounds = Object.freeze([
             Enemy.ArmoredGrizzly,
             Enemy.ForestGiant,
             Enemy.OrderMage
-        ]
+        ],
     }
 ]);
 export default battlegrounds;
