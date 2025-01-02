@@ -1406,7 +1406,7 @@ const enemies = Object.freeze({
         faction: Faction.Unchained,
         riftPoints: null // Wiki doesn't tell us
     },
-    HumaniMage: {
+    HumanIMage: {
         name: "Human iMage",
         description: "Human iMages are masters of disguise who create iMages of themselves to confuse and hunt down heroes. The iMages use magic of all 4 elements to attack the Heroes, each of the clones uses a different type of magic. If the heroes take down a fake iMage, the iMage will respawn. But if heroes are able to kill the real Mage, all the iMages will fall with him. It spawns as many clones as players are in the match. Mercenaries can leap over Barricades.",
         image: "images/enemies/Human_iMage_image.webp",

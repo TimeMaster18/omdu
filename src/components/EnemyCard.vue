@@ -7,7 +7,15 @@
         <v-card-text>
             <!-- Stats -->
             <stat-value icon="mdi-heart">
-                {{ enemy.hp ?? '?' }}
+                <span v-if="enemy.hp">
+                    {{ enemy.hp }}
+                </span>
+                <span
+                    v-else
+                    class="font-italic transparent"
+                >
+                    Unknown
+                </span>
             </stat-value>
 
             <!-- Abilities -->
@@ -23,7 +31,7 @@
             <!-- Description -->
             <div
                 v-if="showDescription"
-                class="mt-4 flavor-text"
+                class="mt-4 transparent"
             >
                 {{ enemy.description }}
             </div>
@@ -58,6 +66,7 @@ export default {
 	user-select: none;
 	min-width: 15.625rem;
 	max-width: 18.75rem;
+    height: fit-content;
 }
 
 .image {
@@ -75,7 +84,7 @@ export default {
     width: 100%;
 }
 
-.flavor-text {
+.transparent {
 	opacity: 0.3;
 }
 </style>

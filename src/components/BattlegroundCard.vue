@@ -45,14 +45,9 @@ export default {
 <style scoped>
 .card {
 	user-select: none;
-	/* min-width: 15.625rem;
-	max-width: 18.75rem;
-
-    min-width: 26.25rem;
-    max-width: 31.25rem; */
-
     min-width: 20rem;
 	max-width: 24rem;
+    height: fit-content;
 }
 
 .image {

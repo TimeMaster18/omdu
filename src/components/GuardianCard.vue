@@ -44,6 +44,7 @@ export default {
 	user-select: none;
 	min-width: 15.625rem;
 	max-width: 18.75rem;
+    height: fit-content;
 }
 
 .image {
