@@ -1353,6 +1353,94 @@ const enemies = Object.freeze({
         ],
         faction: Faction.Unchained,
         riftPoints: 4
+    },
+    BouncerBear: {
+        name: "Bouncer Bear",
+        description: "Bouncing Bear is a Mercenary that defends the minions, he escorts the minions to the rift attacking enemy heroes that are in the way. He charges against nearby Heroes knocking them back on hit and dealing damage to barricades in the way of his charge. If he reaches the Rift or there are no minions left, he will charge all the way back to the Minion Portal. Mercenaries can leap over Barricades. The last thing a hero wants is to be bounced by the Bouncer Bear. This bear acts as a bodyguard to allied minions and escorts them to the rift. When heroes get too close, he charges them, knocking them back (potentially into battleground hazards) and dealing damage to any barricades in his way. Be careful around the Bouncer Bear, or your hero may find themselves bounced out of the battleground.",
+        image: "images/enemies/Bouncer_Bear_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.Charge,
+            Ability.Retreat
+        ],
+        faction: Faction.Order,
+        riftPoints: 0
+    },
+    ChaoticKobold: {
+        name: "Chaotic Kobold",
+        description: "Chaotic Kobold is a Mercenary that runs around the map ignoring heroes and disabling traps, they are very fast Mercenaries that run around the map creating energy crystals that disable nearby traps. Mercenaries can leap over Barricades. Rushing onto the battleground at great speed, the Chaotic Kobold is hard to hit and kill. What makes him an even more challenging is his penchant for 'gifting' crystals all over the battleground that disable nearby traps and slow nearby heroes. But disabling the crystals won't do a hero much good; until he's dead, he will continue to speed around the map placing and re-placing crystals.",
+        image: "images/enemies/Chaotic_Kobold_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.ChaosCrystals,
+            Ability.Fast
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 0
+    },
+    DwarfPriest: {
+        name: "Dwarf Priest",
+        description: "Dwarf Priest is a Mercenary that escorts minions, he can create a bubble shield around him that prevents minions inside from taking damage coming from outside the shield. He also has a very powerful spell that heals nearby minions over time, a long and powerful regeneration buff. He retreats to the Minion Portal when he reaches the rift or no minions are remaining Mercenaries can leap over Barricades. Equipped with the ability to shield minions, heal them, and buff them with damage dealing and reduction spells, this slow-moving mercenary, the Dwarf Shaman, protects allied minions while escorting them to the rift. Heroes must either stand inside the shield or kill the Dwarf Shaman to damage his minion allies. Once he reaches the rift, he will go back to the start of a lane to escort more minions.",
+        image: "images/enemies/Dwarf_Priest_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.ArcaneShield,
+            Ability.ArcaneRegeneration
+        ],
+        faction: Faction.Order,
+        riftPoints: 0
+    },
+    GnollBreeder: {
+        name: "Gnoll Breeder",
+        description: "Gnoll Breeder is a Mercenary that hunts Heroes, he throws cages near enemy heroes that spawn 4 Teacup Gnolls which hunt heroes down by their high damage and slow debuff on hit. The mercenary is unable to directly attack. Mercenaries can leap over Barricades.",
+        image: "images/enemies/Gnoll_Breeder_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.Leaping,
+            Ability.OutofGnollwhere
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 0
+    },
+    HumaniMage: {
+        name: "Human iMage",
+        description: "Human iMages are masters of disguise who create iMages of themselves to confuse and hunt down heroes. The iMages use magic of all 4 elements to attack the Heroes, each of the clones uses a different type of magic. If the heroes take down a fake iMage, the iMage will respawn. But if heroes are able to kill the real Mage, all the iMages will fall with him. It spawns as many clones as players are in the match. Mercenaries can leap over Barricades.",
+        image: "images/enemies/Human_iMage_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.Clones
+        ],
+        faction: Faction.Order,
+        riftPoints: 0
+    },
+    PrideAssassin: {
+        name: "Pride Assassin",
+        description: "Pride Assassin is a Mercenary that hunts Heroes. These highly-trained, stealthy assassins hunt random heroes. They use cloak to get close to their prey, attack, and then cloak again to retreat and heal. They can heal up to 50% when entering stealth. Chased Hero will see a mark in their screen. Mercenaries can leap over Barricades. Cloaked in shadow, the Pride Assassin stalks the battleground invisible to its enemies, hunting down heroes and 'marking' them for assassination. When he goes in for the kill, he reveals himself at close range and launches a devastating melee attack. If the hero puts up a fight, the Pride Assassin retreats to the shadows to heal its wounds. Once healed enough, it will return to attack and will keep retreating and attacking until he is killed.",
+        image: "images/enemies/Pride_Assassin_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.Cloak
+        ],
+        faction: Faction.Order,
+        riftPoints: 0
+    },
+    TeacupGnoll: {
+        name: "Teacup Gnoll",
+        description: "Teacup Gnoll is a Mercenary that hunts Heroes, teacup gnolls are used as weapons by Gnoll Breeders, they only spawn when a Breeder encounters enemy heroes and release them. Teacup Gnolls have high damage attacks but low health, they also heavily slow enemies on hit. They are temporal minions and disappear after some seconds. Mercenaries can leap over Barricades.",
+        image: "images/enemies/Teacup_Gnoll_image.webp",
+        type: EnemyType.Mercenary,
+        hp: 0,
+        abilities: [
+            Ability.Maiming
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 0
     }
 });
 
