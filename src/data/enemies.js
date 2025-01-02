@@ -1120,6 +1120,239 @@ const enemies = Object.freeze({
         ],
         faction: Faction.WuXingDynasty,
         riftPoints: 3
+    },
+    BulgodTheArmoredOgre: {
+        name: "Bulgod the Armored Ogre",
+        description: "As an armored ogre general, Bulgod disables traps in a wide area with his attacks, giving his troops a better chance at surviving.",
+        image: "images/enemies/Bulgod_the_Armored_Ogre_image.webp",
+        type: EnemyType.Boss,
+        hp: 3920,
+        abilities: [
+            Ability.Stunning,
+            Ability.Large,
+            Ability.Shockwave
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 4
+    },    
+    CommanderTower: {
+        name: "Commander Tower",
+        description: "Commander Tower leads his army to victory by leading the charge and protecting all minions behind him with towering shield.",
+        image: "images/enemies/Commander_Tower_image.webp",
+        type: EnemyType.Boss,
+        hp: 3800,
+        abilities: [
+            Ability.Large,
+            Ability.Blocking
+        ],
+        faction: Faction.Order,
+        riftPoints: 6
+    },
+    Dread: {
+        name: "Dread",
+        description: "His name is what the Order feels when they see him on the battlefield. Dread, an orc general, buffs his compatriots with health to help them survive.",
+        image: "images/enemies/Dread_image.webp",
+        type: EnemyType.Boss,
+        hp: 2240,
+        abilities: [
+            Ability.Large,
+            Ability.Dread
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 4
+    },
+    GaeadinTheEarthLord: {
+        name: "Gaeadin the Earth Lord",
+        description: "The Earth Lord, Gaeadin, is immune to slows and stuns and splits into smaller versions of herself when destroyed, making her very hard to kill.",
+        image: "images/enemies/Gaeadin_the_Earth_Lord_image.webp",
+        type: EnemyType.Boss,
+        hp: 3000,
+        abilities: [
+            Ability.Unstoppable,
+            Ability.Large,
+            Ability.Replication
+        ],
+        faction: Faction.Elementals,
+        riftPoints: 6
+    },
+    GrenwaldeTheNatureLord: {
+        name: "Grenwalde the Nature Lord",
+        description: "The Nature Lord, Grenwalde, blesses those who respect nature by using his powers to heal his allies. He also steals life from his foes.",
+        image: "images/enemies/Grenwalde_the_Nature_Lord_image.webp",
+        type: EnemyType.Boss,
+        hp: 2800,
+        abilities: [
+            Ability.Large,
+            Ability.Healing,
+            Ability.Lifesteal
+        ],
+        faction: Faction.Elementals,
+        riftPoints: 4
+    },
+    IcebergTheIceLord: {
+        name: "Iceberg the Ice Lord",
+        description: "He is resistant to frost damage, but susceptible to fire damage, and splits into smaller elementals when damaged. The Ice Lord, Iceberg, hails from the frozen frost caverns of Arctos. The release of frost magic has also attracted the attention of Iceberg. Always vigilant, Iceberg will seek out and punish those who misuse ice magic. He is not happy that the Unchained now have the power to use frost magic.",
+        image: "images/enemies/Iceberg_the_Ice_Lord_image.webp",
+        type: EnemyType.Boss,
+        hp: 3800,
+        abilities: [
+            Ability.Large,
+            Ability.Replication,
+            Ability.FrostResistance,
+            Ability.Freezing
+        ],
+        faction: Faction.Elementals,
+        riftPoints: 6
+    },
+    LyzanderCultOfDeathResurrector: {
+        name: "Lyzander, Cult of Death Resurrector",
+        description: "'Death is as impermanent as life if you know the secrets of resurrection.' - Stallid, High Priest of the Cult of Death",
+        image: "images/enemies/Lyzander,_Cult_of_Death_Resurrector_image.webp",
+        type: EnemyType.Boss,
+        hp: 2800,
+        abilities: [
+            Ability.Large,
+            Ability.Resurrecting
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 4
+    },
+    MrMoneybags: {
+        name: "Mr. Moneybags",
+        description: "A well-heeled ogre from old ogre money, Mr. Moneybags runs to the Rift ignoring everything but also leaves a generous amount of coin behind when killed. He is also completely harmless and doesn't give any damage to the Rift, which making him very easy to kill.",
+        image: "images/enemies/Mr._Moneybags_image.webp",
+        type: EnemyType.Boss,
+        hp: 3920,
+        abilities: [
+            Ability.Large,
+            Ability.Rich
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 0
+    },
+    OrfumTheMountainTroll: {
+        name: "Orfum the Mountain Troll",
+        description: "A venerated mountain troll warrior, Orfum deals an impressive amount of damage and regenerates his health quickly. He ignores physics traps.",
+        image: "images/enemies/Orfum_the_Mountain_Troll_image.webp",
+        type: EnemyType.Boss,
+        hp: 3360,
+        abilities: [
+            Ability.Large,
+            Ability.BarricadeBash,
+            Ability.Regenerating
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 6
+    },
+    Sarge: {
+        name: "Sarge",
+        description: "Sarge is a legend among Order soldiers, and his mere presence inspires them to fight more fiercely. Soldiers near Sarge deal increased damage.",
+        image: "images/enemies/Sarge_image.webp",
+        type: EnemyType.Boss,
+        hp: 2576,
+        abilities: [
+            Ability.Large,
+            Ability.Steady,
+            Ability.Sarge
+        ],
+        faction: Faction.Order,
+        riftPoints: 4
+    },
+    ScurvyRumrudder: {
+        name: "Scurvy Rumrudder",
+        description: "As a full-time pirate and part-time guardian, Scurvy Rumrudder knows how to hit a guardian where it hurts. As a boss, Scurvy deals increased damage to guardians.",
+        image: "images/enemies/Scurvy_Rumrudder_image.webp",
+        type: EnemyType.Boss,
+        hp: 2240,
+        abilities: [
+            Ability.Large,
+            Ability.Scurvy
+        ],
+        faction: Faction.Pirates,
+        riftPoints: 4
+    },
+    SnowflakeTheYeti: {
+        name: "Snowflake the Yeti",
+        description: "When angered, Snowflake loves to lob deadly snowballs at her enemies, freezing them as she angrily stomps towards their rifts. Snowflake is not as gentle as her name implies. The frosty conditions have made the climate more comfortable for the yeti, who have made their way into the region. The most notorious of these yeti is the incorrigible Snowflake. If encountered, it is best to get out of her way! She is resistant to frost damage but susceptible to fire damage.",
+        image: "images/enemies/Snowflake_the_Yeti_image.webp",
+        type: EnemyType.Boss,
+        hp: 3920,
+        abilities: [
+            Ability.Enraged,
+            Ability.Large,
+            Ability.Slow
+        ],
+        faction: Faction.FrostClan,
+        riftPoints: 4
+    },
+    Swiftyhooves: {
+        name: "Swiftyhooves",
+        description: "A very large and very fast satyr, Swiftyhooves dashes quickly towards enemy rifts, jumping any walls or barricades in his path.",
+        image: "images/enemies/Swiftyhooves_image.webp",
+        type: EnemyType.Boss,
+        hp: 2464,
+        abilities: [
+            Ability.Large,
+            Ability.Leaping,
+            Ability.Fast
+        ],
+        faction: Faction.Order,
+        riftPoints: 6
+    },
+    TikLikTheHobgoblinShaman: {
+        name: "TikLik the Hobgoblin Shaman",
+        description: "The leader of the hobgoblin shamans, TikLik, wears the mysteriously powerful chieftain mask. TikLik uses his powers to heal his allies and steal life from his enemies.",
+        image: "images/enemies/TikLik_the_Hobgoblin_Shaman_image.webp",
+        type: EnemyType.Boss,
+        hp: 672,
+        abilities: [
+            Ability.Large,
+            Ability.Healing,
+            Ability.Lifesteal
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 4
+    },
+    Tubifore: {
+        name: "Tubifore",
+        description: "The son Bionka never speaks of, Tubifore, attacks barricades and regenerates health when he is not taking damage. Nobody knows for sure what this four-armed, two-headed boss is, but he is as effective as he is strange-looking. Using his four, giant fists, he smashes through barricades. He's a resilient boss too, regenerating his health when out of combat. Rumor has it that this boss is another of Bionka's sons, but she's not talking and we're not rude enough to ask.",
+        image: "images/enemies/Tubifore_image.webp",
+        type: EnemyType.Boss,
+        hp: 3360,
+        abilities: [
+            Ability.Large,
+            Ability.BarricadeBash,
+            Ability.Regenerating
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 6
+    },
+    UrzaTheFireLord: {
+        name: "Urza the Fire Lord",
+        description: "As king of the fire lords, Urza is very hard to kill. When Urza's main form is destroyed, he splits into smaller, explosive versions of himself. Urza also resists fire damage.",
+        image: "images/enemies/Urza_the_Fire_Lord_image.webp",
+        type: EnemyType.Boss,
+        hp: 5040,
+        abilities: [
+            Ability.Large,
+            Ability.Replication,
+            Ability.FlameRetardant
+        ],
+        faction: Faction.Elementals,
+        riftPoints: 6
+    },
+    VitalityTheCyclopsResurrector: {
+        name: "Vitality the Cyclops Resurrector",
+        description: "As a disciple of Stinkeye, Vitality has learned the secrets of resurrection. On the battlefield, Vitality resurrects allied minions and steals life from his foes.",
+        image: "images/enemies/Vitality_the_Cyclops_Resurrector_image.webp",
+        type: EnemyType.Boss,
+        hp: 2800,
+        abilities: [
+            Ability.Large,
+            Ability.Resurrecting
+        ],
+        faction: Faction.Unchained,
+        riftPoints: 4
     }
 });
 
