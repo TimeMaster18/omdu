@@ -10,7 +10,7 @@
                 {{ battleground.waves }}
             </stat-value>
             <stat-value icon="mdi-clock">
-                {{ battleground.parTime.minutes }}:{{ battleground.parTime.seconds }}
+                {{ parTime }}
             </stat-value>
         </v-card-text>
     </v-card>
@@ -37,6 +37,13 @@ export default {
             else if(this.battleground.difficulty === Difficulty.Master) return "Master";
             else if(this.battleground.difficulty === Difficulty.RiftLord) return "Rift Lord";
             else return null;
+        },
+        parTime() {
+            if(this.battleground.parTime.seconds < 10) {
+                return `${this.battleground.parTime.minutes}:0${this.battleground.parTime.seconds}`;
+            } else {
+                return `${this.battleground.parTime.minutes}:${this.battleground.parTime.seconds}`;
+            }
         }
     }
 }
@@ -44,7 +51,6 @@ export default {
 
 <style scoped>
 .card {
-	user-select: none;
     min-width: 20rem;
 	max-width: 24rem;
     height: fit-content;

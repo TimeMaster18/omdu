@@ -1,44 +1,47 @@
 <template>
-    <v-dialog v-model="isOpen">
+    <v-dialog
+        v-model="isOpen"
+        max-width="1300"
+    >
         <v-card>
             <v-card-text>
-                <v-row>
-                    <v-col cols="3">
-                        <DifficultyCard
-                            class="elevation-0"
-                            :difficulty="battleground.difficulty"
-                        />
+                <v-row dense>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                    >
+                        <div class="info">
+                            <DifficultyCard
+                                class="elevation-0 mb-2"
+                                :difficulty="battleground.difficulty"
+                            />
+                            <div class="v-card-title pl-0">
+                                {{ battleground.map.name }}
+                            </div>
+                            <stat-value icon="mdi-waves">
+                                {{ battleground.waves }}
+                            </stat-value>
+                            <stat-value icon="mdi-clock">
+                                {{ parTime }}
+                            </stat-value>
+                            <div class="transparent mt-4 hidden-sm-and-down">
+                                {{ battleground.map.description }}
+                            </div>
+                        </div>
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        align="center"
+                    >
                         <img
                             class="minimap"
                             :src="battleground.map.minimap"
                         >
-                        <div class="v-card-title px-0">
-                            {{ battleground.map.name }}
-                        </div>
-                        <stat-value icon="mdi-waves">
-                            {{ battleground.waves }}
-                        </stat-value>
-                        <stat-value icon="mdi-clock">
-                            {{ battleground.parTime.minutes }}:{{ battleground.parTime.seconds }}
-                        </stat-value>
                     </v-col>
-                    <v-col cols="9">
-                        <div v-if="bosses.length > 0">
-                            <div class="mx-2 pl-0 v-card-title">
-                                Bosses
-                            </div>
-                            <div class="d-flex flex-wrap">
-                                <enemy-card
-                                    v-for="(boss, index) in bosses"
-                                    :key="index"
-                                    class="ma-2 enemy-card"
-                                    :enemy="boss"
-                                />
-                            </div>
-                        </div>
-
+                    <v-col cols="12">
                         <div v-if="minions.length > 0">
-                            <div class="mx-2 mt-4 pl-0 v-card-title">
+                            <div class="mx-2 pl-0 v-card-title">
                                 Minions
                             </div>
                             <div class="d-flex flex-wrap">
@@ -67,6 +70,20 @@
                                 />
                             </div>
                         </div>
+
+                        <div v-if="bosses.length > 0">
+                            <div class="mx-2 mt-4 pl-0 v-card-title">
+                                Bosses
+                            </div>
+                            <div class="d-flex flex-wrap">
+                                <enemy-card
+                                    v-for="(boss, index) in bosses"
+                                    :key="index"
+                                    class="ma-2 enemy-card"
+                                    :enemy="boss"
+                                />
+                            </div>
+                        </div>
                     </v-col>
                 </v-row>
             </v-card-text>
@@ -91,6 +108,13 @@ export default {
         }
     },
     computed: {
+        parTime() {
+            if(this.battleground.parTime.seconds < 10) {
+                return `${this.battleground.parTime.minutes}:0${this.battleground.parTime.seconds}`;
+            } else {
+                return `${this.battleground.parTime.minutes}:${this.battleground.parTime.seconds}`;
+            }
+        },
         minions() {
             if(this.battleground === null) return [];
 
@@ -137,13 +161,24 @@ export default {
 </script>
 
 <style>
+.info {
+    max-width: 500px;
+}
+
 .minimap {
     width: 100%;
     aspect-ratio: 512/512;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .enemy-card {
     min-width: 12rem !important;
 	max-width: 14.4rem !important;
+}
+
+.transparent {
+    opacity: 0.3;
 }
 </style>

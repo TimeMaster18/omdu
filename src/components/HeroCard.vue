@@ -145,7 +145,6 @@ export default {
 
 <style scoped>
 .card {
-	user-select: none;
     min-width: 26.25rem;
     max-width: 31.25rem;
     height: fit-content;

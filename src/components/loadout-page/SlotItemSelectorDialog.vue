@@ -195,7 +195,7 @@ export default {
 
 .no-slot-item-selected {
     margin-top: calc((7.5rem - 51.95px) / 2);
-	opacity: 0.3;
+    opacity: 0.3;
 }
 
 .selected {

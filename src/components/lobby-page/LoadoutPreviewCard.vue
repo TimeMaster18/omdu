@@ -128,7 +128,6 @@ export default {
 
 <style scoped>
 .card {
-	user-select: none;
     line-height: 0;
     aspect-ratio: 1000/471;
     background: rgb(var(--v-theme-on-surface-loading));

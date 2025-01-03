@@ -50,7 +50,6 @@ export default {
 
 <style scoped>
 .card {
-	user-select: none;
 	line-height: 0;
 }
 

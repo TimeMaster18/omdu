@@ -34,7 +34,6 @@ export default {
 
 <style scoped>
 .card {
-	user-select: none;
     width: 18.75rem;
     line-height: 0;
 }
