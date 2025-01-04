@@ -8,21 +8,20 @@
                 sm="6"
                 lg="3"
             >
-                <LoadoutPreviewCard :loadout-code="code" />
+                <LoadoutPreviewCard
+                    :loadout-code="code"
+                    v-on="(index === playerIndex) ? { 'click': openLoadoutDialog } : null"
+                />
             </v-col>
+            <loadout-dialog
+                ref="loadoutDialog"
+                v-model="loadoutCode"
+            />
         </v-row>
         <v-divider
             class="my-2"
             thickness="2"
         />
-        <v-row>
-            <v-col cols="12">
-                <LoadoutEditor
-                    v-model="loadoutCode"
-                    :fixed-player-name="playerName"
-                />
-            </v-col>
-        </v-row>
         <v-divider
             class="my-2"
             thickness="2"
@@ -37,21 +36,19 @@
 </template>
 
 <script>
-import LoadoutEditor from '../components/LoadoutEditor.vue';
+import LoadoutDialog from '../components/lobby-page/LoadoutDialog.vue';
 import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue';
 import LobbySettingsForm from '../components/lobby-page/LobbySettingsForm.vue';
 import { firebaseApp } from '../firebase.js';
 import { useLobbyStore } from '../stores/lobby.js';
-import Cookies from 'js-cookie';
-import CookieName from '../enums/cookieNames.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 
 export default {
     components: {
         LobbySettingsForm,
         LoadoutPreviewCard,
-        LoadoutEditor,
         BattlegroundSelectionDialog,
+        LoadoutDialog,
     },
     setup() {
         const lobbyStore = useLobbyStore();
@@ -62,10 +59,12 @@ export default {
     data() {
         return {
             firebaseCorrectlySetup: firebaseApp !== null,
-            playerName: Cookies.get(CookieName.PlayerName) ?? null
         }
     },
     computed: {
+        playerIndex() {
+            return this.lobbyStore.playerIndex;
+        },
         loadoutCode: {
             get() {
                 return this.lobbyStore.playerLoadout;
@@ -90,6 +89,11 @@ export default {
                 return this.lobbyStore.setBattleground(value);
             }
         },
+    },
+    methods: {
+        openLoadoutDialog() {
+            this.$refs.loadoutDialog.open();
+        }
     }
 };
 </script>

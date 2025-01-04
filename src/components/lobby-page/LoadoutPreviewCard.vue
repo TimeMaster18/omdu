@@ -19,13 +19,13 @@
             </div>
             <div class="actions">
                 <v-icon
-                    @click="openLoadoutLinkToClipboard"
+                    @click.stop="openLoadoutLinkToClipboard"
                     class="mr-2"
                 >
                     mdi-link
                 </v-icon>
                 <v-icon
-                    @click="copyLoadoutCodeToClipboard"
+                    @click.stop="copyLoadoutCodeToClipboard"
                     :disabled="copying"
                 >
                     mdi-content-copy
