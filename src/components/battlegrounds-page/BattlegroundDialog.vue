@@ -93,7 +93,7 @@
 
 <script>
 import EnemyCard from '../EnemyCard.vue';
-import DifficultyCard from './DifficultyCard.vue';
+import DifficultyCard from '../DifficultyCard.vue';
 import StatValue from '../StatValue.vue';
 import Enemy from '../../data/enemies.js';
 import EnemyType from '../../enums/enemyType';

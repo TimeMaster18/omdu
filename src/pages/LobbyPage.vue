@@ -15,7 +15,7 @@
             class="my-2"
             thickness="2"
         />
-        <v-row dense>
+        <v-row>
             <v-col cols="12">
                 <LoadoutEditor
                     v-model="loadoutCode"
@@ -23,6 +23,11 @@
                 />
             </v-col>
         </v-row>
+        <v-divider
+            class="my-2"
+            thickness="2"
+        />
+        <battleground-selection-dialog v-model="battleground" />
         <v-divider
             class="my-2"
             thickness="2"
@@ -39,12 +44,14 @@ import { firebaseApp } from '../firebase.js';
 import { useLobbyStore } from '../stores/lobby.js';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieNames.js';
+import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 
 export default {
     components: {
         LobbySettingsForm,
         LoadoutPreviewCard,
         LoadoutEditor,
+        BattlegroundSelectionDialog,
     },
     setup() {
         const lobbyStore = useLobbyStore();
@@ -74,6 +81,14 @@ export default {
                 this.lobbyStore.getPlayerLoadoutByIndex(2),
                 this.lobbyStore.getPlayerLoadoutByIndex(3),
             ]
+        },
+        battleground: {
+            get() {
+                return this.lobbyStore.battleground;
+            },
+            set(value) {
+                return this.lobbyStore.setBattleground(value);
+            }
         },
     }
 };

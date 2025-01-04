@@ -35,7 +35,7 @@
 <script>
 import BattlegroundCard from '../components/BattlegroundCard.vue';
 import BattlegroundDialog from '../components/battlegrounds-page/BattlegroundDialog.vue';
-import DifficultyCard from '../components/battlegrounds-page/DifficultyCard.vue';
+import DifficultyCard from '../components/DifficultyCard.vue';
 import Difficulty from '../enums/difficulty';
 import { useDataStore } from '../stores/data';
 

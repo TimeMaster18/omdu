@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import Difficulty from '../../enums/difficulty';
-import ApprenticeImage from '../../assets/images/header_bucket_1.webp';
-import WarMageImage from '../../assets/images/header_bucket_2.webp';
-import MasterImage from '../../assets/images/header_bucket_3.webp';
-import RiftLordImage from '../../assets/images/header_bucket_4.webp';
+import Difficulty from '../enums/difficulty';
+import ApprenticeImage from '../assets/images/header_bucket_1.webp';
+import WarMageImage from '../assets/images/header_bucket_2.webp';
+import MasterImage from '../assets/images/header_bucket_3.webp';
+import RiftLordImage from '../assets/images/header_bucket_4.webp';
 
 export default {
     props: {
