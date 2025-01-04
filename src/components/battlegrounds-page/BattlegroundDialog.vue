@@ -119,32 +119,21 @@ export default {
             if(this.battleground === null) return [];
 
             return JSON.parse(JSON.stringify(this.battleground.enemies))
-                .filter(enemy => enemy.type === EnemyType.Minion)
-                .sort((a, b) => {
-                    if(a.faction.name !== b.faction.name) return a.faction.name > b.faction.name;
-                    else return a.name > b.name
-                });
+                .filter(enemy => enemy.type === EnemyType.Minion);
         },
         bosses() {
             if(this.battleground === null) return [];
 
             return JSON.parse(JSON.stringify(this.battleground.enemies))
                 .filter(enemy => enemy.type === EnemyType.Boss)
-                .sort((a, b) => {
-                    if(a.faction.name !== b.faction.name) return a.faction.name > b.faction.name;
-                    else return a.name > b.name
-                });
+                .sort((a, b) =>  a.name > b.name);
         },
         mercenaries() {
             if(this.battleground === null) return [];
             if(this.battleground.mercenaries === 0) return [];
 
             // We have to manually create the mercenary list as this is the same for every battleground and as such doesn't get included in the battleground data
-            return [Enemy.BouncerBear, Enemy.ChaoticKobold, Enemy.DwarfPriest, Enemy.GnollBreeder, Enemy.HumanIMage, Enemy.PrideAssassin]
-                .sort((a, b) => {
-                    if(a.faction.name !== b.faction.name) return a.faction.name > b.faction.name;
-                    else return a.name > b.name
-                });
+            return [Enemy.BouncerBear, Enemy.ChaoticKobold, Enemy.DwarfPriest, Enemy.GnollBreeder, Enemy.HumanIMage, Enemy.PrideAssassin];
         }
     },
     methods: {

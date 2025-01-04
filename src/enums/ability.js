@@ -225,7 +225,7 @@ const Ability = Object.freeze({
         icon: ""
     },
     ArcaneRegeneration: {
-        name: "Arcane Shield",
+        name: "Arcane Regeneration",
         description: "Applies a very powerful regeneration buff to nearby damaged minions.",
         icon: ""
     },
