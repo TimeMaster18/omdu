@@ -138,7 +138,8 @@ const heroes = Object.freeze([
                 name: "Bunny",
                 image: "images/skins/Bionka_Bionka_Bunny_background.webp"
             }
-        ]
+        ],
+        icon: "images/hero-icons/Bionka.webp"
     },
     {
         id: 2,
@@ -296,7 +297,8 @@ const heroes = Object.freeze([
                 name: "Dragon Thrall",
                 image: "images/skins/Blackpaw_Dragon_Thrall_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Blackpaw.webp"
     },
     {
         id: 3,
@@ -451,7 +453,8 @@ const heroes = Object.freeze([
                 name: "Laughing to Death",
                 image: "images/skins/Bloodspike_Laughing_to_Death_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Bloodspike.webp"
     },
     {
         id: 4,
@@ -591,7 +594,8 @@ const heroes = Object.freeze([
                 name: "Bombshell Battalion",
                 image: "images/skins/Brass_Bombshell_Battalion_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Brass.webp"
     },
     {
         id: 5,
@@ -729,7 +733,8 @@ const heroes = Object.freeze([
                 name: "Road Master",
                 image: "images/skins/Cygnus_Road_Master_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Cygnus.webp"
     },
     {
         id: 6,
@@ -869,7 +874,8 @@ const heroes = Object.freeze([
                 name: "The Good, the Bad, and the Deadeye",
                 image: "images/skins/Deadeye_The_Good,_the_Bad,_and_the_Deadeye_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Deadeye.webp"
     },
     {
         id: 7,
@@ -1007,7 +1013,8 @@ const heroes = Object.freeze([
                 name: "Santa's Little Helper",
                 image: "images/skins/Dobbin_Santa's_Little_Helper_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Dobbin.webp"
     },
     {
         id: 8,
@@ -1200,7 +1207,8 @@ const heroes = Object.freeze([
                 name: "Dragon Charmer",
                 image: "images/skins/Gabriella_Dragon_Charmer_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Gabriella.webp"
     },
     {
         id: 9,
@@ -1368,7 +1376,8 @@ const heroes = Object.freeze([
                 name: "Dragon Ward",
                 image: "images/skins/Hogarth_Dragon_Ward_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Hogarth.webp"
     },
     {
         id: 10,
@@ -1526,7 +1535,8 @@ const heroes = Object.freeze([
                 name: "Dragon Tamer",
                 image: "images/skins/Ivy_Dragon_Tamer_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Ivy.webp"
     },
     {
         id: 11,
@@ -1729,7 +1739,8 @@ const heroes = Object.freeze([
                 name: "Summer of Stunning",
                 image: "images/skins/Maximilian_Summer_of_Stunning_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Maximilian.webp"
     },
     {
         id: 12,
@@ -1875,7 +1886,8 @@ const heroes = Object.freeze([
                 name: "Wu Xing Azure Assassin",
                 image: "images/skins/Midnight_Wu_Xing_Azure_Assassin_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Midnight.webp"
     },
     {
         id: 13,
@@ -2020,7 +2032,8 @@ const heroes = Object.freeze([
                 name: "Knight Walker",
                 image: "images/skins/Oziel_Knight_Walker_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Oziel.webp"
     },
     {
         id: 14,
@@ -2172,7 +2185,8 @@ const heroes = Object.freeze([
                 name: "Wu Xing Dragon Mage",
                 image: "images/skins/Smolder_Wu_Xing_Dragon_Mage_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Smolder.webp"
     },
     {
         id: 15,
@@ -2310,7 +2324,8 @@ const heroes = Object.freeze([
                 name: "Floaty Fun",
                 image: "images/skins/Stinkeye_Floaty_Fun_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Stinkeye.webp"
     },
     {
         id: 16,
@@ -2452,7 +2467,8 @@ const heroes = Object.freeze([
                 name: "Prized Cow",
                 image: "images/skins/Temper_Prized_Cow_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Temper.webp"
     },
     {
         id: 17,
@@ -2604,7 +2620,8 @@ const heroes = Object.freeze([
                 name: "Imperial Golden Mage",
                 image: "images/skins/Tundra_Imperial_Golden_Mage_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Tundra.webp"
     },
     {
         id: 18,
@@ -2750,7 +2767,8 @@ const heroes = Object.freeze([
                 image: "images/skins/Yi-Lin_Yule-Lin_background.webp"
             },
             
-        ]
+        ],
+        icon: "images/hero-icons/Yi-Lin.webp"
     },
     {
         id: 19,
@@ -2895,7 +2913,8 @@ const heroes = Object.freeze([
                 name: "Jurassic Journey",
                 image: "images/skins/Zoey_Jurassic_Journey_background.webp"
             },
-        ]
+        ],
+        icon: "images/hero-icons/Zoey.webp"
     }
 ]);
 export default heroes;

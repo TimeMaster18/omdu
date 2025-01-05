@@ -1,35 +1,40 @@
 <template>
     <v-card class="card">
-        <div v-if="loadout !== null">
+        <div
+            v-if="loadout !== null"
+            class="d-flex"
+        >
             <img
-                class="skin"
-                :src="skin?.image"
+                class="icon ma-1"
+                :src="hero?.icon"
             >
-            <div class="name">
-                {{ loadout?.playerName }} - {{ hero?.name }}
-            </div>
-            <div class="slot-items">
-                <img
-                    v-for="(slotItem, index) in slotItems"
-                    :key="index"
-                    class="slot-item"
-                    :class="{'empty': slotItem === null}"
-                    :src="slotItem?.image"
-                >
-            </div>
-            <div class="actions">
-                <v-icon
-                    @click.stop="openLoadoutLinkToClipboard"
-                    class="mr-2"
-                >
-                    mdi-link
-                </v-icon>
-                <v-icon
-                    @click.stop="copyLoadoutCodeToClipboard"
-                    :disabled="copying"
-                >
-                    mdi-content-copy
-                </v-icon>
+            <div class="d-flex flex-column flex-grow-1">
+                <div class="name flex-grow-1 pl-2">
+                    {{ loadout?.playerName }} - {{ hero?.name }}
+                    <div class="actions">
+                        <v-icon
+                            @click.stop="openLoadoutLinkToClipboard"
+                            class="mr-2"
+                        >
+                            mdi-link
+                        </v-icon>
+                        <v-icon
+                            @click.stop="copyLoadoutCodeToClipboard"
+                            :disabled="copying"
+                        >
+                            mdi-content-copy
+                        </v-icon>
+                    </div>
+                </div>
+                <div class="slot-items flex-grow-0">
+                    <img
+                        v-for="(slotItem, index) in slotItems"
+                        :key="index"
+                        class="slot-item"
+                        :class="{'empty': slotItem === null}"
+                        :src="slotItem?.image"
+                    >
+                </div>
             </div>
         </div>
     </v-card>
@@ -93,9 +98,6 @@ export default {
         hero() {
             return JSON.parse(JSON.stringify(this.dataStore.heroes)).find(hero => hero.id === this.loadout.heroId) ?? null;
         },
-        skin() {
-            return this.hero?.skins.find(skin => skin.id === this.loadout.skinId) ?? null;
-        },
         slotItems() {
             let slotItems = [];
             this.loadout.slotItemIds.forEach(slotItemId => {
@@ -129,30 +131,25 @@ export default {
 <style scoped>
 .card {
     line-height: 0;
-    aspect-ratio: 1000/471;
-    background: rgb(var(--v-theme-on-surface-loading));
+    aspect-ratio: 464/74;
 }
 
 .name {
-    position: absolute;
-    left: 0;
-    bottom: 19.5%;
-    line-height: 1;
-    font-size: 1.25rem;
-    padding: 0.25rem 1rem;
-    background: rgba(var(--v-theme-surface), 1);
-    border-top-right-radius: 0.5rem;
+    line-height: 1.6;
+    align-content: center;
+    overflow: visible;
 }
 
-.skin {
-	width: 100%;
+.icon {
 	image-rendering: optimizeQuality;
-    aspect-ratio: 1000/471;
+    aspect-ratio: 63/64;
+	border-radius: 0.25rem;
+    background: rgb(var(--v-theme-on-surface-loading));
+	min-width: 14%;
+	max-width: 14%;
 }
 
 .slot-items {
-	position: absolute;
-	bottom: 0;
 	background: rgba(var(--v-theme-surface), 1);
     width: 100%;
 	aspect-ratio: calc(684 * 9)/572;
