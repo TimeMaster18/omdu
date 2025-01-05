@@ -394,7 +394,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 17,
+        id: 18,
         map: Map.StablesAtEventide,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
@@ -424,7 +424,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 18,
+        id: 19,
         map: Map.TempleGraveyard,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
@@ -449,7 +449,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 19,
+        id: 20,
         map: Map.TheWall,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
@@ -480,7 +480,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 20,
+        id: 21,
         map: Map.ThroneRoom,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
@@ -506,7 +506,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 21,
+        id: 22,
         map: Map.ThuricvodVillage,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
@@ -532,7 +532,7 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 22,
+        id: 23,
         map: Map.TrainingGrounds,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
