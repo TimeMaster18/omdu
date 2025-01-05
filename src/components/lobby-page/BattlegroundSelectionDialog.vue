@@ -110,7 +110,8 @@ export default {
                 .sort((a, b) => a.name > b.name);
         },
         selectedBattleground() {
-            return this.battlegrounds.find(battleground=>battleground.id === this.selectedBattlegroundId) ?? null;
+            return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
+                .find(battleground => battleground.id === this.selectedBattlegroundId) ?? null;
         }
     },
     methods: {
