@@ -1,6 +1,6 @@
 <template>
     <div v-if="firebaseCorrectlySetup">
-        <v-row dense>
+        <v-row>
             <v-col
                 v-for="(code, index) in loadoutCodes"
                 :key="index"
@@ -18,10 +18,6 @@
                 v-model="loadoutCode"
             />
         </v-row>
-        <v-divider
-            class="my-2"
-            thickness="2"
-        />
         <v-divider
             class="my-2"
             thickness="2"

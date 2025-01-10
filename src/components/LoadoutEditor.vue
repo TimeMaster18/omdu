@@ -8,20 +8,22 @@
                 order-xl="1"
                 align="right"
             >
-                <v-row
-                    v-for="x in [0,1,2]"
-                    :key="x"
-                    dense
+                <draggable
+                    class="v-row v-row--dense"
+                    v-model="loadout.slots"
                 >
-                    <v-col
-                        v-for="y in [0,1,2]"
-                        :key="y"
-                        cols="4"
-                        align="center"
-                    >
-                        <slot-item-card v-model="loadout.slots[x * 3 + y]" />
-                    </v-col>
-                </v-row>
+                    <template #item="{index}">
+                        <v-col
+                            cols="4"
+                            align="center"
+                        >
+                            <slot-item-card
+                                v-model="loadout.slots[index]"
+                                :ripple="draggingSlotItem"
+                            />
+                        </v-col>
+                    </template>
+                </draggable>
             </v-col>
             <v-col
                 cols="12"
@@ -82,6 +84,7 @@ import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.
 import SlotItemCard from '../components/loadout-page/SlotItemCard.vue';
 import TraitSlot from '../enums/traitSlot.js';
 import GuardianSelectorDialog from './loadout-page/GuardianSelectorDialog.vue';
+import draggable from 'vuedraggable'
 
 export default {
     emits: ['update:model-value'],
@@ -89,7 +92,8 @@ export default {
         HeroSelectorDialog,
         TraitSelectorDialog,
         SlotItemCard,
-        GuardianSelectorDialog
+        GuardianSelectorDialog,
+        draggable
     },
     props: {
         modelValue: {
@@ -258,4 +262,8 @@ export default {
 </script>
 
 <style scoped>
+.disabled {
+    background: red;
+    user-select: none;
+}
 </style>
