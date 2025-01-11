@@ -1,6 +1,6 @@
 <template>
     <v-card class="card text-start">
-        <div class="image text-center">
+        <div class="image">
             <img :src="enemy.image">
         </div>
         <v-card-title>{{ enemy.name }}</v-card-title>

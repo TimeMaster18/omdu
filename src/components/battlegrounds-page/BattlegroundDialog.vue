@@ -40,50 +40,7 @@
                         >
                     </v-col>
                     <v-col cols="12">
-                        <div v-if="minions.length > 0">
-                            <div class="mx-2 pl-0 v-card-title">
-                                Minions
-                            </div>
-                            <div class="d-flex flex-wrap">
-                                <enemy-card
-                                    v-for="(minion, index) in minions"
-                                    :key="index"
-                                    class="ma-2 enemy-card"
-                                    :enemy="minion"
-                                />
-                            </div>
-                        </div>
-
-                        <div
-                            v-if="this.battleground.mercenaries > 0"
-                            class="mt-4"
-                        >
-                            <div class="mx-2 pl-0 v-card-title">
-                                Mercenaries ({{ this.battleground.mercenaries }} randomly selected)
-                            </div>
-                            <div class="d-flex flex-wrap">
-                                <enemy-card
-                                    v-for="(mercenary, index) in mercenaries"
-                                    :key="index"
-                                    class="ma-2 enemy-card"
-                                    :enemy="mercenary"
-                                />
-                            </div>
-                        </div>
-
-                        <div v-if="bosses.length > 0">
-                            <div class="mx-2 mt-4 pl-0 v-card-title">
-                                Bosses
-                            </div>
-                            <div class="d-flex flex-wrap">
-                                <enemy-card
-                                    v-for="(boss, index) in bosses"
-                                    :key="index"
-                                    class="ma-2 enemy-card"
-                                    :enemy="boss"
-                                />
-                            </div>
-                        </div>
+                        <battleground-enemies-list :battleground="battleground" />
                     </v-col>
                 </v-row>
             </v-card-text>
@@ -92,15 +49,13 @@
 </template>
 
 <script>
-import EnemyCard from '../EnemyCard.vue';
 import DifficultyCard from '../DifficultyCard.vue';
 import StatValue from '../StatValue.vue';
-import Enemy from '../../data/enemies.js';
-import EnemyType from '../../enums/enemyType';
+import BattlegroundEnemiesList from '../BattlegroundEnemiesList.vue';
 
 export default {
     expose: ["open", "close"],
-    components: { EnemyCard, DifficultyCard, StatValue },
+    components: { BattlegroundEnemiesList, DifficultyCard, StatValue },
     data() {
         return {
             isOpen: false,
@@ -115,26 +70,6 @@ export default {
                 return `${this.battleground.parTime.minutes}:${this.battleground.parTime.seconds}`;
             }
         },
-        minions() {
-            if(this.battleground === null) return [];
-
-            return JSON.parse(JSON.stringify(this.battleground.enemies))
-                .filter(enemy => enemy.type === EnemyType.Minion);
-        },
-        bosses() {
-            if(this.battleground === null) return [];
-
-            return JSON.parse(JSON.stringify(this.battleground.enemies))
-                .filter(enemy => enemy.type === EnemyType.Boss)
-                .sort((a, b) =>  a.name > b.name);
-        },
-        mercenaries() {
-            if(this.battleground === null) return [];
-            if(this.battleground.mercenaries === 0) return [];
-
-            // We have to manually create the mercenary list as this is the same for every battleground and as such doesn't get included in the battleground data
-            return [Enemy.BouncerBear, Enemy.ChaoticKobold, Enemy.DwarfPriest, Enemy.GnollBreeder, Enemy.HumanIMage, Enemy.PrideAssassin];
-        }
     },
     methods: {
         open(battleground) {
@@ -149,7 +84,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .info {
     max-width: 500px;
 }

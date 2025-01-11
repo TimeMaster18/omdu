@@ -6,21 +6,30 @@
     >
         <template #activator>
             <div>
-                <battleground-card
-                    v-if="selectedBattleground !== null"
-                    :battleground="selectedBattleground"
-                    @click="isOpen = true"
-                />
-                <v-card
-                    v-else
-                    @click="isOpen = true"
-                >
-                    <v-card-text>
-                        <span class="font-italic no-battleground-selected">
-                            No battleground selected
-                        </span>
-                    </v-card-text>
-                </v-card>
+                <v-row dense>
+                    <v-col cols="4">
+                        <battleground-card
+                            v-if="selectedBattleground !== null"
+                            @click="isOpen = true"
+                            :battleground="selectedBattleground"
+                        />
+                        <v-card
+                            v-else
+                            @click="isOpen = true"
+                        >
+                            <v-card-text class="font-italic no-battleground-selected">
+                                No battleground selected
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="fill">
+                        <battleground-enemies-list
+                            class="enemies-list"
+                            v-if="selectedBattleground !== null"
+                            :battleground="selectedBattleground"
+                        />
+                    </v-col>
+                </v-row>
             </div>
         </template>
 
@@ -74,6 +83,7 @@ import Difficulty from '../../enums/difficulty.js';
 import BattlegroundCard from '../BattlegroundCard.vue';
 import { useDataStore } from '../../stores/data.js';
 import DeselectCard from '../loadout-page/DeselectCard.vue';
+import BattlegroundEnemiesList from '../BattlegroundEnemiesList.vue';
 
 export default {
     setup() {
@@ -85,7 +95,8 @@ export default {
     components: {
         DifficultyCard,
         BattlegroundCard,
-        DeselectCard
+        DeselectCard,
+        BattlegroundEnemiesList,
     },
     emits: ["update:model-value"],
     props: {
@@ -135,11 +146,21 @@ export default {
 </script>
 
 <style scoped>
+.info {
+    max-width: 500px;
+}
+
 .no-battleground-selected {
 	opacity: 0.3;
 }
 
 .selected {
     outline: rgb(var(--v-theme-on-surface)) 2px solid;
+}
+
+.enemies-list:deep(.enemy-card) {
+    min-width: calc(12rem * 0.8);
+	max-width: calc(14.4rem * 0.8);
+    font-size: 0.8rem;
 }
 </style>
