@@ -1550,7 +1550,7 @@ const heroes = Object.freeze([
             passive: {
                 name: "Close Enough",
                 icon: "images/abilities/Close_Enough_icon.webp",
-                description: "Maximilian spends less coin when placing traps.",
+                description: "Maximilian spends 15% less coins when placing traps.",
                 cooldown: null,
                 cost: null
             },
