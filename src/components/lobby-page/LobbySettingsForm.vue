@@ -65,17 +65,17 @@
 
 <script>
 import Cookies from 'js-cookie';
-import cookieNames from '../../enums/cookieNames.js';
+import CookieName from '../../enums/cookieName.js';
 import { firebaseApp } from '../../firebase.js';
 
 export default {
     data() {
         return {
             firebaseCorrectlySetup: firebaseApp !== null,
-            firebaseUrl: Cookies.get(cookieNames.FirebaseUrl),
-            firebaseSecret: Cookies.get(cookieNames.FirebaseSecret),
-            playerIndex: (parseInt(Cookies.get(cookieNames.PlayerIndex)) ?? 0) + 1,
-            playerName: Cookies.get(cookieNames.PlayerName),
+            firebaseUrl: Cookies.get(CookieName.FirebaseUrl),
+            firebaseSecret: Cookies.get(CookieName.FirebaseSecret),
+            playerIndex: (parseInt(Cookies.get(CookieName.PlayerIndex)) ?? 0) + 1,
+            playerName: Cookies.get(CookieName.PlayerName),
         }
     },
     methods: {
@@ -85,10 +85,10 @@ export default {
             // secure: Only allow the cookie to be sent over https
             const cookieOptions = { expires: 365, sameSite: "Strict", secure: true };
 
-            Cookies.set(cookieNames.FirebaseUrl, this.firebaseUrl, cookieOptions);
-            Cookies.set(cookieNames.FirebaseSecret, this.firebaseSecret, cookieOptions);
-            Cookies.set(cookieNames.PlayerIndex, this.playerIndex - 1, cookieOptions);
-            Cookies.set(cookieNames.PlayerName, this.playerName, cookieOptions);
+            Cookies.set(CookieName.FirebaseUrl, this.firebaseUrl, cookieOptions);
+            Cookies.set(CookieName.FirebaseSecret, this.firebaseSecret, cookieOptions);
+            Cookies.set(CookieName.PlayerIndex, this.playerIndex - 1, cookieOptions);
+            Cookies.set(CookieName.PlayerName, this.playerName, cookieOptions);
 
             // Reload the page so the firebase store can set itself up correctly
             location.reload();

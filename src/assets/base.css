@@ -24,3 +24,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
 }
+
+img {
+  pointer-events: none;
+}

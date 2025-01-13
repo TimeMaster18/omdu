@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import Cookies from 'js-cookie';
-import cookieNames from '../enums/cookieNames.js';
+import CookieName from '../enums/cookieName.js';
 import { database } from '../firebase.js';
 import { ref, set } from 'firebase/database';
 import { useDatabaseObject } from 'vuefire';
@@ -8,7 +8,7 @@ import { useDatabaseObject } from 'vuefire';
 export const useLobbyStore = defineStore('lobby', {
     state() {
         return {
-            playerIndex: parseInt(Cookies.get(cookieNames.PlayerIndex)) ?? 0,
+            playerIndex: parseInt(Cookies.get(CookieName.PlayerIndex)) ?? 0,
             playerLoadouts: [
                 database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-1')) : null,
                 database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-2')) : null,

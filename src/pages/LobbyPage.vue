@@ -8,9 +8,11 @@
                 sm="6"
                 lg="3"
             >
-                <LoadoutPreviewCard
+                <loadout-preview-card
                     :loadout-code="code"
                     v-on="(index === playerIndex) ? { 'click': openLoadoutDialog } : null"
+                    show-copy-action
+                    show-open-loadout-action
                 />
             </v-col>
             <loadout-dialog

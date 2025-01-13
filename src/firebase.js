@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 import Cookies from 'js-cookie';
-import cookieNames from './enums/cookieNames';
+import CookieName from './enums/cookieName';
 import { VueFire, VueFireAuth, VueFireDatabaseOptionsAPI } from 'vuefire';
 
 let firebaseApp = null;
@@ -11,8 +11,8 @@ let initialize = function(vueApp) {
     try {
         // There's multiple ways this could go wrong (like a missing url, connection, ...)
         firebaseApp = initializeApp({
-            apiKey: Cookies.get(cookieNames.FirebaseSecret),
-            databaseURL: Cookies.get(cookieNames.FirebaseUrl)
+            apiKey: Cookies.get(CookieName.FirebaseSecret),
+            databaseURL: Cookies.get(CookieName.FirebaseUrl)
         });
         database = getDatabase(firebaseApp);
 

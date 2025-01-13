@@ -10,15 +10,27 @@
             >
             <div class="d-flex flex-column flex-grow-1">
                 <div class="name flex-grow-1 pl-2">
-                    {{ loadout?.playerName }} - {{ hero?.name }}
+                    <span>
+                        <slot
+                            name="name"
+                            :loadout="loadout"
+                            :hero="hero"
+                        />
+                        <span v-if="!$slots.name">
+                            {{ loadout?.playerName }} - {{ hero?.name }}
+                        </span>
+                    </span>
                     <div class="actions">
+                        <slot name="actions" />
                         <v-icon
+                            v-if="showOpenLoadoutAction"
                             @click.stop="openLoadoutLinkToClipboard"
                             class="mr-2"
                         >
                             mdi-link
                         </v-icon>
                         <v-icon
+                            v-if="showCopyAction"
                             @click.stop="copyLoadoutCodeToClipboard"
                             :disabled="copying"
                         >
@@ -57,6 +69,14 @@ export default {
             type: String,
             required: true
         },
+        showCopyAction: {
+            type: Boolean,
+            default: false
+        },
+        showOpenLoadoutAction: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
