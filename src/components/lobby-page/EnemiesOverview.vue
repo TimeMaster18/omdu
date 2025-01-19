@@ -5,7 +5,7 @@
                 <enemy-card
                     v-for="(enemy, index) in enemies"
                     :key="index"
-                    class="ma-2 enemy-card"
+                    class="mx-2 mb-4 enemy-card"
                     :class="{'selected': enemy.name === selectedEnemy?.name}"
                     :enemy="enemy"
                     @click="toggle(enemy)"
@@ -27,7 +27,7 @@
                 <enemy-card
                     v-for="(mercenary, index) in mercenaries"
                     :key="index"
-                    class="ma-2 enemy-card"
+                    class="mx-2 mb-4 enemy-card"
                     :class="{'selected': mercenary.name === selectedEnemy?.name}"
                     :enemy="mercenary"
                     @click="toggle(mercenary)"
