@@ -9,7 +9,7 @@
         <v-card-text v-if="showHealth || showAbilities || showDescription">
             <!-- Stats -->
             <stat-value
-                v-if="showhealth"
+                v-if="showHealth"
                 icon="mdi-heart"
             >
                 <span v-if="enemy.hp">

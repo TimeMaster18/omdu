@@ -10,6 +10,9 @@
                     :key="index"
                     class="ma-2 enemy-card"
                     :enemy="minion"
+                    show-name
+                    show-health
+                    show-abilities
                 />
             </div>
         </div>
@@ -44,6 +47,9 @@
                     :key="index"
                     class="ma-2 enemy-card"
                     :enemy="boss"
+                    show-name
+                    show-health
+                    show-abilities
                 />
             </div>
         </div>
