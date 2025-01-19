@@ -111,5 +111,6 @@ export default {
 	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
+    aspect-ratio: 88/89;
 }
 </style>
