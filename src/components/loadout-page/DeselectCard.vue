@@ -16,7 +16,7 @@ export default {}
 .card {
 	height: 100%;
 	align-content: center;
-    border: 2px dashed rgba(var(--v-theme-on-surface), 0.1)
+    border: 2px dashed rgba(var(--v-theme-on-surface), 0.1);
 }
 
 .card-text {

@@ -5,31 +5,45 @@
         scrollable
     >
         <template #activator>
-            <div>
-                <v-row dense>
-                    <v-col cols="4">
-                        <battleground-card
-                            v-if="selectedBattleground !== null"
-                            @click="isOpen = true"
-                            :battleground="selectedBattleground"
-                        />
-                        <v-card
-                            v-else
-                            @click="isOpen = true"
+            <div class="battleground-info-card-wrapper">
+                <v-card
+                    v-if="selectedBattleground !== null"
+                    @click="isOpen = true"
+                >
+                    <difficulty-card
+                        class="elevation-0 rounded-0"
+                        :difficulty="selectedBattleground.difficulty"
+                    />
+                    <div class="text-center">
+                        <img
+                            class="minimap"
+                            :src="selectedBattleground.map.minimap"
                         >
-                            <v-card-text class="font-italic no-battleground-selected">
-                                No battleground selected
-                            </v-card-text>
-                        </v-card>
-                    </v-col>
-                    <v-col cols="fill">
-                        <battleground-enemies-list
-                            class="enemies-list"
-                            v-if="selectedBattleground !== null"
-                            :battleground="selectedBattleground"
-                        />
-                    </v-col>
-                </v-row>
+                    </div>
+                    <v-card-text>
+                        <div class="v-card-title pl-0">
+                            {{ selectedBattleground.map.name }}
+                        </div>
+                        <stat-value icon="mdi-waves">
+                            {{ selectedBattleground.waves }}
+                        </stat-value>
+                        <stat-value icon="mdi-clock">
+                            {{ parTime }}
+                        </stat-value>
+                        <div class="transparent mt-4">
+                            {{ selectedBattleground.map.description }}
+                        </div>
+                    </v-card-text>
+                </v-card>
+                <v-card
+                    v-else
+                    @click="isOpen = true"
+                    class="no-battleground-selected-card"
+                >
+                    <v-card-text class="font-italic no-battleground-selected">
+                        No battleground selected
+                    </v-card-text>
+                </v-card>
             </div>
         </template>
 
@@ -81,9 +95,9 @@
 import DifficultyCard from '../DifficultyCard.vue';
 import Difficulty from '../../enums/difficulty.js';
 import BattlegroundCard from '../BattlegroundCard.vue';
-import { useDataStore } from '../../stores/data.js';
 import DeselectCard from '../loadout-page/DeselectCard.vue';
-import BattlegroundEnemiesList from '../BattlegroundEnemiesList.vue';
+import StatValue from '../StatValue.vue';
+import { useDataStore } from '../../stores/data.js';
 
 export default {
     setup() {
@@ -96,7 +110,7 @@ export default {
         DifficultyCard,
         BattlegroundCard,
         DeselectCard,
-        BattlegroundEnemiesList,
+        StatValue
     },
     emits: ["update:model-value"],
     props: {
@@ -123,7 +137,14 @@ export default {
         selectedBattleground() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .find(battleground => battleground.id === this.selectedBattlegroundId) ?? null;
-        }
+        },
+        parTime() {
+            if(this.selectedBattleground.parTime.seconds < 10) {
+                return `${this.selectedBattleground.parTime.minutes}:0${this.selectedBattleground.parTime.seconds}`;
+            } else {
+                return `${this.selectedBattleground.parTime.minutes}:${this.selectedBattleground.parTime.seconds}`;
+            }
+        },
     },
     methods: {
         selectBattleground(battleground) {
@@ -146,21 +167,30 @@ export default {
 </script>
 
 <style scoped>
-.info {
-    max-width: 500px;
+.battleground-info-card-wrapper {
+    max-width: 40rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.no-battleground-selected-card {
+    min-height: 20rem;
 }
 
 .no-battleground-selected {
 	opacity: 0.3;
 }
 
+.minimap {
+    width: 100%;
+    max-width: 20rem;
+}
+
 .selected {
     outline: rgb(var(--v-theme-on-surface)) 2px solid;
 }
 
-.enemies-list:deep(.enemy-card) {
-    min-width: calc(12rem * 0.8);
-	max-width: calc(14.4rem * 0.8);
-    font-size: 0.8rem;
+.transparent {
+    opacity: 0.3;
 }
 </style>

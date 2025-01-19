@@ -562,7 +562,7 @@ const battlegrounds = Object.freeze([
 
     // Rift lord
     {
-        id: null,
+        id: 500, // TODO: update this
         map: Map.AcademySewers,
         difficulty: Difficulty.RiftLord,
         gamemode: Gamemode.Survival,

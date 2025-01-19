@@ -51,7 +51,7 @@
 <script>
 import DifficultyCard from '../DifficultyCard.vue';
 import StatValue from '../StatValue.vue';
-import BattlegroundEnemiesList from '../BattlegroundEnemiesList.vue';
+import BattlegroundEnemiesList from './BattlegroundEnemiesList.vue';
 
 export default {
     expose: ["open", "close"],

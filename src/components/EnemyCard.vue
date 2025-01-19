@@ -3,10 +3,15 @@
         <div class="image">
             <img :src="enemy.image">
         </div>
-        <v-card-title>{{ enemy.name }}</v-card-title>
-        <v-card-text>
+        <v-card-title v-if="showName">
+            {{ enemy.name }}
+        </v-card-title>
+        <v-card-text v-if="showHealth || showAbilities || showDescription">
             <!-- Stats -->
-            <stat-value icon="mdi-heart">
+            <stat-value
+                v-if="showhealth"
+                icon="mdi-heart"
+            >
                 <span v-if="enemy.hp">
                     {{ enemy.hp }}
                 </span>
@@ -19,14 +24,18 @@
             </stat-value>
 
             <!-- Abilities -->
-            <enemy-ability-icon
-                v-for="(ability, index) in enemy.abilities"
-                :key="index"
-                :ability="ability"
-                show-label
-                :size="2"
-                class="mt-2"
-            />
+            <div 
+                v-if="showAbilities"
+            >
+                <enemy-ability-icon
+                    v-for="(ability, index) in enemy.abilities"
+                    :key="index"
+                    :ability="ability"
+                    show-label
+                    :size="2"
+                    class="mt-2"
+                />
+            </div>
 
             <!-- Description -->
             <div
@@ -52,6 +61,18 @@ export default {
         enemy: {
             type: Object,
             required: true
+        },
+        showName: {
+            type: Boolean,
+            default: false
+        },
+        showHealth: {
+            type: Boolean,
+            default: false
+        },
+        showAbilities: {
+            type: Boolean,
+            default: false
         },
         showDescription: {
             type: Boolean,

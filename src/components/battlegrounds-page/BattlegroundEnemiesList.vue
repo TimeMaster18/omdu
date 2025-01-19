@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import EnemyCard from './EnemyCard.vue';
-import Enemy from '../data/enemies.js';
-import EnemyType from '../enums/enemyType';
+import EnemyCard from '../EnemyCard.vue';
+import Enemy from '../../data/enemies.js';
+import EnemyType from '../../enums/enemyType.js';
 
 export default {
     components: { EnemyCard },

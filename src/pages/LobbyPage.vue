@@ -24,7 +24,23 @@
             class="my-2"
             thickness="2"
         />
-        <battleground-selection-dialog v-model="battleground" />
+        <v-row>
+            <v-col
+                cols="12"
+                lg="4"
+            >
+                <battleground-selection-dialog v-model="battleground" />
+            </v-col>
+            <v-col
+                cols="12"
+                lg="8"
+            >
+                <enemies-overview
+                    v-if="battlegroundEnemies"
+                    :enemies="battlegroundEnemies"
+                />
+            </v-col>
+        </v-row>
         <v-divider
             class="my-2"
             thickness="2"
@@ -39,7 +55,9 @@ import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue'
 import LobbySettingsForm from '../components/lobby-page/LobbySettingsForm.vue';
 import { firebaseApp } from '../firebase.js';
 import { useLobbyStore } from '../stores/lobby.js';
+import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
+import EnemiesOverview from '../components/lobby-page/EnemiesOverview.vue';
 
 export default {
     components: {
@@ -47,11 +65,14 @@ export default {
         LoadoutPreviewCard,
         BattlegroundSelectionDialog,
         LoadoutDialog,
+        EnemiesOverview
     },
     setup() {
         const lobbyStore = useLobbyStore();
+        const dataStore = useDataStore();
         return {
-            lobbyStore
+            lobbyStore,
+            dataStore
         };
     },
     data() {
@@ -87,6 +108,10 @@ export default {
                 return this.lobbyStore.setBattleground(value);
             }
         },
+        battlegroundEnemies() {
+            return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
+                .find(battleground => battleground.id === this.battleground)?.enemies ?? null;
+        }
     },
     methods: {
         openLoadoutDialog() {
