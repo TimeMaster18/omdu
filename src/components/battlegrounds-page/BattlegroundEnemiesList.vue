@@ -27,6 +27,9 @@
                     :key="index"
                     class="ma-2 enemy-card"
                     :enemy="mercenary"
+                    show-name
+                    show-health
+                    show-abilities
                 />
             </div>
         </div>
