@@ -12,7 +12,7 @@
                 />
                 <v-card
                     v-if="totalMercenaries > 0"
-                    class="ma-2 enemy-card mercenary-toggle-card"
+                    class="mx-2 mb-4 enemy-card mercenary-toggle-card"
                     @click="showMercenaries = !showMercenaries"
                 >
                     <div>
@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import EnemyCard from '../EnemyCard.vue';
-import Enemy from '../../data/enemies.js';
+import EnemyCard from './EnemyCard.vue';
+import Enemy from '../data/enemies.js';
 
 export default {
     components: {
@@ -108,7 +108,7 @@ export default {
     align-items: center;
 
     background-color: rgb(var(--v-theme-on-surface-loading));
-	background-image: url('../../assets/images/trap_background.webp');
+	background-image: url('../assets/images/trap_background.webp');
 	background-position: center;
 	background-size: cover;
 }

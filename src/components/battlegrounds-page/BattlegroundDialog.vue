@@ -40,7 +40,10 @@
                         >
                     </v-col>
                     <v-col cols="12">
-                        <battleground-enemies-list :battleground="battleground" />
+                        <enemies-overview
+                            :enemies="battleground.enemies"
+                            :total-mercenaries="battleground.mercenaries"
+                        />
                     </v-col>
                 </v-row>
             </v-card-text>
@@ -50,12 +53,16 @@
 
 <script>
 import DifficultyCard from '../DifficultyCard.vue';
+import EnemiesOverview from '../EnemiesOverview.vue';
 import StatValue from '../StatValue.vue';
-import BattlegroundEnemiesList from './BattlegroundEnemiesList.vue';
 
 export default {
     expose: ["open", "close"],
-    components: { BattlegroundEnemiesList, DifficultyCard, StatValue },
+    components: {
+        DifficultyCard,
+        StatValue,
+        EnemiesOverview
+    },
     data() {
         return {
             isOpen: false,

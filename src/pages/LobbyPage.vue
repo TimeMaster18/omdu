@@ -58,7 +58,7 @@ import { firebaseApp } from '../firebase.js';
 import { useLobbyStore } from '../stores/lobby.js';
 import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
-import EnemiesOverview from '../components/lobby-page/EnemiesOverview.vue';
+import EnemiesOverview from '../components/EnemiesOverview.vue';
 
 export default {
     components: {
