@@ -7,37 +7,20 @@ const battlegrounds = Object.freeze([
     // Apprentice
     {
         id: 1,
-        map: Map.BanquetHall,
+        map: Map.TheBaths,
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Survival,
+        unlockLevel: 1,
+        enemyLevel: 1,
+        trapTier: 1,
         waves: 6,
         parTime: {
-            minutes: 7,
-            seconds: 30
+            minutes: 8,
+            seconds: 0
         },
         mercenaries: 0,
         enemies: [
-            Enemy.VitalityTheCyclopsResurrector,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.Ogre
-        ],
-    },
-    {
-        id: 2,
-        map: Map.CliffsideClash,
-        difficulty: Difficulty.Apprentice,
-        gamemode: Gamemode.Survival,
-        waves: 6,
-        parTime: {
-            minutes: 10,
-            seconds: 30
-        },
-        mercenaries: 0,
-        enemies: [
-            Enemy.Dread,
+            Enemy.BulgodTheArmoredOgre,
             Enemy.LightOrc,
             Enemy.MediumOrc,
             Enemy.OrcArcher,
@@ -47,10 +30,13 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 3,
+        id: 2,
         map: Map.EventideRamparts,
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Survival,
+        unlockLevel: 2,
+        enemyLevel: 2,
+        trapTier: 1,
         waves: 8,
         parTime: {
             minutes: 10,
@@ -69,14 +55,40 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 4,
-        map: Map.Highlands,
+        id: 3,
+        map: Map.BanquetHall,
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Survival,
+        unlockLevel: 4,
+        enemyLevel: 4,
+        trapTier: 1,
         waves: 6,
         parTime: {
-            minutes: 9,
-            seconds: 15
+            minutes: 7,
+            seconds: 30
+        },
+        mercenaries: 0,
+        enemies: [
+            Enemy.VitalityTheCyclopsResurrector,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.Ogre
+        ],
+    },
+    {
+        id: 4,
+        map: Map.CliffsideClash,
+        difficulty: Difficulty.Apprentice,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 5,
+        enemyLevel: 5,
+        trapTier: 2,
+        waves: 6,
+        parTime: {
+            minutes: 10,
+            seconds: 30
         },
         mercenaries: 0,
         enemies: [
@@ -91,30 +103,12 @@ const battlegrounds = Object.freeze([
     },
     {
         id: 5,
-        map: Map.TheBaths,
-        difficulty: Difficulty.Apprentice,
-        gamemode: Gamemode.Survival,
-        waves: 6,
-        parTime: {
-            minutes: 8,
-            seconds: 0
-        },
-        mercenaries: 0,
-        enemies: [
-            Enemy.BulgodTheArmoredOgre,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.GnollHunter,
-            Enemy.Ogre
-        ],
-    },
-    {
-        id: 6,
         map: Map.ThroneRoom,
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Survival,
+        unlockLevel: 6,
+        enemyLevel: 6,
+        trapTier: 2,
         waves: 8,
         parTime: {
             minutes: 9,
@@ -131,50 +125,13 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 7,
-        map: Map.TrainingGrounds,
-        difficulty: Difficulty.Apprentice,
-        gamemode: Gamemode.Survival,
-        waves: 7,
-        parTime: {
-            minutes: 9,
-            seconds: 50
-        },
-        mercenaries: 0,
-        enemies: [
-            Enemy.GrenwaldeTheNatureLord,
-            Enemy.LightSoldier,
-            Enemy.MediumSoldier,
-            Enemy.Crossbowman,
-            Enemy.Grizzly,
-            Enemy.ShieldGrizzly,
-        ],
-    },
-    {
-        id: 8,
-        map: Map.UnchainedFortress,
-        difficulty: Difficulty.Apprentice,
-        gamemode: Gamemode.Survival,
-        waves: 6,
-        parTime: {
-            minutes: 8,
-            seconds: 50
-        },
-        mercenaries: 0,
-        enemies: [
-            Enemy.GrenwaldeTheNatureLord,
-            Enemy.LightSoldier,
-            Enemy.MediumSoldier,
-            Enemy.Crossbowman,
-            Enemy.Grizzly,
-            Enemy.ShieldGrizzly,
-        ],
-    },
-    {
-        id: 9,
+        id: 6,
         map: Map.WaterGarden,
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Survival,
+        unlockLevel: 7,
+        enemyLevel: 7,
+        trapTier: 2,
         waves: 6,
         parTime: {
             minutes: 7,
@@ -193,13 +150,143 @@ const battlegrounds = Object.freeze([
             Enemy.Earthling,
         ],
     },
+    {
+        id: 7,
+        map: Map.UnchainedFortress,
+        difficulty: Difficulty.Apprentice,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 8,
+        enemyLevel: 8,
+        trapTier: 2,
+        waves: 6,
+        parTime: {
+            minutes: 8,
+            seconds: 50
+        },
+        mercenaries: 0,
+        enemies: [
+            Enemy.GrenwaldeTheNatureLord,
+            Enemy.LightSoldier,
+            Enemy.MediumSoldier,
+            Enemy.Crossbowman,
+            Enemy.Grizzly,
+            Enemy.ShieldGrizzly,
+        ],
+    },
+    {
+        id: 8,
+        map: Map.Highlands,
+        difficulty: Difficulty.Apprentice,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 9,
+        enemyLevel: 9,
+        trapTier: 2,
+        waves: 6,
+        parTime: {
+            minutes: 9,
+            seconds: 15
+        },
+        mercenaries: 0,
+        enemies: [
+            Enemy.Dread,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.GnollHunter,
+            Enemy.Ogre
+        ],
+    },
+    {
+        id: 9,
+        map: Map.TrainingGrounds,
+        difficulty: Difficulty.Apprentice,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 10,
+        enemyLevel: 10,
+        trapTier: 2,
+        waves: 7,
+        parTime: {
+            minutes: 9,
+            seconds: 50
+        },
+        mercenaries: 0,
+        enemies: [
+            Enemy.GrenwaldeTheNatureLord,
+            Enemy.LightSoldier,
+            Enemy.MediumSoldier,
+            Enemy.Crossbowman,
+            Enemy.Grizzly,
+            Enemy.ShieldGrizzly,
+        ],
+    },
 
-    // War mage
+    // War mage mapped
     {
         id: 10,
+        map: Map.EventideRamparts,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 12,
+        enemyLevel: 12,
+        trapTier: 2,
+        waves: 10,
+        parTime: {
+            minutes: 13,
+            seconds: 30
+        },
+        mercenaries: 3,
+        enemies: [
+            Enemy.OrfumTheMountainTroll,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KoboldPup,
+            Enemy.KamikazeKobold,
+            Enemy.GnollHunter,
+            Enemy.GnollGrenadier,
+            Enemy.Ogre,
+            Enemy.Troll
+        ],
+    },
+    {
+        id: 11,
+        map: Map.TempleGraveyard,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 13,
+        enemyLevel: 13,
+        trapTier: 2,
+        waves: 10,
+        parTime: {
+            minutes: 11,
+            seconds: 30
+        },
+        mercenaries: 4,
+        enemies: [
+            Enemy.VitalityTheCyclopsResurrector,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KamikazeKobold,
+            Enemy.GnollHunter,
+            Enemy.Ogre,
+            Enemy.Troll,
+            Enemy.ShieldTroll
+        ],
+    },
+    {
+        id: 12,
         map: Map.BanquetHall,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
+        unlockLevel: 14,
+        enemyLevel: 14,
+        trapTier: 2,
         waves: 10,
         parTime: {
             minutes: 12,
@@ -223,60 +310,13 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 11,
-        map: Map.CrogonKeep,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 10,
-        parTime: {
-            minutes: 14,
-            seconds: 0
-        },
-        mercenaries: 2,
-        enemies: [
-            Enemy.VitalityTheCyclopsResurrector,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KamikazeKobold,
-            Enemy.Ogre,
-            Enemy.Troll,
-            Enemy.ShieldTroll
-        ],
-    },
-    {
-        id: 12,
-        map: Map.EventideRamparts,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 10,
-        parTime: {
-            minutes: 13,
-            seconds: 30
-        },
-        mercenaries: 3,
-        enemies: [
-            Enemy.OrfumTheMountainTroll,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KoboldPup,
-            Enemy.KamikazeKobold,
-            Enemy.GnollHunter,
-            Enemy.GnollGrenadier,
-            Enemy.Ogre,
-            Enemy.Troll
-        ],
-    },
-    {
         id: 13,
         map: Map.GatesOfThuricvod,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
+        unlockLevel: 15,
+        enemyLevel: 15,
+        trapTier: 2,
         waves: 8,
         parTime: {
             minutes: 7,
@@ -299,160 +339,12 @@ const battlegrounds = Object.freeze([
     },
     {
         id: 14,
-        map: Map.Highlands,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 8,
-        parTime: {
-            minutes: 12,
-            seconds: 45
-        },
-        mercenaries: 1,
-        enemies: [
-            Enemy.VitalityTheCyclopsResurrector,
-            Enemy.OrfumTheMountainTroll,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KamikazeKobold,
-            Enemy.Ogre,
-            Enemy.Troll,
-            Enemy.ShieldTroll
-        ],
-    },
-    {
-        id: 15,
-        map: Map.MidnightMarket,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 8,
-        parTime: {
-            minutes: 8,
-            seconds: 30
-        },
-        mercenaries: 2,
-        enemies: [
-            Enemy.GrenwaldeTheNatureLord,
-            Enemy.WuXingLightSoldier,
-            Enemy.WuXingMediumSoldier,
-            Enemy.WuXingHeavySoldier,
-            Enemy.WuXingArcher,
-            Enemy.WuXingHunter,
-            Enemy.WuXingBear,
-            Enemy.Earthling
-        ],
-    },
-    {
-        id: 16,
-        map: Map.RestrictedSection,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 8,
-        parTime: {
-            minutes: 10,
-            seconds: 30
-        },
-        mercenaries: 1,
-        enemies: [
-            Enemy.BulgodTheArmoredOgre,
-            Enemy.Dread,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KamikazeKobold,
-            Enemy.GnollHunter,
-            Enemy.Ogre,
-            Enemy.Troll,
-            Enemy.ShieldTroll
-        ],
-    },
-    {
-        id: 17,
-        map: Map.SharkIsland,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 10,
-        parTime: {
-            minutes: 12,
-            seconds: 30
-        },
-        mercenaries: 3,
-        enemies: [
-            Enemy.Dread,
-            Enemy.ScurvyRumrudder,
-            Enemy.PirateMediumOrc,
-            Enemy.PirateHeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KoboldPup,
-            Enemy.KamikazeKobold,
-            Enemy.PirateOgre,
-            Enemy.PirateShieldTroll
-        ],
-    },
-    {
-        id: 18,
-        map: Map.StablesAtEventide,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 8,
-        parTime: {
-            minutes: 10,
-            seconds: 30
-        },
-        mercenaries: 2,
-        enemies: [
-            Enemy.GaeadinTheEarthLord,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KoboldPup,
-            Enemy.GnollHunter,
-            Enemy.Ogre,
-            Enemy.Troll,
-            Enemy.ShieldTroll,
-            Enemy.PirateMediumOrc,
-            Enemy.PirateHeavyOrc,
-            Enemy.FrostClanKobold,
-            Enemy.EarthElemental,
-            Enemy.Earthling
-        ],
-    },
-    {
-        id: 19,
-        map: Map.TempleGraveyard,
-        difficulty: Difficulty.WarMage,
-        gamemode: Gamemode.Survival,
-        waves: 10,
-        parTime: {
-            minutes: 11,
-            seconds: 30
-        },
-        mercenaries: 4,
-        enemies: [
-            Enemy.VitalityTheCyclopsResurrector,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.HeavyOrc,
-            Enemy.OrcArcher,
-            Enemy.KoboldRunner,
-            Enemy.KamikazeKobold,
-            Enemy.GnollHunter,
-            Enemy.Ogre,
-            Enemy.Troll,
-            Enemy.ShieldTroll
-        ],
-    },
-    {
-        id: 20,
         map: Map.TheWall,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
+        unlockLevel: 16,
+        enemyLevel: 16,
+        trapTier: 2,
         waves: 10,
         parTime: {
             minutes: 15,
@@ -480,18 +372,45 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 21,
-        map: Map.ThroneRoom,
+        id: 15,
+        map: Map.MidnightMarket,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
-        waves: 10,
+        unlockLevel: 17,
+        enemyLevel: 17,
+        trapTier: 2,
+        waves: 8,
         parTime: {
-            minutes: 14,
+            minutes: 8,
             seconds: 30
         },
         mercenaries: 2,
         enemies: [
-            Enemy.GaeadinTheEarthLord,
+            Enemy.GrenwaldeTheNatureLord,
+            Enemy.WuXingLightSoldier,
+            Enemy.WuXingMediumSoldier,
+            Enemy.WuXingHeavySoldier,
+            Enemy.WuXingArcher,
+            Enemy.WuXingHunter,
+            Enemy.WuXingBear,
+            Enemy.Earthling
+        ],
+    },
+    {
+        id: 16,
+        map: Map.TrainingGrounds,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 18,
+        enemyLevel: 18,
+        trapTier: 2,
+        waves: 9,
+        parTime: {
+            minutes: 11,
+            seconds: 45
+        },
+        mercenaries: 2,
+        enemies: [
             Enemy.Sarge,
             Enemy.LightSoldier,
             Enemy.MediumSoldier,
@@ -499,6 +418,7 @@ const battlegrounds = Object.freeze([
             Enemy.Crossbowman,
             Enemy.SatyrRunner,
             Enemy.GnomeDestroyer,
+            Enemy.PrideHunter,
             Enemy.Grizzly,
             Enemy.ShieldGrizzly,
             Enemy.EarthElemental,
@@ -506,10 +426,13 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 22,
+        id: 17,
         map: Map.ThuricvodVillage,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
+        unlockLevel: 19,
+        enemyLevel: 19,
+        trapTier: 2,
         waves: 8,
         parTime: {
             minutes: 9,
@@ -532,17 +455,21 @@ const battlegrounds = Object.freeze([
         ],
     },
     {
-        id: 23,
-        map: Map.TrainingGrounds,
+        id: 18,
+        map: Map.ThroneRoom,
         difficulty: Difficulty.WarMage,
         gamemode: Gamemode.Survival,
-        waves: 9,
+        unlockLevel: 20,
+        enemyLevel: 20,
+        trapTier: 2,
+        waves: 10,
         parTime: {
-            minutes: 11,
-            seconds: 45
+            minutes: 14,
+            seconds: 30
         },
         mercenaries: 2,
         enemies: [
+            Enemy.GaeadinTheEarthLord,
             Enemy.Sarge,
             Enemy.LightSoldier,
             Enemy.MediumSoldier,
@@ -550,22 +477,167 @@ const battlegrounds = Object.freeze([
             Enemy.Crossbowman,
             Enemy.SatyrRunner,
             Enemy.GnomeDestroyer,
-            Enemy.PrideHunter,
             Enemy.Grizzly,
             Enemy.ShieldGrizzly,
             Enemy.EarthElemental,
             Enemy.Earthling
         ],
     },
+    {
+        id: 19,
+        map: Map.CrogonKeep,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 21,
+        enemyLevel: 21,
+        trapTier: 3,
+        waves: 10,
+        parTime: {
+            minutes: 14,
+            seconds: 0
+        },
+        mercenaries: 2,
+        enemies: [
+            Enemy.VitalityTheCyclopsResurrector,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KamikazeKobold,
+            Enemy.Ogre,
+            Enemy.Troll,
+            Enemy.ShieldTroll
+        ],
+    },
+    {
+        id: 20,
+        map: Map.SharkIsland,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 23,
+        enemyLevel: 23,
+        trapTier: 3,
+        waves: 10,
+        parTime: {
+            minutes: 12,
+            seconds: 30
+        },
+        mercenaries: 3,
+        enemies: [
+            Enemy.Dread,
+            Enemy.ScurvyRumrudder,
+            Enemy.PirateMediumOrc,
+            Enemy.PirateHeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KoboldPup,
+            Enemy.KamikazeKobold,
+            Enemy.PirateOgre,
+            Enemy.PirateShieldTroll
+        ],
+    },
+    {
+        id: 21,
+        map: Map.StablesAtEventide,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 24,
+        enemyLevel: 24,
+        trapTier: 3,
+        waves: 8,
+        parTime: {
+            minutes: 10,
+            seconds: 30
+        },
+        mercenaries: 2,
+        enemies: [
+            Enemy.GaeadinTheEarthLord,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KoboldPup,
+            Enemy.GnollHunter,
+            Enemy.Ogre,
+            Enemy.Troll,
+            Enemy.ShieldTroll,
+            Enemy.PirateMediumOrc,
+            Enemy.PirateHeavyOrc,
+            Enemy.FrostClanKobold,
+            Enemy.EarthElemental,
+            Enemy.Earthling
+        ],
+    },
+    {
+        id: 22,
+        map: Map.Highlands,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 25,
+        enemyLevel: 25,
+        trapTier: 3,
+        waves: 8,
+        parTime: {
+            minutes: 12,
+            seconds: 45
+        },
+        mercenaries: 1,
+        enemies: [
+            Enemy.VitalityTheCyclopsResurrector,
+            Enemy.OrfumTheMountainTroll,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KamikazeKobold,
+            Enemy.Ogre,
+            Enemy.Troll,
+            Enemy.ShieldTroll
+        ],
+    },
+    {
+        id: 23,
+        map: Map.RestrictedSection,
+        difficulty: Difficulty.WarMage,
+        gamemode: Gamemode.Survival,
+        unlockLevel: 25,
+        enemyLevel: 25,
+        trapTier: 3,
+        waves: 8,
+        parTime: {
+            minutes: 10,
+            seconds: 30
+        },
+        mercenaries: 1,
+        enemies: [
+            Enemy.BulgodTheArmoredOgre,
+            Enemy.Dread,
+            Enemy.LightOrc,
+            Enemy.MediumOrc,
+            Enemy.HeavyOrc,
+            Enemy.OrcArcher,
+            Enemy.KoboldRunner,
+            Enemy.KamikazeKobold,
+            Enemy.GnollHunter,
+            Enemy.Ogre,
+            Enemy.Troll,
+            Enemy.ShieldTroll
+        ],
+    },    
 
     // Master
 
     // Rift lord
     {
-        id: 500, // TODO: update this
+        id: 53,
         map: Map.AcademySewers,
         difficulty: Difficulty.RiftLord,
         gamemode: Gamemode.Survival,
+        unlockLevel: 68,
+        enemyLevel: 68,
+        trapTier: 7,
         waves: 14,
         parTime: {
             minutes: 13,
