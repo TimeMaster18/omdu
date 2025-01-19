@@ -38,7 +38,7 @@
                 <v-card
                     v-else
                     @click="isOpen = true"
-                    class="no-battleground-selected-card"
+                    class="text-center no-battleground-selected-card"
                 >
                     <v-card-text class="font-italic no-battleground-selected">
                         No battleground selected
@@ -175,6 +175,8 @@ export default {
 
 .no-battleground-selected-card {
     min-height: 20rem;
+	height: 100%;
+	align-content: center;
 }
 
 .no-battleground-selected {
