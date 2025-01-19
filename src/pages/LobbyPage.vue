@@ -36,8 +36,9 @@
                 lg="8"
             >
                 <enemies-overview
-                    v-if="battlegroundEnemies"
-                    :enemies="battlegroundEnemies"
+                    v-if="battlegroundInfo !== null"
+                    :enemies="battlegroundInfo.enemies"
+                    :total-mercenaries="battlegroundInfo.mercenaries"
                 />
             </v-col>
         </v-row>
@@ -108,10 +109,10 @@ export default {
                 return this.lobbyStore.setBattleground(value);
             }
         },
-        battlegroundEnemies() {
+        battlegroundInfo() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
-                .find(battleground => battleground.id === this.battleground)?.enemies ?? null;
-        }
+                .find(battleground => battleground.id === this.battleground) ?? null
+        },
     },
     methods: {
         openLoadoutDialog() {

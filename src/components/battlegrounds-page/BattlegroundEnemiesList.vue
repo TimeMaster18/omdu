@@ -11,7 +11,7 @@
                     class="ma-2 enemy-card"
                     :enemy="minion"
                     show-name
-                    show-health
+                    show-stats
                     show-abilities
                 />
             </div>
@@ -31,7 +31,7 @@
                     class="ma-2 enemy-card"
                     :enemy="mercenary"
                     show-name
-                    show-health
+                    show-stats
                     show-abilities
                 />
             </div>
@@ -48,7 +48,7 @@
                     class="ma-2 enemy-card"
                     :enemy="boss"
                     show-name
-                    show-health
+                    show-stats
                     show-abilities
                 />
             </div>

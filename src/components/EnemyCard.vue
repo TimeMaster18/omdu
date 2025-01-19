@@ -8,20 +8,24 @@
         </v-card-title>
         <v-card-text v-if="showHealth || showAbilities || showDescription">
             <!-- Stats -->
-            <stat-value
-                v-if="showHealth"
-                icon="mdi-heart"
-            >
-                <span v-if="enemy.hp">
-                    {{ enemy.hp }}
-                </span>
-                <span
-                    v-else
-                    class="font-italic transparent"
-                >
-                    Unknown
-                </span>
-            </stat-value>
+            <div v-if="showStats">
+                <stat-value icon="mdi-heart">
+                    <span v-if="enemy.hp">
+                        {{ enemy.hp }}
+                    </span>
+                    <span
+                        v-else
+                        class="font-italic transparent"
+                    >
+                        Unknown
+                    </span>
+                </stat-value>
+                <stat-value icon="mdi-account">
+                    <span class="capitalize">
+                        {{ enemy.type }}
+                    </span>
+                </stat-value>
+            </div>
 
             <!-- Abilities -->
             <div 
@@ -66,7 +70,7 @@ export default {
             type: Boolean,
             default: false
         },
-        showHealth: {
+        showStats: {
             type: Boolean,
             default: false
         },
@@ -106,5 +110,9 @@ export default {
 
 .transparent {
 	opacity: 0.3;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }
 </style>

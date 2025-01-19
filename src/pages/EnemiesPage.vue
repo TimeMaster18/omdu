@@ -10,7 +10,7 @@
                     class="text-left"
                     :enemy="enemy"
                     show-name
-                    show-health
+                    show-stats
                     show-abilities
                     show-description
                 />
