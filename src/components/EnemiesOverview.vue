@@ -17,7 +17,7 @@
                 >
                     <div>
                         <div>
-                            {{ totalMercenaries }} random {{ totalMercenaries === 1 ? "mercanary" : "mercanaries" }}
+                            {{ totalMercenaries }} random {{ totalMercenaries === 1 ? "mercenary" : "mercenaries" }}
                         </div>
                         <v-icon class="m-auto">
                             {{ showMercenaries ? "mdi-eye-off" : "mdi-eye" }}
