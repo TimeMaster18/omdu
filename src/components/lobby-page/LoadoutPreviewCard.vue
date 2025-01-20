@@ -6,12 +6,12 @@
         >
             <div class="icon my-auto">
                 <img
-                    class="ma-1"
+                    class="ml-1 my-1"
                     :src="hero?.icon"
                 >
             </div>
             
-            <div class="name">
+            <div class="name ml-1 mt-1">
                 <slot
                     name="name"
                     :loadout="loadout"
@@ -21,15 +21,8 @@
                     {{ loadout?.playerName }} - {{ hero?.name }}
                 </span>
             </div>
-            <div class="actions">
+            <div class="actions mr-1 mt-1">
                 <slot name="actions" />
-                <v-icon
-                    v-if="showOpenLoadoutAction"
-                    @click.stop="openLoadoutLinkToClipboard"
-                    class="mr-2"
-                >
-                    mdi-link
-                </v-icon>
                 <v-icon
                     v-if="showCopyAction"
                     @click.stop="copyLoadoutCodeToClipboard"
@@ -37,8 +30,15 @@
                 >
                     mdi-content-copy
                 </v-icon>
+                <v-icon
+                    v-if="showOpenLoadoutAction"
+                    @click.stop="openLoadoutLinkToClipboard"
+                    class="ml-2"
+                >
+                    mdi-open-in-new
+                </v-icon>
             </div>
-            <div class="slot-items">
+            <div class="slot-items mt-1">
                 <img
                     v-for="(slotItem, index) in slotItems"
                     :key="index"
@@ -153,12 +153,11 @@ export default {
 <style scoped>
 .card {
     line-height: 0;
-    /* aspect-ratio: 464/74; */
 }
 
 .grid {
     display: grid;
-    grid-template-columns: 14% 1fr auto;
+    grid-template-columns: 15% 1fr auto;
     grid-template-rows: 1fr auto;
     grid-template-areas: "icon name actions" "icon slots slots"
 }
@@ -180,7 +179,7 @@ export default {
 	image-rendering: optimizeQuality;
     aspect-ratio: 63/64;
 	border-radius: 0.25rem;
-    width: calc(100% - 0.5rem);
+    width: calc(100% - 0.25rem);
     background: rgb(var(--v-theme-on-surface-loading));
 }
 

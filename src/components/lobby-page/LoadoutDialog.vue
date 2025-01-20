@@ -10,7 +10,7 @@
                         hide-details
                         class="mr-2 shrink loadout-code-text-field"
                         reverse
-                        max-width=" 1000px"
+                        max-width="1000px"
                         readonly
                     />
                     <loadout-presets
