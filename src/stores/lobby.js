@@ -13,7 +13,8 @@ export const useLobbyStore = defineStore('lobby', {
                 database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-1')) : null,
                 database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-2')) : null,
                 database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-3')) : null,
-                database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-4')) : null
+                database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-4')) : null,
+                database !== null ? useDatabaseObject(ref(database, 'player-loadouts/player-5')) : null
             ],
             battlegroundId: database !== null ? useDatabaseObject(ref(database, 'battleground')) : null
         };

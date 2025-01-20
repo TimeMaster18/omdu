@@ -1,52 +1,51 @@
 <template>
     <v-card class="card">
         <div
-            v-if="loadout !== null"
-            class="d-flex"
+            :class="{ 'hidden': loadout === null }"
+            class="grid"
         >
-            <img
-                class="icon ma-1"
-                :src="hero?.icon"
-            >
-            <div class="d-flex flex-column flex-grow-1">
-                <div class="name flex-grow-1 pl-2">
-                    <span>
-                        <slot
-                            name="name"
-                            :loadout="loadout"
-                            :hero="hero"
-                        />
-                        <span v-if="!$slots.name">
-                            {{ loadout?.playerName }} - {{ hero?.name }}
-                        </span>
-                    </span>
-                    <div class="actions">
-                        <slot name="actions" />
-                        <v-icon
-                            v-if="showOpenLoadoutAction"
-                            @click.stop="openLoadoutLinkToClipboard"
-                            class="mr-2"
-                        >
-                            mdi-link
-                        </v-icon>
-                        <v-icon
-                            v-if="showCopyAction"
-                            @click.stop="copyLoadoutCodeToClipboard"
-                            :disabled="copying"
-                        >
-                            mdi-content-copy
-                        </v-icon>
-                    </div>
-                </div>
-                <div class="slot-items flex-grow-0">
-                    <img
-                        v-for="(slotItem, index) in slotItems"
-                        :key="index"
-                        class="slot-item"
-                        :class="{'empty': slotItem === null}"
-                        :src="slotItem?.image"
-                    >
-                </div>
+            <div class="icon my-auto">
+                <img
+                    class="ma-1"
+                    :src="hero?.icon"
+                >
+            </div>
+            
+            <div class="name">
+                <slot
+                    name="name"
+                    :loadout="loadout"
+                    :hero="hero"
+                />
+                <span v-if="!$slots.name">
+                    {{ loadout?.playerName }} - {{ hero?.name }}
+                </span>
+            </div>
+            <div class="actions">
+                <slot name="actions" />
+                <v-icon
+                    v-if="showOpenLoadoutAction"
+                    @click.stop="openLoadoutLinkToClipboard"
+                    class="mr-2"
+                >
+                    mdi-link
+                </v-icon>
+                <v-icon
+                    v-if="showCopyAction"
+                    @click.stop="copyLoadoutCodeToClipboard"
+                    :disabled="copying"
+                >
+                    mdi-content-copy
+                </v-icon>
+            </div>
+            <div class="slot-items">
+                <img
+                    v-for="(slotItem, index) in slotItems"
+                    :key="index"
+                    class="slot-item"
+                    :class="{'hidden': slotItem === null}"
+                    :src="slotItem?.image"
+                >
             </div>
         </div>
     </v-card>
@@ -116,9 +115,12 @@ export default {
             return loadout;
         },
         hero() {
+            if(this.loadout === null) return null;
             return JSON.parse(JSON.stringify(this.dataStore.heroes)).find(hero => hero.id === this.loadout.heroId) ?? null;
         },
         slotItems() {
+            if(this.loadout === null) return [null, null, null, null, null, null, null, null, null];
+
             let slotItems = [];
             this.loadout.slotItemIds.forEach(slotItemId => {
                 if(100 <= slotItemId && slotItemId <= 200) {
@@ -151,28 +153,43 @@ export default {
 <style scoped>
 .card {
     line-height: 0;
-    aspect-ratio: 464/74;
+    /* aspect-ratio: 464/74; */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 14% 1fr auto;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "icon name actions" "icon slots slots"
 }
 
 .name {
+    grid-area: name;
     line-height: 1.6;
     align-content: center;
-    overflow: visible;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .icon {
+    grid-area: icon;
+}
+
+.icon img {
 	image-rendering: optimizeQuality;
     aspect-ratio: 63/64;
 	border-radius: 0.25rem;
+    width: calc(100% - 0.5rem);
     background: rgb(var(--v-theme-on-surface-loading));
-	min-width: 14%;
-	max-width: 14%;
 }
 
 .slot-items {
+    grid-area: slots;
 	background: rgba(var(--v-theme-surface), 1);
     width: 100%;
 	aspect-ratio: calc(684 * 9)/572;
+    align-content: end;
 }
 
 .slot-item {
@@ -181,14 +198,13 @@ export default {
 	aspect-ratio: 684/572;
 }
 
-.slot-item.empty {
+.hidden {
     visibility: hidden;
 }
 
 .actions {
-	position: absolute;
-	top: 0;
-    right: 0;
-    padding: 0.25rem;
+    grid-area: actions;
+    text-wrap: nowrap;
+    align-content: center;
 }
 </style>

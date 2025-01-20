@@ -15,7 +15,7 @@
                     />
                     <loadout-presets
                         :current-loadout-code="vModelProxy"
-                        @import="(importedLoadoutCode) => vModelProxy = importedLoadoutCode"
+                        @import="importLoadoutCode"
                     />
                 </div>
                 <loadout-editor
@@ -66,6 +66,11 @@ export default {
         },
         close() {
             this.isOpen = false;
+        },
+        importLoadoutCode(importedLoadoutCode) {
+            let parts = importedLoadoutCode.split('-');
+            parts[0] = this.playerName; // Use the player's name instead of the imported loadout's player name
+            this.vModelProxy = parts.join('-');
         }
     }
 }

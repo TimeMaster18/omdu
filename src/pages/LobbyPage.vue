@@ -1,12 +1,13 @@
 <template>
     <div v-if="firebaseCorrectlySetup">
-        <v-row>
+        <v-row class="justify-center">
             <v-col
                 v-for="(code, index) in loadoutCodes"
                 :key="index"
                 cols="12"
                 sm="6"
-                lg="3"
+                md="4"
+                class="v-col-xl-fifth"
             >
                 <loadout-preview-card
                     :loadout-code="code"
@@ -99,6 +100,7 @@ export default {
                 this.lobbyStore.getPlayerLoadoutByIndex(1),
                 this.lobbyStore.getPlayerLoadoutByIndex(2),
                 this.lobbyStore.getPlayerLoadoutByIndex(3),
+                this.lobbyStore.getPlayerLoadoutByIndex(4),
             ]
         },
         battleground: {
@@ -123,6 +125,14 @@ export default {
 </script>
 
 <style scoped>
+/* Custom breakpoint for 1/5th division of a row as we have 5 players which we want to show */
+@media (min-width: 1700px) {
+    .v-col-xl-fifth {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
 .settings {
     max-width: 500px;
 }

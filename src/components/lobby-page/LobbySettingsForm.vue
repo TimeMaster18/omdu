@@ -43,7 +43,7 @@
             v-model="playerIndex"
             type="number"
             min="1"
-            max="4"
+            max="5"
             class="mb-4"
         />
         <v-text-field
