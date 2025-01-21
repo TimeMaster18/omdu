@@ -50,9 +50,9 @@
                         title="Enemies"
                     />
                     <v-list-item
-                        to="maps"
+                        to="battlegrounds"
                         prepend-icon="mdi-map"
-                        title="Maps"
+                        title="Battlegrounds"
                     />
                 </v-list>
             </v-menu>

@@ -68,7 +68,7 @@ const router = createRouter({
         { path: '/omdu/trap-parts', component: TrapPartsPage },
         { path: '/omdu/guardians', component: GuardiansPage },
         { path: '/omdu/enemies', component: EnemiesPage },
-        { path: '/omdu/maps', component: BattlegroundsPage },
+        { path: '/omdu/battlegrounds', component: BattlegroundsPage },
         { path: '/omdu/loadout', component: LoadoutPage },
         { path: '/omdu/lobby', component: LobbyPage },
     ],
