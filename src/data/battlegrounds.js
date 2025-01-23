@@ -1180,7 +1180,7 @@ const battlegrounds = Object.freeze([
             Enemy.PirateShieldTroll,
             Enemy.HobgoblinShaman
         ],
-    }
+    },
     
     // Rift lord
     {
