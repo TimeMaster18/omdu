@@ -867,7 +867,7 @@ const battlegrounds = Object.freeze([
         waves: 11,
         parTime: {
             minutes: 15,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 2,
         enemies: [
@@ -928,7 +928,7 @@ const battlegrounds = Object.freeze([
         waves: 10,
         parTime: {
             minutes: 13,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 3,
         enemies: [
@@ -965,7 +965,7 @@ const battlegrounds = Object.freeze([
         waves: 12,
         parTime: {
             minutes: 15,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 1,
         enemies: [
@@ -1031,7 +1031,7 @@ const battlegrounds = Object.freeze([
         waves: 10,
         parTime: {
             minutes: 11,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 2,
         enemies: [
@@ -1095,7 +1095,7 @@ const battlegrounds = Object.freeze([
         waves: 12,
         parTime: {
             minutes: 18,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 2,
         enemies: [
@@ -1128,7 +1128,7 @@ const battlegrounds = Object.freeze([
         waves: 12,
         parTime: {
             minutes: 13,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 1,
         enemies: [
@@ -1160,7 +1160,7 @@ const battlegrounds = Object.freeze([
         waves: 12,
         parTime: {
             minutes: 18,
-            seconds: 00
+            seconds: 0
         },
         mercenaries: 1,
         enemies: [
