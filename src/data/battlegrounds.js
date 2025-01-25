@@ -1756,6 +1756,7 @@ const battlegrounds = Object.freeze([
 
     // Endless
     // IDs = the IDs from the game + 100.
+    // Launcher sets the trap tier for each endless map to 7 and used lvl 75 enemies so we follow these settings.
     // We include all mercenaries up until the par wave a.k.a. wave 25.
     // We include every enemy the player might face, this includes the repeating waves.
     {
@@ -1764,21 +1765,15 @@ const battlegrounds = Object.freeze([
         difficulty: Difficulty.Apprentice,
         gamemode: Gamemode.Endless,
         unlockLevel: 1,
-        enemyLevel: null,
-        trapTier: null,
+        enemyLevel: 75,
+        trapTier: 7,
         parWave: 25,
         mercenaries: 6,
         enemies: [
             Enemy.GaeadinTheEarthLord,
             Enemy.UrzaTheFireLord,
             Enemy.OrfumTheMountainTroll,
-            Enemy.LightOrc,
-            Enemy.MediumOrc,
-            Enemy.OrcArcher,
             Enemy.KamikazeKobold,
-            Enemy.KoboldRunner,
-            Enemy.GnollHunter,
-            Enemy.Ogre,
             Enemy.FireElemental,
             Enemy.FireOgre,
             Enemy.OrcTNTArcher
