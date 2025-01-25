@@ -33,11 +33,20 @@
                 <battleground-selection-dialog v-model="battleground" />
             </v-col>
             <v-col
+                v-if="battlegroundInfo !== null"
                 cols="12"
                 lg="8"
             >
+                <v-alert
+                    v-if="battlegroundInfo.gamemode === Gamemode.Endless"
+                    class="mx-2 mb-2"
+                    type="warning"
+                    variant="outlined"
+                    width="fit-content"
+                >
+                    Due to incomplete wave data we're only able to show notable enemies
+                </v-alert>
                 <enemies-overview
-                    v-if="battlegroundInfo !== null"
                     :enemies="battlegroundInfo.enemies"
                     :total-mercenaries="battlegroundInfo.mercenaries"
                 />
@@ -60,6 +69,7 @@ import { useLobbyStore } from '../stores/lobby.js';
 import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
+import Gamemode from '../enums/gamemode.js';
 
 export default {
     components: {
@@ -79,6 +89,7 @@ export default {
     },
     data() {
         return {
+            Gamemode,
             firebaseCorrectlySetup: firebaseApp !== null,
         }
     },

@@ -35,6 +35,15 @@
                         >
                     </v-col>
                     <v-col cols="12">
+                        <v-alert
+                            v-if="battleground.gamemode === Gamemode.Endless"
+                            class="mx-2 mb-2"
+                            type="warning"
+                            variant="outlined"
+                            width="fit-content"
+                        >
+                            Due to incomplete wave data we're only able to show notable enemies
+                        </v-alert>
                         <enemies-overview
                             :enemies="battleground.enemies"
                             :total-mercenaries="battleground.mercenaries"
@@ -47,6 +56,7 @@
 </template>
 
 <script>
+import Gamemode from '../../enums/gamemode';
 import BattlegroundStats from '../BattlegroundStats.vue';
 import DifficultyCard from '../DifficultyCard.vue';
 import EnemiesOverview from '../EnemiesOverview.vue';
@@ -60,6 +70,8 @@ export default {
     },
     data() {
         return {
+            Gamemode,
+            
             isOpen: false,
             battleground: null
         }
