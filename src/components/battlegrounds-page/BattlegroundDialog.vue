@@ -18,12 +18,7 @@
                             <div class="v-card-title pl-0">
                                 {{ battleground.map.name }}
                             </div>
-                            <stat-value icon="mdi-waves">
-                                {{ battleground.waves }}
-                            </stat-value>
-                            <stat-value icon="mdi-clock">
-                                {{ parTime }}
-                            </stat-value>
+                            <battleground-stats :battleground="battleground" />
                             <div class="transparent mt-4 hidden-sm-and-down">
                                 {{ battleground.map.description }}
                             </div>
@@ -52,15 +47,15 @@
 </template>
 
 <script>
+import BattlegroundStats from '../BattlegroundStats.vue';
 import DifficultyCard from '../DifficultyCard.vue';
 import EnemiesOverview from '../EnemiesOverview.vue';
-import StatValue from '../StatValue.vue';
 
 export default {
     expose: ["open", "close"],
     components: {
         DifficultyCard,
-        StatValue,
+        BattlegroundStats,
         EnemiesOverview
     },
     data() {
@@ -68,15 +63,6 @@ export default {
             isOpen: false,
             battleground: null
         }
-    },
-    computed: {
-        parTime() {
-            if(this.battleground.parTime.seconds < 10) {
-                return `${this.battleground.parTime.minutes}:0${this.battleground.parTime.seconds}`;
-            } else {
-                return `${this.battleground.parTime.minutes}:${this.battleground.parTime.seconds}`;
-            }
-        },
     },
     methods: {
         open(battleground) {
@@ -102,11 +88,6 @@ export default {
     max-width: 450px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.enemy-card {
-    min-width: 12rem !important;
-	max-width: 14.4rem !important;
 }
 
 .transparent {

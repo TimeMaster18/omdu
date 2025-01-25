@@ -24,15 +24,7 @@
                         <div class="v-card-title pl-0">
                             {{ selectedBattleground.map.name }}
                         </div>
-                        <stat-value icon="mdi-waves">
-                            {{ selectedBattleground.waves }}
-                        </stat-value>
-                        <stat-value icon="mdi-clock">
-                            {{ parTime }}
-                        </stat-value>
-                        <div class="transparent mt-4">
-                            {{ selectedBattleground.map.description }}
-                        </div>
+                        <battleground-stats :battleground="selectedBattleground" />
                     </v-card-text>
                 </v-card>
                 <v-card
@@ -96,8 +88,8 @@ import DifficultyCard from '../DifficultyCard.vue';
 import Difficulty from '../../enums/difficulty.js';
 import BattlegroundCard from '../BattlegroundCard.vue';
 import DeselectCard from '../loadout-page/DeselectCard.vue';
-import StatValue from '../StatValue.vue';
 import { useDataStore } from '../../stores/data.js';
+import BattlegroundStats from '../BattlegroundStats.vue';
 
 export default {
     setup() {
@@ -110,7 +102,7 @@ export default {
         DifficultyCard,
         BattlegroundCard,
         DeselectCard,
-        StatValue
+        BattlegroundStats
     },
     emits: ["update:model-value"],
     props: {
@@ -137,13 +129,6 @@ export default {
         selectedBattleground() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .find(battleground => battleground.id === this.selectedBattlegroundId) ?? null;
-        },
-        parTime() {
-            if(this.selectedBattleground.parTime.seconds < 10) {
-                return `${this.selectedBattleground.parTime.minutes}:0${this.selectedBattleground.parTime.seconds}`;
-            } else {
-                return `${this.selectedBattleground.parTime.minutes}:${this.selectedBattleground.parTime.seconds}`;
-            }
         },
     },
     methods: {
@@ -190,9 +175,5 @@ export default {
 
 .selected {
     outline: rgb(var(--v-theme-on-surface)) 2px solid;
-}
-
-.transparent {
-    opacity: 0.3;
 }
 </style>

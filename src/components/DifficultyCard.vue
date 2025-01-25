@@ -17,6 +17,7 @@ import ApprenticeImage from '../assets/images/header_bucket_1.webp';
 import WarMageImage from '../assets/images/header_bucket_2.webp';
 import MasterImage from '../assets/images/header_bucket_3.webp';
 import RiftLordImage from '../assets/images/header_bucket_4.webp';
+import ArchMageImage from '../assets/images/header_bucket_5.webp';
 
 export default {
     props: {
@@ -35,6 +36,7 @@ export default {
             else if(this.difficulty === Difficulty.WarMage) return WarMageImage;
             else if(this.difficulty === Difficulty.Master) return MasterImage;
             else if(this.difficulty === Difficulty.RiftLord) return RiftLordImage;
+            else if(this.difficulty === Difficulty.ArchMage) return ArchMageImage;
             return null;
         },
         name() {
@@ -42,6 +44,7 @@ export default {
             else if(this.difficulty === Difficulty.WarMage) return "War Mage";
             else if(this.difficulty === Difficulty.Master) return "Master";
             else if(this.difficulty === Difficulty.RiftLord) return "Rift Lord";
+            else if(this.difficulty === Difficulty.ArchMage) return "Arch Mage";
             return null;
         }
     }

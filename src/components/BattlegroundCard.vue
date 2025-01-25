@@ -3,26 +3,21 @@
         <div class="image text-center">
             <img :src="battleground.map.images[0]">
         </div>
-        <v-card-title>{{ battleground.map.name }} ({{ difficulty }})</v-card-title>
+        <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
-            <!-- Stats -->
-            <stat-value icon="mdi-waves">
-                {{ battleground.waves }}
-            </stat-value>
-            <stat-value icon="mdi-clock">
-                {{ parTime }}
-            </stat-value>
+            <battleground-stats :battleground="battleground" />
         </v-card-text>
     </v-card>
 </template>
 
 <script>
 import Difficulty from '../enums/difficulty';
-import StatValue from './StatValue.vue';
+import Gamemode from '../enums/gamemode';
+import BattlegroundStats from './BattlegroundStats.vue';
 
 export default {
     components: {
-        StatValue
+        BattlegroundStats
     },
     props: {
         battleground: {
@@ -31,6 +26,11 @@ export default {
         }
     },
     computed: {
+        title() {
+            let title = `${this.battleground.map.name} `;
+            if(this.battleground.gamemode === Gamemode.Endless) title += '(Endless)';
+            return title;
+        },
         difficulty() {
             if(this.battleground.difficulty === Difficulty.Apprentice) return "Apprentice";
             else if(this.battleground.difficulty === Difficulty.WarMage) return "War Mage";
@@ -38,13 +38,6 @@ export default {
             else if(this.battleground.difficulty === Difficulty.RiftLord) return "Rift Lord";
             else return null;
         },
-        parTime() {
-            if(this.battleground.parTime.seconds < 10) {
-                return `${this.battleground.parTime.minutes}:0${this.battleground.parTime.seconds}`;
-            } else {
-                return `${this.battleground.parTime.minutes}:${this.battleground.parTime.seconds}`;
-            }
-        }
     }
 }
 </script>

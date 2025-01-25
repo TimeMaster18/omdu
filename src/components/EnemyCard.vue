@@ -9,6 +9,11 @@
         <v-card-text v-if="showHealth || showAbilities || showDescription">
             <!-- Stats -->
             <div v-if="showStats">
+                <stat-value icon="mdi-account">
+                    <span class="capitalize">
+                        {{ enemy.type }}
+                    </span>
+                </stat-value>
                 <stat-value icon="mdi-heart">
                     <span v-if="enemy.hp">
                         {{ enemy.hp }}
@@ -18,11 +23,6 @@
                         class="font-italic transparent"
                     >
                         Unknown
-                    </span>
-                </stat-value>
-                <stat-value icon="mdi-account">
-                    <span class="capitalize">
-                        {{ enemy.type }}
                     </span>
                 </stat-value>
             </div>
