@@ -24,7 +24,12 @@
                         <div class="v-card-title pl-0">
                             {{ selectedBattleground.map.name }}
                         </div>
-                        <battleground-stats :battleground="selectedBattleground" />
+                        <battleground-stats
+                            show-enemy-level
+                            show-waves
+                            show-par-time
+                            :battleground="selectedBattleground"
+                        />
                     </v-card-text>
                 </v-card>
                 <v-card
@@ -42,7 +47,7 @@
         <template #default>
             <v-card>
                 <v-row
-                    class="mt-2 mx-4"
+                    class="mt-2 mx-4 justify-center"
                     dense
                 >
                     <v-col
@@ -50,12 +55,25 @@
                         :key="difficulty"
                         cols="12"
                         sm="6"
-                        lg="3"
+                        md="4"
+                        class="v-col-lg-fifth"
                     >
                         <difficulty-card
                             :difficulty="difficulty"
-                            @click="difficultyFilter = difficulty"
-                            :active="difficultyFilter === difficulty"
+                            @click="filter = difficulty"
+                            :active="filter === difficulty"
+                        />
+                    </v-col>
+                    <v-col
+                        cols="12"
+                        sm="6"
+                        md="4"
+                        class="v-col-lg-fifth"
+                    >
+                        <gamemode-card
+                            :gamemode="Gamemode.Endless"
+                            @click="filter = Gamemode.Endless"
+                            :active="filter === Gamemode.Endless"
                         />
                     </v-col>
                 </v-row>
@@ -90,6 +108,8 @@ import BattlegroundCard from '../BattlegroundCard.vue';
 import DeselectCard from '../loadout-page/DeselectCard.vue';
 import { useDataStore } from '../../stores/data.js';
 import BattlegroundStats from '../BattlegroundStats.vue';
+import GamemodeCard from '../GamemodeCard.vue';
+import Gamemode from '../../enums/gamemode.js';
 
 export default {
     setup() {
@@ -102,7 +122,8 @@ export default {
         DifficultyCard,
         BattlegroundCard,
         DeselectCard,
-        BattlegroundStats
+        BattlegroundStats,
+        GamemodeCard
     },
     emits: ["update:model-value"],
     props: {
@@ -114,17 +135,24 @@ export default {
     data() {
         return {
             Difficulty,
+            Gamemode,
 
             isOpen: false,
-            difficultyFilter: Difficulty.Apprentice,
+            filter: Difficulty.Apprentice,
             selectedBattlegroundId: this.modelValue,
         }
     },
     computed: {
         battlegrounds() {
-            return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
-                .filter(battleground => this.difficultyFilter === battleground.difficulty)
-                .sort((a, b) => a.name > b.name);
+            let battlegrounds = JSON.parse(JSON.stringify(this.dataStore.battlegrounds));
+            
+            if(this.filter === Gamemode.Endless) {
+                battlegrounds = battlegrounds.filter(battleground => battleground.gamemode === Gamemode.Endless);
+            } else {
+                battlegrounds = battlegrounds.filter(battleground => this.filter === battleground.difficulty && battleground.gamemode === Gamemode.Survival);
+            }   
+
+            return battlegrounds.sort((a, b) => a.unlockLevel > b.unlockLevel);
         },
         selectedBattleground() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
@@ -152,6 +180,14 @@ export default {
 </script>
 
 <style scoped>
+/* Custom breakpoint for 1/5th division of a row as we have 5 players which we want to show */
+@media (min-width: 1280px) {
+    .v-col-lg-fifth {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
 .battleground-info-card-wrapper {
     max-width: 40rem;
     margin-right: auto;

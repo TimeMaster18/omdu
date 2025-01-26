@@ -1,24 +1,40 @@
 <template>
     <div>
-        <v-row dense>
+        <v-row
+            dense
+            class="justify-center"
+        >
             <v-col
                 v-for="difficulty in [Difficulty.Apprentice, Difficulty.WarMage, Difficulty.Master, Difficulty.RiftLord]"
                 :key="difficulty"
                 cols="12"
                 sm="6"
-                lg="3"
+                md="4"
+                class="v-col-lg-fifth"
             >
                 <difficulty-card
                     :difficulty="difficulty"
-                    @click="difficultyFilter = difficulty"
-                    :active="difficultyFilter === difficulty"
+                    @click="filter = difficulty"
+                    :active="filter === difficulty"
+                />
+            </v-col>
+            <v-col
+                cols="12"
+                sm="6"
+                md="4"
+                class="v-col-lg-fifth"
+            >
+                <gamemode-card
+                    :gamemode="Gamemode.Endless"
+                    @click="filter = Gamemode.Endless"
+                    :active="filter === Gamemode.Endless"
                 />
             </v-col>
         </v-row>
         <v-row>
             <v-col
-                v-for="(battleground, index) in battlegrounds"
-                :key="index"
+                v-for="battleground in battlegrounds"
+                :key="battleground.id"
                 align="center"
             >
                 <battleground-card
@@ -37,6 +53,8 @@ import BattlegroundCard from '../components/BattlegroundCard.vue';
 import BattlegroundDialog from '../components/battlegrounds-page/BattlegroundDialog.vue';
 import DifficultyCard from '../components/DifficultyCard.vue';
 import Difficulty from '../enums/difficulty';
+import GamemodeCard from '../components/GamemodeCard.vue';
+import Gamemode from '../enums/gamemode.js';
 import { useDataStore } from '../stores/data';
 
 export default {
@@ -49,23 +67,38 @@ export default {
     components: {
         BattlegroundCard,
         DifficultyCard,
-        BattlegroundDialog
+        BattlegroundDialog,
+        GamemodeCard,
     },
     data() {
         return {
             Difficulty,
-            difficultyFilter: Difficulty.Apprentice
+            Gamemode,
+            filter: Difficulty.Apprentice
         }
     },
     computed: {
         battlegrounds() {
-            return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
-                .filter(battleground => this.difficultyFilter === battleground.difficulty)
-                .sort((a, b) => a.name > b.name);
+            let battlegrounds = JSON.parse(JSON.stringify(this.dataStore.battlegrounds));
+            
+            if(this.filter === Gamemode.Endless) {
+                battlegrounds = battlegrounds.filter(battleground => battleground.gamemode === Gamemode.Endless);
+            } else {
+                battlegrounds = battlegrounds.filter(battleground => this.filter === battleground.difficulty && battleground.gamemode === Gamemode.Survival);
+            }   
+
+            return battlegrounds.sort((a, b) => a.unlockLevel > b.unlockLevel);
         },
     },
 }
 </script>
 
 <style scoped>
+/* Custom breakpoint for 1/5th division of a row as we have 5 players which we want to show */
+@media (min-width: 1280px) {
+    .v-col-lg-fifth {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
 </style>

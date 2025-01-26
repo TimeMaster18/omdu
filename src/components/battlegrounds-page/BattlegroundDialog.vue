@@ -18,7 +18,13 @@
                             <div class="v-card-title pl-0">
                                 {{ battleground.map.name }}
                             </div>
-                            <battleground-stats :battleground="battleground" />
+                            <battleground-stats
+                                :battleground="battleground"
+                                show-gamemode
+                                show-enemy-level
+                                show-waves
+                                show-par-time
+                            />
                             <div class="transparent mt-4 hidden-sm-and-down">
                                 {{ battleground.map.description }}
                             </div>

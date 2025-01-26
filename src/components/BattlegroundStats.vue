@@ -1,18 +1,33 @@
 <template>
     <div>
-        <stat-value icon="mdi-sword-cross">
+        <stat-value
+            v-if="showGamemode"
+            icon="mdi-sword-cross"
+        >
             <span class="capitalize">
                 {{ battleground.gamemode }}
             </span>
         </stat-value>
         <stat-value
-            v-if="battleground.waves"
-            icon="mdi-waves"
+            v-if="showUnlockLevel"
+            icon="mdi-account-lock-open"
         >
-            {{ battleground.waves }}
+            Level {{ battleground.unlockLevel }}
         </stat-value>
         <stat-value
-            v-if="parTime"
+            v-if="showEnemyLevel"
+            icon="mdi-target-account"
+        >
+            Level {{ battleground.enemyLevel }}
+        </stat-value>
+        <stat-value
+            v-if="showWaves && battleground.waves"
+            icon="mdi-waves"
+        >
+            {{ battleground.waves }} Waves
+        </stat-value>
+        <stat-value
+            v-if="showParTime && parTime"
             icon="mdi-clock"
         >
             {{ parTime }}
@@ -31,6 +46,26 @@ export default {
         battleground: {
             required: true,
             type: Object
+        },
+        showGamemode: {
+            type: Boolean,
+            default: false
+        },
+        showUnlockLevel: {
+            type: Boolean,
+            default: false
+        },
+        showEnemyLevel: {
+            type: Boolean,
+            default: false
+        },
+        showWaves: {
+            type: Boolean,
+            default: false
+        },
+        showParTime: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {

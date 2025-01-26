@@ -5,7 +5,12 @@
         </div>
         <v-card-title>{{ title }}</v-card-title>
         <v-card-text>
-            <battleground-stats :battleground="battleground" />
+            <battleground-stats
+                :battleground="battleground"
+                show-enemy-level
+                show-waves
+                show-par-time
+            />
         </v-card-text>
     </v-card>
 </template>
@@ -28,7 +33,8 @@ export default {
     computed: {
         title() {
             let title = `${this.battleground.map.name} `;
-            if(this.battleground.gamemode === Gamemode.Endless) title += '(Endless)';
+            if(this.battleground.gamemode === Gamemode.Survival) title += `(${this.difficulty})`;
+            else if(this.battleground.gamemode === Gamemode.Endless) title += '(Endless)';
             return title;
         },
         difficulty() {
