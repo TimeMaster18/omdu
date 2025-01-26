@@ -22,9 +22,10 @@
                     </div>
                     <v-card-text>
                         <div class="v-card-title pl-0">
-                            {{ selectedBattleground.map.name }}
+                            <battleground-name :battleground="selectedBattleground" />
                         </div>
                         <battleground-stats
+                            show-gamemode
                             show-enemy-level
                             show-waves
                             show-par-time
@@ -51,17 +52,17 @@
                     dense
                 >
                     <v-col
-                        v-for="difficulty in [Difficulty.Apprentice, Difficulty.WarMage, Difficulty.Master, Difficulty.RiftLord]"
-                        :key="difficulty"
+                        v-for="difficultyFilter in [Difficulty.Apprentice, Difficulty.WarMage, Difficulty.Master, Difficulty.RiftLord]"
+                        :key="difficultyFilter"
                         cols="12"
                         sm="6"
                         md="4"
                         class="v-col-lg-fifth"
                     >
                         <difficulty-card
-                            :difficulty="difficulty"
-                            @click="filter = difficulty"
-                            :active="filter === difficulty"
+                            :difficulty="difficultyFilter"
+                            @click="filter = difficultyFilter"
+                            :active="filter === difficultyFilter"
                         />
                     </v-col>
                     <v-col
@@ -110,6 +111,7 @@ import { useDataStore } from '../../stores/data.js';
 import BattlegroundStats from '../BattlegroundStats.vue';
 import GamemodeCard from '../GamemodeCard.vue';
 import Gamemode from '../../enums/gamemode.js';
+import BattlegroundName from '../BattlegroundName.vue';
 
 export default {
     setup() {
@@ -123,7 +125,8 @@ export default {
         BattlegroundCard,
         DeselectCard,
         BattlegroundStats,
-        GamemodeCard
+        GamemodeCard,
+        BattlegroundName
     },
     emits: ["update:model-value"],
     props: {
@@ -157,6 +160,19 @@ export default {
         selectedBattleground() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .find(battleground => battleground.id === this.selectedBattlegroundId) ?? null;
+        },
+        title() {
+            let title = `${this.selectedBattleground.map.name} `;
+            if(this.selectedBattleground.gamemode === Gamemode.Survival) title += `(${this.difficulty})`;
+            else if(this.selectedBattleground.gamemode === Gamemode.Endless) title += '(Endless)';
+            return title;
+        },
+        difficulty() {
+            if(this.selectedBattleground.difficulty === Difficulty.Apprentice) return "Apprentice";
+            else if(this.selectedBattleground.difficulty === Difficulty.WarMage) return "War Mage";
+            else if(this.selectedBattleground.difficulty === Difficulty.Master) return "Master";
+            else if(this.selectedBattleground.difficulty === Difficulty.RiftLord) return "Rift Lord";
+            else return null;
         },
     },
     methods: {

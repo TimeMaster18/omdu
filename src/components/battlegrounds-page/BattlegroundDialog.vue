@@ -16,7 +16,7 @@
                                 :difficulty="battleground.difficulty"
                             />
                             <div class="v-card-title pl-0">
-                                {{ battleground.map.name }}
+                                <battleground-name :battleground="battleground" />
                             </div>
                             <battleground-stats
                                 :battleground="battleground"
@@ -63,6 +63,7 @@
 
 <script>
 import Gamemode from '../../enums/gamemode';
+import BattlegroundName from '../BattlegroundName.vue';
 import BattlegroundStats from '../BattlegroundStats.vue';
 import DifficultyCard from '../DifficultyCard.vue';
 import EnemiesOverview from '../EnemiesOverview.vue';
@@ -72,7 +73,8 @@ export default {
     components: {
         DifficultyCard,
         BattlegroundStats,
-        EnemiesOverview
+        EnemiesOverview,
+        BattlegroundName
     },
     data() {
         return {

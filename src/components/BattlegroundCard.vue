@@ -3,7 +3,9 @@
         <div class="image text-center">
             <img :src="battleground.map.images[0]">
         </div>
-        <v-card-title>{{ title }}</v-card-title>
+        <v-card-title>
+            <battleground-name :battleground="battleground" />
+        </v-card-title>
         <v-card-text>
             <battleground-stats
                 :battleground="battleground"
@@ -18,10 +20,12 @@
 <script>
 import Difficulty from '../enums/difficulty';
 import Gamemode from '../enums/gamemode';
+import BattlegroundName from './BattlegroundName.vue';
 import BattlegroundStats from './BattlegroundStats.vue';
 
 export default {
     components: {
+        BattlegroundName,
         BattlegroundStats
     },
     props: {
