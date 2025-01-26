@@ -70,6 +70,15 @@
                 />
                 <guardian-selector-dialog
                     v-model="loadout.guardianIds[1]"
+                    activator-class="mb-8"
+                />
+
+                <consumable-selector-dialog
+                    v-model="loadout.consumableIds[0]"
+                    activator-class="mb-2"
+                />
+                <consumable-selector-dialog
+                    v-model="loadout.consumableIds[1]"
                 />
             </v-col>
         </v-row>
@@ -85,6 +94,7 @@ import SlotItemCard from '../components/loadout-page/SlotItemCard.vue';
 import TraitSlot from '../enums/traitSlot.js';
 import GuardianSelectorDialog from './loadout-page/GuardianSelectorDialog.vue';
 import draggable from 'vuedraggable'
+import ConsumableSelectorDialog from './loadout-page/ConsumableSelectorDialog.vue';
 
 export default {
     emits: ['update:model-value'],
@@ -93,6 +103,7 @@ export default {
         TraitSelectorDialog,
         SlotItemCard,
         GuardianSelectorDialog,
+        ConsumableSelectorDialog,
         draggable
     },
     props: {
@@ -121,6 +132,10 @@ export default {
                     noBonusTraitId: null,
                 },
                 guardianIds: [
+                    null,
+                    null
+                ],
+                consumableIds: [
                     null,
                     null
                 ],
@@ -183,8 +198,8 @@ export default {
             loadoutCode += encode(this.loadout.guardianIds[0])
             loadoutCode += encode(this.loadout.guardianIds[1])
             loadoutCode += "-"
-            loadoutCode += encode(null) // Consumable id
-            loadoutCode += encode(null) // Consumable id
+            loadoutCode += encode(this.loadout.consumableIds[0])
+            loadoutCode += encode(this.loadout.consumableIds[1])
             loadoutCode += "-"
             loadoutCode += encode(this.loadout.traits.pentagonTraitId)
             loadoutCode += encode(this.loadout.traits.diamondTraitId)
@@ -231,8 +246,10 @@ export default {
                 
             this.loadout.guardianIds[0] = decode(parts[3].substring(0, 1));
             this.loadout.guardianIds[1] = decode(parts[3].substring(1, 2));
-                
-                
+
+            this.loadout.consumableIds[0] = decode(parts[4].substring(0, 1));
+            this.loadout.consumableIds[1] = decode(parts[4].substring(1, 2));
+            
             this.loadout.traits.pentagonTraitId = decode(parts[5].substring(0, 1));
             this.loadout.traits.diamondTraitId = decode(parts[5].substring(1, 2));
             this.loadout.traits.triangleTraitId = decode(parts[5].substring(2, 3));
