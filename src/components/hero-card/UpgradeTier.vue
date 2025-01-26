@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import IconWithTooltip from "./IconWithTooltip.vue";
+import IconWithTooltip from "../IconWithTooltip.vue";
 export default {
     components: { IconWithTooltip },
     props: {

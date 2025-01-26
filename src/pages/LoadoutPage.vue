@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import LoadoutPresets from '../components/loadout-page/LoadoutPresets.vue';
+import LoadoutPresets from '../components/loadout-editor/LoadoutPresets.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
 
 export default {

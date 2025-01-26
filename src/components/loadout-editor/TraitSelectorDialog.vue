@@ -23,7 +23,7 @@
                             :size="2"
                             inactive
                         >
-                            <span class="font-italic no-trait-selected">
+                            <span class="font-italic">
                                 No trait selected
                             </span>
                         </trait-slot-icon>

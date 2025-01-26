@@ -103,7 +103,7 @@
 import Range from "../enums/range.js";
 import AbilityIcon from "./AbilityIcon.vue";
 import StatValue from "./StatValue.vue";
-import UpgradeTier from "./UpgradeTier.vue";
+import UpgradeTier from "./hero-card/UpgradeTier.vue";
 
 export default {
     components: { AbilityIcon, UpgradeTier, StatValue },

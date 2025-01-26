@@ -31,7 +31,7 @@
             <div 
                 v-if="showAbilities"
             >
-                <enemy-ability-icon
+                <enemy-ability-icon-with-tooltip
                     v-for="(ability, index) in enemy.abilities"
                     :key="index"
                     :ability="ability"
@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import EnemyAbilityIcon from './EnemyAbilityIcon.vue';
+import EnemyAbilityIconWithTooltip from './EnemyAbilityIconWithTooltip.vue';
 import StatValue from './StatValue.vue';
 
 export default {
     components: {
-        EnemyAbilityIcon,
+        EnemyAbilityIconWithTooltip,
         StatValue,
     },
     props: {

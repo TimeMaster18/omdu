@@ -106,7 +106,7 @@
 import DifficultyCard from '../DifficultyCard.vue';
 import Difficulty from '../../enums/difficulty.js';
 import BattlegroundCard from '../BattlegroundCard.vue';
-import DeselectCard from '../loadout-page/DeselectCard.vue';
+import DeselectCard from '../loadout-editor/DeselectCard.vue';
 import { useDataStore } from '../../stores/data.js';
 import BattlegroundStats from '../BattlegroundStats.vue';
 import GamemodeCard from '../GamemodeCard.vue';

@@ -31,7 +31,7 @@
 import LoadoutEditor from '../LoadoutEditor.vue';
 import CookieName from '../../enums/cookieName.js';
 import Cookies from 'js-cookie';
-import LoadoutPresets from '../loadout-page/LoadoutPresets.vue';
+import LoadoutPresets from '../loadout-editor/LoadoutPresets.vue';
 
 export default {
     emits: ['update:model-value'],

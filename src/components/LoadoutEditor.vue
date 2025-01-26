@@ -88,13 +88,13 @@
 <script>
 import { encode, decode } from '../utils/base62Util.js';
 import Dye from '../enums/dye.js';
-import HeroSelectorDialog from '../components/loadout-page/HeroSelectorDialog.vue';
-import TraitSelectorDialog from '../components/loadout-page/TraitSelectorDialog.vue';
-import SlotItemCard from '../components/loadout-page/SlotItemCard.vue';
+import HeroSelectorDialog from '../components/loadout-editor/HeroSelectorDialog.vue';
+import TraitSelectorDialog from '../components/loadout-editor/TraitSelectorDialog.vue';
+import SlotItemCard from '../components/loadout-editor/SlotItemCard.vue';
 import TraitSlot from '../enums/traitSlot.js';
-import GuardianSelectorDialog from './loadout-page/GuardianSelectorDialog.vue';
+import GuardianSelectorDialog from './loadout-editor/GuardianSelectorDialog.vue';
 import draggable from 'vuedraggable'
-import ConsumableSelectorDialog from './loadout-page/ConsumableSelectorDialog.vue';
+import ConsumableSelectorDialog from './loadout-editor/ConsumableSelectorDialog.vue';
 
 export default {
     emits: ['update:model-value'],
