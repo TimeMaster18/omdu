@@ -31,7 +31,7 @@ const consumables = Object.freeze([
         type: ConsumableType.Scroll,
         image: "images/consumables/Empty_Rift_Scroll_image.webp",
         effect: {
-            primary: "Enemies entering the Rift are worth 0 points for 10s",
+            primary: "Enemies entering the Rift are worth 0 points for 10s.",
             secondary: null
         },
         usageLimit: 1,
