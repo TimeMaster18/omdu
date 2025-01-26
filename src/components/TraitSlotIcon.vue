@@ -67,8 +67,12 @@ export default {
 	text-transform: capitalize;
 }
 
-.inactive {
+.inactive img {
     filter: grayscale();
     opacity: 0.5;
+}
+
+.inactive span {
+    opacity: 0.3;
 }
 </style>
