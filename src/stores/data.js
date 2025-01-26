@@ -7,6 +7,7 @@ import trapParts from '../data/trapParts';
 import guardians from '../data/guardians';
 import enemies from '../data/enemies';
 import battlegrounds from '../data/battlegrounds';
+import consumables from '../data/consumables';
 
 export const useDataStore = defineStore('data', {
     state() {
@@ -18,7 +19,8 @@ export const useDataStore = defineStore('data', {
             trapParts: trapParts,
             guardians: guardians,
             enemies: Object.values(enemies), // Enemies can be used as an enum, but in this case we just want the list of all enemies
-            battlegrounds: battlegrounds
+            battlegrounds: battlegrounds,
+            consumables: consumables
         };
     },
     getters: {

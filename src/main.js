@@ -53,6 +53,7 @@ import TraitsPage from './pages/TraitsPage.vue';
 import GearPage from './pages/GearPage.vue'
 import TrapsPage from './pages/TrapsPage.vue';
 import TrapPartsPage from './pages/TrapPartsPage.vue';
+import ConsumablesPage from './pages/ConsumablesPage.vue';
 import GuardiansPage from './pages/GuardiansPage.vue';
 import EnemiesPage from './pages/EnemiesPage.vue';
 import BattlegroundsPage from './pages/BattlegroundsPage.vue';
@@ -67,6 +68,7 @@ const router = createRouter({
         { path: '/omdu/gear', component: GearPage },
         { path: '/omdu/traps', component: TrapsPage },
         { path: '/omdu/trap-parts', component: TrapPartsPage },
+        { path: '/omdu/consumables', component: ConsumablesPage },
         { path: '/omdu/guardians', component: GuardiansPage },
         { path: '/omdu/enemies', component: EnemiesPage },
         { path: '/omdu/battlegrounds', component: BattlegroundsPage },

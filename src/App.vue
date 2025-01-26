@@ -48,6 +48,11 @@
                         title="Trap Parts"
                     />
                     <v-list-item
+                        to="consumables"
+                        prepend-icon="mdi-flask-round-bottom"
+                        title="Consumables"
+                    />
+                    <v-list-item
                         to="guardians"
                         prepend-icon="mdi-shield"
                         title="Guardians"
