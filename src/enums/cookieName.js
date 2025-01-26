@@ -3,6 +3,7 @@ const CookieName = Object.freeze({
     FirebaseSecret: "firebase-realtime-database-secret",
     PlayerIndex: "player-index",
     PlayerName: "player-name",
-    LoadoutPresets: "loadouts"
+    LoadoutPresets: "loadouts",
+    Loadout: "loadout"
 });
 export default CookieName;

@@ -20,6 +20,8 @@
 <script>
 import LoadoutPresets from '../components/loadout-editor/LoadoutPresets.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
+import CookieName from '../enums/cookieName';
+import Cookies from 'js-cookie';
 
 export default {
     components: {
@@ -28,12 +30,17 @@ export default {
     },
     data() {
         return {
-            loadoutCode: "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
+            loadoutCode: Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
         }
     },
     mounted() {
         if(this.$route.query.code !== undefined) {
             this.loadoutCode = this.$route.query.code;
+        }
+    },
+    watch: {
+        loadoutCode(loadoutCode) {
+            Cookies.set(CookieName.Loadout, loadoutCode, { expires: 365, sameSite: "Strict", secure: true });
         }
     }
 };
