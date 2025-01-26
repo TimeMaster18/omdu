@@ -6,6 +6,14 @@
             </v-container>
         </v-main>
         <v-bottom-navigation>
+            <router-link
+                to="."
+                class="logo px-2"
+            >
+                <img 
+                    src="./assets/images/logo.png"
+                >
+            </router-link>
             <v-menu open-on-hover>
                 <template #activator="{ props }">
                     <v-btn v-bind="props">
@@ -74,19 +82,17 @@ export default {
 };
 </script>
 
-<style>
-html {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-html::-webkit-scrollbar {
-	display: none;
-}
-</style>
-
 <style scoped>
 .menu-dropdown:deep(.v-list-item__prepend) {
     max-width: 36px;
+}
+
+.logo {
+    height: 100%;
+    max-width: fit-content;
+}
+
+.logo img {
+    height: 100%;
 }
 </style>

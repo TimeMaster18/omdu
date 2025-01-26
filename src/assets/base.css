@@ -24,3 +24,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
 }
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
