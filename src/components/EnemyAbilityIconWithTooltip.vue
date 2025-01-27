@@ -20,11 +20,13 @@
         </template>
 
         <template #default>
-            <div class="name">
-                {{ ability.name }}
-            </div>
-            <div class="mt-2">
-                {{ ability.description }}
+            <div class="px-2 py-1">
+                <div class="name">
+                    {{ ability.name }}
+                </div>
+                <div class="mt-2">
+                    {{ ability.description }}
+                </div>
             </div>
         </template>
     </component-with-tooltip>

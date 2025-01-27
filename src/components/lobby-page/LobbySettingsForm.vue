@@ -55,7 +55,6 @@
         />
         <v-btn
             variant="outlined"
-            class="mb-4"
             @click="saveFirebaseSettings"
         >
             Save

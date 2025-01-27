@@ -1,6 +1,6 @@
 <template>
     <v-dialog v-model="isOpen">
-        <v-card>
+        <v-card background="background">
             <v-card-text>
                 <div class="d-flex justify-end mb-4">
                     <!-- TODO: fix autosizing of loadout code field -->

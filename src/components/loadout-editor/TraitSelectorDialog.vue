@@ -181,7 +181,7 @@ export default {
 
 <style scoped>
 .trait-card {
-    min-width: none;
+    min-width: unset;
     max-width: none;
 }
 

@@ -44,6 +44,30 @@
                 xl="3"
                 order-xl="3"
             >
+                <v-row
+                    dense
+                    class="mb-2"
+                >
+                    <v-col cols="6">
+                        <guardian-selector-dialog v-model="loadout.guardianIds[0]" />
+                    </v-col>
+                    <v-col cols="6">
+                        <guardian-selector-dialog v-model="loadout.guardianIds[1]" />
+                    </v-col>
+                </v-row>
+
+                <v-row
+                    dense
+                    class="mb-2"
+                >
+                    <v-col cols="6">
+                        <consumable-selector-dialog v-model="loadout.consumableIds[0]" />
+                    </v-col>
+                    <v-col cols="6">
+                        <consumable-selector-dialog v-model="loadout.consumableIds[1]" />
+                    </v-col>
+                </v-row>
+
                 <trait-selector-dialog
                     v-model="loadout.traits.pentagonTraitId"
                     :bonus-slot="TraitSlot.Pentagon"
@@ -59,27 +83,7 @@
                     :bonus-slot="TraitSlot.Triangle"
                     activator-class="mb-2"
                 />
-                <trait-selector-dialog
-                    v-model="loadout.traits.noBonusTraitId"
-                    activator-class="mb-8"
-                />
-
-                <guardian-selector-dialog
-                    v-model="loadout.guardianIds[0]"
-                    activator-class="mb-2"
-                />
-                <guardian-selector-dialog
-                    v-model="loadout.guardianIds[1]"
-                    activator-class="mb-8"
-                />
-
-                <consumable-selector-dialog
-                    v-model="loadout.consumableIds[0]"
-                    activator-class="mb-2"
-                />
-                <consumable-selector-dialog
-                    v-model="loadout.consumableIds[1]"
-                />
+                <trait-selector-dialog v-model="loadout.traits.noBonusTraitId" />
             </v-col>
         </v-row>
     </div>

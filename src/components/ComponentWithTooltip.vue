@@ -9,6 +9,7 @@
             class="tooltip"
             content-class="tooltip-content elevation-2"
             max-width="400"
+            :disabled="disabledTooltip"
         >
             <template #activator="{ props }">
                 <slot
@@ -34,6 +35,10 @@ export default {
         height: {
             type: String,
             default: "4rem"
+        },
+        disabledTooltip: {
+            type: Boolean,
+            default: false
         }
     },
 }
@@ -46,5 +51,6 @@ export default {
 	border-color: rgb(var(--v-theme-on-surface));
 	background: rgb(var(--v-theme-surface)) !important;
 	color: rgb(var(--v-theme-on-surface)) !important;
+    padding: 0;
 }
 </style>

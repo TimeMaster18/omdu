@@ -13,7 +13,9 @@
         </template>
 
         <template #default>
-            <slot />
+            <div class="px-2 py-1">
+                <slot />
+            </div>
         </template>
     </component-with-tooltip>
 </template>

@@ -6,33 +6,40 @@
         max-width="1300"
     >
         <template #activator>
-            <v-card
-                class="consumable-card"
-                @click="isOpen = true"
-                :class="activatorClass"
+            <component-with-tooltip
+                height="calc(1rem + 4rem + 1rem)"
+                width="100%"
+                :disabled-tooltip="selectedConsumable === null"
             >
-                <v-card-text v-if="selectedConsumable !== null">
-                    <div>
-                        {{ selectedConsumable.effect.primary }}
-                    </div>
-
-                    <div
-                        v-if="selectedConsumable.effect.secondary"
-                        class="mt-4"
+                <template #activator="{ props }">
+                    <v-card
+                        class="consumable-card d-flex text-center align-center"
+                        @click="isOpen = true"
+                        v-bind="props"
                     >
-                        <span v-if="selectedConsumable.type === ConsumableType.Potion">
-                            Until death: 
-                        </span>
-                        {{ selectedConsumable.effect.secondary }}
-                    </div>
-                </v-card-text>
-                <v-card-text
-                    v-else
-                    class="font-italic no-consumable-selected"
-                >
-                    No consumable selected
-                </v-card-text>
-            </v-card>
+                        <v-card-text v-if="selectedConsumable !== null">
+                            <img
+                                class="consumable-image"
+                                :src="selectedConsumable.image"
+                            >
+                        </v-card-text>
+                        <v-card-text
+                            v-else
+                            class="font-italic no-consumable-selected"
+                        >
+                            No consumable selected
+                        </v-card-text>
+                    </v-card>
+                </template>
+
+                <template #default>
+                    <consumable-card
+                        v-if="selectedConsumable !== null"
+                        :consumable="selectedConsumable"
+                        class="elevation-0"
+                    />
+                </template>
+            </component-with-tooltip>
         </template>
 
         <template #default>
@@ -104,11 +111,13 @@ import { useDataStore } from '../../stores/data';
 import ConsumableCard from '../ConsumableCard.vue';
 import DeselectCard from './DeselectCard.vue';
 import ConsumableType from '../../enums/consumableType.js';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
     components: {
         ConsumableCard,
-        DeselectCard
+        DeselectCard,
+        ComponentWithTooltip
     },
     emits: ['update:model-value'],
     setup() {
@@ -122,10 +131,6 @@ export default {
             type: Number,
             required: true
         },
-        activatorClass: {
-            type:String,
-            default: null
-        }
     },
     data() {
         return {
@@ -178,8 +183,9 @@ export default {
 
 <style scoped>
 .consumable-card {
-    min-width: none;
+    min-width: unset;
     max-width: none;
+    height: calc(1rem + 4rem + 1rem);
 }
 
 .no-consumable-selected {
@@ -188,5 +194,9 @@ export default {
 
 .selected {
     outline: rgb(var(--v-theme-on-surface)) 2px solid;
+}
+
+.consumable-image {
+    height: 4rem;
 }
 </style>

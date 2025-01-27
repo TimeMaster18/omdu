@@ -5,34 +5,39 @@
         scrollable
     >
         <template #activator>
-            <v-card
-                class="guardian-card"
-                @click="isOpen = true"
-                :class="activatorClass"
+            <component-with-tooltip
+                height="calc(1rem + 4rem + 1rem)"
+                width="100%"
+                :disabled-tooltip="selectedGuardian === null"
             >
-                <v-card-text v-if="selectedGuardian !== null">
-                    <div>
-                        Aura: {{ selectedGuardian.aura.description }}
-                    </div>
-
-                    <div class="mt-4">
-                        <guardian-home-icon
-                            :guardian-home="selectedGuardian.home"
-                            :size="2"
+                <template #activator="{ props }">
+                    <v-card
+                        class="guardian-card d-flex text-center align-center"
+                        @click="isOpen = true"
+                        v-bind="props"
+                    >
+                        <img
+                            v-if="selectedGuardian !== null"
+                            class="guardian-image mx-auto"
+                            :src="selectedGuardian.image"
                         >
-                            <div class="ml-2">
-                                Deals 35% more damage and has 35% more health.
-                            </div>
-                        </guardian-home-icon>
-                    </div>
-                </v-card-text>
-                <v-card-text
-                    v-else
-                    class="font-italic no-guardian-selected"
-                >
-                    No guardian selected
-                </v-card-text>
-            </v-card>
+                        <v-card-text
+                            v-else
+                            class="font-italic no-guardian-selected"
+                        >
+                            No guardian selected
+                        </v-card-text>
+                    </v-card>
+                </template>
+
+                <template #default>
+                    <guardian-card
+                        v-if="selectedGuardian !== null"
+                        :guardian="selectedGuardian"
+                        class="elevation-0"
+                    />
+                </template>
+            </component-with-tooltip>
         </template>
 
         <template #default>
@@ -64,13 +69,13 @@
 import { useDataStore } from '../../stores/data';
 import GuardianCard from '../GuardianCard.vue';
 import DeselectCard from './DeselectCard.vue';
-import GuardianHomeIcon from '../GuardianHomeIcon.vue';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
     components: {
         GuardianCard,
         DeselectCard,
-        GuardianHomeIcon
+        ComponentWithTooltip
     },
     emits: ['update:model-value'],
     setup() {
@@ -84,10 +89,6 @@ export default {
             type: Number,
             required: true
         },
-        activatorClass: {
-            type:String,
-            default: null
-        }
     },
     data() {
         return {
@@ -131,8 +132,9 @@ export default {
 
 <style scoped>
 .guardian-card {
-    min-width: none;
+    min-width: unset;
     max-width: none;
+    height: calc(1rem + 4rem + 1rem);
 }
 
 .no-guardian-selected {
@@ -141,5 +143,9 @@ export default {
 
 .selected {
     outline: rgb(var(--v-theme-on-surface)) 2px solid;
+}
+
+.guardian-image {
+    height: 100%;
 }
 </style>
