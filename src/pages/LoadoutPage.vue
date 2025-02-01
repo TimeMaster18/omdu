@@ -17,6 +17,11 @@
                 hide-details
             />
             <copy-to-clipboard-button
+                :value="loadoutCode"
+                class="ml-2"
+                copy-icon="mdi-content-copy"
+            />
+            <copy-to-clipboard-button
                 :value="shareLink"
                 class="ml-2"
                 copy-icon="mdi-share-variant"
