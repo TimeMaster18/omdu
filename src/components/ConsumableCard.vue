@@ -10,28 +10,27 @@
                 {{ consumable.usageLimit }} {{ consumable.usageLimit === 1 ? "use" : "uses" }}
             </stat-value>
 
-            <!-- Effects -->
+            <!-- Primary Effects -->
             <div class="mt-4">
                 {{ consumable.effect.primary }}
             </div>
 
-            <!-- Effects -->
+            <!-- Secondary Effects -->
             <div
                 v-if="consumable.effect.secondary"
                 class="mt-4"
             >
-                <span v-if="consumable.type === ConsumableType.Potion">
-                    Until death: 
-                </span>
+                Until death: 
                 {{ consumable.effect.secondary }}
+                <span class="transparent">
+                    (doesn't stack)
+                </span>
             </div>
 
             <!-- Flavor text -->
-            <div class="mt-4 font-italic flavor-text">
+            <div class="mt-4 font-italic transparent">
                 {{ consumable.flavourText }}
             </div>
-            
-            <!-- Secondary effects are lost on death and can't be stacked. -->
         </v-card-text>
     </v-card>
 </template>
@@ -81,7 +80,7 @@ export default {
 	text-transform: capitalize;
 }
 
-.flavor-text {
+.transparent {
     opacity: 0.3;
 }
 </style>
