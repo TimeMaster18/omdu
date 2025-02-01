@@ -19,7 +19,7 @@
             </template>
 
             <template #default>
-                <slot />
+                <slot name="tooltip" />
             </template>
         </v-tooltip>
     </v-lazy>

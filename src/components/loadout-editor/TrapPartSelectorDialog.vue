@@ -6,26 +6,42 @@
         width="auto"
     >
         <template #activator>
-            <v-card 
-                class="trap-part-card text-center"
-                @click="isOpen = true"
-                :class="activatorClass"
+            <component-with-tooltip
+                height="auto"
+                width="auto"
+                :disabled-tooltip="selectedTrapPart === null"
             >
-                <v-card-text class="text-left py-2">
-                    <trap-part-icon
+                <template #activator="{ props }">
+                    <v-card 
+                        class="trap-part-card text-center"
+                        @click="isOpen = true"
+                        :class="activatorClass"
+                        v-bind="props"
+                    >
+                        <v-card-text class="text-left py-2">
+                            <img
+                                v-if="selectedTrapPart !== null"
+                                class="trap-part-image mx-auto"
+                                :src="selectedTrapPart.image"
+                            >
+                            <trap-part-slot-icon
+                                v-else
+                                :trap-part-slot="trapPartSlot"
+                                :size="4"
+                                class="justify-center"
+                            />
+                        </v-card-text>
+                    </v-card>
+                </template>
+
+                <template #tooltip>
+                    <trap-part-card
                         v-if="selectedTrapPart !== null"
                         :trap-part="selectedTrapPart"
-                        :size="4"
-                        class="justify-center"
+                        class="elevation-0"
                     />
-                    <trap-part-slot-icon
-                        v-else
-                        :trap-part-slot="trapPartSlot"
-                        :size="4"
-                        class="justify-center"
-                    />
-                </v-card-text>
-            </v-card>
+                </template>
+            </component-with-tooltip>
         </template>
 
         <template #default>
@@ -55,17 +71,17 @@
 
 <script>
 import { useDataStore } from '../../stores/data';
-import TrapPartIcon from './TrapPartIcon.vue';
 import TrapPartCard from '../TrapPartCard.vue';
 import TrapPartSlotIcon from '../TrapPartSlotIcon.vue';
 import DeselectCard from './DeselectCard.vue';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
     components:{
-        TrapPartIcon,
         TrapPartSlotIcon,
         TrapPartCard,
-        DeselectCard
+        DeselectCard,
+        ComponentWithTooltip
     },
     emits: ['update:model-value'],
     setup() {
@@ -134,6 +150,13 @@ export default {
 .trap-part-card {
     width: 100%;
     line-height: 0;
+}
+
+.trap-part-image {
+    min-height: 4rem;
+    max-height: 4rem;
+    min-width: 4rem;
+    max-width: 4rem;
 }
 
 .selected {

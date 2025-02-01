@@ -32,7 +32,7 @@
                     </v-card>
                 </template>
 
-                <template #default>
+                <template #tooltip>
                     <consumable-card
                         v-if="selectedConsumable !== null"
                         :consumable="selectedConsumable"

@@ -12,7 +12,7 @@
             >
         </template>
 
-        <template #default>
+        <template #tooltip>
             <div class="px-2 py-1">
                 <slot />
             </div>

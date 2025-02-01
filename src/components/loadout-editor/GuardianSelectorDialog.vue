@@ -30,7 +30,7 @@
                     </v-card>
                 </template>
 
-                <template #default>
+                <template #tooltip>
                     <guardian-card
                         v-if="selectedGuardian !== null"
                         :guardian="selectedGuardian"

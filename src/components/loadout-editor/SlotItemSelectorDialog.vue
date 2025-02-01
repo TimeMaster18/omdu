@@ -5,7 +5,7 @@
         scrollable
     >
         <template #activator>
-            <v-card
+            <!-- <v-card
                 class="slot-item-card text-center"
                 @click="isOpen = true"
                 :class="activatorClass"
@@ -20,7 +20,50 @@
                 >
                     No slot item selected
                 </v-card-text>
-            </v-card>
+            </v-card> -->
+
+            <component-with-tooltip
+                height="auto"
+                width="auto"
+                :disabled-tooltip="selectedSlotItem === null"
+            >
+                <template #activator="{ props }">
+                    <v-card 
+                        class="slot-item-card text-center"
+                        @click="isOpen = true"
+                        :class="activatorClass"
+                        v-bind="props"
+                    >
+                        <img
+                            v-if="selectedSlotItem !== null"
+                            :src="selectedSlotItem?.image"
+                        >
+                        <v-card-text
+                            v-else
+                            class="font-italic no-slot-item-selected"
+                        >
+                            No slot item selected
+                        </v-card-text>
+                    </v-card>
+                </template>
+
+                <template #tooltip>
+                    <trap-card
+                        v-if="slotItemType === 'trap'"
+                        :trap="selectedSlotItem"
+                        show-image
+                        show-name
+                        show-stats
+                        show-description
+                        class="elevation-0"
+                    />
+                    <gear-card
+                        v-if="slotItemType === 'gear'"
+                        :gear="selectedSlotItem"
+                        class="elevation-0"
+                    />
+                </template>
+            </component-with-tooltip>
         </template>
 
         <template #default>
@@ -97,12 +140,14 @@ import { useDataStore } from '../../stores/data';
 import GearCard from '../GearCard.vue';
 import TrapCard from '../TrapCard.vue';
 import DeselectCard from './DeselectCard.vue';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
     components:{
         TrapCard,
         GearCard,
-        DeselectCard
+        DeselectCard,
+        ComponentWithTooltip
     },
     emits: ['update:model-value'],
     setup() {
