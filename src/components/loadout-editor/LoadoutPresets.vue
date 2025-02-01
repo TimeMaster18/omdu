@@ -61,7 +61,10 @@
                                 {{ loadout.name }}
                             </template>
                             <template #actions>
-                                <copy-to-clipboard-icon :value="`${baseShareLink}${loadout.code}`" />
+                                <copy-to-clipboard-icon
+                                    :value="`${baseShareLink}${loadout.code}`" 
+                                    copy-icon="mdi-share-variant"
+                                />
                                 <v-icon
                                     class="ml-2"
                                     @click.stop="deleteLoadout(index)"

@@ -23,13 +23,10 @@
             </div>
             <div class="actions mr-1 mt-1">
                 <slot name="actions" />
-                <v-icon
+                <copy-to-clipboard-icon
                     v-if="showCopyAction"
-                    @click.stop="copyLoadoutCodeToClipboard"
-                    :disabled="copying"
-                >
-                    mdi-content-copy
-                </v-icon>
+                    :value="loadoutCode"
+                />
                 <v-icon
                     v-if="showOpenLoadoutAction"
                     @click.stop="openLoadoutLink"
@@ -55,6 +52,7 @@
 import Dye from '../../enums/dye.js';
 import { useDataStore } from '../../stores/data.js';
 import { decode } from '../../utils/base62Util.js';
+import CopyToClipboardIcon from '../CopyToClipboardIcon.vue';
 
 export default {
     setup() {
@@ -62,6 +60,9 @@ export default {
         return {
             dataStore
         };
+    },
+    components: {
+        CopyToClipboardIcon,
     },
     props: {
         loadoutCode: {
@@ -75,11 +76,6 @@ export default {
         showOpenLoadoutAction: {
             type: Boolean,
             default: false
-        }
-    },
-    data() {
-        return {
-            copying: false
         }
     },
     computed: {
@@ -130,21 +126,14 @@ export default {
                 }
             });
             return slotItems;
+        },
+        shareLink() {
+            return `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
         }
     },
     methods: {
-        copyLoadoutCodeToClipboard() {
-            if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
-                this.copying = true;
-                navigator.clipboard.writeText(this.loadoutCode);
-                setTimeout(() => this.copying = false, 2000);
-            } else {
-                alert("Failed to copy loadout code to your clipboard 😢");
-            }
-        },
         openLoadoutLink() {
-            let url = `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
-            window.open(url, '_blank');
+            window.open(this.shareLink, '_blank');
         }
     }
 }

@@ -12,7 +12,7 @@
                 mdi-clipboard-check
             </v-icon>
             <v-icon v-else>
-                mdi-share-variant
+                {{ copyIcon }}
             </v-icon>
         </transition>
     </v-btn>
@@ -24,7 +24,11 @@ export default {
         value: {
             type: String,
             required: true
-        }
+        },
+        copyIcon: {
+            type: String,
+            default: "mdi-content-copy"
+        },
     },
     data() {
         return {
@@ -48,13 +52,4 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>

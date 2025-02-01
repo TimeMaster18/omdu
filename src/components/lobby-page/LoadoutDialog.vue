@@ -16,6 +16,7 @@
                     <copy-to-clipboard-button
                         :value="shareLink"
                         class="mr-2"
+                        copy-icon="mdi-share-variant"
                     />
                     <loadout-presets
                         :current-loadout-code="vModelProxy"

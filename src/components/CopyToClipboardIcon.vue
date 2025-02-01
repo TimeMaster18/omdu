@@ -4,10 +4,17 @@
         mode="out-in"
     >
         <v-icon
-            @click.stop="copyToClipboard"
-            :disabled="cooldown"
+            v-if="cooldown"
+            @click.stop
+            disabled
         >
-            {{ cooldown ? "mdi-clipboard-check" : "mdi-share-variant" }}
+            mdi-clipboard-check
+        </v-icon>
+        <v-icon
+            v-else
+            @click.stop="copyToClipboard"
+        >
+            {{ copyIcon }}
         </v-icon>
     </transition>
 </template>
@@ -18,7 +25,11 @@ export default {
         value: {
             type: String,
             required: true
-        }
+        },
+        copyIcon: {
+            type: String,
+            default: "mdi-content-copy"
+        },
     },
     data() {
         return {
@@ -27,7 +38,6 @@ export default {
     },
     methods: {
         copyToClipboard() {
-            console.log("click");
             if(this.cooldown) return;
 
             if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
@@ -43,13 +53,4 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease-out;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>

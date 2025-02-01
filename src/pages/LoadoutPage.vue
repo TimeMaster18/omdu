@@ -19,6 +19,7 @@
             <copy-to-clipboard-button
                 :value="shareLink"
                 class="ml-2"
+                copy-icon="mdi-share-variant"
             />
             <loadout-presets
                 activator-class="ml-2"
