@@ -5,36 +5,20 @@
         scrollable
     >
         <template #activator>
-            <!-- <v-card
-                class="slot-item-card text-center"
-                @click="isOpen = true"
-                :class="activatorClass"
-            >
-                <img
-                    v-if="selectedSlotItem !== null"
-                    :src="selectedSlotItem?.image"
-                >
-                <v-card-text
-                    v-else
-                    class="font-italic no-slot-item-selected"
-                >
-                    No slot item selected
-                </v-card-text>
-            </v-card> -->
-
             <component-with-tooltip
-                height="auto"
-                width="auto"
+                height="7.5rem"
+                width="100%"
                 :disabled-tooltip="selectedSlotItem === null"
             >
                 <template #activator="{ props }">
                     <v-card 
-                        class="slot-item-card text-center"
+                        class="slot-item-card d-flex text-center align-center"
                         @click="isOpen = true"
                         :class="activatorClass"
                         v-bind="props"
                     >
                         <img
+                            class="mx-auto"
                             v-if="selectedSlotItem !== null"
                             :src="selectedSlotItem?.image"
                         >
@@ -239,7 +223,6 @@ export default {
 }
 
 .no-slot-item-selected {
-    margin-top: calc((7.5rem - 51.95px) / 2);
     opacity: 0.3;
 }
 

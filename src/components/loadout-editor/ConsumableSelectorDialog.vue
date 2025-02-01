@@ -10,6 +10,7 @@
                 height="calc(1rem + 4rem + 1rem)"
                 width="100%"
                 :disabled-tooltip="selectedConsumable === null"
+                class="wrapper"
             >
                 <template #activator="{ props }">
                     <v-card
@@ -17,12 +18,11 @@
                         @click="isOpen = true"
                         v-bind="props"
                     >
-                        <v-card-text v-if="selectedConsumable !== null">
-                            <img
-                                class="consumable-image"
-                                :src="selectedConsumable.image"
-                            >
-                        </v-card-text>
+                        <img
+                            v-if="selectedConsumable !== null"
+                            class="consumable-image mx-auto"
+                            :src="selectedConsumable.image"
+                        >
                         <v-card-text
                             v-else
                             class="font-italic no-consumable-selected"
@@ -198,5 +198,10 @@ export default {
 
 .consumable-image {
     height: 4rem;
+}
+
+.wrapper {
+    background-color: rgb(var(--v-theme-surface));
+    border-radius: 4px;
 }
 </style>

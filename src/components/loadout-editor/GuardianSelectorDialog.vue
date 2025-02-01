@@ -9,6 +9,7 @@
                 height="calc(1rem + 4rem + 1rem)"
                 width="100%"
                 :disabled-tooltip="selectedGuardian === null"
+                class="wrapper"
             >
                 <template #activator="{ props }">
                     <v-card
@@ -147,5 +148,10 @@ export default {
 
 .guardian-image {
     height: 100%;
+}
+
+.wrapper {
+    background-color: rgb(var(--v-theme-surface));
+    border-radius: 4px;
 }
 </style>
