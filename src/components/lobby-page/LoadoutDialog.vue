@@ -8,17 +8,23 @@
                         v-model="vModelProxy"
                         variant="outlined"
                         hide-details
-                        class="mr-2 shrink loadout-code-text-field"
+                        class="shrink loadout-code-text-field"
                         reverse
                         max-width="1000"
                         readonly
                     />
                     <copy-to-clipboard-button
+                        :value="vModelProxy"
+                        class="ml-2"
+                        copy-icon="mdi-content-copy"
+                    />
+                    <copy-to-clipboard-button
                         :value="shareLink"
-                        class="mr-2"
+                        class="ml-2"
                         copy-icon="mdi-share-variant"
                     />
                     <loadout-presets
+                        activator-class="ml-2"
                         :current-loadout-code="vModelProxy"
                         @import="importLoadoutCode"
                     />
