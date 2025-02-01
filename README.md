@@ -14,4 +14,4 @@ This website is a fan-made project dedicated to Orcs Must Die! Unchained, a disc
 
 The use of these materials is done in accordance with applicable EU copyright laws, including exceptions for non-commercial, educational, and archival purposes as outlined in the EU Copyright Directive (Directive 2019/790) and relevant national laws. This website is not affiliated with, endorsed by, or sponsored by Robot Entertainment. No copyright infringement is intended.
 
-If you are a rights holder and believe any content should be removed or modified, please contact me at [tripledutch19@gmail.com](mailto:tripledutch19@gmail.com) , and I will address your concerns promptly.
+If you are a rights holder and believe any content should be removed or modified, please contact me at [tripledutch19@gmail.com](mailto:tripledutch19@gmail.com), and I will address your concerns promptly.
