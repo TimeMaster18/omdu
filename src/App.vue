@@ -2,7 +2,7 @@
     <v-layout>
         <v-main>
             <v-container fluid>
-                <router-view />
+                <router-view :key="$route.fullPath" />
             </v-container>
         </v-main>
         <v-bottom-navigation>

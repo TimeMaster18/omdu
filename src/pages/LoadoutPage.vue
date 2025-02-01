@@ -45,7 +45,7 @@ export default {
     },
     data() {
         return {
-            loadoutCode: Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000",
+            loadoutCode: null,
             sharedLoadout: false
         }
     },
@@ -53,6 +53,9 @@ export default {
         if(this.$route.query.code !== undefined) {
             this.sharedLoadout = true;
             this.loadoutCode = this.$route.query.code;
+        } else {
+            this.sharedLoadout = false;
+            this.loadoutCode = Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
         }
     },
     computed: {
