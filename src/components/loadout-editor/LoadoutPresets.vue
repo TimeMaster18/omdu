@@ -61,7 +61,11 @@
                                 {{ loadout.name }}
                             </template>
                             <template #actions>
-                                <v-icon @click.stop="deleteLoadout(index)">
+                                <copy-to-clipboard-icon :value="`${baseShareLink}${loadout.code}`" />
+                                <v-icon
+                                    class="ml-2"
+                                    @click.stop="deleteLoadout(index)"
+                                >
                                     mdi-delete
                                 </v-icon>
                             </template>
@@ -78,12 +82,14 @@ import Cookies from 'js-cookie';
 import CookieName from '../../enums/cookieName';
 import LoadoutPreviewCard from '../lobby-page/LoadoutPreviewCard.vue';
 import DividerTitle from '../DividerTitle.vue';
+import CopyToClipboardIcon from '../CopyToClipboardIcon.vue';
 
 export default {
     emits: ["import"],
     components: {
         LoadoutPreviewCard,
-        DividerTitle
+        DividerTitle,
+        CopyToClipboardIcon
     },
     props: {
         currentLoadoutCode: {
@@ -99,7 +105,8 @@ export default {
         return {
             importMenuIsOpen: false,
             loadouts: [],
-            loadoutName: null
+            loadoutName: null,
+            baseShareLink: `${window.location.origin}/omdu/loadout?code=`
         }
     },
     mounted() {
