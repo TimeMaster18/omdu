@@ -1,5 +1,10 @@
 <template>
     <div v-if="firebaseCorrectlySetup">
+        <v-row class="justify-end px-2">
+            <settings-dialog>
+                <lobby-settings-form class="settings" />
+            </settings-dialog>
+        </v-row>
         <v-row class="justify-center">
             <v-col
                 v-for="(code, index) in loadoutCodes"
@@ -42,9 +47,10 @@
                     class="mx-2 mb-2"
                     type="warning"
                     variant="outlined"
+                    density="compact"
                     width="fit-content"
                 >
-                    Due to incomplete wave data we're only able to show notable enemies
+                    Due to incomplete wave data we're only able to show notable enemies.
                 </v-alert>
                 <enemies-overview
                     :enemies="battlegroundInfo.enemies"
@@ -52,12 +58,11 @@
                 />
             </v-col>
         </v-row>
-        <v-divider
-            class="my-2"
-            thickness="2"
-        />
     </div>
-    <lobby-settings-form class="settings mx-auto" />
+    <lobby-settings-form
+        v-else
+        class="settings mx-auto"
+    />
 </template>
 
 <script>
@@ -70,6 +75,7 @@ import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
+import SettingsDialog from '../components/SettingsDialog.vue';
 
 export default {
     components: {
@@ -77,7 +83,8 @@ export default {
         LoadoutPreviewCard,
         BattlegroundSelectionDialog,
         LoadoutDialog,
-        EnemiesOverview
+        EnemiesOverview,
+        SettingsDialog
     },
     setup() {
         const lobbyStore = useLobbyStore();
@@ -146,5 +153,6 @@ export default {
 
 .settings {
     max-width: 500px;
+    width: 500px;
 }
 </style>

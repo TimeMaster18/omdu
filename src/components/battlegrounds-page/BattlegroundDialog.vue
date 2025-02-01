@@ -46,9 +46,10 @@
                             class="mx-2 mb-2"
                             type="warning"
                             variant="outlined"
+                            density="compact"
                             width="fit-content"
                         >
-                            Due to incomplete wave data we're only able to show notable enemies
+                            Due to incomplete wave data we're only able to show notable enemies.
                         </v-alert>
                         <enemies-overview
                             :enemies="battleground.enemies"

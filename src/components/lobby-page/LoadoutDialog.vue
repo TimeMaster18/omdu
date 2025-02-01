@@ -13,6 +13,10 @@
                         max-width="1000"
                         readonly
                     />
+                    <copy-to-clipboard-button
+                        :value="shareLink"
+                        class="mr-2"
+                    />
                     <loadout-presets
                         :current-loadout-code="vModelProxy"
                         @import="importLoadoutCode"
@@ -32,11 +36,12 @@ import LoadoutEditor from '../LoadoutEditor.vue';
 import CookieName from '../../enums/cookieName.js';
 import Cookies from 'js-cookie';
 import LoadoutPresets from '../loadout-editor/LoadoutPresets.vue';
+import CopyToClipboardButton from '../CopyToClipboardButton.vue';
 
 export default {
     emits: ['update:model-value'],
     expose: ["open", "close"],
-    components: { LoadoutEditor, LoadoutPresets },
+    components: { LoadoutEditor, LoadoutPresets, CopyToClipboardButton },
     props: {
         modelValue: {
             type: String,
@@ -58,6 +63,9 @@ export default {
             set(value) {
                 this.$emit("update:model-value", value);
             }
+        },
+        shareLink() {
+            return `${window.location.origin}/omdu/loadout?code=${this.vModelProxy}`;
         }
     },
     methods: {

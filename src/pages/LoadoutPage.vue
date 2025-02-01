@@ -1,5 +1,14 @@
 <template>
     <div>
+        <v-alert
+            v-if="sharedLoadout"
+            type="warning"
+            variant="outlined"
+            class="mb-2"
+            density="compact"
+        >
+            You're viewing a shared loadout. Any changes will be lost if you reload or leave the page. To keep this loadout, you can save it to your loadout presets manually.
+        </v-alert>
         <div class="d-flex mb-4">
             <v-text-field
                 class="loadout-code-text-field"
@@ -7,8 +16,12 @@
                 variant="outlined"
                 hide-details
             />
+            <copy-to-clipboard-button
+                :value="shareLink"
+                class="ml-2"
+            />
             <loadout-presets
-                activator-class="ml-4"
+                activator-class="ml-2"
                 :current-loadout-code="loadoutCode"
                 @import="(importedLoadoutCode) => loadoutCode = importedLoadoutCode"
             />
@@ -18,6 +31,7 @@
 </template>
 
 <script>
+import CopyToClipboardButton from '../components/CopyToClipboardButton.vue';
 import LoadoutPresets from '../components/loadout-editor/LoadoutPresets.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
 import CookieName from '../enums/cookieName';
@@ -26,20 +40,29 @@ import Cookies from 'js-cookie';
 export default {
     components: {
         LoadoutEditor,
-        LoadoutPresets
+        LoadoutPresets,
+        CopyToClipboardButton
     },
     data() {
         return {
-            loadoutCode: Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
+            loadoutCode: Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000",
+            sharedLoadout: false
         }
     },
     mounted() {
         if(this.$route.query.code !== undefined) {
+            this.sharedLoadout = true;
             this.loadoutCode = this.$route.query.code;
+        }
+    },
+    computed: {
+        shareLink() {
+            return `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
         }
     },
     watch: {
         loadoutCode(loadoutCode) {
+            if(this.sharedLoadout) return;
             Cookies.set(CookieName.Loadout, loadoutCode, { expires: 365, sameSite: "Strict", secure: true });
         }
     }

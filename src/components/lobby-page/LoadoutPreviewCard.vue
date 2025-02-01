@@ -32,7 +32,7 @@
                 </v-icon>
                 <v-icon
                     v-if="showOpenLoadoutAction"
-                    @click.stop="openLoadoutLinkToClipboard"
+                    @click.stop="openLoadoutLink"
                     class="ml-2"
                 >
                     mdi-open-in-new
@@ -142,7 +142,7 @@ export default {
                 alert("Failed to copy loadout code to your clipboard 😢");
             }
         },
-        openLoadoutLinkToClipboard() {
+        openLoadoutLink() {
             let url = `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
             window.open(url, '_blank');
         }
