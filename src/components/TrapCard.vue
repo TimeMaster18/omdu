@@ -13,7 +13,7 @@
             <!-- Stats -->
             <div v-if="showStats">
                 <stat-value
-                    v-if="trap.damageType"
+                    v-if="trap.placement"
                     :icon="placementIcon"
                 >
                     <span class="capitalize">
