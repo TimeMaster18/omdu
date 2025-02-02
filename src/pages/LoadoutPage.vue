@@ -61,7 +61,7 @@ export default {
             this.loadoutCode = this.$route.query.code;
         } else {
             this.sharedLoadout = false;
-            this.loadoutCode = Cookies.get(CookieName.Loadout) ?? "Player-1091-000000000000000000-00-00-0000-0000000000000000000000000000"
+            this.loadoutCode = Cookies.get(CookieName.Loadout) ?? "Player-0000-000000000000000000-00-00-0000-0000000000000000000000000000"
         }
     },
     computed: {

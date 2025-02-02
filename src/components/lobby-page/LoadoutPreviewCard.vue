@@ -49,10 +49,9 @@
 </template>
 
 <script>
-import Dye from '../../enums/dye.js';
 import { useDataStore } from '../../stores/data.js';
-import { decode } from '../../utils/base62Util.js';
 import CopyToClipboardIcon from '../CopyToClipboardIcon.vue';
+import { load as loadLoadout } from '../../utils/loadoutUtil.js';
 
 export default {
     setup() {
@@ -80,35 +79,7 @@ export default {
     },
     computed: {
         loadout() {
-            let loadout = {
-                playerName: 'Player',
-                heroId: null,
-                skinId: null,
-                dyeId: Dye.Normal,
-                guardianIds: [null, null],
-                slotItemIds: [null, null, null, null, null, null, null, null, null],
-            };
-
-            try {
-                // Turn the loadoat code into loadout data
-                const parts = this.loadoutCode.split("-");
-                loadout.playerName = parts[0];
-
-                loadout.heroId = decode(parts[1].substring(0, 1));
-                loadout.skinId = decode(parts[1].substring(1, 3));
-                loadout.dyeId = decode(parts[1].substring(3, 4));
-
-                for (let index = 0; index < loadout.slotItemIds.length; index++) {
-                    loadout.slotItemIds[index] = decode(parts[2].substring(index * 2, (index + 1) * 2));
-                }
-                
-                loadout.guardianIds[0] = decode(parts[3].substring(0, 1));
-                loadout.guardianIds[1] = decode(parts[3].substring(1, 2));
-            } catch (exception) {
-                return null;
-            }
-
-            return loadout;
+            return loadLoadout(this.loadoutCode);
         },
         hero() {
             if(this.loadout === null) return null;
@@ -118,11 +89,11 @@ export default {
             if(this.loadout === null) return [null, null, null, null, null, null, null, null, null];
 
             let slotItems = [];
-            this.loadout.slotItemIds.forEach(slotItemId => {
-                if(100 <= slotItemId && slotItemId <= 200) {
-                    slotItems.push(JSON.parse(JSON.stringify(this.dataStore.traps)).find(trap => trap.id === slotItemId) ?? null);
+            this.loadout.slots.forEach(slot => {
+                if(100 <= slot.itemId && slot.itemId <= 200) {
+                    slotItems.push(JSON.parse(JSON.stringify(this.dataStore.traps)).find(trap => trap.id === slot.itemId) ?? null);
                 } else {
-                    slotItems.push(JSON.parse(JSON.stringify(this.dataStore.gear)).find(gear => gear.id === slotItemId) ?? null);
+                    slotItems.push(JSON.parse(JSON.stringify(this.dataStore.gear)).find(gear => gear.id === slot.itemId) ?? null);
                 }
             });
             return slotItems;

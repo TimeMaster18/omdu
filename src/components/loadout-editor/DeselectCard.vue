@@ -1,7 +1,7 @@
 <template>
     <v-card class="text-center font-italic elevation-0 card">
         <v-card-text class="card-text">
-            <v-icon size="12rem">
+            <v-icon :size="iconSize">
                 mdi-close-circle-outline
             </v-icon>
         </v-card-text>
@@ -9,7 +9,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+    props: {
+        iconSize: {
+            type: String,
+            default: "12rem"
+        }
+    }
+}
 </script>
 
 <style scoped>

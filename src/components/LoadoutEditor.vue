@@ -90,7 +90,8 @@
 </template>
 
 <script>
-import { encode, decode } from '../utils/base62Util.js';
+import { encode } from '../utils/base62Util.js';
+import { load as loadLoadoutCode } from '../utils/loadoutUtil.js';
 import Dye from '../enums/dye.js';
 import HeroSelectorDialog from '../components/loadout-editor/HeroSelectorDialog.vue';
 import TraitSelectorDialog from '../components/loadout-editor/TraitSelectorDialog.vue';
@@ -126,8 +127,8 @@ export default {
             
             loadout: {
                 playerName: this.fixedPlayerName ?? 'Player',
-                heroId: 1,
-                skinId: 9,
+                heroId: null,
+                skinId: null,
                 dyeId: Dye.Normal,
                 traits: {
                     pentagonTraitId: null,
@@ -184,7 +185,7 @@ export default {
             }
         }
     },
-    mounted(){
+    mounted() {
         this.loadLoadout(this.modelValue);
     },
     computed:{
@@ -235,35 +236,13 @@ export default {
             // TODO: Validation
             if(loadoutCode === null) return;
 
-            // Turn the loadout code into loadout data
-            const parts = loadoutCode.split("-");
-            if(this.fixedPlayerName !== null) this.loadout.playerName = this.fixedPlayerName;
-            else this.loadout.playerName = parts[0];
+            let newLoadout = loadLoadoutCode(loadoutCode);
+            if(newLoadout === null) return;
 
-            this.loadout.heroId = decode(parts[1].substring(0, 1));
-            this.loadout.skinId = decode(parts[1].substring(1, 3));
-            this.loadout.dyeId = decode(parts[1].substring(3, 4));
+            // If we set up a fixed name we'll use it
+            if(this.fixedPlayerName !== null) newLoadout.playerName = this.fixedPlayerName;
 
-            for (let index = 0; index < this.loadout.slots.length; index++) {
-                this.loadout.slots[index].itemId = decode(parts[2].substring(index * 2, (index + 1) * 2));
-            }
-                
-            this.loadout.guardianIds[0] = decode(parts[3].substring(0, 1));
-            this.loadout.guardianIds[1] = decode(parts[3].substring(1, 2));
-
-            this.loadout.consumableIds[0] = decode(parts[4].substring(0, 1));
-            this.loadout.consumableIds[1] = decode(parts[4].substring(1, 2));
-            
-            this.loadout.traits.pentagonTraitId = decode(parts[5].substring(0, 1));
-            this.loadout.traits.diamondTraitId = decode(parts[5].substring(1, 2));
-            this.loadout.traits.triangleTraitId = decode(parts[5].substring(2, 3));
-            this.loadout.traits.noBonusTraitId = decode(parts[5].substring(3, 4));
-
-            for (let index = 0; index < this.loadout.slots.length; index++) {
-                this.loadout.slots[index].partIds[0] = decode(parts[6].substring(index * 3 + 0, index * 3 + 1));
-                this.loadout.slots[index].partIds[1] = decode(parts[6].substring(index * 3 + 1, index * 3 + 2));
-                this.loadout.slots[index].partIds[2] = decode(parts[6].substring(index * 3 + 2, index * 3 + 3));
-            }
+            this.loadout = newLoadout;
         },
     },
     watch:{

@@ -9,15 +9,25 @@
                 class="hero-selector"
             >
                 <hero-card
-                    v-if="selectedHero"
+                    v-if="selectedHero !== null"
                     @click="isOpen = true"
-                    class="cursor-pointer"
                     :hero="selectedHero"
                     :skin="selectedSkin"
                     show-stats
                     show-abilities
                     show-upgrades
                 />
+                <v-card
+                    v-else
+                    @click="isOpen = true"
+                    class="no-hero-selected-card d-flex text-center align-center"
+                >
+                    <v-card-text 
+                        class="font-italic transparent justi"
+                    >
+                        No hero selected
+                    </v-card-text>
+                </v-card>
             </div>
         </template>
 
@@ -44,12 +54,19 @@
                         <!-- Select Hero -->
                         <v-tabs-window-item value="hero">
                             <v-row dense>
+                                <v-col align="center">
+                                    <deselect-card
+                                        class="deselect-card"
+                                        icon-size="6rem"
+                                        @click="deselectHero()"
+                                    />
+                                </v-col>
                                 <v-col
                                     v-for="sortedHero in sortedHeroes"
                                     :key="sortedHero.id"
                                     align="center"
                                 >
-                                    <selection-card
+                                    <hero-selection-card
                                         :image="sortedHero.skins[0].image"
                                         :label="sortedHero.name"
                                         :selected="sortedHero.id === selectedHero?.id"
@@ -67,7 +84,7 @@
                                     :key="sortedSkin.id"
                                     align="center"
                                 >
-                                    <selection-card
+                                    <hero-selection-card
                                         :image="sortedSkin.image"
                                         :label="sortedSkin.name"
                                         :selected="sortedSkin.id === selectedSkin?.id"
@@ -85,13 +102,15 @@
 
 <script>
 import HeroCard from '../HeroCard.vue';
-import SelectionCard from './HeroSelectionCard.vue';
+import HeroSelectionCard from './HeroSelectionCard.vue';
+import DeselectCard from './DeselectCard.vue';
 import { useDataStore } from '../../stores/data';
 
 export default {
     components:{
-        SelectionCard,
-        HeroCard
+        HeroSelectionCard,
+        HeroCard,
+        DeselectCard
     },
     emits: ['update:model-value'],
     setup() {
@@ -129,7 +148,7 @@ export default {
             this.selectedHero = this.dataStore.heroes.find(hero => hero.id === heroId) ?? null;
 
             // Find the skin
-            if(this.selectHero === null) {
+            if(this.selectedHero === null) {
                 this.selectedSkin = null;
             } else {
                 this.selectedSkin = this.selectedHero.skins.find(skin => skin.id === skinId);
@@ -144,6 +163,14 @@ export default {
         },
         selectSkin(skin) {
             this.selectedSkin = skin;
+            this.isOpen = false;
+            this.emitHeroOrSkinChange();
+        },
+
+        deselectHero() {
+            this.selectedHero = null;
+            this.selectedSkin = null;
+            this.currentTab = "hero";
             this.isOpen = false;
             this.emitHeroOrSkinChange();
         },
@@ -172,5 +199,18 @@ export default {
 .hero-image {
 	aspect-ratio: 1000/471;
 	width: 100%;
+}
+
+.deselect-card {
+    width: 18.75rem;
+	aspect-ratio: 1000/471;
+}
+
+.no-hero-selected-card {
+    aspect-ratio: 466/730.817;
+}
+
+.transparent {
+    opacity: 0.3;
 }
 </style>
