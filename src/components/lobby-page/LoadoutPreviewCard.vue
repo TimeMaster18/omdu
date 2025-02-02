@@ -4,7 +4,10 @@
             :class="{ 'hidden': loadout === null }"
             class="grid"
         >
-            <div class="icon my-auto">
+            <div
+                class="icon my-auto"
+                :class="{ 'hidden': !hero?.icon}"
+            >
                 <img
                     class="ml-1 my-1"
                     :src="hero?.icon"

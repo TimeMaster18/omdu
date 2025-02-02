@@ -74,7 +74,6 @@ export default {
                 // Shift + clicking delete seemed like a good option for this.
                 this.confirmDelete();
             } else {
-                console.log(this.$refs.confirmationDialog);
                 this.$refs.confirmationDialog.open();
             }
         },

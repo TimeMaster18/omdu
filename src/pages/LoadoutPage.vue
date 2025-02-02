@@ -16,6 +16,22 @@
                 variant="outlined"
                 hide-details
             />
+            <v-btn
+                variant="outlined"
+                class="ml-2"
+                @click="$refs.clearConfirmationDialog.open()"
+            >
+                <v-icon>
+                    mdi-close-circle-outline
+                </v-icon>
+            </v-btn>
+            <confirmation-dialog
+                ref="clearConfirmationDialog"
+                confirm-button-color="error"
+                @confirm="clearLoadout"
+            >
+                Are you sure you want to clear your loadout?
+            </confirmation-dialog>
             <copy-to-clipboard-button
                 :value="loadoutCode"
                 class="ml-2"
@@ -37,6 +53,7 @@
 </template>
 
 <script>
+import ConfirmationDialog from '../components/ConfirmationDialog.vue';
 import CopyToClipboardButton from '../components/CopyToClipboardButton.vue';
 import LoadoutPresets from '../components/loadout-editor/LoadoutPresets.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
@@ -47,10 +64,12 @@ export default {
     components: {
         LoadoutEditor,
         LoadoutPresets,
-        CopyToClipboardButton
+        CopyToClipboardButton,
+        ConfirmationDialog
     },
     data() {
         return {
+            defaultLoadoutCode: "Player-0000-000000000000000000-00-00-0000-0000000000000000000000000000",
             loadoutCode: null,
             sharedLoadout: false
         }
@@ -61,12 +80,17 @@ export default {
             this.loadoutCode = this.$route.query.code;
         } else {
             this.sharedLoadout = false;
-            this.loadoutCode = Cookies.get(CookieName.Loadout) ?? "Player-0000-000000000000000000-00-00-0000-0000000000000000000000000000"
+            this.loadoutCode = Cookies.get(CookieName.Loadout) ?? this.defaultLoadoutCode
         }
     },
     computed: {
         shareLink() {
             return `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
+        }
+    },
+    methods: {
+        clearLoadout() {
+            this.loadoutCode = this.defaultLoadoutCode;
         }
     },
     watch: {

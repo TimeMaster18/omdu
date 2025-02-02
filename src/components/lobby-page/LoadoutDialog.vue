@@ -13,6 +13,22 @@
                         max-width="1000"
                         readonly
                     />
+                    <v-btn
+                        variant="outlined"
+                        class="ml-2"
+                        @click="$refs.clearConfirmationDialog.open()"
+                    >
+                        <v-icon>
+                            mdi-close-circle-outline
+                        </v-icon>
+                    </v-btn>
+                    <confirmation-dialog
+                        ref="clearConfirmationDialog"
+                        confirm-button-color="error"
+                        @confirm="clearLoadout"
+                    >
+                        Are you sure you want to clear your loadout?
+                    </confirmation-dialog>
                     <copy-to-clipboard-button
                         :value="vModelProxy"
                         class="ml-2"
@@ -44,11 +60,12 @@ import CookieName from '../../enums/cookieName.js';
 import Cookies from 'js-cookie';
 import LoadoutPresets from '../loadout-editor/LoadoutPresets.vue';
 import CopyToClipboardButton from '../CopyToClipboardButton.vue';
+import ConfirmationDialog from '../ConfirmationDialog.vue';
 
 export default {
     emits: ['update:model-value'],
     expose: ["open", "close"],
-    components: { LoadoutEditor, LoadoutPresets, CopyToClipboardButton },
+    components: { LoadoutEditor, LoadoutPresets, CopyToClipboardButton, ConfirmationDialog },
     props: {
         modelValue: {
             type: String,
@@ -86,6 +103,9 @@ export default {
             let parts = importedLoadoutCode.split('-');
             parts[0] = this.playerName; // Use the player's name instead of the imported loadout's player name
             this.vModelProxy = parts.join('-');
+        },
+        clearLoadout() {
+            this.vModelProxy = `${this.playerName}-0000-000000000000000000-00-00-0000-0000000000000000000000000000`;
         }
     }
 }
