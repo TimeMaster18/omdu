@@ -41,7 +41,10 @@
                     <v-tab value="hero">
                         Hero
                     </v-tab>
-                    <v-tab value="skin">
+                    <v-tab
+                        value="skin"
+                        :disabled="selectedHero === null"
+                    >
                         Skin
                     </v-tab>
                 </v-tabs>
