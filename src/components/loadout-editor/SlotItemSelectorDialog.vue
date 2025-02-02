@@ -35,7 +35,6 @@
                     <trap-card
                         v-if="slotItemType === 'trap'"
                         :trap="selectedSlotItem"
-                        show-image
                         show-name
                         show-stats
                         show-description
@@ -106,6 +105,7 @@
                                 >
                                     <gear-card
                                         :gear="gearItem"
+                                        show-image
                                         :class="{'selected': gearItem.id === selectedSlotItemId}"
                                         @click="selectSlotItem(gearItem)"
                                     />

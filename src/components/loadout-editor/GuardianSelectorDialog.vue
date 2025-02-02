@@ -55,6 +55,7 @@
                         >
                             <guardian-card 
                                 :guardian="guardian"
+                                show-image
                                 :class="{'selected': guardian.id === selectedGuardianId}"
                                 @click="selectGuardian(guardian)"
                             />

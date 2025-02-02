@@ -1,6 +1,9 @@
 <template>
     <v-card class="card text-start">
-        <div class="image text-center">
+        <div
+            v-if="showImage"
+            class="image text-center"
+        >
             <img :src="gear.image">
         </div>
         <v-card-title>{{ gear.name }}</v-card-title>
@@ -36,6 +39,10 @@ export default {
         gear: {
             type: Object,
             required: true
+        },
+        showImage: {
+            type: Boolean,
+            default: false
         }
     },
 }

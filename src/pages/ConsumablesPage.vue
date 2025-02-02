@@ -9,6 +9,8 @@
                 <consumable-card
                     class="text-left"
                     :consumable="consumable"
+                    show-image
+                    show-flavour
                 />
             </v-col>
         </v-row>

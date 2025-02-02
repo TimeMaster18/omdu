@@ -11,7 +11,7 @@
                 >
             </div>
             
-            <div class="name ml-1 mt-1">
+            <div class="name ml-1 mt-1 text-left">
                 <slot
                     name="name"
                     :loadout="loadout"

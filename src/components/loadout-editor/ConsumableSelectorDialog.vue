@@ -75,6 +75,7 @@
                                 >
                                     <consumable-card 
                                         :consumable="potion"
+                                        show-image
                                         :class="{'selected': potion.id === selectedConsumableId}"
                                         @click="selectConsumable(potion)"
                                     />
@@ -93,6 +94,7 @@
                                 >
                                     <consumable-card 
                                         :consumable="scroll"
+                                        show-image
                                         :class="{'selected': scroll.id === selectedConsumableId}"
                                         @click="selectConsumable(scroll)"
                                     />

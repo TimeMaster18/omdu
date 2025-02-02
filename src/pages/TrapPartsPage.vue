@@ -9,6 +9,7 @@
                 <trap-part-card
                     class="text-left"
                     :trap-part="trapPart"
+                    show-image
                     show-slot-icon
                     show-flavour
                 />

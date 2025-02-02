@@ -9,6 +9,7 @@
                 <gear-card
                     class="text-left"
                     :gear="gear"
+                    show-image
                 />
             </v-col>
         </v-row>

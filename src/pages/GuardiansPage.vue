@@ -9,6 +9,8 @@
                 <guardian-card
                     class="text-left"
                     :guardian="guardian"
+                    show-image
+                    show-flavour
                 />
             </v-col>
         </v-row>

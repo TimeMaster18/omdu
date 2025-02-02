@@ -50,7 +50,16 @@
                     </divider-title>
 
                     <div class="saved-loadouts">
-                        <loadout-preview-card
+                        <loadout-preset
+                            v-for="(loadout, index) in sortedLoadouts"
+                            :key="index"
+                            class="elevation-0 preview-card"
+                            :name="loadout.name"
+                            :loadout-code="loadout.code"
+                            @click="importLoadout(loadout.code)"
+                            @delete="deleteLoadout(index)"
+                        />
+                        <!-- <loadout-preview-card
                             v-for="(loadout, index) in sortedLoadouts"
                             :key="index"
                             class="elevation-0 preview-card"
@@ -72,7 +81,7 @@
                                     mdi-delete
                                 </v-icon>
                             </template>
-                        </loadout-preview-card>
+                        </loadout-preview-card> -->
                     </div>
                 </span>
             </v-card>
@@ -85,14 +94,14 @@ import Cookies from 'js-cookie';
 import CookieName from '../../enums/cookieName';
 import LoadoutPreviewCard from '../lobby-page/LoadoutPreviewCard.vue';
 import DividerTitle from '../DividerTitle.vue';
-import CopyToClipboardIcon from '../CopyToClipboardIcon.vue';
+import LoadoutPreset from './LoadoutPreset.vue';
 
 export default {
     emits: ["import"],
     components: {
         LoadoutPreviewCard,
         DividerTitle,
-        CopyToClipboardIcon
+        LoadoutPreset
     },
     props: {
         currentLoadoutCode: {
@@ -151,22 +160,9 @@ export default {
     width: 450px;
 }
 
-.name-text-field:deep(.v-field) {
-    box-shadow: none;
-}
-
-.name-text-field:deep(input) {
-    padding: 0;
-    min-height: 28px;
-}
-
 .saved-loadouts {
     max-height: 500px;
     overflow-y: auto;
     overflow-x: hidden;
-}
-
-.save-button {
-    width: 100%;
 }
 </style>

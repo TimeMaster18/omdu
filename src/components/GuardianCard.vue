@@ -1,6 +1,9 @@
 <template>
     <v-card class="card text-start">
-        <div class="image text-center">
+        <div
+            v-if="showImage"
+            class="image text-center"
+        >
             <img :src="guardian.image">
         </div>
         <guardian-home-icon
@@ -16,7 +19,10 @@
             </div>
 
             <!-- Description -->
-            <div class="mt-4 flavor-text">
+            <div
+                v-if="showFlavour"
+                class="mt-4 flavour-text"
+            >
                 {{ guardian.description }}
             </div>
         </v-card-text>
@@ -34,7 +40,15 @@ export default {
         guardian: {
             type: Object,
             required: true
-        }
+        },
+        showImage: {
+            type: Boolean,
+            default: false
+        },
+        showFlavour: {
+            type: Boolean,
+            default: false
+        },
     },
 }
 </script>
@@ -65,7 +79,7 @@ export default {
 	top: 0.5rem;
 }
 
-.flavor-text {
+.flavour-text {
 	opacity: 0.3;
 }
 </style>

@@ -1,6 +1,9 @@
 <template>
     <v-card class="card text-start">
-        <div class="image text-center">
+        <div
+            v-if="showImage"
+            class="image text-center"
+        >
             <img :src="consumable.image">
         </div>
         <v-card-title>{{ consumable.name }}</v-card-title>
@@ -27,8 +30,11 @@
                 </span>
             </div>
 
-            <!-- Flavor text -->
-            <div class="mt-4 font-italic transparent">
+            <!-- Flavour text -->
+            <div
+                v-if="showFlavour"
+                class="mt-4 font-italic transparent"
+            >
                 {{ consumable.flavourText }}
             </div>
         </v-card-text>
@@ -45,6 +51,14 @@ export default {
         consumable: {
             type: Object,
             required: true
+        },
+        showImage: {
+            type: Boolean,
+            default: false
+        },
+        showFlavour: {
+            type: Boolean,
+            default: false
         }
     },
     data() {

@@ -59,6 +59,7 @@
                             <trap-part-card
                                 :trap-part="trapPart"
                                 :class="{'selected': trapPart.id === selectedTrapPartId}"
+                                show-image
                                 @click="selectTrapPart(trapPart)"
                             />
                         </v-col>
