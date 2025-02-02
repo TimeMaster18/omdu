@@ -2,7 +2,7 @@
     <div class="d-flex justify-center">
         <img
             class="logo"
-            src="../assets/images/logo.png"
+            src="../assets/images/logo.webp"
         >
     </div>
     <v-row class="justify-center">

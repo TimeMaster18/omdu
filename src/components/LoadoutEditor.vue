@@ -34,7 +34,7 @@
                 align="center"
             >
                 <hero-selector-dialog
-                    v-model="heroAndSkin"
+                    v-model="heroSkinAndDye"
                 />
             </v-col>
             <v-col
@@ -218,16 +218,18 @@ export default {
             });
             return loadoutCode;
         },
-        heroAndSkin: {
+        heroSkinAndDye: {
             get() {
                 return {
                     heroId: this.loadout.heroId,
-                    skinId: this.loadout.skinId
+                    skinId: this.loadout.skinId,
+                    dyeId: this.loadout.dyeId
                 }
             },
             set(value) {
                 this.loadout.heroId = value.heroId;
                 this.loadout.skinId = value.skinId;
+                this.loadout.dyeId = value.dyeId;
             }
         }
     },

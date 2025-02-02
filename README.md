@@ -1,4 +1,4 @@
-![Logo](./src/assets/images/logo.png)
+![Logo](./src/assets/images/logo.webp)
 
 # Welcome to Orcs Must Read Unchained!
 I created this small website to help my friends and I set up survival mode loadouts for [Project Rechained](https://github.com/TimeMaster18/Project-Rechained), a fan-made revival of Orcs Must Die! What began as a personal project ended up being useful to more people than I anticipated, so I'm now working on expanding the site for a broader audience. I hope it helps you get more familiar with the game and enhances your experience.

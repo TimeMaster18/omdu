@@ -47,6 +47,12 @@
                     >
                         Skin
                     </v-tab>
+                    <v-tab
+                        value="dye"
+                        :disabled="selectedHero === null"
+                    >
+                        Dye
+                    </v-tab>
                 </v-tabs>
 
                 <v-card-text class="pt-2">
@@ -96,6 +102,24 @@
                                 </v-col>
                             </v-row>
                         </v-tabs-window-item>
+
+                        <v-tabs-window-item value="dye">
+                            <v-row dense>
+                                <v-col
+                                    v-for="dye in [Dye.Normal, Dye.Heroic, Dye.Legendary]"
+                                    :key="dye"
+                                    align="center"
+                                >
+                                    <dye-icon
+                                        class="cursor-pointer"
+                                        :dye="dye"
+                                        :selected="dye === selectedDyeId"
+                                        @click="selectDye(dye)"
+                                        :size="8"
+                                    />
+                                </v-col>
+                            </v-row>
+                        </v-tabs-window-item>
                     </v-tabs-window>
                 </v-card-text>
             </v-card>
@@ -108,12 +132,15 @@ import HeroCard from '../HeroCard.vue';
 import HeroSelectionCard from './HeroSelectionCard.vue';
 import DeselectCard from './DeselectCard.vue';
 import { useDataStore } from '../../stores/data';
+import Dye from '../../enums/dye';
+import DyeIcon from '../DyeIcon.vue';
 
 export default {
-    components:{
+    components: {
         HeroSelectionCard,
         HeroCard,
-        DeselectCard
+        DeselectCard,
+        DyeIcon
     },
     emits: ['update:model-value'],
     setup() {
@@ -122,23 +149,25 @@ export default {
             dataStore
         };
     },
-    props:{
+    props: {
         modelValue: {
-            type: Object, // { heroId: int, skinId: int }
+            type: Object, // { heroId: number, skinId: number, dyeId: number }
             required: true
         },
     },
     data() {
         return {
+            Dye,
             isOpen: false,
             currentTab: "hero",
 
             selectedHero: null,
-            selectedSkin: null
+            selectedSkin: null,
+            selectedDyeId: null
         }
     },
     mounted(){
-        this.syncSelectedHeroAndSkin(this.modelValue.heroId, this.modelValue.skinId);
+        this.syncSelectedHeroSkinAndDye(this.modelValue.heroId, this.modelValue.skinId, this.modelValue.dyeId);
     },
     computed: {
         sortedHeroes() {
@@ -146,7 +175,7 @@ export default {
         },
     },
     methods:{
-        syncSelectedHeroAndSkin(heroId, skinId) {
+        syncSelectedHeroSkinAndDye(heroId, skinId, dyeId) {
             // Find the hero
             this.selectedHero = this.dataStore.heroes.find(hero => hero.id === heroId) ?? null;
 
@@ -156,38 +185,48 @@ export default {
             } else {
                 this.selectedSkin = this.selectedHero.skins.find(skin => skin.id === skinId);
             }
+
+            // Set the dye
+            this.selectedDyeId = dyeId;
         },
 
         selectHero(hero) {
             this.selectedHero = hero;
             this.selectedSkin = this.selectedHero.skins[0];
             this.currentTab = "skin";
-            this.emitHeroOrSkinChange();
+            this.emitVModelChange();
         },
         selectSkin(skin) {
             this.selectedSkin = skin;
+            this.currentTab = "dye";
+            this.emitVModelChange();
+        },
+        selectDye(dyeId) {
+            this.selectedDyeId = dyeId;
             this.isOpen = false;
-            this.emitHeroOrSkinChange();
+            this.emitVModelChange();
         },
 
         deselectHero() {
             this.selectedHero = null;
             this.selectedSkin = null;
+            this.selectedDye = Dye.Normal;
             this.currentTab = "hero";
             this.isOpen = false;
-            this.emitHeroOrSkinChange();
+            this.emitVModelChange();
         },
 
-        emitHeroOrSkinChange() {
+        emitVModelChange() {
             this.$emit("update:model-value", {
                 skinId: this.selectedSkin?.id ?? null,
-                heroId: this.selectedHero?.id ?? null
+                heroId: this.selectedHero?.id ?? null,
+                dyeId: this.selectedDyeId
             });
         }
     },
     watch:{
         modelValue(modelValue) {
-            this.syncSelectedHeroAndSkin(modelValue.heroId, modelValue.skinId);
+            this.syncSelectedHeroSkinAndDye(modelValue.heroId, modelValue.skinId, modelValue.dyeId);
         },
     }
 }

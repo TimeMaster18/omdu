@@ -11,7 +11,7 @@
                 class="logo px-2"
             >
                 <img 
-                    src="./assets/images/logo.png"
+                    src="./assets/images/logo.webp"
                 >
             </router-link>
             <v-menu open-on-hover>
