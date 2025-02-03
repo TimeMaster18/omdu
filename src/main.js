@@ -59,6 +59,7 @@ import EnemiesPage from './pages/EnemiesPage.vue';
 import BattlegroundsPage from './pages/BattlegroundsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
 import LobbyPage from './pages/LobbyPage.vue';
+import WebSocketLobbyPage from './pages/WebSocketLobbyPage.vue';
 import HomePage from './pages/HomePage.vue';
 const router = createRouter({
     history: createWebHistory(),
@@ -74,6 +75,7 @@ const router = createRouter({
         { path: '/omdu/battlegrounds', component: BattlegroundsPage },
         { path: '/omdu/loadout', component: LoadoutPage },
         { path: '/omdu/lobby', component: LobbyPage },
+        { path: '/omdu/ws-lobby', component: WebSocketLobbyPage },
         { path: '/omdu/:pathMatch(.*)*', component: HomePage },
     ],
 });
