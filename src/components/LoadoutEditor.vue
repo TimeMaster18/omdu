@@ -264,8 +264,4 @@ export default {
 </script>
 
 <style scoped>
-.disabled {
-    background: red;
-    user-select: none;
-}
 </style>

@@ -250,6 +250,8 @@ export default {
 
 .no-hero-selected-card {
     aspect-ratio: 466/730.817;
+    min-width: 26.25rem;
+    max-width: 31.25rem;
 }
 
 .transparent {
