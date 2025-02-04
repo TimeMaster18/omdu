@@ -1,5 +1,5 @@
 <template>
-    <div v-if="firebaseCorrectlySetup">
+    <div v-if="isConnectedToLobby">
         <v-row class="justify-end px-2">
             <settings-dialog>
                 <lobby-settings-form class="settings" />
@@ -69,13 +69,14 @@
 import LoadoutDialog from '../components/lobby-page/LoadoutDialog.vue';
 import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue';
 import LobbySettingsForm from '../components/lobby-page/LobbySettingsForm.vue';
-import { firebaseApp } from '../firebase.js';
 import { useLobbyStore } from '../stores/lobby.js';
 import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
 import SettingsDialog from '../components/SettingsDialog.vue';
+import Cookies from 'js-cookie';
+import CookieName from '../enums/cookieName.js';
 
 export default {
     components: {
@@ -94,13 +95,20 @@ export default {
             dataStore
         };
     },
+    mounted() {
+        if(Cookies.get(CookieName.LobbyIp) !== undefined) {
+            this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp));
+        }
+    },
     data() {
         return {
             Gamemode,
-            firebaseCorrectlySetup: firebaseApp !== null,
         }
     },
     computed: {
+        isConnectedToLobby() {
+            return this.lobbyStore.connected;
+        },
         playerIndex() {
             return this.lobbyStore.playerIndex;
         },
