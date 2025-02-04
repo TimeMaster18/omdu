@@ -3,6 +3,12 @@
         <lobby-connection-status class="text-center my-2" />
         
         <v-card-text>
+            <v-switch
+                label="Secure lobby"
+                variant="outlined"
+                hide-details
+                v-model="secure"
+            />
             <v-text-field
                 label="Lobby ip"
                 variant="outlined"
@@ -54,6 +60,7 @@ export default {
     },
     data() {
         return {
+            secure: Cookies.get(CookieName.SecureLobby) === "true",
             ip: Cookies.get(CookieName.LobbyIp),
             playerName: Cookies.get(CookieName.PlayerName),
         }
@@ -72,6 +79,8 @@ export default {
 
             if(this.ip === null) Cookies.remove(CookieName.LobbyIp);
             else Cookies.set(CookieName.LobbyIp, this.ip, cookieOptions);
+
+            Cookies.set(CookieName.SecureLobby, this.secure, cookieOptions);
 
             if(this.playerName === null) Cookies.remove(CookieName.PlayerName);
             else Cookies.set(CookieName.PlayerName, this.playerName, cookieOptions);

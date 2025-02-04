@@ -97,7 +97,7 @@ export default {
     },
     mounted() {
         if(Cookies.get(CookieName.LobbyIp) !== undefined) {
-            this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp));
+            this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp), Cookies.get(CookieName.SecureLobby) === "true");
         }
     },
     data() {
