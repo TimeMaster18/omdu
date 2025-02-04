@@ -17,8 +17,7 @@ export const useLobbyStore = defineStore('lobby', {
             // Prevent a double connection
             if(this.socket !== null) return;
             
-            const prefix = window.location.protocol === 'https:' ? 'wss' : 'ws';
-            this.socket = new WebSocket(`${prefix}://${ip}:7778/lobby`);
+            this.socket = new WebSocket(`ws://${ip}:7778/lobby`);
             this.socket.onopen = () => {
                 this.socket.onmessage = (message) => {
                     const data = JSON.parse(message.data);
