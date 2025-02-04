@@ -1,7 +1,5 @@
 const CookieName = Object.freeze({
-    FirebaseUrl: "firebase-realtime-database-url",
-    FirebaseSecret: "firebase-realtime-database-secret",
-    PlayerIndex: "player-index",
+    LobbyIp: "lobby-ip",
     PlayerName: "player-name",
     LoadoutPresets: "loadouts",
     Loadout: "loadout"

@@ -85,9 +85,5 @@ const pinia = createPinia();
 setActivePinia(pinia);
 vueApp.use(pinia);
 
-// Firebase
-import { initialize as initializeFirebase } from './firebase';
-initializeFirebase(vueApp);
-
 // Mount the Vue app
 vueApp.mount('#app')
