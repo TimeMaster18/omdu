@@ -149,7 +149,7 @@ export default {
             this.importMenuIsOpen = false;
         },
         updateCookie() {
-            Cookies.set(CookieName.LoadoutPresets, JSON.stringify(this.loadouts), { expires: 365, sameSite: "Strict", secure: true });
+            Cookies.set(CookieName.LoadoutPresets, JSON.stringify(this.loadouts), { expires: 365, sameSite: "Strict", secure: false });
         }
     },
 }
