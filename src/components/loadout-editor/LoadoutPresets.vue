@@ -118,7 +118,7 @@ export default {
             importMenuIsOpen: false,
             loadouts: [],
             loadoutName: null,
-            baseShareLink: `${window.location.origin}/omdu/loadout?code=`
+            baseShareLink: `${window.location.origin}/loadout?code=`
         }
     },
     mounted() {

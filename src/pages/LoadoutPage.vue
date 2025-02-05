@@ -85,7 +85,7 @@ export default {
     },
     computed: {
         shareLink() {
-            return `${window.location.origin}/omdu/loadout?code=${this.loadoutCode}`;
+            return `${window.location.origin}/loadout?code=${this.loadoutCode}`;
         }
     },
     methods: {

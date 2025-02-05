@@ -89,7 +89,7 @@ export default {
             }
         },
         shareLink() {
-            return `${window.location.origin}/omdu/loadout?code=${this.vModelProxy}`;
+            return `${window.location.origin}/loadout?code=${this.vModelProxy}`;
         }
     },
     methods: {
