@@ -17,12 +17,18 @@ export const useLobbyStore = defineStore('lobby', {
             // Prevent a double connection
             if(this.socket !== null) return;
             
-            this.socket = new WebSocket(`ws://${ip}:7778/lobby`);
+            this.socket = new WebSocket(`ws://127.0.0.1:7778/lobby-proxy`);
             this.socket.onopen = () => {
                 this.socket.onmessage = (message) => {
                     const data = JSON.parse(message.data);
 
-                    if(data.type === "assigned-player-slot") {
+                    if(data.type === "requested-server-ip") {
+                        // Only ever requested by the proxy
+                        this.socket.send(JSON.stringify({
+                            type: `connect-to-ip`,
+                            value: ip
+                        }));
+                    } else if(data.type === "assigned-player-slot") {
                         this.playerIndex = data.playerSlot
                         this.connected = true;
                     } else if(data.type === "updated-lobby") {
