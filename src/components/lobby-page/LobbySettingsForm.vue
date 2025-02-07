@@ -1,6 +1,6 @@
 <template>
     <v-card class="elevation-0">
-        <lobby-connection-status class="text-center my-2" />
+        <lobby-connection-status class="text-center mt-2" />
         
         <v-card-text>
             <v-text-field
@@ -15,7 +15,11 @@
                 variant="outlined"
                 hide-details
                 v-model="playerName"
+                class="mb-4"
             />
+            <div>
+                <a href="https://github.com/Danmander/omdu/blob/main/server/README.md">How to set up a lobby?</a>
+            </div>
         </v-card-text>
         <v-card-actions>
             <v-btn

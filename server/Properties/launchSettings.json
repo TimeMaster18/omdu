@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Lobby": {
+      "commandName": "Project",
+      "commandLineArgs": "server"
+    },
+    "Lobby Proxy": {
+      "commandName": "Project"
+    }
+  }
+}
