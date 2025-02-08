@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="connectionStatus === LobbyStatus.Disconnected"
-        class="text-error"
+        class="status text-error"
     >
         <v-icon size="32">
             mdi-close-circle-outline
@@ -10,7 +10,7 @@
     </div>
     <div
         v-else-if="connectionStatus === LobbyStatus.Connecting"
-        class="text-warning"
+        class="status text-warning"
     >
         <v-icon size="32">
             mdi-dots-horizontal-circle-outline
@@ -19,7 +19,7 @@
     </div>
     <div
         v-else-if="connectionStatus === LobbyStatus.Connected"
-        class="text-success"
+        class="status text-success"
     >
         <v-icon size="32">
             mdi-check-circle-outline
@@ -50,4 +50,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.status {
+    font-size: 16px;
+}
+</style>

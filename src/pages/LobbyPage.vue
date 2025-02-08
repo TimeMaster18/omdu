@@ -1,9 +1,14 @@
 <template>
     <div v-if="isConnectedToLobby">
         <v-row class="justify-end px-2">
-            <settings-dialog>
-                <lobby-settings-form class="settings" />
-            </settings-dialog>
+            <v-btn
+                prepend-icon="mdi-lan-disconnect"
+                color="error"
+                variant="outlined"
+                @click="disconnect"
+            >
+                Disconnect
+            </v-btn>
         </v-row>
         <v-row class="justify-center">
             <v-col
@@ -59,33 +64,38 @@
             </v-col>
         </v-row>
     </div>
-    <lobby-settings-form
+    <v-card
         v-else
         class="settings mx-auto"
-    />
+    >
+        <v-card-text class="pb-0">
+            <lobby-connection-status class="text-center" />
+            <lobby-setup-tutorial class="elevation-0" />
+        </v-card-text>
+    </v-card>
 </template>
 
 <script>
 import LoadoutDialog from '../components/lobby-page/LoadoutDialog.vue';
 import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue';
-import LobbySettingsForm from '../components/lobby-page/LobbySettingsForm.vue';
 import { useLobbyStore } from '../stores/lobby.js';
 import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
-import SettingsDialog from '../components/SettingsDialog.vue';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
+import LobbySetupTutorial from '../components/lobby-page/LobbySetupTutorial.vue';
+import LobbyConnectionStatus from '../components/lobby-page/LobbyConnectionStatus.vue';
 
 export default {
     components: {
-        LobbySettingsForm,
         LoadoutPreviewCard,
         BattlegroundSelectionDialog,
         LoadoutDialog,
         EnemiesOverview,
-        SettingsDialog
+        LobbySetupTutorial,
+        LobbyConnectionStatus
     },
     setup() {
         const lobbyStore = useLobbyStore();
@@ -145,6 +155,10 @@ export default {
     methods: {
         openLoadoutDialog() {
             this.$refs.loadoutDialog.open();
+        },
+        disconnect() {
+            Cookies.remove(CookieName.LobbyIp);
+            location.reload();
         }
     }
 };
