@@ -41,16 +41,11 @@
                 </li>
 
                 <!-- Find the host's ip address  -->
-                <li>
+                <li v-if="!host">
                     Right click
                     <span v-if="host">yourself</span>
                     <span v-else>the host</span>
                     in Radmin VPN and then choose "Copy IP address"
-                </li>
-
-                <!-- Enter ip address into console -->
-                <li v-if="host">
-                    Paste the IP address into the start-lobby.bat console window
                 </li>
 
                 <!-- Enter the host's ip address -->

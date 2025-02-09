@@ -16,10 +16,6 @@ You can download the server and proxy executable from this project's [release pa
 ## Setting up a lobby
 Before starting, decide who will host the lobby (only one player needs to do this). The host must run the `start-lobby.bat` file, while all other players must run the `start-proxy.bat` file.
 
-The host will be prompted to enter their internal IPv4 address:
-- Using Radmin VPN? Use the IP address displayed next to your name.
-- Not using Radmin? Find your internal IP by running `ipconfig /all`.
-
 Once the server is running, all players should visit the [lobby page](https://omdu.danmander.com/lobby), enter a player name, and input the host’s public IPv4 address:
 - Using Radmin VPN? Use the IP shown next to the host’s name.
 - Not using Radmin? Use a service like [www.whatsmyip.org](https://www.whatsmyip.org/) to find the host's public IP.

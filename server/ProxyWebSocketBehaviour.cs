@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 using WebSocketSharp;
 using WebSocketSharp.Server;
 
@@ -24,7 +22,7 @@ namespace OmduLobby
 
             Sessions.CloseSession(ID);
         }
-        
+
         private void OnServerError(object? sender, WebSocketSharp.ErrorEventArgs e)
         {
             Logger.LogError(e.Message);

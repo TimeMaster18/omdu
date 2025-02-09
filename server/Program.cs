@@ -1,44 +1,40 @@
-﻿using WebSocketSharp.Server;
+﻿using System.Reflection;
+using WebSocketSharp.Server;
 
 namespace OmduLobby
 {
     public class Program
     {
+        public static string Version
+        {
+            get
+            {
+                Version? version = Assembly.GetExecutingAssembly().GetName().Version;
+                if (version == null) return "version unknown";
+                else return $"v{version.Major}.{version.Minor}.{version.Build}";
+            }
+        }
+
         static void Main(string[] args)
         {
-            Console.Title = "Orcs Must Read Unchained - Lobby";
+            Console.Title = $"Orcs Must Read Unchained - Lobby {Version}";
 
             if (args.Any((argument) => argument == "server"))
             {
-                // Ask the user for their server's internal ip
-                Console.Write("Please enter your internal IPv4 address: ");
-
-                string? ip = null;
-                do
-                {
-                    ip = Console.ReadLine();
-                } while (ip == null);
-
-                // Set up two lobby listeners
-                //  - A public listerer for other users
-                //  - A local (127.0.0.1) listerer for the host
-                WebSocketServer server = new($"ws://{ip}:7778");
+                // The lobby should be both available to the local machine, the internal network (in case VPNs get used) and the public network (in case port forwarding is used)
+                WebSocketServer server = new("ws://0.0.0.0:7778");
                 server.AddWebSocketService<LobbyWebSocketBehaviour>("/lobby");
                 server.Start();
                 Console.WriteLine($"Started ws://{server.Address}:{server.Port}/lobby");
-
-                WebSocketServer proxyServer = new($"ws://127.0.0.1:7778");
-                proxyServer.AddWebSocketService<LobbyWebSocketBehaviour>("/lobby-proxy");
-                proxyServer.Start();
-                Console.WriteLine($"Started ws://{proxyServer.Address}:{proxyServer.Port}/lobby-proxy");
             }
             else
             {
-                // Set up proxy server
+                // The proxy should only be available to the local machine (127.0.0.1)
                 WebSocketServer proxyServer = new($"ws://127.0.0.1:7778");
-                proxyServer.AddWebSocketService<ProxyWebSocketBehaviour>("/lobby-proxy");
+                ProxyWebSocketBehaviour proxyBehaviour = new();
+                proxyServer.AddWebSocketService<ProxyWebSocketBehaviour>("/lobby");
                 proxyServer.Start();
-                Console.WriteLine($"Started ws://{proxyServer.Address}:{proxyServer.Port}/lobby-proxy");
+                Console.WriteLine($"Started ws://{proxyServer.Address}:{proxyServer.Port}/lobby");
             }
 
             // Todo: handle commands

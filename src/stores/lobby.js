@@ -17,7 +17,7 @@ export const useLobbyStore = defineStore('lobby', {
             // Prevent a double connection
             if(this.socket !== null) return;
             
-            this.socket = new WebSocket(`ws://127.0.0.1:7778/lobby-proxy`);
+            this.socket = new WebSocket(`ws://127.0.0.1:7778/lobby`);
             this.socket.onopen = () => {
                 this.socket.onmessage = (message) => {
                     const data = JSON.parse(message.data);

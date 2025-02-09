@@ -6,25 +6,18 @@ namespace OmduLobby
 {
     public class LobbyWebSocketBehaviour : WebSocketBehavior
     {
-        private static readonly List<LobbyWebSocketBehaviour> instances = new();
-        public LobbyWebSocketBehaviour()
-        {
-            instances.Add(this);
-        }
-        ~LobbyWebSocketBehaviour()
-        {
-            instances.Remove(this);
-        }
-
         protected override void OnOpen()
         {
             Logger.LogInfo("Opened connection " + ID);
 
-            int? slot = Lobby.Singleton.ReservePlayerSlot(ID);
+            // Try to reserve a player slot for the new connection
+            int? slot = null;
+            if (Context.IsLocal) slot = Lobby.Singleton.ReserveHostPlayerSlot(ID); // Only the local machine can be the host
+            slot ??= Lobby.Singleton.ReservePlayerSlot(ID);
+
             if (!slot.HasValue)
             {
-                // Lobby is full, don't allow new players to join
-                Logger.LogWarning("Player rejected (full)");
+                Logger.LogWarning($"Player rejected");
                 Sessions.CloseSession(ID);
             }
             else
@@ -80,17 +73,6 @@ namespace OmduLobby
             Logger.LogError(e.Message);
         }
 
-        /// <summary>
-        /// Broadcast a message to all sessions connected to any LobbyWebSocketBehaviour.
-        /// </summary>
-        public static void BroadcastGlobally(string message)
-        {
-            foreach (var instance in instances)
-            {
-                instance.Sessions.Broadcast(message);
-            }
-        }
-
         private void SendPlayerSlotAssignment(int slot)
         {
             Send(JsonConvert.SerializeObject(new
@@ -100,9 +82,9 @@ namespace OmduLobby
             }));
         }
 
-        private static void BroadcastLobbyUpdate()
+        private void BroadcastLobbyUpdate()
         {
-            BroadcastGlobally(JsonConvert.SerializeObject(new
+            Sessions.Broadcast(JsonConvert.SerializeObject(new
             {
                 type = "updated-lobby",
                 lobby = Lobby.Singleton.GetData()
