@@ -16,22 +16,34 @@
         public int? BattlegroundId { get; set; } = null;
         public Player[] Players { get; private set; } = new Player[5];
 
-        public bool HasPlayerSlot(string playerSessionId)
+        /// <summary>
+        /// Search for the slot that's reserved for a specific player
+        /// </summary>
+        private int? GetPlayerSlot(string playerSessionId)
         {
             for (int i = 0; i < Players.Length; i++)
             {
-                if (Players[i].SessionId == playerSessionId) return true;
+                if (Players[i].SessionId == playerSessionId) return i;
             }
 
-            return false;
+            return null;
+        }
+
+        public int? ReserveHostPlayerSlot(string playerSessionId)
+        {
+            if (Players[0].SessionId != null) return null;
+
+            Players[0].SessionId = playerSessionId;
+            return 0;
         }
 
         public int? ReservePlayerSlot(string playerSessionId)
         {
-            // Prevent users from taking up two slots
-            if (HasPlayerSlot(playerSessionId)) return null;
+            // Prevent a single connection from taking up two slots
+            if (GetPlayerSlot(playerSessionId) != null) return null;
 
-            for (int i = 0; i < Players.Length; i++)
+            // Exclude the host connection slot
+            for (int i = 1; i < Players.Length; i++)
             {
                 if (Players[i].SessionId != null) continue;
 
