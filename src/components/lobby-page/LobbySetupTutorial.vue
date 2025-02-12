@@ -8,17 +8,16 @@
                 class="mb-4 d-flex flex-row"
             >
                 <v-btn
-                    :value="true"
-                    class="flex-grow-1"
-                >
-                    Host Lobby
-                </v-btn>
-
-                <v-btn
                     :value="false"
                     class="flex-grow-1"
                 >
                     Join Lobby
+                </v-btn>
+                <v-btn
+                    :value="true"
+                    class="flex-grow-1"
+                >
+                    Host Lobby
                 </v-btn>
             </v-btn-toggle>
 
@@ -99,7 +98,7 @@ import CookieName from '../../enums/cookieName';
 export default {
     data() {
         return {
-            host: true,
+            host: Cookies.get(CookieName.LobbyIp) === "127.0.0.1",
 
             ip: Cookies.get(CookieName.LobbyIp),
             playerName: Cookies.get(CookieName.PlayerName),
