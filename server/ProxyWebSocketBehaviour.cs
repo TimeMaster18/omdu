@@ -44,30 +44,38 @@ namespace OmduLobby
         {
             Logger.LogDebug("Message received from " + ID + " " + e.Data);
 
-            if (client == null)
+            // Once the proxy to the real server is set up, we purely act like a proxy
+            if (client != null)
             {
-                WebSocketMessage? data = JsonConvert.DeserializeObject<WebSocketMessage>(e.Data);
-                if (!data.HasValue)
-                {
-                    Logger.LogError("Message invalid (null)");
-                    return;
-                }
-                WebSocketMessage message = data.Value;
+                client.Send(e.Data);
+                return;
+            }
 
-                if (message.Type == "connect-to-ip")
+            // If the proxy is not yet properly set up, we need some messages to request the right data for a connection first
+            WebSocketMessage? data = JsonConvert.DeserializeObject<WebSocketMessage>(e.Data);
+            if (!data.HasValue)
+            {
+                Logger.LogError("Message invalid (null)");
+                return;
+            }
+            WebSocketMessage message = data.Value;
+
+            if (message.Type == "connect-to-ip")
+            {
+                // Prevent the proxy from connecting to itself as that would create an infinite connection loop.
+                if (message.Value == "127.0.0.1" || message.Value == "localhost")
                 {
-                    ConnectToServer(message.Value);
-                }
-                else
-                {
-                    // Invalid message
-                    Logger.LogError("Message invalid (unknown)");
+                    Logger.LogWarning($"{ID} tried connecting to itself ({message.Value})");
+                    Sessions.CloseSession(ID);
                     return;
                 }
+
+                ConnectToServer(message.Value);
             }
             else
             {
-                client.Send(e.Data);
+                // Invalid message
+                Logger.LogError("Message invalid (unknown)");
             }
         }
 
@@ -75,10 +83,12 @@ namespace OmduLobby
         {
             Logger.LogInfo("Closed connection " + ID);
 
-            if (client == null) return;
-
-            client.Close();
-            client = null;
+            if (client != null)
+            {
+                // Clean up after ourselves by closing the connection to the server
+                client.Close();
+                client = null;
+            }
         }
 
         protected override void OnError(WebSocketSharp.ErrorEventArgs e)
@@ -96,7 +106,7 @@ namespace OmduLobby
             client.OnMessage += OnServerMessage;
             client.OnClose += OnServerClose;
             client.OnError += OnServerError;
-            // client.SslConfiguration.ServerCertificateValidationCallback doesn't work cause of https://github.com/mono/mono/issues/8660 so we can't use a secure connection for self signed certificates
+            //client.SslConfiguration.ServerCertificateValidationCallback  doesn't work cause of https://github.com/mono/mono/issues/8660 so we can't use a secure connection for self signed certificates
             client.Connect();
         }
     }
