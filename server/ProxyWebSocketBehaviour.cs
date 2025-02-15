@@ -100,7 +100,7 @@ namespace OmduLobby
         {
             if (client != null) return;
 
-            string url = $"ws://{ip}:7778/lobby";
+            string url = $"ws://{ip}:{Config.LobbyPort}/lobby";
             Logger.LogInfo($"Connecting to {url}");
             client = new WebSocket(url);
             client.OnMessage += OnServerMessage;
