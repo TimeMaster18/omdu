@@ -8,7 +8,7 @@ namespace OmduLobby
     {
         protected override void OnOpen()
         {
-            Logger.LogInfo("Opened connection " + ID);
+            Logger.LogInfo($"Opened connection {ID}");
 
             // Try to reserve a player slot for the new connection
             int? slot = null;
@@ -17,7 +17,7 @@ namespace OmduLobby
 
             if (!slot.HasValue)
             {
-                Logger.LogWarning($"Player rejected");
+                Logger.LogWarning("Player rejected");
                 Sessions.CloseSession(ID);
             }
             else
@@ -32,7 +32,7 @@ namespace OmduLobby
 
         protected override void OnMessage(MessageEventArgs e)
         {
-            Logger.LogDebug("Message received from " + ID + " " + e.Data);
+            Logger.LogDebug($"Message received from {ID} {e.Data}");
 
             WebSocketMessage? data = JsonConvert.DeserializeObject<WebSocketMessage>(e.Data);
             if (!data.HasValue)
@@ -42,7 +42,7 @@ namespace OmduLobby
             }
             WebSocketMessage message = data.Value;
 
-            if (message.Type == "update-battleground")
+            if (Lobby.Singleton.IsHost(ID) && message.Type == "update-battleground")
             {
                 Lobby.Singleton.BattlegroundId = int.Parse(message.Value);
             }
@@ -61,7 +61,7 @@ namespace OmduLobby
 
         protected override void OnClose(CloseEventArgs e)
         {
-            Logger.LogInfo("Closed connection " + ID);
+            Logger.LogInfo($"Closed connection {ID}");
 
             Lobby.Singleton.ReleasePlayerSlot(ID);
 

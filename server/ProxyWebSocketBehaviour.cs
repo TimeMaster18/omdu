@@ -11,14 +11,14 @@ namespace OmduLobby
         // Server -> Proxy events
         private void OnServerMessage(object? sender, MessageEventArgs e)
         {
-            Logger.LogDebug("Message received from server " + e.Data);
+            Logger.LogDebug($"Message received from server {e.Data}");
 
             Send(e.Data);
         }
 
         private void OnServerClose(object? sender, CloseEventArgs e)
         {
-            Logger.LogInfo("Closed connection by server " + ID);
+            Logger.LogInfo($"Closed connection by server {ID}");
 
             Sessions.CloseSession(ID);
         }
@@ -31,7 +31,7 @@ namespace OmduLobby
         // Client -> Proxy events
         protected override void OnOpen()
         {
-            Logger.LogInfo("Opened connection " + ID);
+            Logger.LogInfo($"Opened connection {ID}");
 
             // Instantly request the connection to give us the ip they want to connect to
             Send(JsonConvert.SerializeObject(new
@@ -42,7 +42,7 @@ namespace OmduLobby
 
         protected override void OnMessage(MessageEventArgs e)
         {
-            Logger.LogDebug("Message received from " + ID + " " + e.Data);
+            Logger.LogDebug($"Message received from {ID} {e.Data}");
 
             // Once the proxy to the real server is set up, we purely act like a proxy
             if (client != null)
@@ -81,7 +81,7 @@ namespace OmduLobby
 
         protected override void OnClose(CloseEventArgs e)
         {
-            Logger.LogInfo("Closed connection " + ID);
+            Logger.LogInfo($"Closed connection {ID}");
 
             if (client != null)
             {
