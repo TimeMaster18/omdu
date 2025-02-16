@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <Authors>Dánmander</Authors>
-    <AssemblyVersion>0.1.0</AssemblyVersion>
+    <AssemblyVersion>0.1.1</AssemblyVersion>
     <FileVersion>${AssemblyVersion}</FileVersion>
   </PropertyGroup>
 

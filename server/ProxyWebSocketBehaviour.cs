@@ -11,14 +11,14 @@ namespace OmduLobby
         // Server -> Proxy events
         private void OnServerMessage(object? sender, MessageEventArgs e)
         {
-            Logger.LogDebug("Message received from server " + e.Data);
+            Logger.LogDebug($"Message received from server {e.Data}");
 
             Send(e.Data);
         }
 
         private void OnServerClose(object? sender, CloseEventArgs e)
         {
-            Logger.LogInfo("Closed connection by server " + ID);
+            Logger.LogInfo($"Closed connection by server {ID}");
 
             Sessions.CloseSession(ID);
         }
@@ -31,7 +31,7 @@ namespace OmduLobby
         // Client -> Proxy events
         protected override void OnOpen()
         {
-            Logger.LogInfo("Opened connection " + ID);
+            Logger.LogInfo($"Opened connection {ID}");
 
             // Instantly request the connection to give us the ip they want to connect to
             Send(JsonConvert.SerializeObject(new
@@ -42,43 +42,53 @@ namespace OmduLobby
 
         protected override void OnMessage(MessageEventArgs e)
         {
-            Logger.LogDebug("Message received from " + ID + " " + e.Data);
+            Logger.LogDebug($"Message received from {ID} {e.Data}");
 
-            if (client == null)
+            // Once the proxy to the real server is set up, we purely act like a proxy
+            if (client != null)
             {
-                WebSocketMessage? data = JsonConvert.DeserializeObject<WebSocketMessage>(e.Data);
-                if (!data.HasValue)
-                {
-                    Logger.LogError("Message invalid (null)");
-                    return;
-                }
-                WebSocketMessage message = data.Value;
+                client.Send(e.Data);
+                return;
+            }
 
-                if (message.Type == "connect-to-ip")
+            // If the proxy is not yet properly set up, we need some messages to request the right data for a connection first
+            WebSocketMessage? data = JsonConvert.DeserializeObject<WebSocketMessage>(e.Data);
+            if (!data.HasValue)
+            {
+                Logger.LogError("Message invalid (null)");
+                return;
+            }
+            WebSocketMessage message = data.Value;
+
+            if (message.Type == "connect-to-ip")
+            {
+                // Prevent the proxy from connecting to itself as that would create an infinite connection loop.
+                if (message.Value == "127.0.0.1" || message.Value == "localhost")
                 {
-                    ConnectToServer(message.Value);
-                }
-                else
-                {
-                    // Invalid message
-                    Logger.LogError("Message invalid (unknown)");
+                    Logger.LogWarning($"{ID} tried connecting to itself ({message.Value})");
+                    Sessions.CloseSession(ID);
                     return;
                 }
+
+                ConnectToServer(message.Value);
             }
             else
             {
-                client.Send(e.Data);
+                // Invalid message
+                Logger.LogError("Message invalid (unknown)");
             }
         }
 
         protected override void OnClose(CloseEventArgs e)
         {
-            Logger.LogInfo("Closed connection " + ID);
+            Logger.LogInfo($"Closed connection {ID}");
 
-            if (client == null) return;
-
-            client.Close();
-            client = null;
+            if (client != null)
+            {
+                // Clean up after ourselves by closing the connection to the server
+                client.Close();
+                client = null;
+            }
         }
 
         protected override void OnError(WebSocketSharp.ErrorEventArgs e)
@@ -90,13 +100,13 @@ namespace OmduLobby
         {
             if (client != null) return;
 
-            string url = $"ws://{ip}:7778/lobby";
+            string url = $"ws://{ip}:{Config.LobbyPort}/lobby";
             Logger.LogInfo($"Connecting to {url}");
             client = new WebSocket(url);
             client.OnMessage += OnServerMessage;
             client.OnClose += OnServerClose;
             client.OnError += OnServerError;
-            // client.SslConfiguration.ServerCertificateValidationCallback doesn't work cause of https://github.com/mono/mono/issues/8660 so we can't use a secure connection for self signed certificates
+            //client.SslConfiguration.ServerCertificateValidationCallback  doesn't work cause of https://github.com/mono/mono/issues/8660 so we can't use a secure connection for self signed certificates
             client.Connect();
         }
     }

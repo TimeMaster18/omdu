@@ -8,7 +8,7 @@
             <div class="battleground-info-card-wrapper">
                 <v-card
                     v-if="selectedBattleground !== null"
-                    @click="isOpen = true"
+                    v-on="disabled ? {} : { 'click' : () => isOpen = true }"
                 >
                     <difficulty-card
                         class="elevation-0 rounded-0"
@@ -35,7 +35,7 @@
                 </v-card>
                 <v-card
                     v-else
-                    @click="isOpen = true"
+                    v-on="disabled ? {} : { 'click' : () => isOpen = true }"
                     class="text-center no-battleground-selected-card"
                 >
                     <v-card-text class="font-italic no-battleground-selected">
@@ -133,6 +133,10 @@ export default {
         modelValue: {
             type: Number,
             required: true
+        },
+        disabled: {
+            type: Boolean,
+            default: true
         }
     },
     data() {

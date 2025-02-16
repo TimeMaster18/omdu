@@ -16,6 +16,11 @@
         public int? BattlegroundId { get; set; } = null;
         public Player[] Players { get; private set; } = new Player[5];
 
+        public bool IsHost(string playerSessionId)
+        {
+            return Players[0].SessionId == playerSessionId;
+        }
+
         /// <summary>
         /// Search for the slot that's reserved for a specific player
         /// </summary>

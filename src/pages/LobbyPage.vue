@@ -40,7 +40,10 @@
                 cols="12"
                 lg="4"
             >
-                <battleground-selection-dialog v-model="battleground" />
+                <battleground-selection-dialog
+                    v-model="battleground"
+                    :disabled="!isHost"
+                />
             </v-col>
             <v-col
                 v-if="battlegroundInfo !== null"
@@ -121,6 +124,9 @@ export default {
         },
         playerIndex() {
             return this.lobbyStore.playerIndex;
+        },
+        isHost() {
+            return this.playerIndex === 0;
         },
         loadoutCode: {
             get() {
