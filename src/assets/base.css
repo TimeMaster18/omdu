@@ -16,7 +16,7 @@ body {
   min-height: 100vh;
   min-width: 100vw;
   color: rgb(var(--v-theme-background-lighten-2));
-  background: rgb(var(--v-theme-background));
+  background-color: rgb(var(--v-theme-background));
   line-height: 1.6;
   font-family: "Dyslexic";
   text-rendering: optimizeLegibility;

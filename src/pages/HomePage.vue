@@ -59,5 +59,6 @@ export default {}
 .logo {
     width: 100%;
     max-width: 500px;
+    aspect-ratio: 866/558;
 }
 </style>
