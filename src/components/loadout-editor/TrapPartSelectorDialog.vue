@@ -13,12 +13,12 @@
             >
                 <template #activator="{ props }">
                     <v-card 
-                        class="trap-part-card text-center"
+                        class="trap-part-card line-height-0 text-center"
                         @click="isOpen = true"
                         :class="activatorClass"
                         v-bind="props"
                     >
-                        <v-card-text class="text-left py-2">
+                        <v-card-text class="line-height-0 text-left py-2">
                             <img
                                 v-if="selectedTrapPart !== null"
                                 class="trap-part-image mx-auto"
@@ -150,6 +150,9 @@ export default {
 <style scoped>
 .trap-part-card {
     width: 100%;
+}
+
+.line-height-0 {
     line-height: 0;
 }
 
