@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import LobbyStatus from '../enums/lobbyStatus';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName';
+import { load, save as convertToLoadoutCode } from '../utils/loadoutUtil';
 
 export const useLobbyStore = defineStore('lobby', {
     state() {
@@ -35,8 +36,16 @@ export const useLobbyStore = defineStore('lobby', {
                         this.connected = true;
 
                         // Immediately send over the locally stored loadout.
-                        // Default to an empty loadout if no loadout was stored so other users can still see we are connected.
-                        let storedLoadout = Cookies.get(CookieName.LobbyLoadout) ?? `${Cookies.get(CookieName.PlayerName)}-0000-000000000000000000-00-00-0000-0000000000000000000000000000`;
+                        let storedLoadout = Cookies.get(CookieName.LobbyLoadout);
+                        if(storedLoadout === undefined) {
+                            // Default to an empty loadout if no loadout was stored so other users can still see we are connected.
+                            storedLoadout = `${Cookies.get(CookieName.PlayerName)}-0000-000000000000000000-00-00-0000-0000000000000000000000000000`;
+                        }else {
+                            // Make sure the loadout uses the player name and not an old player name
+                            let loadout = load(storedLoadout);
+                            loadout.playerName = Cookies.get(CookieName.PlayerName);
+                            storedLoadout = convertToLoadoutCode(loadout);
+                        }
                         this.socket.send(JSON.stringify({
                             type: "update-loadout",
                             value: storedLoadout
