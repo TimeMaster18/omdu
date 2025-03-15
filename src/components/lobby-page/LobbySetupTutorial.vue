@@ -113,7 +113,7 @@ export default {
             // expires: Set the cookies for 1 years even if the user closes the session
             // sameSite: It will only be send to this website so others can't get a hold of itµ
             // secure: Only allow the cookie to be sent over https
-            const cookieOptions = { expires: 365, sameSite: "Strict", secure: false };
+            const cookieOptions = { expires: 365, sameSite: "Strict", secure: true };
 
             // Hosts only need to connect to their own server so we automatically set
             if(this.host) Cookies.set(CookieName.LobbyIp, "127.0.0.1", cookieOptions);

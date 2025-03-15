@@ -96,7 +96,7 @@ export default {
     watch: {
         loadoutCode(loadoutCode) {
             if(this.sharedLoadout) return;
-            Cookies.set(CookieName.Loadout, loadoutCode, { expires: 365, sameSite: "Strict", secure: false });
+            Cookies.set(CookieName.Loadout, loadoutCode, { expires: 365, sameSite: "Strict", secure: true });
         }
     }
 };
