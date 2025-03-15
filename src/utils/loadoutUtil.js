@@ -1,4 +1,4 @@
-import { decode } from './base62Util';
+import { decode, encode } from './base62Util';
 
 /**
  * Turns a loadout code into a loadout object
@@ -142,4 +142,132 @@ export const load = function (loadoutCode) {
         // If anything is off about this code it's a faulty code so we return null
         return null;
     }
+}
+
+/**
+ * Turns a loadout object into a loadout code
+ * @param {{
+*      playerName: string,
+*      heroId: number,
+*      skinId: number,
+*      dyeId: number,
+*      traits: {
+*          pentagonTraitId: number,
+*          diamondTraitId: number,
+*          triangleTraitId: number,
+*          noBonusTraitId: number
+*      },
+*      guardianIds: [
+*          number,
+*          number
+*      ],
+*      consumableIds: [
+*          number,
+*          number
+*      ],
+*      slots: [
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*          {
+*              itemId: number,
+*              partIds: [
+*                  number,
+*                  number,
+*                  number,
+*              ]
+*          },
+*      ]
+* }} loadout The loadout object to turn into a loadout code
+* @return {String} loadoutCode
+*/
+export const save = function (loadout) {
+    let loadoutCode = loadout.playerName;
+    loadoutCode += "-";
+    loadoutCode += encode(loadout.heroId)
+    loadoutCode += encode(loadout.skinId, true)
+    loadoutCode += encode(loadout.dyeId)
+    loadoutCode += "-"
+    loadout.slots.forEach(slot => {
+        loadoutCode += encode(slot.itemId, true);
+    });
+    loadoutCode += "-"
+    loadoutCode += encode(loadout.guardianIds[0])
+    loadoutCode += encode(loadout.guardianIds[1])
+    loadoutCode += "-"
+    loadoutCode += encode(loadout.consumableIds[0])
+    loadoutCode += encode(loadout.consumableIds[1])
+    loadoutCode += "-"
+    loadoutCode += encode(loadout.traits.pentagonTraitId)
+    loadoutCode += encode(loadout.traits.diamondTraitId)
+    loadoutCode += encode(loadout.traits.triangleTraitId)
+    loadoutCode += encode(loadout.traits.noBonusTraitId)
+    loadoutCode += "-"
+    loadout.slots.forEach(slot => {
+        loadoutCode += encode(slot.partIds[0]);
+        loadoutCode += encode(slot.partIds[1]);
+        loadoutCode += encode(slot.partIds[2]);
+    });
+    return loadoutCode;
 }

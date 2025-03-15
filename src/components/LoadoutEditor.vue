@@ -90,8 +90,7 @@
 </template>
 
 <script>
-import { encode } from '../utils/base62Util.js';
-import { load as loadLoadoutCode } from '../utils/loadoutUtil.js';
+import { load as loadLoadoutCode, save as saveLoadoutCode } from '../utils/loadoutUtil.js';
 import Dye from '../enums/dye.js';
 import HeroSelectorDialog from '../components/loadout-editor/HeroSelectorDialog.vue';
 import TraitSelectorDialog from '../components/loadout-editor/TraitSelectorDialog.vue';
@@ -190,33 +189,7 @@ export default {
     },
     computed:{
         loadoutCode() {
-            let loadoutCode = this.loadout.playerName;
-            loadoutCode += "-";
-            loadoutCode += encode(this.loadout.heroId)
-            loadoutCode += encode(this.loadout.skinId, true)
-            loadoutCode += encode(this.loadout.dyeId) // Dye id (1, 2, 3)
-            loadoutCode += "-"
-            this.loadout.slots.forEach(slot => {
-                loadoutCode += encode(slot.itemId, true);
-            });
-            loadoutCode += "-"
-            loadoutCode += encode(this.loadout.guardianIds[0])
-            loadoutCode += encode(this.loadout.guardianIds[1])
-            loadoutCode += "-"
-            loadoutCode += encode(this.loadout.consumableIds[0])
-            loadoutCode += encode(this.loadout.consumableIds[1])
-            loadoutCode += "-"
-            loadoutCode += encode(this.loadout.traits.pentagonTraitId)
-            loadoutCode += encode(this.loadout.traits.diamondTraitId)
-            loadoutCode += encode(this.loadout.traits.triangleTraitId)
-            loadoutCode += encode(this.loadout.traits.noBonusTraitId)
-            loadoutCode += "-"
-            this.loadout.slots.forEach(slot => {
-                loadoutCode += encode(slot.partIds[0]);
-                loadoutCode += encode(slot.partIds[1]);
-                loadoutCode += encode(slot.partIds[2]);
-            });
-            return loadoutCode;
+            return saveLoadoutCode(this.loadout);
         },
         heroSkinAndDye: {
             get() {
