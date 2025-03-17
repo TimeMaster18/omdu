@@ -8,7 +8,7 @@ export const useLobbyStore = defineStore('lobby', {
     state() {
         return {
             socket: null,
-            connected: false,
+            connectedTo: null,
 
             playerIndex: null,
             playerLoadouts: [null, null, null, null, null],
@@ -33,7 +33,7 @@ export const useLobbyStore = defineStore('lobby', {
                         }));
                     } else if(data.type === "assigned-player-slot") {
                         this.playerIndex = data.playerSlot
-                        this.connected = true;
+                        this.connectedTo = ip;
 
                         // Immediately send over the locally stored loadout.
                         let storedLoadout = Cookies.get(CookieName.LobbyLoadout);
@@ -61,7 +61,7 @@ export const useLobbyStore = defineStore('lobby', {
 
             this.socket.onclose = () => {
                 this.socket = null;
-                this.connected = false;
+                this.connectedTo = null;
             }
         },
         disconnect() {
@@ -92,8 +92,11 @@ export const useLobbyStore = defineStore('lobby', {
     getters: {
         connectionStatus: (state) => {
             if(state.socket === null) return LobbyStatus.Disconnected;
-            else if(state.connected) return LobbyStatus.Connected;
+            else if(state.connectedTo !== null) return LobbyStatus.Connected;
             else return LobbyStatus.Connecting;
+        },
+        isHost: (state) => {
+            return state.playerIndex === 0;
         },
         playerLoadout: (state) => {
             return state.playerLoadouts[state.playerIndex];

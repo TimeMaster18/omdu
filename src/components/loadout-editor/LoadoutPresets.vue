@@ -59,29 +59,6 @@
                             @click="importLoadout(loadout.code)"
                             @delete="deleteLoadout(index)"
                         />
-                        <!-- <loadout-preview-card
-                            v-for="(loadout, index) in sortedLoadouts"
-                            :key="index"
-                            class="elevation-0 preview-card"
-                            :loadout-code="loadout.code"
-                            @click="importLoadout(loadout.code)"
-                        >
-                            <template #name>
-                                {{ loadout.name }}
-                            </template>
-                            <template #actions>
-                                <copy-to-clipboard-icon
-                                    :value="`${baseShareLink}${loadout.code}`" 
-                                    copy-icon="mdi-share-variant"
-                                />
-                                <v-icon
-                                    class="ml-2"
-                                    @click.stop="deleteLoadout(index)"
-                                >
-                                    mdi-delete
-                                </v-icon>
-                            </template>
-                        </loadout-preview-card> -->
                     </div>
                 </span>
             </v-card>
