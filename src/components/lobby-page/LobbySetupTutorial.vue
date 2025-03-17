@@ -25,7 +25,7 @@
                 <!-- Download the .zip -->
                 <li>
                     <a
-                        href="https://github.com/Danmander/omdu/releases"
+                        href="https://github.com/Danmander/omdu/releases/latest"
                         target="_blank"
                     >Download</a>
                     and extract the latest lobby.zip from GitHub
