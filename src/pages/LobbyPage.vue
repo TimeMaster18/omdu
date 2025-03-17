@@ -1,6 +1,14 @@
 <template>
     <div v-if="isConnectedToLobby">
         <v-row class="justify-end px-2">
+            <lobby-launch-button
+                v-if="isConnectedToProjectRechained"
+                :player-index="playerIndex"
+                :loadouts="loadoutCodes"
+                :battleground="battlegroundInfo"
+                :host-ip="lobbyStore.connectedTo"
+                class="mr-2"
+            />
             <v-btn
                 prepend-icon="mdi-lan-disconnect"
                 color="error"
@@ -20,11 +28,24 @@
                 class="v-col-xl-fifth"
             >
                 <loadout-preview-card
+                    v-if="code !== null"
                     :loadout-code="code"
                     v-on="(index === playerIndex) ? { 'click': openLoadoutDialog } : null"
                     show-copy-action
                     show-open-loadout-action
-                />
+                >
+                    <template #name="{loadout}">
+                        {{ loadout?.playerName }}
+                    </template>
+                    <template #actions>
+                        <v-icon
+                            v-if="index === playerIndex"
+                            class="mr-2"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                    </template>
+                </loadout-preview-card>
             </v-col>
             <loadout-dialog
                 ref="loadoutDialog"
@@ -90,6 +111,9 @@ import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
 import LobbySetupTutorial from '../components/lobby-page/LobbySetupTutorial.vue';
 import LobbyConnectionStatus from '../components/lobby-page/LobbyConnectionStatus.vue';
+import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
+import LobbyStatus from '../enums/lobbyStatus.js';
+import { useProjectRechainedStore } from '../stores/projectRechained.js';
 
 export default {
     components: {
@@ -98,20 +122,25 @@ export default {
         LoadoutDialog,
         EnemiesOverview,
         LobbySetupTutorial,
-        LobbyConnectionStatus
+        LobbyConnectionStatus,
+        LobbyLaunchButton
     },
     setup() {
         const lobbyStore = useLobbyStore();
         const dataStore = useDataStore();
+        const projectRechainedStore = useProjectRechainedStore();
         return {
             lobbyStore,
-            dataStore
+            dataStore,
+            projectRechainedStore
         };
     },
     mounted() {
         if(Cookies.get(CookieName.LobbyIp) !== undefined) {
             this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp));
         }
+
+        this.projectRechainedStore.checkConnection();
     },
     data() {
         return {
@@ -120,13 +149,16 @@ export default {
     },
     computed: {
         isConnectedToLobby() {
-            return this.lobbyStore.connected;
+            return this.lobbyStore.connectionStatus === LobbyStatus.Connected;
+        },
+        isConnectedToProjectRechained() {
+            return this.projectRechainedStore.connected;
         },
         playerIndex() {
             return this.lobbyStore.playerIndex;
         },
         isHost() {
-            return this.playerIndex === 0;
+            return this.lobbyStore.isHost;
         },
         loadoutCode: {
             get() {
