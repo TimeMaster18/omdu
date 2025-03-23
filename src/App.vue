@@ -73,6 +73,13 @@
                 <v-icon>mdi-package</v-icon>
                 <span>Loadout</span>
             </v-btn>
+            <v-btn
+                v-if="isConnectedToProjectRechained"
+                to="project-rechained-lobby"
+            >
+                <v-icon>mdi-account-group</v-icon>
+                <span>Manual Lobby</span>
+            </v-btn>
             <v-btn to="lobby">
                 <v-icon>mdi-account-group</v-icon>
                 <span>Lobby</span>
@@ -82,8 +89,23 @@
 </template>
 
 <script>
-export default {
+import { useProjectRechainedStore } from './stores/projectRechained';
 
+export default {
+    setup() {
+        const projectRechainedStore = useProjectRechainedStore();
+        return {
+            projectRechainedStore
+        };
+    },
+    mounted() {
+        this.projectRechainedStore.checkConnection();
+    },
+    computed: {
+        isConnectedToProjectRechained() {
+            return this.projectRechainedStore.connected;
+        },
+    }
 };
 </script>
 

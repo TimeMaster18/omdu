@@ -4,6 +4,7 @@
             <!-- Host or join lobby -->
             <v-btn-toggle
                 v-model="host"
+                mandatory
                 variant="outlined"
                 class="mb-4 d-flex flex-row"
             >

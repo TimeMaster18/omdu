@@ -1,24 +1,29 @@
 <template>
-    <div v-if="isConnectedToLobby">
-        <v-row class="justify-end px-2">
-            <lobby-launch-button
-                v-if="isConnectedToProjectRechained"
-                :is-host="isHost"
-                :player-index="playerIndex"
-                :loadouts="loadoutCodes"
-                :battleground="battlegroundInfo"
-                :host-ip="lobbyStore.connectedTo"
-                class="mr-2"
-            />
-            <v-btn
-                prepend-icon="mdi-lan-disconnect"
-                color="error"
-                variant="outlined"
-                @click="disconnect"
-            >
-                Disconnect
+    <v-row class="justify-end px-2 mb-3">
+        <lobby-launch-button
+            v-if="isConnectedToProjectRechained"
+            :is-host="isHost"
+            :player-index="0"
+            :loadouts="loadoutCodes"
+            :battleground="battlegroundInfo"
+        />
+        <v-btn-toggle
+            v-model="isHost"
+            mandatory
+            class="ml-2"
+            variant="outlined"
+            density="compact"
+        >
+            <v-btn :value="true">
+                Host game
             </v-btn>
-        </v-row>
+
+            <v-btn :value="false">
+                Join game
+            </v-btn>
+        </v-btn-toggle>
+    </v-row>
+    <div v-if="isHost">
         <v-row class="justify-center">
             <v-col
                 v-for="(code, index) in loadoutCodes"
@@ -30,16 +35,25 @@
             >
                 <loadout-preview-card
                     :loadout-code="code"
-                    v-on="(index === playerIndex) ? { 'click': openLoadoutDialog } : null"
+                    v-on="(index === 0) ? { 'click': openLoadoutDialog } : null"
                     show-copy-action
                     show-open-loadout-action
                 >
-                    <template #name="{loadout}">
-                        {{ loadout?.playerName }}
+                    <template #name>
+                        <v-text-field
+                            class="player-name mr-2"
+                            @click.stop
+                            :label="`Player ${index + 1}'s loadout code`"
+                            v-model="loadoutCodes[index]"
+                            single-line
+                            hide-details
+                            density="compact"
+                            variant="underlined"
+                        />
                     </template>
                     <template #actions>
                         <v-icon
-                            v-if="index === playerIndex"
+                            v-if="index === 0"
                             class="mr-2"
                         >
                             mdi-pencil
@@ -49,7 +63,7 @@
             </v-col>
             <loadout-dialog
                 ref="loadoutDialog"
-                v-model="loadoutCode"
+                v-model="playerLoadoutCode"
             />
         </v-row>
         <v-divider
@@ -61,10 +75,7 @@
                 cols="12"
                 lg="4"
             >
-                <battleground-selection-dialog
-                    v-model="battleground"
-                    :disabled="!isHost"
-                />
+                <battleground-selection-dialog v-model="battleground" />
             </v-col>
             <v-col
                 v-if="battlegroundInfo !== null"
@@ -88,32 +99,23 @@
             </v-col>
         </v-row>
     </div>
-    <v-card
-        v-else
-        class="settings mx-auto"
-    >
-        <v-card-text class="pb-0">
-            <lobby-connection-status class="text-center" />
-            <lobby-setup-tutorial class="elevation-0" />
-        </v-card-text>
-    </v-card>
+    <div v-else>
+        <loadout-editor v-model="playerLoadoutCode" />
+    </div>
 </template>
 
 <script>
 import LoadoutDialog from '../components/lobby-page/LoadoutDialog.vue';
 import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue';
-import { useLobbyStore } from '../stores/lobby.js';
 import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
+import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
+import { useProjectRechainedStore } from '../stores/projectRechained.js';
+import LoadoutEditor from '../components/LoadoutEditor.vue';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
-import LobbySetupTutorial from '../components/lobby-page/LobbySetupTutorial.vue';
-import LobbyConnectionStatus from '../components/lobby-page/LobbyConnectionStatus.vue';
-import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
-import LobbyStatus from '../enums/lobbyStatus.js';
-import { useProjectRechainedStore } from '../stores/projectRechained.js';
 
 export default {
     components: {
@@ -121,88 +123,102 @@ export default {
         BattlegroundSelectionDialog,
         LoadoutDialog,
         EnemiesOverview,
-        LobbySetupTutorial,
-        LobbyConnectionStatus,
-        LobbyLaunchButton
+        LobbyLaunchButton,
+        LoadoutEditor
     },
     setup() {
-        const lobbyStore = useLobbyStore();
         const dataStore = useDataStore();
         const projectRechainedStore = useProjectRechainedStore();
         return {
-            lobbyStore,
             dataStore,
             projectRechainedStore
         };
     },
     mounted() {
-        if(Cookies.get(CookieName.LobbyIp) !== undefined) {
-            this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp));
-        }
-
         this.projectRechainedStore.checkConnection();
+        this.loadLobbySettingsCookie();
     },
     data() {
         return {
             Gamemode,
+
+            isHost: true,
+            battleground: null,
+            loadoutCodes: [null, null, null, null, null]
         }
     },
     computed: {
-        isConnectedToLobby() {
-            return this.lobbyStore.connectionStatus === LobbyStatus.Connected;
-        },
         isConnectedToProjectRechained() {
             return this.projectRechainedStore.connected;
-        },
-        playerIndex() {
-            return this.lobbyStore.playerIndex;
-        },
-        isHost() {
-            return this.lobbyStore.isHost;
-        },
-        loadoutCode: {
-            get() {
-                return this.lobbyStore.playerLoadout;
-            },
-            set(value) {
-                return this.lobbyStore.setPlayerLoadout(value);
-            }
-        },
-        loadoutCodes() {
-            return [
-                this.lobbyStore.getPlayerLoadoutByIndex(0),
-                this.lobbyStore.getPlayerLoadoutByIndex(1),
-                this.lobbyStore.getPlayerLoadoutByIndex(2),
-                this.lobbyStore.getPlayerLoadoutByIndex(3),
-                this.lobbyStore.getPlayerLoadoutByIndex(4),
-            ]
-        },
-        battleground: {
-            get() {
-                return this.lobbyStore.battleground;
-            },
-            set(value) {
-                return this.lobbyStore.setBattleground(value);
-            }
         },
         battlegroundInfo() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .find(battleground => battleground.id === this.battleground) ?? null
         },
+        playerLoadoutCode: {
+            // User is always player 0:
+            //  - When hosting (because the host is always player 0)
+            //  - When joining (because they don't have any clue about other players so there's only 1 player they need to keep track of)
+            get() {
+                return this.loadoutCodes[0];
+            },
+            set(loadoutCode) {
+                this.loadoutCodes[0] = loadoutCode;
+            }
+        }
     },
     methods: {
         openLoadoutDialog() {
             this.$refs.loadoutDialog.open();
         },
-        disconnect() {
-            Cookies.remove(CookieName.LobbyIp);
-            location.reload();
+        loadLobbySettingsCookie() {
+            let cookie = Cookies.get(CookieName.ProjectRechainedLobbySettings);
+            if(cookie === undefined) return;
+            cookie = JSON.parse(cookie);
+
+            if(cookie.host !== undefined) this.isHost =  !!cookie.host;
+            if(cookie.battleground !== undefined) this.battleground = cookie.battleground;
+            if(cookie.loadouts !== undefined) this.loadoutCodes = cookie.loadouts;
+        },
+        saveLobbySettingsCookie() {
+            Cookies.set(
+                CookieName.ProjectRechainedLobbySettings,
+                JSON.stringify({
+                    host: this.isHost,
+                    battleground: this.battleground,
+                    loadouts: this.loadoutCodes
+                }),
+                {
+                    expires: 365,
+                    sameSite: "Strict",
+                    secure: true
+                }
+            );
+        },
+    },
+    watch: {
+        isHost() {
+            this.saveLobbySettingsCookie();
+        },
+        battleground() {
+            this.saveLobbySettingsCookie();
+        },
+        loadoutCodes: {
+            deep: true,
+            handler: function() {
+                this.saveLobbySettingsCookie();
+            }
         }
     }
 };
 </script>
 
 <style scoped>
+.settings {
+    max-width: 500px;
+    width: 500px;
+}
+
 /* Custom breakpoint for 1/5th division of a row as we have 5 players which we want to show */
 @media (min-width: 1700px) {
     .v-col-xl-fifth {
@@ -211,8 +227,7 @@ export default {
     }
 }
 
-.settings {
-    max-width: 500px;
-    width: 500px;
+.player-name:deep(.v-field__input) {
+    padding: 0 4px !important;
 }
 </style>

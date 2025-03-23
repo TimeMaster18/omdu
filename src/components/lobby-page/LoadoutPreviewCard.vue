@@ -1,9 +1,6 @@
 <template>
     <v-card class="card">
-        <div
-            :class="{ 'hidden': loadout === null }"
-            class="grid"
-        >
+        <div class="grid">
             <div
                 class="icon my-auto"
                 :class="{ 'hidden': !hero?.icon}"
@@ -27,11 +24,11 @@
             <div class="actions mr-1 mt-1">
                 <slot name="actions" />
                 <copy-to-clipboard-icon
-                    v-if="showCopyAction"
+                    v-if="showCopyAction && loadout !== null"
                     :value="loadoutCode"
                 />
                 <v-icon
-                    v-if="showOpenLoadoutAction"
+                    v-if="showOpenLoadoutAction && loadout !== null"
                     @click.stop="openLoadoutLink"
                     class="ml-2"
                 >

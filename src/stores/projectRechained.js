@@ -43,10 +43,10 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
         },
         hostGame(loadouts, battleground, language = Language.English, showTrapDamage = false, activeMods = [], startingCoins = null, trapTier = 7, accountLevel = 50) {
             // Can't create a game without a loadout or battleground
-            if(loadouts.length === 0 || battleground === null) return;
+            if(loadouts.length === 0 || battleground === null) return Promise.reject();
 
             // Filter out empty loadouts as the endpoints don't support those
-            loadouts = loadouts.filter((loadout) => loadout !== null);
+            loadouts = loadouts.filter((loadout) => loadout !== null || loadout === "");
 
             return new Promise((resolve, reject) => {
                 fetch(`${BASE_API_URL}/game/launch`, {
@@ -82,7 +82,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
         },
         joinGame(loadout, hostIp, language = Language.English, showTrapDamage = false) {
             // Can't join a hosted game without a loadout or the host's server ip
-            if(loadout === null || hostIp === null) return;
+            if(loadout === null || hostIp === null) return Promise.reject();
 
             return new Promise((resolve, reject) => {
                 fetch(`${BASE_API_URL}/game/join`, {
