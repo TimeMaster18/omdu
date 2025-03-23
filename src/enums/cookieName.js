@@ -4,6 +4,7 @@ const CookieName = Object.freeze({
     PlayerName: "player-name",
     LoadoutPresets: "loadouts",
     Loadout: "loadout",
-    ProjectRechainedLaunchSettings: "project-rechained"
+    ProjectRechainedLaunchSettings: "project-rechained",
+    ProjectRechainedLobbySettings: "project-rechained-lobby"
 });
 export default CookieName;

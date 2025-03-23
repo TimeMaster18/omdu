@@ -1,9 +1,22 @@
 <template>
     <div>
+        <v-text-field
+            v-if="showManualHostIpInput"
+            v-model="internalHostIp"
+            label="Host's IPv4 address"
+            class="host-ip rounded-e-0 border-e-0"
+            :class="{'active': readyToLaunch}"
+            density="compact"
+            single-line
+            hide-details
+            variant="outlined"
+        />
+
         <v-btn
             color="success"
             variant="outlined"
             class="rounded-e-0 border-e-0"
+            :class="showManualHostIpInput ? ['rounded-s-0', 'border-s-0'] : []"
             prepend-icon="mdi-play"
             @click="isHost ? host() : join()"
             :disabled="!readyToLaunch"
@@ -111,7 +124,7 @@
                                 >
                                     Trap level:
                                     <v-text-field
-                                        :label="`Automatic (${battleground.trapTier ?? 'none'})`"
+                                        :label="`Automatic (${battleground?.trapTier ?? 'none'})`"
                                         v-model.number="trapLevel"
                                         @update:model-value="saveLaunchSettings"
                                         type="number"
@@ -125,7 +138,7 @@
                                 <v-col cols="6">
                                     Account level
                                     <v-text-field
-                                        :label="`Automatic (${battleground.unlockLevel ?? 'none'})`"
+                                        :label="`Automatic (${battleground?.unlockLevel ?? 'none'})`"
                                         v-model.number="accountLevel"
                                         @update:model-value="saveLaunchSettings"
                                         type="number"
@@ -149,7 +162,6 @@
 import Cookies from 'js-cookie';
 import CookieName from '../../enums/cookieName';
 import { useDataStore } from '../../stores/data';
-import { useLobbyStore } from '../../stores/lobby';
 import Language from '../../enums/project-rechained/language';
 import Mod from '../../enums/project-rechained/mod';
 import { useProjectRechainedStore } from '../../stores/projectRechained';
@@ -157,15 +169,17 @@ import { useProjectRechainedStore } from '../../stores/projectRechained';
 export default {
     setup() {
         const dataStore = useDataStore();
-        const lobbyStore = useLobbyStore();
         const projectRechainedStore = useProjectRechainedStore();
         return {
             dataStore,
-            lobbyStore,
             projectRechainedStore,
         };
     },
     props: {
+        isHost: {
+            type: Boolean,
+            default: true
+        },
         playerIndex: {
             type: Number,
             default: 0
@@ -174,6 +188,7 @@ export default {
             type: Array,
             required: true
         },
+        // Only required for hosting games, not for joining them
         battleground: {
             type: Object,
             required: true
@@ -196,18 +211,28 @@ export default {
             trapLevel: null,
             accountLevel: null,
 
+            internalHostIp: null,
             launching: false
         };
     },
     mounted() {
         this.loadLaunchSettings();
+        this.internalHostIp = this.hostIp;
     },
     computed: {
-        isHost() {
-            return this.playerIndex === 0;
+        showManualHostIpInput() {
+            // We NEED a host ip to join games. So if none is provided via the properties, we'll show an input field for it
+            return !this.isHost && this.hostIp === null;
         },
         readyToLaunch() {
-            return this.battleground !== null;
+            // We always need at least the host's loadout to start a game
+            if(this.loadouts[0] === null || this.loadouts[0] === "") return false;
+
+            if(this.isHost) {
+                return this.battleground !== null;
+            } else {
+                return this.internalHostIp !== null && this.internalHostIp !== "";
+            }
         },
     },
     methods: {
@@ -269,16 +294,69 @@ export default {
             this.launching = true;
             this.projectRechainedStore.joinGame(
                 this.loadouts[this.playerIndex], 
-                this.lobbyStore.connectedTo,
+                this.internalHostIp,
                 this.selectedLanguage,
                 this.showTrapDamage
             ).finally(() => {
                 this.launching = false;
             });
         }
+    },
+    watch: {
+        // Update the internal host ip if we ever receive a host ip via the component properties
+        hostIp(hostIp) {
+            this.internalHostIp = hostIp;
+        },
     }
 }
 </script>
 
 <style scoped>
+.host-ip {
+    max-width: 200px;
+    display: inline-grid;
+    width: 200px;
+    vertical-align: bottom;
+}
+
+.host-ip:deep(.v-field) {
+    max-height: 36px;
+}
+
+.host-ip:deep(.v-field.v-field-active){
+    border-width: 1px;
+}
+
+.host-ip:deep(.v-field__input) {
+    padding: 0 8px !important;
+    min-height: 36px;
+    max-height: 36px;
+    text-align: end;
+}
+
+.host-ip:deep(.v-field__outline) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.host-ip:deep(.v-field__outline>.v-field__outline__start) {
+    border-color: rgb(var(--v-theme-success)) !important;
+    border-top-width: 1px !important;
+    border-bottom-width: 1px !important;
+}
+.host-ip:deep(.v-field__outline>.v-field__outline__end) {
+    border-color: rgb(var(--v-theme-success)) !important;
+    border-top-width: 1px !important;
+    border-bottom-width: 1px !important;
+}
+
+.host-ip.active:deep(.v-field__outline>.v-field__outline__start),
+.host-ip.active:deep(.v-field__outline>.v-field__outline__end) {
+    opacity: 1 !important;
+}
+
+.host-ip:not(.active):deep(.v-field__outline>.v-field__outline__start),
+.host-ip:not(.active):deep(.v-field__outline>.v-field__outline__end) {
+    opacity: 0.38 !important;
+}
 </style>

@@ -9,53 +9,11 @@
         >
             You're viewing a shared loadout. Any changes will be lost if you reload or leave the page. To keep this loadout, you can save it to your loadout presets manually.
         </v-alert>
-        <div class="d-flex mb-4">
-            <v-text-field
-                class="loadout-code-text-field"
-                v-model="loadoutCode"
-                variant="outlined"
-                hide-details
-            />
-            <v-btn
-                variant="outlined"
-                class="ml-2"
-                @click="$refs.clearConfirmationDialog.open()"
-            >
-                <v-icon>
-                    mdi-close-circle-outline
-                </v-icon>
-            </v-btn>
-            <confirmation-dialog
-                ref="clearConfirmationDialog"
-                confirm-button-color="error"
-                @confirm="clearLoadout"
-            >
-                Are you sure you want to clear your loadout?
-            </confirmation-dialog>
-            <copy-to-clipboard-button
-                :value="loadoutCode"
-                class="ml-2"
-                copy-icon="mdi-content-copy"
-            />
-            <copy-to-clipboard-button
-                :value="shareLink"
-                class="ml-2"
-                copy-icon="mdi-share-variant"
-            />
-            <loadout-presets
-                activator-class="ml-2"
-                :current-loadout-code="loadoutCode"
-                @import="(importedLoadoutCode) => loadoutCode = importedLoadoutCode"
-            />
-        </div>
         <loadout-editor v-model="loadoutCode" />
     </div>
 </template>
 
 <script>
-import ConfirmationDialog from '../components/ConfirmationDialog.vue';
-import CopyToClipboardButton from '../components/CopyToClipboardButton.vue';
-import LoadoutPresets from '../components/loadout-editor/LoadoutPresets.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
 import CookieName from '../enums/cookieName';
 import Cookies from 'js-cookie';
@@ -63,9 +21,6 @@ import Cookies from 'js-cookie';
 export default {
     components: {
         LoadoutEditor,
-        LoadoutPresets,
-        CopyToClipboardButton,
-        ConfirmationDialog
     },
     data() {
         return {
@@ -84,14 +39,10 @@ export default {
         }
     },
     computed: {
-        shareLink() {
-            return `${window.location.origin}/loadout?code=${this.loadoutCode}`;
-        }
+        
     },
     methods: {
-        clearLoadout() {
-            this.loadoutCode = this.defaultLoadoutCode;
-        }
+        
     },
     watch: {
         loadoutCode(loadoutCode) {
@@ -103,13 +54,4 @@ export default {
 </script>
 
 <style scoped>
-.loadout-code-text-field:deep(.v-field) {
-    box-shadow: none;
-}
-
-.loadout-code-text-field:deep(input) {
-    padding-top: 4px;
-    padding-bottom: 4px;
-    min-height: 28px;
-}
 </style>
