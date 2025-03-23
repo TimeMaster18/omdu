@@ -152,6 +152,7 @@ export default {
 }
 
 .slot-item {
+    vertical-align: bottom;
 	width: calc(100% / 9);
 	image-rendering: optimizeQuality;
 	aspect-ratio: 684/572;

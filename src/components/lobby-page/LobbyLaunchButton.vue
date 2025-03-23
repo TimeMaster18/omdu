@@ -39,7 +39,7 @@
                 </v-btn>
             </template>
 
-            <template #default>
+            <template #default="{ isActive }">
                 <v-card>
                     <v-card-text class="pb-2">
                         <v-select
@@ -69,7 +69,7 @@
                                 variant="outlined"
                                 density="compact"
                             >
-                                Using mods can lead to unexpected outcomes. Some mods won't work in multiplayer.
+                                Using mods can lead to unexpected outcomes and can break the game's balance. Some mods won't work in multiplayer.
                             </v-alert>
 
                             <v-row no-gutters>
@@ -101,7 +101,7 @@
                                     Overwrite starting coins:
                                     <v-text-field
                                         v-model.number="startingCoins"
-                                        label="Automatic"
+                                        label="Don't overwrite"
                                         @update:model-value="saveLaunchSettings"
                                         type="number"
                                         :min="0"
@@ -122,9 +122,9 @@
                                     cols="6"
                                     class="pr-2"
                                 >
-                                    Trap level:
+                                    Overwrite trap level:
                                     <v-text-field
-                                        :label="`Automatic (${battleground?.trapTier ?? 'none'})`"
+                                        label="Don't overwrite"
                                         v-model.number="trapLevel"
                                         @update:model-value="saveLaunchSettings"
                                         type="number"
@@ -136,9 +136,9 @@
                                     />
                                 </v-col>
                                 <v-col cols="6">
-                                    Account level
+                                    Overwrite account level:
                                     <v-text-field
-                                        :label="`Automatic (${battleground?.unlockLevel ?? 'none'})`"
+                                        label="Don't overwrite"
                                         v-model.number="accountLevel"
                                         @update:model-value="saveLaunchSettings"
                                         type="number"
@@ -152,6 +152,15 @@
                             </v-row>
                         </div>
                     </v-card-text>
+                    <v-card-actions>
+                        <v-spacer />
+                        <v-btn
+                            prepend-icon="mdi-close"
+                            variant="outlined"
+                            text="Close"
+                            @click="isActive.value = false"
+                        />
+                    </v-card-actions>
                 </v-card>
             </template>
         </v-dialog>

@@ -39,8 +39,12 @@
                     show-copy-action
                     show-open-loadout-action
                 >
-                    <template #name>
+                    <template #name="{ loadout }">
+                        <span v-if="index === 0">
+                            {{ loadout?.playerName ?? 'Your loadout' }}
+                        </span>
                         <v-text-field
+                            v-else
                             class="player-name mr-2"
                             @click.stop
                             :label="`Player ${index + 1}'s loadout code`"
@@ -229,5 +233,13 @@ export default {
 
 .player-name:deep(.v-field__input) {
     padding: 0 4px !important;
+}
+
+.player-name:deep(.v-field__field) {
+    height: 25.6px /* The height of a normal text element in the loçadout preview card */
+}
+
+.player-name:deep(.v-label) {
+    top: 0;
 }
 </style>

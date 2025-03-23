@@ -1,13 +1,24 @@
 <template>
     <v-dialog v-model="isOpen">
-        <v-card background="background">
-            <v-card-text>
-                <loadout-editor
-                    v-model="vModelProxy"
-                    :fixed-player-name="playerName"
-                />
-            </v-card-text>
-        </v-card>
+        <template #default="{ isActive }">
+            <v-card background="background">
+                <v-card-text>
+                    <loadout-editor
+                        v-model="vModelProxy"
+                        :fixed-player-name="playerName"
+                    />
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer />
+                    <v-btn
+                        prepend-icon="mdi-close"
+                        variant="outlined"
+                        text="Close"
+                        @click="isActive.value = false"
+                    />
+                </v-card-actions>
+            </v-card>
+        </template>
     </v-dialog>
 </template>
 
