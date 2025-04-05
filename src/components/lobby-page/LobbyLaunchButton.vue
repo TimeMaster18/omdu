@@ -1,5 +1,31 @@
 <template>
-    <div>
+    <div v-if="!isConnected">
+        <component-with-tooltip
+            width="auto"
+            height="auto"
+        >
+            <template #activator="{props}">
+                <v-btn
+                    v-bind="props"
+                    color="warning"
+                    variant="outlined"
+                    prepend-icon="mdi-repeat"
+                    @click="projectRechainedStore.checkConnection()"
+                    :loading="projectRechainedStore.connecting"
+                >
+                    Reconnect
+                </v-btn>
+            </template>
+
+            <template #tooltip>
+                <v-card class="pointer-event-auto px-2 py-1">
+                    To automatically launch games, please make sure the Project Rechained launcher is open and remains running.
+                    If you haven't installed the launcher yet, you can follow the installation instructions on <a href="https://github.com/TimeMaster18/Project-Rechained">Project Rechained's GitHub page</a>.
+                </v-card>
+            </template>
+        </component-with-tooltip>
+    </div>
+    <div v-else>
         <v-text-field
             v-if="showManualHostIpInput"
             v-model="internalHostIp"
@@ -174,8 +200,12 @@ import { useDataStore } from '../../stores/data';
 import Language from '../../enums/project-rechained/language';
 import Mod from '../../enums/project-rechained/mod';
 import { useProjectRechainedStore } from '../../stores/projectRechained';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
+    components: {
+        ComponentWithTooltip
+    },
     setup() {
         const dataStore = useDataStore();
         const projectRechainedStore = useProjectRechainedStore();
@@ -225,10 +255,14 @@ export default {
         };
     },
     mounted() {
-        this.loadLaunchSettings();
         this.internalHostIp = this.hostIp;
+        this.projectRechainedStore.checkConnection();
+        this.loadLaunchSettings();
     },
     computed: {
+        isConnected() {
+            return this.projectRechainedStore.connected;
+        },
         showManualHostIpInput() {
             // We NEED a host ip to join games. So if none is provided via the properties, we'll show an input field for it
             return !this.isHost && this.hostIp === null;
@@ -367,5 +401,9 @@ export default {
 .host-ip:not(.active):deep(.v-field__outline>.v-field__outline__start),
 .host-ip:not(.active):deep(.v-field__outline>.v-field__outline__end) {
     opacity: 0.38 !important;
+}
+
+.pointer-event-auto {
+    pointer-events: auto;
 }
 </style>

@@ -25,11 +25,15 @@ function parseApiGamemode(battleground) {
 export const useProjectRechainedStore = defineStore('project-rechained', {
     state() {
         return {
+            connecting: false,
             connected: false
         };
     },
     actions: {
         checkConnection() {
+            if(this.connecting) return;
+
+            this.connecting = true;
             fetch(`${BASE_API_URL}/game/status`, {
                 headers: {
                     "Content-Type": "application/json",
@@ -39,6 +43,8 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                 this.connected = response.ok;
             }).catch(() => {
                 this.connected = false;
+            }).finally(()=>{
+                this.connecting = false;
             });
         },
         hostGame(loadouts, battleground, language = Language.English, showTrapDamage = false, activeMods = [], startingCoins = null, trapTier = 7, accountLevel = 50) {
@@ -76,6 +82,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                     if(response.ok) resolve();
                     else reject();
                 }).catch(() => {
+                    this.checkConnection(); // Check the connection in case it's the connection that went wrong
                     reject();
                 });
             });
@@ -100,6 +107,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                     if(response.ok) resolve();
                     else reject();
                 }).catch(() => {
+                    this.checkConnection(); // Check the connection in case it's the connection that went wrong
                     reject();
                 });
             });

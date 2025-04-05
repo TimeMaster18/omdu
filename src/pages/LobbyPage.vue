@@ -2,7 +2,6 @@
     <div v-if="isConnectedToLobby">
         <v-row class="justify-end px-2">
             <lobby-launch-button
-                v-if="isConnectedToProjectRechained"
                 :is-host="isHost"
                 :player-index="playerIndex"
                 :loadouts="loadoutCodes"
@@ -113,7 +112,6 @@ import LobbySetupTutorial from '../components/lobby-page/LobbySetupTutorial.vue'
 import LobbyConnectionStatus from '../components/lobby-page/LobbyConnectionStatus.vue';
 import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
 import LobbyStatus from '../enums/lobbyStatus.js';
-import { useProjectRechainedStore } from '../stores/projectRechained.js';
 
 export default {
     components: {
@@ -128,19 +126,15 @@ export default {
     setup() {
         const lobbyStore = useLobbyStore();
         const dataStore = useDataStore();
-        const projectRechainedStore = useProjectRechainedStore();
         return {
             lobbyStore,
-            dataStore,
-            projectRechainedStore
+            dataStore
         };
     },
     mounted() {
         if(Cookies.get(CookieName.LobbyIp) !== undefined) {
             this.lobbyStore.connect(Cookies.get(CookieName.LobbyIp));
         }
-
-        this.projectRechainedStore.checkConnection();
     },
     data() {
         return {
@@ -150,9 +144,6 @@ export default {
     computed: {
         isConnectedToLobby() {
             return this.lobbyStore.connectionStatus === LobbyStatus.Connected;
-        },
-        isConnectedToProjectRechained() {
-            return this.projectRechainedStore.connected;
         },
         playerIndex() {
             return this.lobbyStore.playerIndex;

@@ -22,7 +22,7 @@
                         To get started playing the game, follow the installation instructions on <a href="https://github.com/TimeMaster18/Project-Rechained">Project Rechained's GitHub page</a>.
                     </p>
                     <p>
-                        Looking for a group to play with? Join <a href="https://discord.gg/xkZskPXtwm">Project Unchained's Discord server</a>, where you'll find dedicated LFG channels and roles.
+                        Looking for a group to play with? Join <a href="https://discord.gg/xkZskPXtwm">Project Rechained's Discord server</a>, where you'll find dedicated LFG channels and roles.
                     </p>
                 </v-card-text>
             </v-card>

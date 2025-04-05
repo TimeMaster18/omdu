@@ -1,7 +1,6 @@
 <template>
     <v-row class="justify-end px-2 mb-3">
         <lobby-launch-button
-            v-if="isConnectedToProjectRechained"
             :is-host="isHost"
             :player-index="0"
             :loadouts="loadoutCodes"
@@ -116,7 +115,6 @@ import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSe
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
 import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
-import { useProjectRechainedStore } from '../stores/projectRechained.js';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
@@ -132,14 +130,11 @@ export default {
     },
     setup() {
         const dataStore = useDataStore();
-        const projectRechainedStore = useProjectRechainedStore();
         return {
             dataStore,
-            projectRechainedStore
         };
     },
     mounted() {
-        this.projectRechainedStore.checkConnection();
         this.loadLobbySettingsCookie();
     },
     data() {
@@ -152,9 +147,6 @@ export default {
         }
     },
     computed: {
-        isConnectedToProjectRechained() {
-            return this.projectRechainedStore.connected;
-        },
         battlegroundInfo() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
                 .find(battleground => battleground.id === this.battleground) ?? null

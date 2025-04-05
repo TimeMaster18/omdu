@@ -7,7 +7,7 @@ I created this small website to help my friends and I set up survival mode loado
 To get started playing the game, follow the installation instructions on [Project Rechained's GitHub page](https://github.com/TimeMaster18/Project-Rechained).
 
 ## Looking for a group?
-Looking for a group to play with? Join [Project Unchained's Discord server](https://discord.gg/xkZskPXtwm), where you'll find dedicated LFG channels and roles.
+Looking for a group to play with? Join [Project Rechained's Discord server](https://discord.gg/xkZskPXtwm), where you'll find dedicated LFG channels and roles.
 
 ## Fair Use / Fair Dealing Disclaimer
 This website is a fan-made project dedicated to Orcs Must Die! Unchained, a discontinued game originally developed and published by [Robot Entertainment](https://robotentertainment.com/). The images, logos, and other copyrighted materials used on this site are the property of their respective owners.
