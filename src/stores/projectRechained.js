@@ -26,7 +26,16 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
     state() {
         return {
             connecting: false,
-            connected: false
+            connected: false,
+
+            // All settings/mods related to launching Project Rechained
+            extraDifficulty: null,
+            // selectedLanguage: Language.English,
+            // showTrapDamage: false,
+            // selectedMods: [],
+            // startingCoins: null,
+            // trapLevel: null,
+            // accountLevel: null,
         };
     },
     actions: {
@@ -70,7 +79,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                         "MapName": battleground.map.name, // Name of the map, e.g. "Cliffside Clash", "The Baths", etc.
                         "Difficulty": parseApiDifficulty(battleground), /// "Apprentice", "WarMage", "Master", "RiftLord" or "Endless".
 
-                        "ExtraDifficulty": undefined, // Additional difficulty settings, if applicable. This may include modifiers or custom challenge settings.
+                        "ExtraDifficulty": this.extraDifficulty, // Additional difficulty settings, if applicable. This may include modifiers or custom challenge settings.
                         "ActiveMods": activeMods, // Names of mods to enable. They must match the internal `Mods.ModList` items by name.
                         "ShowTrapDamage": showTrapDamage, // Determines whether trap damage numbers should be displayed on screen.
 

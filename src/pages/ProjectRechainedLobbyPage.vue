@@ -1,6 +1,6 @@
 <template>
     <v-row class="justify-end px-2 mb-3">
-        <lobby-launch-button
+        <project-rechained-launch-button
             :is-host="isHost"
             :player-index="0"
             :loadouts="loadoutCodes"
@@ -114,7 +114,7 @@ import { useDataStore } from '../stores/data.js';
 import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
 import EnemiesOverview from '../components/EnemiesOverview.vue';
 import Gamemode from '../enums/gamemode.js';
-import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
+import ProjectRechainedLaunchButton from '../components/ProjectRechainedLaunchButton.vue';
 import LoadoutEditor from '../components/LoadoutEditor.vue';
 import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
@@ -125,7 +125,7 @@ export default {
         BattlegroundSelectionDialog,
         LoadoutDialog,
         EnemiesOverview,
-        LobbyLaunchButton,
+        ProjectRechainedLaunchButton,
         LoadoutEditor
     },
     setup() {

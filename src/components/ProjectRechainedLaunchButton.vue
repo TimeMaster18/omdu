@@ -195,12 +195,12 @@
 
 <script>
 import Cookies from 'js-cookie';
-import CookieName from '../../enums/cookieName';
-import { useDataStore } from '../../stores/data';
-import Language from '../../enums/project-rechained/language';
-import Mod from '../../enums/project-rechained/mod';
-import { useProjectRechainedStore } from '../../stores/projectRechained';
-import ComponentWithTooltip from '../ComponentWithTooltip.vue';
+import CookieName from '../enums/cookieName';
+import { useDataStore } from '../stores/data';
+import Language from '../enums/project-rechained/language';
+import Mod from '../enums/project-rechained/mod';
+import { useProjectRechainedStore } from '../stores/projectRechained';
+import ComponentWithTooltip from './ComponentWithTooltip.vue';
 
 export default {
     components: {

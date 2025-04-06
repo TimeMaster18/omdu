@@ -1,7 +1,7 @@
 <template>
     <div v-if="isConnectedToLobby">
         <v-row class="justify-end px-2">
-            <lobby-launch-button
+            <project-rechained-launch-button
                 :is-host="isHost"
                 :player-index="playerIndex"
                 :loadouts="loadoutCodes"
@@ -110,7 +110,7 @@ import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName.js';
 import LobbySetupTutorial from '../components/lobby-page/LobbySetupTutorial.vue';
 import LobbyConnectionStatus from '../components/lobby-page/LobbyConnectionStatus.vue';
-import LobbyLaunchButton from '../components/lobby-page/LobbyLaunchButton.vue';
+import ProjectRechainedLaunchButton from '../components/ProjectRechainedLaunchButton.vue';
 import LobbyStatus from '../enums/lobbyStatus.js';
 
 export default {
@@ -121,7 +121,7 @@ export default {
         EnemiesOverview,
         LobbySetupTutorial,
         LobbyConnectionStatus,
-        LobbyLaunchButton
+        ProjectRechainedLaunchButton
     },
     setup() {
         const lobbyStore = useLobbyStore();

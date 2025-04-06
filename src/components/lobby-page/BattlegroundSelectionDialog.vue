@@ -10,10 +10,7 @@
                     v-if="selectedBattleground !== null"
                     v-on="disabled ? {} : { 'click' : () => isOpen = true }"
                 >
-                    <difficulty-card
-                        class="elevation-0 rounded-0"
-                        :difficulty="selectedBattleground.difficulty"
-                    />
+                    <project-rechained-difficulty-card :battleground="selectedBattleground" />
                     <div class="text-center">
                         <img
                             class="minimap"
@@ -103,6 +100,7 @@
 </template>
 
 <script>
+import ProjectRechainedDifficultyCard from './ProjectRechainedDifficultyCard.vue';
 import DifficultyCard from '../DifficultyCard.vue';
 import Difficulty from '../../enums/difficulty.js';
 import BattlegroundCard from '../BattlegroundCard.vue';
@@ -122,6 +120,7 @@ export default {
     },
     components: {
         DifficultyCard,
+        ProjectRechainedDifficultyCard,
         BattlegroundCard,
         DeselectCard,
         BattlegroundStats,
