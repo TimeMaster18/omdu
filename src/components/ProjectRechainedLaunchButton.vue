@@ -20,7 +20,10 @@
             <template #tooltip>
                 <v-card class="pointer-event-auto px-2 py-1">
                     To automatically launch games, please make sure the Project Rechained launcher is open and remains running.
-                    If you haven't installed the launcher yet, you can follow the installation instructions on <a href="https://github.com/TimeMaster18/Project-Rechained">Project Rechained's GitHub page</a>.
+                    If you haven't installed the launcher yet, you can follow the installation instructions on <a
+                        href="https://github.com/TimeMaster18/Project-Rechained"
+                        target="_blank"
+                    >Project Rechained's GitHub page</a>.
                 </v-card>
             </template>
         </component-with-tooltip>
