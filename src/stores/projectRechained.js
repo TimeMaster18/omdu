@@ -101,7 +101,10 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
         },
         joinGame(loadout, hostIp, language = Language.English, showTrapDamage = false) {
             // Can't join a hosted game without a loadout or the host's server ip
-            if(loadout === null || hostIp === null) return Promise.reject();
+            if(loadout === null || loadout.trim() === "" || hostIp === null) return Promise.reject();
+
+            // Filter out bad characters from loadout codes (only alphanumeric character and "-" are allowed)
+            loadout = loadout.replace(/[^a-zA-Z0-9-]/g, "");
 
             return new Promise((resolve, reject) => {
                 fetch(`${BASE_API_URL}/game/join`, {
