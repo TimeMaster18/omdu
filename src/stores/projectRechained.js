@@ -61,7 +61,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
             if(loadouts.length === 0 || battleground === null) return Promise.reject();
 
             // Filter out empty loadouts as the endpoints don't support those
-            loadouts = loadouts.filter((loadout) => loadout !== null || loadout === "");
+            loadouts = loadouts.filter((loadout) => loadout !== null && loadout.trim() !== "");
 
             return new Promise((resolve, reject) => {
                 fetch(`${BASE_API_URL}/game/launch`, {
