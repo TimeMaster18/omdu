@@ -1,7 +1,9 @@
 <template>
-    <difficulty-card
+    <component
+        :is="componentType"
         class="elevation-0 rounded-0"
         :difficulty="battleground.difficulty"
+        :gamemode="battleground.gamemode"
     >
         <template #append>
             <component-with-tooltip
@@ -30,7 +32,7 @@
                 </template>
             </component-with-tooltip>
         </template>
-    </difficulty-card>
+    </component>
 </template>
 
 <script>
@@ -39,6 +41,7 @@ import Gamemode from '../../enums/gamemode';
 import ProjectRechainedDifficulty from '../../enums/project-rechained/difficulty.js';
 import { useProjectRechainedStore } from '../../stores/projectRechained';
 import DifficultyCard from '../DifficultyCard.vue';
+import GamemodeCard from '../GamemodeCard.vue';
 import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
@@ -50,6 +53,7 @@ export default {
     },
     components: {
         DifficultyCard,
+        GamemodeCard,
         ComponentWithTooltip,
     },
     props: {
@@ -59,6 +63,10 @@ export default {
         },
     },
     computed: {
+        componentType() {
+            if(this.battleground.gamemode === Gamemode.Endless) return GamemodeCard;
+            else return DifficultyCard;
+        },
         amountOfExtraDifficulties() {
             if(this.battleground.gamemode === Gamemode.Endless) return 10;
             else if(this.battleground.difficulty === Difficulty.Apprentice) return 1;

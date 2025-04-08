@@ -7,6 +7,9 @@
         >
         <div class="name pa-4">
             {{ name }}
+            <span class="pl-2">
+                <slot name="append" />
+            </span>
         </div>
     </v-card>
 </template>
