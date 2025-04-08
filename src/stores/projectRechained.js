@@ -63,6 +63,9 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
             // Filter out empty loadouts as the endpoints don't support those
             loadouts = loadouts.filter((loadout) => loadout !== null && loadout.trim() !== "");
 
+            // Filter out bad characters from loadout codes (only alphanumeric character and "-" are allowed)
+            loadouts = loadouts.map((loadout) => loadout.replace(/[^a-zA-Z0-9-]/g, ""));
+
             return new Promise((resolve, reject) => {
                 fetch(`${BASE_API_URL}/game/launch`, {
                     headers: {
