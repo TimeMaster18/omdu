@@ -74,7 +74,6 @@
                         <v-select
                             label="Game language"
                             v-model="projectRechainedStore.language"
-                            @update:model-value="projectRechainedStore.saveSettings()"
                             :items="languages"
                             density="comfortable"
                             hide-details
@@ -82,7 +81,6 @@
                         <v-checkbox
                             label="Show trap damage"
                             v-model="projectRechainedStore.showTrapDamage"
-                            @update:model-value="projectRechainedStore.saveSettings()"
                             density="comfortable"
                             hide-details
                         />
@@ -110,7 +108,7 @@
                                     <v-checkbox
                                         :label="mod"
                                         :model-value="projectRechainedStore.mods.includes(mod)"
-                                        @update:model-value="(value) => toggleMod(mod, value)"
+                                        @update:model-value="(value) => projectRechainedStore.toggleMod(mod, value)"
                                         density="comfortable"
                                         hide-details
                                     />
@@ -131,7 +129,6 @@
                                     <v-text-field
                                         v-model.number="projectRechainedStore.startingCoins"
                                         label="Don't overwrite"
-                                        @update:model-value="projectRechainedStore.saveSettings()"
                                         type="number"
                                         :min="0"
                                         :max="10000000"
@@ -154,8 +151,7 @@
                                     Overwrite trap level:
                                     <v-text-field
                                         label="Don't overwrite"
-                                        v-model.number="projectRechainedStore.trapLevel"
-                                        @update:model-value="projectRechainedStore.saveSettings()"
+                                        v-model.number="projectRechainedStore.trapTier"
                                         type="number"
                                         :min="1"
                                         :max="7"
@@ -169,7 +165,6 @@
                                     <v-text-field
                                         label="Don't overwrite"
                                         v-model.number="projectRechainedStore.accountLevel"
-                                        @update:model-value="projectRechainedStore.saveSettings()"
                                         type="number"
                                         :min="1"
                                         :max="100"
@@ -251,7 +246,6 @@ export default {
     mounted() {
         this.internalHostIp = this.hostIp;
         this.projectRechainedStore.checkConnection();
-        this.projectRechainedStore.loadSettings();
     },
     computed: {
         isConnected() {
@@ -273,15 +267,6 @@ export default {
         },
     },
     methods: {
-        toggleMod(mod, enable) {
-            if(enable) {
-                this.projectRechainedStore.mods.push(mod);
-            } else {
-                this.projectRechainedStore.mods = this.projectRechainedStore.mods.filter((selectedMod) => selectedMod !== mod);
-            }
-
-            this.projectRechainedStore.saveSettings();
-        },
         host() {
             this.launching = true;
             this.projectRechainedStore.hostGame(
