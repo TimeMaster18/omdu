@@ -73,16 +73,16 @@
                     <v-card-text class="pb-2">
                         <v-select
                             label="Game language"
-                            v-model="selectedLanguage"
-                            @update:model-value="saveLaunchSettings"
+                            v-model="projectRechainedStore.language"
+                            @update:model-value="projectRechainedStore.saveSettings()"
                             :items="languages"
                             density="comfortable"
                             hide-details
                         />
                         <v-checkbox
                             label="Show trap damage"
-                            v-model="showTrapDamage"
-                            @update:model-value="saveLaunchSettings"
+                            v-model="projectRechainedStore.showTrapDamage"
+                            @update:model-value="projectRechainedStore.saveSettings()"
                             density="comfortable"
                             hide-details
                         />
@@ -109,7 +109,7 @@
                                 >
                                     <v-checkbox
                                         :label="mod"
-                                        :model-value="selectedMods.includes(mod)"
+                                        :model-value="projectRechainedStore.mods.includes(mod)"
                                         @update:model-value="(value) => toggleMod(mod, value)"
                                         density="comfortable"
                                         hide-details
@@ -129,9 +129,9 @@
                                     <!-- max: 10000000 is just what the old launcher did before us -->
                                     Overwrite starting coins:
                                     <v-text-field
-                                        v-model.number="startingCoins"
+                                        v-model.number="projectRechainedStore.startingCoins"
                                         label="Don't overwrite"
-                                        @update:model-value="saveLaunchSettings"
+                                        @update:model-value="projectRechainedStore.saveSettings()"
                                         type="number"
                                         :min="0"
                                         :max="10000000"
@@ -154,8 +154,8 @@
                                     Overwrite trap level:
                                     <v-text-field
                                         label="Don't overwrite"
-                                        v-model.number="trapLevel"
-                                        @update:model-value="saveLaunchSettings"
+                                        v-model.number="projectRechainedStore.trapLevel"
+                                        @update:model-value="projectRechainedStore.saveSettings()"
                                         type="number"
                                         :min="1"
                                         :max="7"
@@ -168,8 +168,8 @@
                                     Overwrite account level:
                                     <v-text-field
                                         label="Don't overwrite"
-                                        v-model.number="accountLevel"
-                                        @update:model-value="saveLaunchSettings"
+                                        v-model.number="projectRechainedStore.accountLevel"
+                                        @update:model-value="projectRechainedStore.saveSettings()"
                                         type="number"
                                         :min="1"
                                         :max="100"
@@ -197,8 +197,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie';
-import CookieName from '../enums/cookieName';
 import { useDataStore } from '../stores/data';
 import Language from '../enums/project-rechained/language';
 import Mod from '../enums/project-rechained/mod';
@@ -246,13 +244,6 @@ export default {
             languages: [...Object.values(Language)],
             mods: [...Object.values(Mod)],
 
-            selectedLanguage: Language.English,
-            showTrapDamage: false,
-            selectedMods: [],
-            startingCoins: null,
-            trapLevel: null,
-            accountLevel: null,
-
             internalHostIp: null,
             launching: false
         };
@@ -260,7 +251,7 @@ export default {
     mounted() {
         this.internalHostIp = this.hostIp;
         this.projectRechainedStore.checkConnection();
-        this.loadLaunchSettings();
+        this.projectRechainedStore.loadSettings();
     },
     computed: {
         isConnected() {
@@ -282,56 +273,20 @@ export default {
         },
     },
     methods: {
-        loadLaunchSettings() {
-            let cookie = Cookies.get(CookieName.ProjectRechainedLaunchSettings);
-            if(cookie === undefined) return;
-            cookie = JSON.parse(cookie);
-
-            this.selectedLanguage = cookie.language ?? Language.English;
-            this.showTrapDamage = cookie.showTrapDamage ?? false;
-            this.selectedMods = cookie.mods ?? [];
-            this.startingCoins = cookie.coins ?? null;
-            this.trapLevel = cookie.trapLevel ?? null;
-            this.accountLevel = cookie.accountLevel ?? null;
-        },
-        saveLaunchSettings() {
-            Cookies.set(
-                CookieName.ProjectRechainedLaunchSettings,
-                JSON.stringify({
-                    language: this.selectedLanguage,
-                    showTrapDamage: this.showTrapDamage,
-                    mods: this.selectedMods,
-                    coins: this.startingCoins,
-                    trapLevel: this.trapLevel,
-                    accountLevel: this.accountLevel
-                }),
-                {
-                    expires: 365,
-                    sameSite: "Strict",
-                    secure: true
-                }
-            );
-        },
         toggleMod(mod, enable) {
             if(enable) {
-                this.selectedMods.push(mod);
+                this.projectRechainedStore.mods.push(mod);
             } else {
-                this.selectedMods = this.selectedMods.filter((selectedMod) => selectedMod !== mod);
+                this.projectRechainedStore.mods = this.projectRechainedStore.mods.filter((selectedMod) => selectedMod !== mod);
             }
 
-            this.saveLaunchSettings();
+            this.projectRechainedStore.saveSettings();
         },
         host() {
             this.launching = true;
             this.projectRechainedStore.hostGame(
                 this.loadouts,
-                this.battleground,
-                this.selectedLanguage,
-                this.showTrapDamage,
-                this.selectedMods,
-                this.startingCoins,
-                this.trapLevel,
-                this.accountLevel
+                this.battleground
             ).finally(() => {
                 this.launching = false;
             });
@@ -340,9 +295,7 @@ export default {
             this.launching = true;
             this.projectRechainedStore.joinGame(
                 this.loadouts[this.playerIndex], 
-                this.internalHostIp,
-                this.selectedLanguage,
-                this.showTrapDamage
+                this.internalHostIp
             ).finally(() => {
                 this.launching = false;
             });

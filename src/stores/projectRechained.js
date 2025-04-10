@@ -5,6 +5,8 @@ import Gamemode from '../enums/gamemode';
 import ApiDifficulty from '../enums/project-rechained/difficulty';
 import ApiGamemode from '../enums/project-rechained/gamemode';
 import Language from '../enums/project-rechained/language';
+import Cookies from 'js-cookie';
+import CookieName from '../enums/cookieName';
 
 const BASE_API_URL = " http://localhost:5001/api";
 
@@ -22,7 +24,9 @@ function parseApiGamemode(battleground) {
     else if(battleground.gamemode === Gamemode.Endless) return ApiGamemode.Endless;
 }
 
+// Turn this into a setup store (https://pinia.vuejs.org/core-concepts/) so we can watch settings and automatically update cookies accordingly.
 export const useProjectRechainedStore = defineStore('project-rechained', {
+    
     state() {
         return {
             connecting: false,
@@ -30,12 +34,12 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
 
             // All settings/mods related to launching Project Rechained
             extraDifficulty: null,
-            // selectedLanguage: Language.English,
-            // showTrapDamage: false,
-            // selectedMods: [],
-            // startingCoins: null,
-            // trapLevel: null,
-            // accountLevel: null,
+            language: Language.English,
+            showTrapDamage: false,
+            mods: [],
+            startingCoins: null,
+            trapLevel: null,
+            accountLevel: null,
         };
     },
     actions: {
@@ -56,7 +60,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                 this.connecting = false;
             });
         },
-        hostGame(loadouts, battleground, language = Language.English, showTrapDamage = false, activeMods = [], startingCoins = null, trapTier = 7, accountLevel = 50) {
+        hostGame(loadouts, battleground) {
             // Can't create a game without a loadout or battleground
             if(loadouts.length === 0 || battleground === null) return Promise.reject();
 
@@ -73,7 +77,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                     },
                     method: "POST",
                     body: JSON.stringify({
-                        "GameLanguage": language, // Language setting for the game, default is "English".
+                        "GameLanguage": this.language, // Language setting for the game, default is "English".
 
                         "PlayerName": load(loadouts[0]).playerName, // Host or local player's name.
                         "Loadouts": loadouts, // Encoded loadouts for each player, or at least the host/local player.
@@ -83,12 +87,12 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                         "Difficulty": parseApiDifficulty(battleground), /// "Apprentice", "WarMage", "Master", "RiftLord" or "Endless".
 
                         "ExtraDifficulty": this.extraDifficulty, // Additional difficulty settings, if applicable. This may include modifiers or custom challenge settings.
-                        "ActiveMods": activeMods, // Names of mods to enable. They must match the internal `Mods.ModList` items by name.
-                        "ShowTrapDamage": showTrapDamage, // Determines whether trap damage numbers should be displayed on screen.
+                        "ActiveMods": this.mods, // Names of mods to enable. They must match the internal `Mods.ModList` items by name.
+                        "ShowTrapDamage": this.showTrapDamage, // Determines whether trap damage numbers should be displayed on screen.
 
-                        "StartingCoin": startingCoins === null || startingCoins === '' ? undefined : startingCoins, // If you want a custom starting coin. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
-                        "OverrideTrapTier": trapTier === null || trapTier === '' ? undefined : trapTier, // Overrides the default trap tier level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
-                        "OverrideAccountLevel": accountLevel === null || accountLevel === '' ? undefined : accountLevel // Overrides the player's account level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
+                        "StartingCoin": this.startingCoins === null || this.startingCoins === '' ? undefined : this.startingCoins, // If you want a custom starting coin. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
+                        "OverrideTrapTier": this.trapTier === null || this.trapTier === '' ? undefined : this.trapTier, // Overrides the default trap tier level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
+                        "OverrideAccountLevel": this.accountLevel === null || this.accountLevel === '' ? undefined : this.accountLevel // Overrides the player's account level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
                     })
                 }).then((response) => {
                     if(response.ok) resolve();
@@ -99,7 +103,7 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                 });
             });
         },
-        joinGame(loadout, hostIp, language = Language.English, showTrapDamage = false) {
+        joinGame(loadout, hostIp) {
             // Can't join a hosted game without a loadout or the host's server ip
             if(loadout === null || loadout.trim() === "" || hostIp === null) return Promise.reject();
 
@@ -113,9 +117,9 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                     },
                     method: "POST",
                     body: JSON.stringify({
-                        "GameLanguage": language, // Language setting for the game, default is "English".
+                        "GameLanguage": this.language, // Language setting for the game, default is "English".
                         "Loadout": loadout, // Encoded loadout.
-                        "ShowTrapDamage": showTrapDamage, // Determines whether trap damage numbers should be displayed on screen.
+                        "ShowTrapDamage": this.showTrapDamage, // Determines whether trap damage numbers should be displayed on screen.
                         "HostIP": hostIp // The IP address of the host in a multiplayer session.
                     })
                 }).then((response) => {
@@ -126,7 +130,38 @@ export const useProjectRechainedStore = defineStore('project-rechained', {
                     reject();
                 });
             });
-        }
+        },
+
+        loadSettings() {
+            let cookie = Cookies.get(CookieName.ProjectRechainedLaunchSettings);
+            if(cookie === undefined) return;
+            cookie = JSON.parse(cookie);
+
+            this.language = cookie.language ?? Language.English;
+            this.showTrapDamage = cookie.showTrapDamage ?? false;
+            this.mods = cookie.mods ?? [];
+            this.startingCoins = cookie.coins ?? null;
+            this.trapLevel = cookie.trapLevel ?? null;
+            this.accountLevel = cookie.accountLevel ?? null;
+        },
+        saveSettings() {
+            Cookies.set(
+                CookieName.ProjectRechainedLaunchSettings,
+                JSON.stringify({
+                    language: this.language,
+                    showTrapDamage: this.showTrapDamage,
+                    mods: this.mods,
+                    coins: this.startingCoins,
+                    trapLevel: this.trapLevel,
+                    accountLevel: this.accountLevel
+                }),
+                {
+                    expires: 365,
+                    sameSite: "Strict",
+                    secure: true
+                }
+            );
+        },
     },
 });
 

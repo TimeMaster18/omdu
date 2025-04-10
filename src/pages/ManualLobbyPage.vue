@@ -168,7 +168,7 @@ export default {
             this.$refs.loadoutDialog.open();
         },
         loadLobbySettingsCookie() {
-            let cookie = Cookies.get(CookieName.ProjectRechainedLobbySettings);
+            let cookie = Cookies.get(CookieName.ManualLobbySettings);
             if(cookie === undefined) return;
             cookie = JSON.parse(cookie);
 
@@ -178,7 +178,7 @@ export default {
         },
         saveLobbySettingsCookie() {
             Cookies.set(
-                CookieName.ProjectRechainedLobbySettings,
+                CookieName.ManualLobbySettings,
                 JSON.stringify({
                     host: this.isHost,
                     battleground: this.battleground,
