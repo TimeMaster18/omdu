@@ -71,7 +71,11 @@
 
                 <!-- Copy host ip -->
                 <li v-if="!host">
-                    Right click the host in Radmin VPN and then choose "Copy IP address"
+                    Right click the host in
+                    <a
+                        href="https://www.radmin-vpn.com"
+                        target="_blank"
+                    > Radmin VPN</a> and then choose "Copy IP address"
                 </li>
 
                 <!-- Paste host ip -->
