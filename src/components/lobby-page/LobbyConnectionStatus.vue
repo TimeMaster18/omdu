@@ -1,6 +1,6 @@
 <template>
     <div
-        v-if="connectionStatus === LobbyStatus.Disconnected"
+        v-if="status === LobbyStatus.Disconnected"
         class="status text-error"
     >
         <v-icon size="32">
@@ -9,7 +9,7 @@
         Not connected to lobby
     </div>
     <div
-        v-else-if="connectionStatus === LobbyStatus.Connecting"
+        v-else-if="status === LobbyStatus.Connecting"
         class="status text-warning"
     >
         <v-icon size="32">
@@ -18,7 +18,7 @@
         Connecting to lobby
     </div>
     <div
-        v-else-if="connectionStatus === LobbyStatus.Connected"
+        v-else-if="status === LobbyStatus.Connected"
         class="status text-success"
     >
         <v-icon size="32">
@@ -30,23 +30,19 @@
 
 <script>
 import LobbyStatus from '../../enums/lobbyStatus.js';
-import { useLobbyStore } from '../../stores/lobby.js';
 
 export default {
-    setup() {
-        const lobbyStore = useLobbyStore();
-        return { lobbyStore };
+    props: {
+        status: {
+            type: String,
+            default: LobbyStatus.Disconnected
+        }
     },
     data() {
         return {
             LobbyStatus
         }
     },
-    computed: {
-        connectionStatus() {
-            return this.lobbyStore.connectionStatus;
-        }
-    }
 };
 </script>
 

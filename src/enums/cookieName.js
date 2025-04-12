@@ -1,10 +1,15 @@
 const CookieName = Object.freeze({
-    LobbyIp: "lobby-ip",
-    LobbyLoadout: "lobby-loadout",
-    PlayerName: "player-name",
-    LoadoutPresets: "loadouts",
     Loadout: "loadout",
+    LoadoutPresets: "loadouts",
+
     ProjectRechainedLaunchSettings: "project-rechained",
-    ManualLobbySettings: "project-rechained-lobby"
+
+    LobbyType: "lobby-type",
+    LobbyHost: "lobby-host",
+    HostIp: "lobby-ip",
+    PlayerName: "player-name",
+
+    ManualLobbySettings: "project-rechained-lobby",
+    AutomaticLobbyLoadout: "lobby-loadout",
 });
 export default CookieName;

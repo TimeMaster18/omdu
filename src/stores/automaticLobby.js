@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import CookieName from '../enums/cookieName';
 import { load, save as convertToLoadoutCode } from '../utils/loadoutUtil';
 
-export const useLobbyStore = defineStore('lobby', {
+export const useAutomaticLobbyStore = defineStore('automatic-lobby', {
     state() {
         return {
             socket: null,
@@ -16,7 +16,7 @@ export const useLobbyStore = defineStore('lobby', {
         };
     },
     actions:{
-        connect(ip) {
+        connect(ip = null) {
             // Prevent a double connection
             if(this.socket !== null) return;
             
@@ -33,10 +33,10 @@ export const useLobbyStore = defineStore('lobby', {
                         }));
                     } else if(data.type === "assigned-player-slot") {
                         this.playerIndex = data.playerSlot
-                        this.connectedTo = ip;
+                        this.connectedTo = ip ? ip : "127.0.0.1"; // Host is automatically connected to itself a.k.a. 127.0.0.1
 
                         // Immediately send over the locally stored loadout.
-                        let storedLoadout = Cookies.get(CookieName.LobbyLoadout);
+                        let storedLoadout = Cookies.get(CookieName.AutomaticLobbyLoadout);
                         if(storedLoadout === undefined) {
                             // Default to an empty loadout if no loadout was stored so other users can still see we are connected.
                             storedLoadout = `${Cookies.get(CookieName.PlayerName)}-0000-000000000000000000-00-00-0000-0000000000000000000000000000`;
@@ -62,6 +62,9 @@ export const useLobbyStore = defineStore('lobby', {
             this.socket.onclose = () => {
                 this.socket = null;
                 this.connectedTo = null;
+                this.playerIndex = null;
+                this.playerLoadouts = [null, null, null, null, null];
+                this.battleground = null;
             }
         },
         disconnect() {
@@ -72,7 +75,7 @@ export const useLobbyStore = defineStore('lobby', {
             // Prevent updating the loadout when the loadout is already set to the same value
             if(this.playerLoadout === loadoutString) return;
 
-            Cookies.set(CookieName.LobbyLoadout, loadoutString);
+            Cookies.set(CookieName.AutomaticLobbyLoadout, loadoutString);
 
             this.socket.send(JSON.stringify({
                 type: `update-loadout`,

@@ -29,23 +29,10 @@
         </component-with-tooltip>
     </div>
     <div v-else>
-        <v-text-field
-            v-if="showManualHostIpInput"
-            v-model="internalHostIp"
-            label="Host's IPv4 address"
-            class="host-ip rounded-e-0 border-e-0"
-            :class="{'active': readyToLaunch}"
-            density="compact"
-            single-line
-            hide-details
-            variant="outlined"
-        />
-
         <v-btn
             color="success"
             variant="outlined"
             class="rounded-e-0 border-e-0"
-            :class="showManualHostIpInput ? ['rounded-s-0', 'border-s-0'] : []"
             prepend-icon="mdi-play"
             @click="isHost ? host() : join()"
             :disabled="!readyToLaunch"
@@ -192,11 +179,11 @@
 </template>
 
 <script>
-import { useDataStore } from '../stores/data';
-import Language from '../enums/project-rechained/language';
-import Mod from '../enums/project-rechained/mod';
-import { useProjectRechainedStore } from '../stores/projectRechained';
-import ComponentWithTooltip from './ComponentWithTooltip.vue';
+import { useDataStore } from '../../stores/data';
+import Language from '../../enums/project-rechained/language';
+import Mod from '../../enums/project-rechained/mod';
+import { useProjectRechainedStore } from '../../stores/projectRechained';
+import ComponentWithTooltip from '../ComponentWithTooltip.vue';
 
 export default {
     components: {
@@ -239,21 +226,15 @@ export default {
             languages: [...Object.values(Language)],
             mods: [...Object.values(Mod)],
 
-            internalHostIp: null,
             launching: false
         };
     },
     mounted() {
-        this.internalHostIp = this.hostIp;
         this.projectRechainedStore.checkConnection();
     },
     computed: {
         isConnected() {
             return this.projectRechainedStore.connected;
-        },
-        showManualHostIpInput() {
-            // We NEED a host ip to join games. So if none is provided via the properties, we'll show an input field for it
-            return !this.isHost && this.hostIp === null;
         },
         readyToLaunch() {
             // We always need at least the host's loadout to start a game
@@ -262,7 +243,7 @@ export default {
             if(this.isHost) {
                 return this.battleground !== null;
             } else {
-                return this.internalHostIp !== null && this.internalHostIp !== "";
+                return this.hostIp !== null && this.hostIp !== "";
             }
         },
     },
@@ -280,18 +261,12 @@ export default {
             this.launching = true;
             this.projectRechainedStore.joinGame(
                 this.loadouts[this.playerIndex], 
-                this.internalHostIp
+                this.hostIp
             ).finally(() => {
                 this.launching = false;
             });
         }
     },
-    watch: {
-        // Update the internal host ip if we ever receive a host ip via the component properties
-        hostIp(hostIp) {
-            this.internalHostIp = hostIp;
-        },
-    }
 }
 </script>
 

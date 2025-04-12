@@ -73,10 +73,6 @@
                 <v-icon>mdi-package</v-icon>
                 <span>Loadout</span>
             </v-btn>
-            <v-btn to="project-rechained-lobby">
-                <v-icon>mdi-account-group</v-icon>
-                <span>Manual Lobby</span>
-            </v-btn>
             <v-btn to="lobby">
                 <v-icon>mdi-account-group</v-icon>
                 <span>Lobby</span>

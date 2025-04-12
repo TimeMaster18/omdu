@@ -58,9 +58,8 @@ import GuardiansPage from './pages/GuardiansPage.vue';
 import EnemiesPage from './pages/EnemiesPage.vue';
 import BattlegroundsPage from './pages/BattlegroundsPage.vue';
 import LoadoutPage from './pages/LoadoutPage.vue';
-import LobbyPage from './pages/LobbyPage.vue';
 import HomePage from './pages/HomePage.vue';
-import ManualLobbyPage from './pages/ManualLobbyPage.vue';
+import LobbyPage from './pages/LobbyPage.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
@@ -75,7 +74,6 @@ const router = createRouter({
         { path: '/battlegrounds', component: BattlegroundsPage },
         { path: '/loadout', component: LoadoutPage },
         { path: '/lobby', component: LobbyPage },
-        { path: '/project-rechained-lobby', component: ManualLobbyPage },
         { path: '/:pathMatch(.*)*', component: HomePage },
     ],
 });

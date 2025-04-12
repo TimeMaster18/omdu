@@ -1,31 +1,26 @@
 <template>
     <v-row class="justify-end px-2 mb-3">
         <project-rechained-launch-button
-            :is-host="isHost"
+            :is-host="lobbyStore.isHost"
             :player-index="0"
-            :loadouts="loadoutCodes"
+            :loadouts="lobbyStore.loadouts"
             :battleground="battlegroundInfo"
+            :host-ip="lobbyStore.hostIp"
+            class="mr-2"
         />
-        <v-btn-toggle
-            v-model="isHost"
-            mandatory
-            class="ml-2"
+        <v-btn
+            prepend-icon="mdi-lan-disconnect"
+            color="error"
             variant="outlined"
-            density="compact"
+            @click="lobbyStore.disconnect()"
         >
-            <v-btn :value="true">
-                Host game
-            </v-btn>
-
-            <v-btn :value="false">
-                Join game
-            </v-btn>
-        </v-btn-toggle>
+            Disconnect
+        </v-btn>
     </v-row>
-    <div v-if="isHost">
+    <div v-if="lobbyStore.isHost">
         <v-row class="justify-center">
             <v-col
-                v-for="(code, index) in loadoutCodes"
+                v-for="(code, index) in lobbyStore.loadouts"
                 :key="index"
                 cols="12"
                 sm="6"
@@ -47,7 +42,7 @@
                             class="player-name mr-2"
                             @click.stop
                             :label="`Player ${index + 1}'s loadout code`"
-                            v-model="loadoutCodes[index]"
+                            v-model="lobbyStore.loadouts[index]"
                             single-line
                             hide-details
                             density="compact"
@@ -78,7 +73,7 @@
                 cols="12"
                 lg="4"
             >
-                <battleground-selection-dialog v-model="battleground" />
+                <battleground-selection-dialog v-model="lobbyStore.battleground" />
             </v-col>
             <v-col
                 v-if="battlegroundInfo !== null"
@@ -103,21 +98,25 @@
         </v-row>
     </div>
     <div v-else>
-        <loadout-editor v-model="playerLoadoutCode" />
+        <loadout-editor
+            v-model="playerLoadoutCode"
+            :fixed-player-name="playerName"
+        />
     </div>
 </template>
 
 <script>
-import LoadoutDialog from '../components/lobby-page/LoadoutDialog.vue';
-import LoadoutPreviewCard from '../components/lobby-page/LoadoutPreviewCard.vue';
-import { useDataStore } from '../stores/data.js';
-import BattlegroundSelectionDialog from '../components/lobby-page/BattlegroundSelectionDialog.vue';
-import EnemiesOverview from '../components/EnemiesOverview.vue';
-import Gamemode from '../enums/gamemode.js';
-import ProjectRechainedLaunchButton from '../components/ProjectRechainedLaunchButton.vue';
-import LoadoutEditor from '../components/LoadoutEditor.vue';
+import LoadoutDialog from './LoadoutDialog.vue';
+import LoadoutPreviewCard from './LoadoutPreviewCard.vue';
+import { useDataStore } from '../../stores/data.js';
+import BattlegroundSelectionDialog from './BattlegroundSelectionDialog.vue';
+import EnemiesOverview from '../EnemiesOverview.vue';
+import Gamemode from '../../enums/gamemode.js';
+import ProjectRechainedLaunchButton from './ProjectRechainedLaunchButton.vue';
+import LoadoutEditor from '../LoadoutEditor.vue';
+import { useManualLobbyStore } from '../../stores/manualLobby.js';
 import Cookies from 'js-cookie';
-import CookieName from '../enums/cookieName.js';
+import CookieName from '../../enums/cookieName.js';
 
 export default {
     components: {
@@ -130,36 +129,32 @@ export default {
     },
     setup() {
         const dataStore = useDataStore();
+        const lobbyStore = useManualLobbyStore();
         return {
             dataStore,
+            lobbyStore
         };
-    },
-    mounted() {
-        this.loadLobbySettingsCookie();
     },
     data() {
         return {
             Gamemode,
-
-            isHost: true,
-            battleground: null,
-            loadoutCodes: [null, null, null, null, null]
+            playerName: Cookies.get(CookieName.PlayerName) ?? null,
         }
     },
     computed: {
         battlegroundInfo() {
             return JSON.parse(JSON.stringify(this.dataStore.battlegrounds))
-                .find(battleground => battleground.id === this.battleground) ?? null
+                .find(battleground => battleground.id === this.lobbyStore.battleground) ?? null
         },
         playerLoadoutCode: {
             // User is always player 0:
             //  - When hosting (because the host is always player 0)
             //  - When joining (because they don't have any clue about other players so there's only 1 player they need to keep track of)
             get() {
-                return this.loadoutCodes[0];
+                return this.lobbyStore.loadouts[0];
             },
             set(loadoutCode) {
-                this.loadoutCodes[0] = loadoutCode;
+                this.lobbyStore.loadouts[0] = loadoutCode;
             }
         }
     },
@@ -167,45 +162,7 @@ export default {
         openLoadoutDialog() {
             this.$refs.loadoutDialog.open();
         },
-        loadLobbySettingsCookie() {
-            let cookie = Cookies.get(CookieName.ManualLobbySettings);
-            if(cookie === undefined) return;
-            cookie = JSON.parse(cookie);
-
-            if(cookie.host !== undefined) this.isHost =  !!cookie.host;
-            if(cookie.battleground !== undefined) this.battleground = cookie.battleground;
-            if(cookie.loadouts !== undefined) this.loadoutCodes = cookie.loadouts;
-        },
-        saveLobbySettingsCookie() {
-            Cookies.set(
-                CookieName.ManualLobbySettings,
-                JSON.stringify({
-                    host: this.isHost,
-                    battleground: this.battleground,
-                    loadouts: this.loadoutCodes
-                }),
-                {
-                    expires: 365,
-                    sameSite: "Strict",
-                    secure: true
-                }
-            );
-        },
     },
-    watch: {
-        isHost() {
-            this.saveLobbySettingsCookie();
-        },
-        battleground() {
-            this.saveLobbySettingsCookie();
-        },
-        loadoutCodes: {
-            deep: true,
-            handler: function() {
-                this.saveLobbySettingsCookie();
-            }
-        }
-    }
 };
 </script>
 
