@@ -109,6 +109,7 @@
                     <v-btn
                         variant="outlined"
                         @click="connect"
+                        :loading="connecting"
                     >
                         Connect
                     </v-btn>
@@ -182,11 +183,14 @@ export default {
             }
 
             return LobbyStatus.Disconnected;
+        },
+        connecting() {
+            return this.connectionStatus === LobbyStatus.Connecting;
         }
     },
     methods: {
         connect() {
-            // Save the selected settings 
+            // Save the selected settings
             const cookieSettings = { expires: 365, sameSite: "Strict", secure: true };
             Cookies.set(CookieName.PlayerName, this.sanitizedPlayerName, cookieSettings);
             Cookies.set(CookieName.LobbyHost, this.host, cookieSettings);

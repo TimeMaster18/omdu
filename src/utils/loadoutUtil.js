@@ -104,7 +104,7 @@ export const load = function (loadoutCode) {
         
         // Load most of the data from the code
         let loadout = {
-            playerName: parts[0],
+            playerName: parts[0].replace(/[^a-zA-Z0-9]/g, ""), // Only alphanumeric characters are allowed in the player's name so we filter them out
             heroId: decode(parts[1].substring(0, 1)),
             skinId: decode(parts[1].substring(1, 3)),
             dyeId: decode(parts[1].substring(3, 4)),
