@@ -1,0 +1,8 @@
+@use 'vuetify/settings' with (
+    $grid-breakpoints: (
+        'md': 958px,
+    ),
+    $container-max-widths: (
+        'md': 958px,
+    )
+);

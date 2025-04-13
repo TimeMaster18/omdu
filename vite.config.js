@@ -9,7 +9,12 @@ import eslint from 'vite-plugin-eslint';
 export default defineConfig({
     plugins: [
         vue(),
-        vuetify({ autoImport: true }),
+        vuetify({
+            autoImport: true,
+            styles: {
+                configFile: './src/styles/settings.scss',
+            },
+        }),
         eslint()
     ],
     resolve: {

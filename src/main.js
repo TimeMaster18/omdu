@@ -42,7 +42,12 @@ const vuetify = createVuetify({
         themes: {
             customTheme,
         },
-    }
+    },
+    display: {
+        thresholds: {
+            md: 958,
+        },
+    },
 });
 vueApp.use(vuetify);
 
