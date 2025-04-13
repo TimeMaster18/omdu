@@ -24,7 +24,7 @@ const customTheme = {
         'primary-lighten-1': '#f4c4d6',
 
         'error': '#D7263D',
-        'info': '#37B5E6',
+        'info': '#00A7E1',
         'success': '#4CB944',
         'warning': '#E59500',
     },

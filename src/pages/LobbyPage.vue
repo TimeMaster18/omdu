@@ -10,6 +10,7 @@
                 :status="connectionStatus"
                 class="text-center mb-4"
             />
+
             <v-btn-toggle
                 v-model="lobbyType"
                 mandatory
@@ -29,6 +30,26 @@
                     Automatic Lobby
                 </v-btn>
             </v-btn-toggle>
+
+            <v-alert
+                v-if="lobbyType === LobbyType.Manual"
+                type="info"
+                variant="outlined"
+                density="compact"
+                class="mb-4"
+            >
+                The Manual Lobby is an out-of-the-box solution that runs without any extra setup. The host needs to manually enter each player's loadout code, and only the host can see the selected battleground and their teammates' loadouts. It's ideal for singleplayer or quick multiplayer sessions.
+            </v-alert>
+            <v-alert
+                v-else-if="lobbyType === LobbyType.Automatic"
+                type="info"
+                variant="outlined"
+                density="compact"
+                class="mb-4"
+            >
+                The Automatic Lobby offers a streamlined experience, but does require a bit of extra setup. Once the small companion app is running, everything syncs up automatically allowing everyone to see the battleground, check out the upcoming enemies, and take a look at their teammates' loadouts. It's ideal for long multiplayer sessions.
+            </v-alert>
+
             <v-btn-toggle
                 v-model="host"
                 mandatory
