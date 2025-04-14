@@ -188,10 +188,13 @@ export default {
         sanitizedPlayerName: {
             // Only alphanumeric characters are allowed in the player name otherwise the game just fails to start.
             get() {
-                return this.playerName.replace(/[^a-zA-Z0-9]/g, "");
+                let playerName = this.playerName;
+                if(playerName !== null) playerName.replace(/[^a-zA-Z0-9]/g, "");
+                return playerName;
             },
             set(name) {
-                this.playerName = name.replace(/[^a-zA-Z0-9]/g, "");
+                if(name !== null) name.replace(/[^a-zA-Z0-9]/g, "");
+                this.playerName = name;
             }
         },
         showManualLobby() {
