@@ -1,179 +1,208 @@
 <template>
-    <div v-if="!isConnected">
-        <component-with-tooltip
-            width="auto"
-            height="auto"
-        >
-            <template #activator="{props}">
-                <v-btn
-                    v-bind="props"
-                    color="warning"
-                    variant="outlined"
-                    prepend-icon="mdi-repeat"
-                    @click="projectRechainedStore.checkConnection()"
-                    :loading="projectRechainedStore.connecting"
-                >
-                    Reconnect
-                </v-btn>
-            </template>
+    <div>
+        <div v-if="!isConnected">
+            <component-with-tooltip
+                width="auto"
+                height="auto"
+            >
+                <template #activator="{props}">
+                    <v-btn
+                        v-bind="props"
+                        color="warning"
+                        variant="outlined"
+                        prepend-icon="mdi-repeat"
+                        @click="projectRechainedStore.checkConnection()"
+                        :loading="projectRechainedStore.connecting"
+                    >
+                        Reconnect
+                    </v-btn>
+                </template>
 
-            <template #tooltip>
-                <v-card class="pointer-event-auto px-2 py-1">
-                    To automatically launch games, please make sure the Project Rechained launcher is open and remains running.
-                    If you haven't installed the launcher yet, you can follow the installation instructions on <a
-                        href="https://github.com/TimeMaster18/Project-Rechained"
-                        target="_blank"
-                    >Project Rechained's GitHub page</a>.
-                </v-card>
-            </template>
-        </component-with-tooltip>
-    </div>
-    <div v-else>
-        <v-btn
-            color="success"
-            variant="outlined"
-            class="rounded-e-0 border-e-0"
-            prepend-icon="mdi-play"
-            @click="isHost ? host() : join()"
-            :disabled="!readyToLaunch"
-            :loading="launching"
-        >
-            {{ isHost ? "Launch" : "Join" }}
-        </v-btn>
+                <template #tooltip>
+                    <v-card class="pointer-event-auto px-2 py-1">
+                        To automatically launch games, please make sure the Project Rechained launcher is open and remains running.
+                        If you haven't installed the launcher yet, you can follow the installation instructions on <a
+                            href="https://github.com/TimeMaster18/Project-Rechained"
+                            target="_blank"
+                        >Project Rechained's GitHub page</a>.
+                    </v-card>
+                </template>
+            </component-with-tooltip>
+        </div>
+        <div v-else>
+            <v-btn
+                color="success"
+                variant="outlined"
+                class="rounded-e-0 border-e-0"
+                prepend-icon="mdi-play"
+                @click="isHost ? host() : join()"
+                :disabled="!readyToLaunch"
+                :loading="launching"
+            >
+                {{ isHost ? "Launch" : "Join" }}
+            </v-btn>
 
-        <v-dialog width="700">
-            <template #activator="{ props }">
-                <v-btn
-                    v-bind="props"
-                    color="success"
-                    variant="outlined"
-                    class="rounded-s-0"
-                >
-                    <v-icon>
-                        mdi-cog
-                    </v-icon>
-                </v-btn>
-            </template>
+            <v-dialog width="700">
+                <template #activator="{ props }">
+                    <v-btn
+                        v-bind="props"
+                        color="success"
+                        variant="outlined"
+                        class="rounded-s-0"
+                    >
+                        <v-icon>
+                            mdi-cog
+                        </v-icon>
+                    </v-btn>
+                </template>
 
-            <template #default="{ isActive }">
-                <v-card>
-                    <v-card-text class="pb-2">
-                        <v-select
-                            label="Game language"
-                            v-model="projectRechainedStore.language"
-                            :items="languages"
-                            density="comfortable"
-                            hide-details
-                        />
-                        <v-checkbox
-                            label="Show trap damage"
-                            v-model="projectRechainedStore.showTrapDamage"
-                            density="comfortable"
-                            hide-details
-                        />
+                <template #default="{ isActive }">
+                    <v-card>
+                        <v-card-text class="pb-2">
+                            <v-select
+                                label="Game language"
+                                v-model="projectRechainedStore.language"
+                                :items="languages"
+                                density="comfortable"
+                                hide-details
+                            />
+                            <v-checkbox
+                                label="Show trap damage"
+                                v-model="projectRechainedStore.showTrapDamage"
+                                density="comfortable"
+                                hide-details
+                            />
 
-                        <!-- Mods -->
-                        <div v-if="isHost">
-                            <div class="v-card-title pl-0">
-                                Mods
+                            <!-- Mods -->
+                            <div v-if="isHost">
+                                <div class="v-card-title pl-0">
+                                    Mods
+                                </div>
+                                <v-alert
+                                    class="mb-2"
+                                    type="warning"
+                                    variant="outlined"
+                                    density="compact"
+                                >
+                                    Using mods can lead to unexpected outcomes and can break the game's balance. Some mods won't work in multiplayer.
+                                </v-alert>
+
+                                <v-row no-gutters>
+                                    <v-col
+                                        v-for="mod in mods"
+                                        :key="mod"
+                                        cols="6"
+                                    >
+                                        <v-checkbox
+                                            :label="mod"
+                                            :model-value="projectRechainedStore.mods.includes(mod)"
+                                            @update:model-value="(value) => projectRechainedStore.toggleMod(mod, value)"
+                                            density="comfortable"
+                                            hide-details
+                                        />
+                                    </v-col>
+                                </v-row>
+
+                                <!-- Starting coins -->
+                                <v-row
+                                    no-gutters
+                                    class="mb-2"
+                                >
+                                    <v-col
+                                        cols="6"
+                                        class="pr-2"
+                                    >
+                                        <!-- max: 10000000 is just what the old launcher did before us -->
+                                        Overwrite starting coins:
+                                        <v-text-field
+                                            v-model.number="projectRechainedStore.startingCoins"
+                                            label="Don't overwrite"
+                                            type="number"
+                                            :min="0"
+                                            :max="10000000"
+                                            single-line
+                                            density="compact"
+                                            hide-details
+                                        />
+                                    </v-col>
+                                </v-row>
+
+                                <!-- Overwriting levels -->
+                                <v-row
+                                    no-gutters
+                                    class="mb-2"
+                                >
+                                    <v-col
+                                        cols="6"
+                                        class="pr-2"
+                                    >
+                                        Overwrite trap level:
+                                        <v-text-field
+                                            label="Don't overwrite"
+                                            v-model.number="projectRechainedStore.trapTier"
+                                            type="number"
+                                            :min="1"
+                                            :max="7"
+                                            single-line
+                                            density="compact"
+                                            hide-details
+                                        />
+                                    </v-col>
+                                    <v-col cols="6">
+                                        Overwrite account level:
+                                        <v-text-field
+                                            label="Don't overwrite"
+                                            v-model.number="projectRechainedStore.accountLevel"
+                                            type="number"
+                                            :min="1"
+                                            :max="100"
+                                            single-line
+                                            density="compact"
+                                            hide-details
+                                        />
+                                    </v-col>
+                                </v-row>
                             </div>
-                            <v-alert
-                                class="mb-2"
-                                type="warning"
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-spacer />
+                            <v-btn
+                                prepend-icon="mdi-close"
                                 variant="outlined"
-                                density="compact"
-                            >
-                                Using mods can lead to unexpected outcomes and can break the game's balance. Some mods won't work in multiplayer.
-                            </v-alert>
+                                text="Close"
+                                @click="isActive.value = false"
+                            />
+                        </v-card-actions>
+                    </v-card>
+                </template>
+            </v-dialog>
+        </div>
 
-                            <v-row no-gutters>
-                                <v-col
-                                    v-for="mod in mods"
-                                    :key="mod"
-                                    cols="6"
-                                >
-                                    <v-checkbox
-                                        :label="mod"
-                                        :model-value="projectRechainedStore.mods.includes(mod)"
-                                        @update:model-value="(value) => projectRechainedStore.toggleMod(mod, value)"
-                                        density="comfortable"
-                                        hide-details
-                                    />
-                                </v-col>
-                            </v-row>
+        <!-- Launch error dialog -->
+        <v-dialog
+            v-model="launchErrorDialogIsOpen"
+            width="auto"
+        >
+            <v-card>
+                <v-alert
+                    type="error"
+                    variant="text"
+                >
+                    Something went wrong
+                </v-alert>
 
-                            <!-- Starting coins -->
-                            <v-row
-                                no-gutters
-                                class="mb-2"
-                            >
-                                <v-col
-                                    cols="6"
-                                    class="pr-2"
-                                >
-                                    <!-- max: 10000000 is just what the old launcher did before us -->
-                                    Overwrite starting coins:
-                                    <v-text-field
-                                        v-model.number="projectRechainedStore.startingCoins"
-                                        label="Don't overwrite"
-                                        type="number"
-                                        :min="0"
-                                        :max="10000000"
-                                        single-line
-                                        density="compact"
-                                        hide-details
-                                    />
-                                </v-col>
-                            </v-row>
+                <v-card-text class="pt-0">
+                    <pre
+                        v-if="launchErrorResponse"
+                        class="overflow-x-auto mb-8"
+                    >{{ launchErrorResponse }}</pre>
 
-                            <!-- Overwriting levels -->
-                            <v-row
-                                no-gutters
-                                class="mb-2"
-                            >
-                                <v-col
-                                    cols="6"
-                                    class="pr-2"
-                                >
-                                    Overwrite trap level:
-                                    <v-text-field
-                                        label="Don't overwrite"
-                                        v-model.number="projectRechainedStore.trapTier"
-                                        type="number"
-                                        :min="1"
-                                        :max="7"
-                                        single-line
-                                        density="compact"
-                                        hide-details
-                                    />
-                                </v-col>
-                                <v-col cols="6">
-                                    Overwrite account level:
-                                    <v-text-field
-                                        label="Don't overwrite"
-                                        v-model.number="projectRechainedStore.accountLevel"
-                                        type="number"
-                                        :min="1"
-                                        :max="100"
-                                        single-line
-                                        density="compact"
-                                        hide-details
-                                    />
-                                </v-col>
-                            </v-row>
-                        </div>
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer />
-                        <v-btn
-                            prepend-icon="mdi-close"
-                            variant="outlined"
-                            text="Close"
-                            @click="isActive.value = false"
-                        />
-                    </v-card-actions>
-                </v-card>
-            </template>
+                    Should the issue persist, feel free to reach out to us on <a
+                        href="https://discord.gg/xkZskPXtwm"
+                        target="_blank"
+                    >Discord</a>.
+                </v-card-text>
+            </v-card>
         </v-dialog>
     </div>
 </template>
@@ -219,14 +248,16 @@ export default {
         hostIp: {
             type: String,
             default: null
-        }
+        },
     },
     data() {
         return {
             languages: [...Object.values(Language)],
             mods: [...Object.values(Mod)],
 
-            launching: false
+            launching: false,
+            launchErrorDialogIsOpen: false,
+            launchErrorResponse: null
         };
     },
     mounted() {
@@ -249,20 +280,28 @@ export default {
     },
     methods: {
         host() {
+            this.launchErrorResponse = null;
             this.launching = true;
             this.projectRechainedStore.hostGame(
                 this.loadouts,
                 this.battleground
-            ).finally(() => {
+            ).catch((error) => {
+                this.launchErrorResponse = error;
+                this.launchErrorDialogIsOpen = true;
+            }).finally(() => {
                 this.launching = false;
             });
         },
         join() {
+            this.launchErrorResponse = null;
             this.launching = true;
             this.projectRechainedStore.joinGame(
                 this.loadouts[this.playerIndex], 
                 this.hostIp
-            ).finally(() => {
+            ).catch((error) => {
+                this.launchErrorResponse = error;
+                this.launchErrorDialogIsOpen = true;
+            }).finally(() => {
                 this.launching = false;
             });
         }
