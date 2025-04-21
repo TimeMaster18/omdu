@@ -137,12 +137,12 @@ export const useProjectRechainedStore = defineStore('project-rechained', () => {
                     "OverrideTrapTier": trapTier.value === null || trapTier.value === '' ? undefined : trapTier.value, // Overrides the default trap tier level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
                     "OverrideAccountLevel": accountLevel.value === null || accountLevel.value === '' ? undefined : accountLevel.value // Overrides the player's account level if specified. Defaults to `GameController.DEFAULT_INVALID_VALUE` if not set.
                 })
-            }).then((response) => {
+            }).then(async (response) => {
                 if(response.ok) resolve();
-                else reject();
-            }).catch(() => {
+                else reject(await response.json());
+            }).catch((error) => {
                 this.checkConnection(); // Check the connection in case it's the connection that went wrong
-                reject();
+                reject(error);
             });
         });
     }
@@ -165,12 +165,12 @@ export const useProjectRechainedStore = defineStore('project-rechained', () => {
                     "ShowTrapDamage": showTrapDamage.value, // Determines whether trap damage numbers should be displayed on screen.
                     "HostIP": hostIp // The IP address of the host in a multiplayer session.
                 })
-            }).then((response) => {
+            }).then(async (response) => {
                 if(response.ok) resolve();
-                else reject();
-            }).catch(() => {
+                else reject(await response.json());
+            }).catch((error) => {
                 this.checkConnection(); // Check the connection in case it's the connection that went wrong
-                reject();
+                reject(error);
             });
         });
     }
