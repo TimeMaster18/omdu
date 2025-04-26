@@ -8,7 +8,7 @@ export const useManualLobbyStore = defineStore('manual-lobby', () => {
     const connected = ref(false);
     const isHost = ref(true);
     const hostIp = ref(null);
-    const loadouts = ref([null, null, null, null, null]);
+    const loadouts = ref(["Player-B1n1-000000000000000000-00-00-0000-000000000000000000000000000", null, null, null, null]);
     /** Battleground Id */
     const battleground = ref(null);
 

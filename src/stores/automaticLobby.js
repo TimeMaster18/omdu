@@ -39,7 +39,7 @@ export const useAutomaticLobbyStore = defineStore('automatic-lobby', {
                         let storedLoadout = Cookies.get(CookieName.AutomaticLobbyLoadout);
                         if(storedLoadout === undefined) {
                             // Default to an empty loadout if no loadout was stored so other users can still see we are connected.
-                            storedLoadout = `${Cookies.get(CookieName.PlayerName)}-0000-000000000000000000-00-00-0000-0000000000000000000000000000`;
+                            storedLoadout = `${Cookies.get(CookieName.PlayerName)}-B1n1-000000000000000000-00-00-0000-0000000000000000000000000000`;
                         }else {
                             // Make sure the loadout uses the player name and not an old player name
                             let loadout = load(storedLoadout);
